@@ -20,7 +20,10 @@ if (typeOf _vehicle == ammobox_i_typename && [player] call F_getScore <= GRLIB_p
 };
 if (isNull _vehicle) exitWith {};
 
-_objectinfo = ( [ (light_vehicles + heavy_vehicles + air_vehicles + static_vehicles + support_vehicles + buildings + opfor_recyclable + ind_recyclable), { typeof _vehicle == _x select 0 } ] call BIS_fnc_conditionalSelect ) select 0;
+_objectinfo = ( [ (light_vehicles_west + heavy_vehicles_west + air_vehicles_west + static_vehicles_west + support_vehicles_west +
+                   light_vehicles_east + heavy_vehicles_east + air_vehicles_east + static_vehicles_east + support_vehicles_east +
+                   buildings + opfor_recyclable), { typeof _vehicle == _x select 0 } ] call BIS_fnc_conditionalSelect ) select 0;
+
 if (isNil "_objectinfo") then {
 	_objectinfo = [typeOf _vehicle, 0, 0, 0];
 };

@@ -50,10 +50,11 @@ resources_intel = 0;
 GRLIB_player_scores = [];
 GRLIB_garage = [];
 
-no_kill_handler_classnames = [FOB_typename, huron_typename];
-_classnames_to_save = [FOB_typename, huron_typename];
+no_kill_handler_classnames = [FOB_typename_west, huron_typename_west, FOB_typename_east, huron_typename_east];
+_classnames_to_save = [FOB_typename_west, huron_typename_west, FOB_typename_east, huron_typename_east];
 _classnames_to_save_blu = [];
-_building_classnames = [FOB_typename];
+_classnames_to_save_red = [];
+_building_classnames = [FOB_typename_west, FOB_typename_east];
 {
 	no_kill_handler_classnames pushback (_x select 0);
 	_classnames_to_save pushback (_x select 0);
@@ -62,9 +63,13 @@ _building_classnames = [FOB_typename];
 
 {
 	_classnames_to_save_blu pushback (_x select 0);
-} foreach (static_vehicles + air_vehicles + heavy_vehicles + light_vehicles + support_vehicles + ind_recyclable);
+} foreach (static_vehicles_west + air_vehicles_west + heavy_vehicles_west + light_vehicles_west + support_vehicles_west );
 
-_classnames_to_save = _classnames_to_save + _classnames_to_save_blu + all_hostile_classnames;
+{
+	_classnames_to_save_red pushback (_x select 0);
+} foreach (static_vehicles_east + air_vehicles_east + heavy_vehicles_east + light_vehicles_east + support_vehicles_east );
+
+_classnames_to_save = _classnames_to_save + _classnames_to_save_blu + _classnames_to_save_red + all_hostile_classnames;
 _buildings_created = [];
 
 trigger_server_save = false;
@@ -234,7 +239,7 @@ if ( !isNil "greuh_liberation_savegame" ) then {
 
 	sleep 1;
 	{
-		if (! (typeOf _x in [FOB_typename])) then { _x allowDamage true };
+		if (! (typeOf _x in [FOB_typename_west,FOB_typename_east])) then { _x allowDamage true };
 	} foreach _buildings_created;
 };
 
@@ -320,7 +325,7 @@ while { true } do {
 			private	_lst_r3f = [];
 			private	_lst_grl = [];
 
-			if ( _nextclass in _classnames_to_save_blu + all_hostile_classnames - GRLIB_vehicle_blacklist) then {
+			if ( _nextclass in _classnames_to_save_blu + _classnames_to_save_red + all_hostile_classnames - GRLIB_vehicle_blacklist) then {
 				if (side _x != GRLIB_side_enemy) then {
 					_hascrew = _x getVariable ["GRLIB_vehicle_manned", false];
 					_owner = _x getVariable ["GRLIB_vehicle_owner", ""];
