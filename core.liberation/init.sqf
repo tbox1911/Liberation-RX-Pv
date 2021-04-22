@@ -21,15 +21,15 @@ if (isServer) then {
 		};
 	} foreach vehicles;
 
-	//[] execVM "scripts\server\init_server.sqf";
+	[] execVM "scripts\server\init_server.sqf";
 };
 
 if (!isDedicated && !hasInterface && isMultiplayer) then {
-	//[] execVM "scripts\server\offloading\hc_manager.sqf";
+	[] execVM "scripts\server\offloading\hc_manager.sqf";
 };
 
 if (!isDedicated && hasInterface) then {
-	//waitUntil { sleep 1; !isNil "GRLIB_init_server" };
+	waitUntil { sleep 1; !isNil "GRLIB_init_server" };
 	[] execVM "scripts\client\init_client.sqf";
 	[] execVM "GREUH\scripts\GREUH_activate.sqf";
 } else {

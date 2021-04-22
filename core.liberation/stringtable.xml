@@ -2,7 +2,7 @@
 <Project name="Liberation">
 		<Package name="Liberation">
 			<Key ID="STR_MISSION_TITLE">
-					<Original>-= Liberation RX PvP =-</Original>
+					<Original>-= Liberation RX - PvP =-</Original>
 			</Key>
 			<Key ID="STR_MISSION_AUTHOR">
 					<Original>[GREUH] Zbug, [GREUH] McKeewa, [AKH] pSiKO</Original>

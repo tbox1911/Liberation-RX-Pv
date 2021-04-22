@@ -35,24 +35,24 @@ infantry_units_east = [
 	["O_soldier_AT_F",1,0,0,GRLIB_perm_log],
 	["O_sniper_F",1,0,0,GRLIB_perm_log],
 	["O_soldier_PG_F",1,0,0,GRLIB_perm_log],
-	[crewman_classname,1,0,0,GRLIB_perm_inf],
-	[pilot_classname,1,0,0,GRLIB_perm_log]
+	[crewman_classname_east,1,0,0,GRLIB_perm_inf],
+	[pilot_classname_east,1,0,0,GRLIB_perm_log]
 ];
 
 // calc units price
 [] call compileFinal preprocessFileLineNumbers "scripts\loadouts\init_loadouts.sqf";
-_grp = createGroup [GRLIB_side_friendly, true];
+_grp = createGroup [east, true];
 {
 	_unit_class = _x select 0;
 	_unit_mp = _x select 1;
 	_unit_rank = _x select 4;
 	_unit = _grp createUnit [_unit_class, [0,0,0], [], 0, "NONE"];
 	if (typeOf _unit in units_loadout_overide) then {
-		_loadouts_folder = format ["scripts\loadouts\%1\%2.sqf", GRLIB_side_friendly, typeOf _unit];
+		_loadouts_folder = format ["scripts\loadouts\%1\%2.sqf", east, typeOf _unit];
 		[_unit] call compileFinal preprocessFileLineNUmbers _loadouts_folder;
 	};
 	_price = [_unit] call F_loadoutPrice;
-	infantry_units set [_forEachIndex, [_unit_class, _unit_mp, _price, 0,_unit_rank] ];
+	infantry_units_east set [_forEachIndex, [_unit_class, _unit_mp, _price, 0,_unit_rank] ];
 	deleteVehicle _unit;
 } foreach infantry_units_east ;
 
@@ -71,14 +71,10 @@ light_vehicles_east = [
 	["O_MRAP_02_F",2,25,2,0],
 	["O_MRAP_02_hmg_F",5,100,2,GRLIB_perm_inf],
 	["O_MRAP_02_gmg_F",5,125,2,GRLIB_perm_log],
-	//["I_MRAP_03_F",2,25,2,0],
-	//["I_MRAP_03_hmg_F",5,100,2,GRLIB_perm_inf],
-	//["I_MRAP_03_gmg_F",5,125,2,GRLIB_perm_log],
 	["O_Truck_02_transport_F",5,10,5,GRLIB_perm_inf],
 	["O_Truck_03_transport_F",5,50,5,GRLIB_perm_log],
 	["O_Truck_02_covered_F",5,10,5,GRLIB_perm_inf],
 	["O_Truck_03_covered_F",5,50,5,GRLIB_perm_log],
-	["I_LT_01_cannon_F",2,200,2,GRLIB_perm_log],
 	["O_LSV_02_unarmed_F",2,25,2,GRLIB_perm_inf],
 	["O_LSV_02_armed_F",5,100,2,GRLIB_perm_log],
 	["O_UGV_01_F",5,10,5,GRLIB_perm_inf],
@@ -89,14 +85,10 @@ heavy_vehicles_east = [
 	["O_APC_Wheeled_02_rcws_v2_F",10,400,10,GRLIB_perm_log],
 	["O_APC_Tracked_02_cannon_F",10,800,10,GRLIB_perm_log],
 	["O_APC_Tracked_02_AA_F",10,1500,10,GRLIB_perm_tank],
-	//["I_APC_Wheeled_03_cannon_F",10,500,10,GRLIB_perm_tank],
-	//["I_APC_tracked_03_cannon_F",10,500,10,GRLIB_perm_tank],
 	["O_MBT_02_cannon_F",15,1500,15,GRLIB_perm_tank],
 	["O_MBT_04_cannon_F",15,2500,15,GRLIB_perm_air],
 	["O_MBT_04_command_F",15,2500,15,GRLIB_perm_air],
-	["I_MBT_03_cannon_F",15,4500,15,GRLIB_perm_max],
-	["O_MBT_02_arty_F",15,3500,15,GRLIB_perm_max],
-	["I_E_Truck_02_MRL_F",15,3500,15,GRLIB_perm_max]
+	["O_MBT_02_arty_F",15,3500,15,GRLIB_perm_max]
 ];
 
 air_vehicles_east = [
@@ -105,23 +97,18 @@ air_vehicles_east = [
 	["O_UAV_02_dynamicLoadout_F",5,1000,5,GRLIB_perm_air],
 	["O_T_UAV_04_CAS_F",5,1500,10,GRLIB_perm_max],
 	["C_Plane_Civil_01_F",1,50,5,GRLIB_perm_air],
-	["I_Heli_light_03_unarmed_F",1,50,5,GRLIB_perm_tank],
 	["O_Heli_Light_02_unarmed_F",1,250,5,GRLIB_perm_tank],
-	["I_Heli_light_03_F",10,2000,20,GRLIB_perm_air],
 	["O_Heli_Transport_04_F",3,500,10,GRLIB_perm_air],
 	["O_Heli_Light_02_dynamicLoadout_F",5,1000,10,GRLIB_perm_air],
 	["O_Heli_Attack_02_dynamicLoadout_F",10,2000,20,GRLIB_perm_air],
 	//["O_T_VTOL_02_infantry_dynamicLoadout_F", 10,2500,20,GRLIB_perm_max],
 	//["O_T_VTOL_02_vehicle_dynamicLoadout_F", 10,2500,20,GRLIB_perm_max],
-	["I_Plane_Fighter_04_F", 10,2500,20,GRLIB_perm_max],
 	["O_Plane_CAS_02_dynamicLoadout_F",20,4000,40,GRLIB_perm_max],
 	["O_Plane_Fighter_02_F",20,4500,40,GRLIB_perm_max],
 	["O_Plane_Fighter_02_Stealth_F",20,4500,40,GRLIB_perm_max]
 ];
 
 blufor_air_east = [
-	"I_Heli_light_03_F",
-	"I_Plane_Fighter_04_F",
 	"O_Heli_Light_02_dynamicLoadout_F",
 	"O_Heli_Attack_02_dynamicLoadout_F",
 	"O_T_VTOL_02_infantry_dynamicLoadout_F",
@@ -143,7 +130,7 @@ static_vehicles_east = [
 	["O_SAM_System_04_F",10,500,0,GRLIB_perm_max]
 ];
 
-buildings_east = [
+buildings_east = buildings + [
 	["Land_Cargo_Tower_V3_F",0,0,0,GRLIB_perm_tank],
 	["Land_Cargo_House_V3_F",0,0,0,GRLIB_perm_inf],
 	["Land_Cargo_Patrol_V3_F",0,0,0,GRLIB_perm_log],
@@ -157,21 +144,21 @@ support_vehicles_east = [
 	[canisterFuel,0,5,1,0],
 	["O_G_Offroad_01_repair_F",5,15,5,GRLIB_perm_inf],
 	["O_G_Van_01_fuel_F",5,15,20,GRLIB_perm_inf],
-	[Respawn_truck_typename,15,150,5,GRLIB_perm_log],
+	[Respawn_truck_typename_east,15,150,5,GRLIB_perm_log],
 	["Land_Pod_Heli_Transport_04_bench_F",0,50,0,GRLIB_perm_log],
 	["Land_Pod_Heli_Transport_04_covered_F",0,50,0,GRLIB_perm_log],
-	[repair_sling_typename,10,100,0,GRLIB_perm_log],
-	[fuel_sling_typename,0,100,30,GRLIB_perm_log],
-	[ammo_sling_typename,0,150,0,GRLIB_perm_log],
-	[medic_sling_typename,10,100,0,GRLIB_perm_log],
-	[ammo_truck_typename,5,200,10,GRLIB_perm_tank],
-	[repair_truck_typename,10,130,10,GRLIB_perm_tank],
-	[fuel_truck_typename,5,120,40,GRLIB_perm_tank],
+	[repair_sling_typename_east,10,100,0,GRLIB_perm_log],
+	[fuel_sling_typename_east,0,100,30,GRLIB_perm_log],
+	[ammo_sling_typename_east,0,150,0,GRLIB_perm_log],
+	[medic_sling_typename_east,10,100,0,GRLIB_perm_log],
+	[ammo_truck_typename_east,5,200,10,GRLIB_perm_tank],
+	[repair_truck_typename_east,10,130,10,GRLIB_perm_tank],
+	[fuel_truck_typename_east,5,120,40,GRLIB_perm_tank],
 	["Box_NATO_Ammo_F",0,80,0,GRLIB_perm_log],
 	["Box_NATO_WpsLaunch_F",0,150,0,GRLIB_perm_tank],
 	["Land_CargoBox_V1_F",0,500,0,GRLIB_perm_max],
-	[FOB_box_typename,50,1500,50,GRLIB_perm_max],
-	[FOB_truck_typename,50,1500,50,GRLIB_perm_max],
+	[FOB_box_typename_east,50,1500,50,GRLIB_perm_max],
+	[FOB_truck_typename_east,50,1500,50,GRLIB_perm_max],
 	[ammobox_b_typename,0,round(300 / GRLIB_recycling_percentage),0,99999],
 	[ammobox_o_typename,0,round(300 / GRLIB_recycling_percentage),0,99999],
 	[ammobox_i_typename,0,round(300 / GRLIB_recycling_percentage),0,99999],
@@ -263,3 +250,12 @@ uavs_east = [
 	"O_UGV_01_rcws_F",
 	"O_UGV_02_Demining_F"
 ];
+
+infantry_units_east = [ infantry_units_east ] call F_filterMods;
+light_vehicles_east = [ light_vehicles_east ] call F_filterMods;
+heavy_vehicles_east = [ heavy_vehicles_east ] call F_filterMods;
+air_vehicles_east = [ air_vehicles_east ] call F_filterMods;
+support_vehicles_east = [ support_vehicles_east ] call F_filterMods;
+static_vehicles_east = [ static_vehicles_east ] call F_filterMods;
+buildings_east = [ buildings_east ] call F_filterMods;
+build_lists = [[],infantry_units_east,light_vehicles_east,heavy_vehicles_east,air_vehicles_east,static_vehicles_east,buildings_east,support_vehicles_east,squads_east];

@@ -8,7 +8,7 @@ class EditorData
 	toggles=641;
 	class ItemIDProvider
 	{
-		nextID=1172;
+		nextID=1173;
 	};
 	class MarkerIDProvider
 	{
@@ -16,18 +16,18 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=67;
+		nextID=68;
 	};
 	class Camera
 	{
-		pos[]={14490.993,33.300072,5855.4907};
+		pos[]={14523.75,34.583424,5845.8301};
 		dir[]={0,-0.70710683,0.70710683};
 		up[]={0,0.70710677,0.70710677};
-		aside[]={0.99999994,0,0};
+		aside[]={0.99999994,0,-0};
 	};
 };
 binarizationWanted=0;
-sourceName="Liberation-RX-PvP";
+sourceName="Liberation_RX_PvP";
 addons[]=
 {
 	"A3_Ui_F",
@@ -6557,8 +6557,8 @@ class Mission
 			dataType="Logic";
 			class PositionInfo
 			{
-				position[]={14483.459,12.376586,5878.8447};
-				angles[]={0.12993059,0,6.1440892};
+				position[]={14485.236,11.413552,5883.1582};
+				angles[]={0.10626491,0,6.0640931};
 			};
 			id=892;
 			type="HighCommand";
@@ -9859,34 +9859,6 @@ class Mission
 			side="West";
 			class Entities
 			{
-				items=1;
-				class Item0
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={14520.411,4.5936041,5871.7056};
-					};
-					side="West";
-					flags=7;
-					class Attributes
-					{
-					};
-					id=1149;
-					type="B_Soldier_unarmed_F";
-				};
-			};
-			class Attributes
-			{
-			};
-			id=1148;
-		};
-		class Item564
-		{
-			dataType="Group";
-			side="West";
-			class Entities
-			{
 				items=5;
 				class Item0
 				{
@@ -10016,7 +9988,7 @@ class Mission
 			};
 			id=1150;
 		};
-		class Item565
+		class Item564
 		{
 			dataType="Group";
 			side="East";
@@ -10109,7 +10081,7 @@ class Mission
 			};
 			id=1156;
 		};
-		class Item566
+		class Item565
 		{
 			dataType="Object";
 			class PositionInfo
@@ -10126,7 +10098,7 @@ class Mission
 			type="C_Kart_01_Blu_F";
 			atlOffset=7.6293945e-006;
 		};
-		class Item567
+		class Item566
 		{
 			dataType="Object";
 			class PositionInfo
@@ -10143,7 +10115,7 @@ class Mission
 			type="C_Kart_01_Fuel_F";
 			atlOffset=-1.5258789e-005;
 		};
-		class Item568
+		class Item567
 		{
 			dataType="Object";
 			class PositionInfo
@@ -10160,7 +10132,7 @@ class Mission
 			type="C_Kart_01_Red_F";
 			atlOffset=-5.531311e-005;
 		};
-		class Item569
+		class Item568
 		{
 			dataType="Object";
 			class PositionInfo
@@ -10177,7 +10149,7 @@ class Mission
 			type="C_Kart_01_Vrana_F";
 			atlOffset=-0.00016021729;
 		};
-		class Item570
+		class Item569
 		{
 			dataType="Object";
 			class PositionInfo
@@ -10401,7 +10373,7 @@ class Mission
 				nAttributes=3;
 			};
 		};
-		class Item571
+		class Item570
 		{
 			dataType="Object";
 			class PositionInfo
@@ -10418,7 +10390,7 @@ class Mission
 			type="C_Kart_01_F";
 			atlOffset=-4.5776367e-005;
 		};
-		class Item572
+		class Item571
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -10431,7 +10403,7 @@ class Mission
 			id=1169;
 			type="HeadlessClient_F";
 		};
-		class Item573
+		class Item572
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -10444,7 +10416,7 @@ class Mission
 			id=1170;
 			type="HeadlessClient_F";
 		};
-		class Item574
+		class Item573
 		{
 			dataType="Logic";
 			class PositionInfo
@@ -10456,6 +10428,128 @@ class Mission
 			isPlayable=1;
 			id=1171;
 			type="HeadlessClient_F";
+		};
+		class Item574
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={14507.81,7.3971167,5886.6045};
+				angles[]={6.2099824,0,6.13234};
+			};
+			id=1172;
+			type="HighCommand";
+		};
+	};
+	class Connections
+	{
+		class LinkIDProvider
+		{
+			nextID=10;
+		};
+		class Links
+		{
+			items=10;
+			class Item0
+			{
+				linkID=0;
+				item0=1151;
+				item1=892;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item1
+			{
+				linkID=1;
+				item0=1152;
+				item1=892;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item2
+			{
+				linkID=2;
+				item0=1153;
+				item1=892;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item3
+			{
+				linkID=3;
+				item0=1154;
+				item1=892;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item4
+			{
+				linkID=4;
+				item0=1155;
+				item1=892;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item5
+			{
+				linkID=5;
+				item0=1157;
+				item1=1172;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item6
+			{
+				linkID=6;
+				item0=1158;
+				item1=1172;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item7
+			{
+				linkID=7;
+				item0=1159;
+				item1=1172;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item8
+			{
+				linkID=8;
+				item0=1160;
+				item1=1172;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
+			class Item9
+			{
+				linkID=9;
+				item0=1161;
+				item1=1172;
+				class CustomData
+				{
+					type="Sync";
+				};
+			};
 		};
 	};
 };
