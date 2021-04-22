@@ -11,4 +11,4 @@ fuel_cap = base_fuel_cap;
 	if ( _x in sectors_factory ) then {
 		fuel_cap = fuel_cap + (20 * GRLIB_resources_multiplier);
 	};
-} foreach blufor_sectors;
+} foreach west_sectors;

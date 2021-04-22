@@ -23,7 +23,7 @@ while { dialog && alive player } do {
 
 		_myveh_lst = [nearestObjects [player, ["LandVehicle","Air","Ship"], 200], {
 			alive _x && (count (crew _x) == 0 || typeOf _x in uavs) &&
-			(_x distance lhd) >= 1000 &&
+			(_x distance my_lhd) >= 1000 &&
 			_x getVariable ["GRLIB_vehicle_owner", ""] == getPlayerUID player &&
 			!(typeOf _x in _recycleable_blacklist)
 		}] call BIS_fnc_conditionalSelect;

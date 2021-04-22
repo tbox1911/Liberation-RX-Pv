@@ -14,7 +14,7 @@ _setupVars =
 	_nbUnits = [] call getNbUnits;
 
 	// settings for this mission
-	_missionLocation = selectRandom ((blufor_sectors select {["capture_", _x] call fn_startsWith;}) apply {[_x, false]}) select 0;
+	_missionLocation = selectRandom ((west_sectors select {["capture_", _x] call fn_startsWith;}) apply {[_x, false]}) select 0;
 	_townName = markerText _missionLocation;
 
 	_locationsArray = nil;
@@ -65,7 +65,7 @@ _setupObjects =
 _waitUntilMarkerPos = nil;
 _waitUntilExec = nil;
 
-_waitUntilCondition = { _missionLocation in (sectors_allSectors - blufor_sectors) };
+_waitUntilCondition = { _missionLocation in (sectors_allSectors - west_sectors) };
 
 _failedExec = {
 	// Mission failed

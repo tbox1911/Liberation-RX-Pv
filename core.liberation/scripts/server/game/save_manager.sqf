@@ -8,8 +8,10 @@ if ( !(isNil "GRLIB_param_wipe_savegame_1") && !(isNil "GRLIB_param_wipe_savegam
 date_year = date select 0;
 date_month = date select 1;
 date_day = date select 2;
-blufor_sectors = [];
-GRLIB_all_fobs = [];
+west_sectors = [];
+east_sectors = [];
+GRLIB_fobs_west = [];
+GRLIB_fobs_east = [];
 GRLIB_mobile_respawn = [];
 buildings_to_save= [];
 combat_readiness = 0;
@@ -79,12 +81,14 @@ greuh_liberation_savegame = profileNamespace getVariable GRLIB_save_key;
 diag_log format [ "--- LRX Load Game start at %1", time ];
 if ( !isNil "greuh_liberation_savegame" ) then {
 
-	blufor_sectors = greuh_liberation_savegame select 0;
-	GRLIB_all_fobs = greuh_liberation_savegame select 1;
-	buildings_to_save = greuh_liberation_savegame select 2;
-	time_of_day = greuh_liberation_savegame select 3;
-	combat_readiness = greuh_liberation_savegame select 4;
-	GRLIB_garage = greuh_liberation_savegame select 5;
+	west_sectors = greuh_liberation_savegame select 0;
+	east_sectors = greuh_liberation_savegame select 1;
+	GRLIB_fobs_west = greuh_liberation_savegame select 2;
+	GRLIB_fobs_east = greuh_liberation_savegame select 3;
+	time_of_day = greuh_liberation_savegame select 4;
+	combat_readiness = greuh_liberation_savegame select 5;
+	GRLIB_garage = greuh_liberation_savegame select 6;
+	buildings_to_save = greuh_liberation_savegame select 7;
 	if (typeName GRLIB_garage != "ARRAY") then {GRLIB_garage = []};
 
 	_stats = greuh_liberation_savegame select 9;
@@ -130,16 +134,6 @@ if ( !isNil "greuh_liberation_savegame" ) then {
 
 	setDate [ GRLIB_date_year, GRLIB_date_month, GRLIB_date_day, time_of_day, 0];
 
-	_correct_fobs = [];
-	{
-		_next_fob = _x;
-		_keep_fob = true;
-		{
-			if ( _next_fob distance (markerpos _x) < 50 ) exitWith { _keep_fob = false };
-		} foreach sectors_allSectors;
-		if ( _keep_fob ) then { _correct_fobs pushback _next_fob };
-	} foreach GRLIB_all_fobs;
-	GRLIB_all_fobs = _correct_fobs;
 	stats_saves_loaded = stats_saves_loaded + 1;
 
 	_list_static = [] + opfor_statics;
@@ -264,8 +258,10 @@ if ( count GRLIB_vehicle_to_military_base_links == 0 ) then {
 	} foreach _classnames_to_check;
 };
 publicVariable "GRLIB_garage";
-publicVariable "blufor_sectors";
-publicVariable "GRLIB_all_fobs";
+publicVariable "west_sectors";
+publicVariable "east_sectors";
+publicVariable "GRLIB_fobs_west";
+publicVariable "GRLIB_fobs_east";
 publicVariable "GRLIB_mobile_respawn";
 publicVariable "GRLIB_vehicle_to_military_base_links";
 publicVariable "GRLIB_permissions";
@@ -300,7 +296,7 @@ while { true } do {
  				} ] call BIS_fnc_conditionalSelect;
 
 			_all_buildings = _all_buildings + _nextbuildings;
-		} foreach GRLIB_all_fobs;
+		} foreach GRLIB_fobs_west + GRLIB_fobs_east;
 
 		{
 			private _savedpos = [];
@@ -395,13 +391,15 @@ while { true } do {
 		_stats pushback stats_readiness_earned;
 
 		greuh_liberation_savegame = [
-			blufor_sectors,
-			GRLIB_all_fobs,
-			buildings_to_save,
+			west_sectors,
+			east_sectors,
+			GRLIB_fobs_west,
+			GRLIB_fobs_east,
 			time_of_day,
 			round combat_readiness,
 			GRLIB_garage,
-			0,0,0,		//free for extened use
+			buildings_to_save,
+			0,		//free for extened use
 			_stats,
 			[ round infantry_weight, round armor_weight, round air_weight ],
 			GRLIB_vehicle_to_military_base_links,

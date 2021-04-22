@@ -20,11 +20,11 @@ if ( combat_readiness > 15 ) then {
 			};
 			_current_timer = time;
 
-			waitUntil { sleep 0.3; (_current_timer + _reinforcements_time < time) || (_targetsector in blufor_sectors) || (_nearestower in blufor_sectors) };
+			waitUntil { sleep 0.3; (_current_timer + _reinforcements_time < time) || (_targetsector in west_sectors) || (_nearestower in west_sectors) };
 
 			sleep 15;
 
-			if ( (_targetsector in active_sectors) && !(_targetsector in blufor_sectors) && !(_nearestower in blufor_sectors) && (!([] call F_isBigtownActive) || _targetsector in sectors_bigtown)  ) then {
+			if ( (_targetsector in active_sectors) && !(_targetsector in west_sectors) && !(_nearestower in west_sectors) && (!([] call F_isBigtownActive) || _targetsector in sectors_bigtown)  ) then {
 				reinforcements_sector_under_attack = _targetsector;
 				reinforcements_set = true;
 				["lib_reinforcements", [markertext _targetsector]] remoteExec ["bis_fnc_shownotification", 0];

@@ -6,7 +6,7 @@ _frame_pos = [];
 _spawn_str = "";
 _basenamestr = "BASE CHIMERA";
 
-waitUntil { !isNil "GRLIB_all_fobs" };
+waitUntil { !isNil "GRLIB_fobs_west" };
 
 fullmap = 0;
 _old_fullmap = 0;
@@ -21,8 +21,8 @@ _oldsel = -999;
 
 showCinemaBorder false;
 camUseNVG false;
-respawn_camera = "camera" camCreate (getposASLW lhd);
-respawn_object = "Sign_Arrow_Blue_F" createVehicleLocal (getposASLW lhd);
+respawn_camera = "camera" camCreate (getposASLW my_lhd);
+respawn_object = "Sign_Arrow_Blue_F" createVehicleLocal (getposASLW my_lhd);
 respawn_object hideObject true;
 respawn_camera camSetTarget respawn_object;
 respawn_camera cameraEffect ["internal","back"];
@@ -52,10 +52,10 @@ lbAdd [ 203, "--"] ;
 lbSetCurSel [ 203, 0 ];
 
 while { dialog && alive player && deploy == 0} do {
-	choiceslist = [ [ _basenamestr, getpos lhd ] ];
+	choiceslist = [ [ _basenamestr, getpos my_lhd ] ];
 
-	for [{_idx=0},{_idx < count GRLIB_all_fobs},{_idx=_idx+1}] do {
-		choiceslist = choiceslist + [[format [ "FOB %1 - %2", (military_alphabet select _idx),mapGridPosition (GRLIB_all_fobs select _idx) ],GRLIB_all_fobs select _idx]];
+	for [{_idx=0},{_idx < count GRLIB_fobs_west},{_idx=_idx+1}] do {
+		choiceslist = choiceslist + [[format [ "FOB %1 - %2", (military_alphabet select _idx),mapGridPosition (GRLIB_fobs_west select _idx) ],GRLIB_fobs_west select _idx]];
 	};
 
 	_respawn_trucks = call F_getMobileRespawns;
@@ -88,7 +88,7 @@ while { dialog && alive player && deploy == 0} do {
 		_enddist = 120;
 		_alti = 35;
 		if ( dialog ) then {
-			if (((choiceslist select (lbCurSel 201)) select 0) == "BLUFOR LHD") then {
+			if (((choiceslist select (lbCurSel 201)) select 0) == "BLUFOR my_lhd") then {
 				_startdist = 200;
 				_enddist = 300;
 				_alti = 30;

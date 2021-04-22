@@ -49,7 +49,7 @@ Your Credit : <t color='#800000'>%4</t>", name player, _rank, _score, _ammo_coll
 hcRemoveAllGroups player;
 if ( player == [] call F_getCommander ) then {
 	private _myveh = [vehicles, {
-		(_x distance lhd) >= 1000 &&
+		(_x distance my_lhd) >= GRLIB_sector_size &&
 		[player, _x] call is_owner &&
 		_x getVariable ["GRLIB_vehicle_manned", false] &&
 		count (crew _x) > 0

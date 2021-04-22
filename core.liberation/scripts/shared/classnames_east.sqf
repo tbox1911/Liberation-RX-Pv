@@ -250,12 +250,3 @@ uavs_east = [
 	"O_UGV_01_rcws_F",
 	"O_UGV_02_Demining_F"
 ];
-
-infantry_units_east = [ infantry_units_east ] call F_filterMods;
-light_vehicles_east = [ light_vehicles_east ] call F_filterMods;
-heavy_vehicles_east = [ heavy_vehicles_east ] call F_filterMods;
-air_vehicles_east = [ air_vehicles_east ] call F_filterMods;
-support_vehicles_east = [ support_vehicles_east ] call F_filterMods;
-static_vehicles_east = [ static_vehicles_east ] call F_filterMods;
-buildings_east = [ buildings_east ] call F_filterMods;
-build_lists = [[],infantry_units_east,light_vehicles_east,heavy_vehicles_east,air_vehicles_east,static_vehicles_east,buildings_east,support_vehicles_east,squads_east];

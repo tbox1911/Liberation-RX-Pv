@@ -13,7 +13,7 @@ while { true } do {
 
 		{
 			if ( ( side group _x == GRLIB_side_friendly ) && ( !isPlayer _x ) ) then {
-				if ( ( _x distance lhd > 250 ) && ( _x distance lhd_west ) > 100  && ( _x distance lhd_east) > 100  && ( alive _x ) ) then {
+				if ( ( _x distance lhd_west ) > GRLIB_sector_size && ( _x distance lhd_east) > GRLIB_sector_size && ( alive _x ) ) then {
 					_unit = _x;
 					{
 						if ( ( _x select 0 ) == typeof _unit ) then {
@@ -28,7 +28,8 @@ while { true } do {
 		{
 			if (
 				(side _x == GRLIB_side_friendly || !(_x getVariable ["GRLIB_vehicle_owner", ""] in ["", "server", "public"]) ) &&
-				(_x distance lhd > 500) &&
+				(_x distance lhd_west > GRLIB_sector_size) &&
+				(_x distance lhd_east > GRLIB_sector_size) &&
 				!(_x getVariable ['R3F_LOG_disabled', false]) &&
 				isNull (_x getVariable ["R3F_LOG_est_transporte_par", objNull]) &&
 				(alive _x)

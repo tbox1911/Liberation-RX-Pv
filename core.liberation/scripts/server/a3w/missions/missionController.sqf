@@ -27,7 +27,7 @@ while {true} do {
 			_missionsList = _availableMissions call generateMissionWeights;
 
 			// Limit Town capture
-			_opfor_sectors = (count sectors_allSectors) - (count blufor_sectors);
+			_opfor_sectors = (count sectors_allSectors) - (count west_sectors);
 			_opfor_factor = round ((_opfor_sectors / (count sectors_allSectors)) * 100);
 
 			if (_opfor_factor <= 40 && count allPlayers > 1) then {
@@ -45,28 +45,28 @@ while {true} do {
 			};
 
 			// Special Delivery
-			if (count blufor_sectors >= 10) then {
+			if (count west_sectors >= 10) then {
 				_missionsList = ["mission_SpecialDelivery", false, _missionsList, 1] call updateMissionsList;
 			} else {
 				_missionsList = ["mission_SpecialDelivery", true, _missionsList] call updateMissionsList;
 			};
 
 			// Water Delivery
-			if (count blufor_sectors >= 5 && {_x in sectors_tower} count blufor_sectors >= 3) then {
+			if (count west_sectors >= 5 && {_x in sectors_tower} count west_sectors >= 3) then {
 				_missionsList = ["mission_WaterDelivery", false, _missionsList, 1] call updateMissionsList;
 			} else {
 				_missionsList = ["mission_WaterDelivery", true, _missionsList] call updateMissionsList;
 			};
 
 			// Food Delivery
-			if (count blufor_sectors >= 5 && {_x in sectors_bigtown} count blufor_sectors >= 1) then {
+			if (count west_sectors >= 5 && {_x in sectors_bigtown} count west_sectors >= 1) then {
 				_missionsList = ["mission_FoodDelivery", false, _missionsList, 1] call updateMissionsList;
 			} else {
 				_missionsList = ["mission_FoodDelivery", true, _missionsList] call updateMissionsList;
 			};
 
 			// Fuel Delivery
-			if (count blufor_sectors >= 5 && {_x in sectors_factory} count blufor_sectors >= 3) then {
+			if (count west_sectors >= 5 && {_x in sectors_factory} count west_sectors >= 3) then {
 				_missionsList = ["mission_FuelDelivery", false, _missionsList, 1] call updateMissionsList;
 			} else {
 				_missionsList = ["mission_FuelDelivery", true, _missionsList] call updateMissionsList;

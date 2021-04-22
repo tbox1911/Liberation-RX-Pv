@@ -57,7 +57,7 @@ if (isServer) then {
 	[ _liberated_sector, 0 ] remoteExec ["remote_call_sector", 0];
 	reset_battlegroups_ai = true; publicVariable "reset_battlegroups_ai";
 
-	blufor_sectors pushback _liberated_sector; publicVariable "blufor_sectors";
+	west_sectors pushback _liberated_sector; publicVariable "west_sectors";
 	stats_sectors_liberated = stats_sectors_liberated + 1;
 
 	[] call recalculate_caps;

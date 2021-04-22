@@ -18,8 +18,8 @@ while { _attacktime > 0 && ( _ownership == GRLIB_side_enemy ) } do {
 
 if ( GRLIB_endgame == 0 ) then {
 	if ( _attacktime <= 1 && ( [markerpos _sector] call F_sectorOwnership == GRLIB_side_enemy ) ) then {
-		blufor_sectors = blufor_sectors - [ _sector ];
-		publicVariable "blufor_sectors";
+		west_sectors = west_sectors - [ _sector ];
+		publicVariable "west_sectors";
 		[ _sector, 2 ] remoteExec ["remote_call_sector", 0];
 		reset_battlegroups_ai = true;
 		trigger_server_save = true;

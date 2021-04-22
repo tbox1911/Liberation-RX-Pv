@@ -1,5 +1,5 @@
-waitUntil { !isNil "GRLIB_all_fobs" };
-waitUntil { !isNil "blufor_sectors" };
+waitUntil { !isNil "GRLIB_fobs_west" };
+waitUntil { !isNil "west_sectors" };
 
 sleep 5;
 
@@ -13,7 +13,7 @@ while { GRLIB_endgame == 0 } do {
 			[ _x ] call attack_in_progress_sector;
 		};
 		sleep 0.5;
-	} foreach blufor_sectors;
+	} foreach west_sectors;
 
 	{
 		_ownership = [ _x ] call F_sectorOwnership;
@@ -21,7 +21,7 @@ while { GRLIB_endgame == 0 } do {
 			[ _x ] call attack_in_progress_fob;
 		};
 		sleep 0.5;
-	} foreach GRLIB_all_fobs;
+	} foreach GRLIB_fobs_west;
 
 	sleep 2;
 

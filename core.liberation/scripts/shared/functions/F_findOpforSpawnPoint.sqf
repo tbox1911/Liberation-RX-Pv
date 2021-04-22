@@ -33,7 +33,7 @@ _filtered_possible_sectors = [];
 				_current_sector_distance = (( markerpos _current_sector ) distance (_x));
 			};
 		};
-	} foreach GRLIB_all_fobs;
+	} foreach GRLIB_fobs_west;
 
 	if ( _accept_current_sector ) then {
 		{
@@ -44,7 +44,7 @@ _filtered_possible_sectors = [];
 					_current_sector_distance = (( markerpos _current_sector ) distance (markerpos _x));
 				};
 			};
-		} foreach blufor_sectors;
+		} foreach west_sectors;
 	};
 
 	if ( _accept_current_sector ) then {
@@ -53,7 +53,7 @@ _filtered_possible_sectors = [];
 			if ( (( markerpos _current_sector ) distance (markerpos _x)) < 2000 ) then {
 				_one_opfor_sector_in_range = true;
 			}
-		} foreach (sectors_allSectors - blufor_sectors);
+		} foreach (sectors_allSectors - west_sectors);
 		_accept_current_sector = _one_opfor_sector_in_range;
 	};
 

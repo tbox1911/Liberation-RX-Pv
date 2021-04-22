@@ -24,8 +24,8 @@ if ( GRLIB_endgame == 0 ) then {
 		sleep 3;
 		[_thispos, 250] remoteExec ["remote_call_penalty", 0];
 		sleep 3;
-		GRLIB_all_fobs = GRLIB_all_fobs - [_thispos];
-		publicVariable "GRLIB_all_fobs";
+		GRLIB_fobs_west = GRLIB_fobs_west - [_thispos];
+		publicVariable "GRLIB_fobs_west";
 		reset_battlegroups_ai = true;
 		[_thispos] call destroy_fob;
 		trigger_server_save = true;

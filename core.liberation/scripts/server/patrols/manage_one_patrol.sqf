@@ -1,11 +1,11 @@
 params [ "_minimum_readiness", "_patrol_type", "_index" ];
 private [ "_headless_client" ];
 
-waitUntil { !isNil "blufor_sectors" };
+waitUntil { !isNil "west_sectors" };
 waitUntil { !isNil "combat_readiness" };
 
 while { GRLIB_endgame == 0 } do {
-	waitUntil { sleep 1; count blufor_sectors >= 3; };
+	waitUntil { sleep 1; count west_sectors >= 3; };
 	waitUntil { sleep 1; combat_readiness >= (_minimum_readiness / GRLIB_difficulty_modifier); };
 
 	sleep ((1 + floor(random 5)) * 60);
@@ -14,7 +14,7 @@ while { GRLIB_endgame == 0 } do {
 		sleep (30 + floor(random 30));
 	};
 
-	while { (count sectors_allSectors - count blufor_sectors) < ((_index + 1) * 2) } do {
+	while { (count sectors_allSectors - count west_sectors) < ((_index + 1) * 2) } do {
 		sleep (150 + floor(random 150));
 	};
 
@@ -56,7 +56,7 @@ while { GRLIB_endgame == 0 } do {
 
 	if (_patrol_type == 3) then {
 		private [ "_vehicle_object" ];
-		_opfor_spawn = [sectors_tower + sectors_military, {!( _x in blufor_sectors)}] call BIS_fnc_conditionalSelect;
+		_opfor_spawn = [sectors_tower + sectors_military, {!( _x in west_sectors)}] call BIS_fnc_conditionalSelect;
 		if ( count _opfor_spawn > 0) then {
 			_grp = createGroup [GRLIB_side_enemy, true];
 			_tower_spawn_pos = [ getMarkerPos (selectRandom _opfor_spawn), floor(random 50), random 360 ] call BIS_fnc_relPos;

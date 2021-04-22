@@ -6,7 +6,7 @@ _hostile_markers = [];
 
 waitUntil {
 	sleep 1;
-	!isNil "blufor_sectors"
+	!isNil "west_sectors"
 };
 
 while { true } do {

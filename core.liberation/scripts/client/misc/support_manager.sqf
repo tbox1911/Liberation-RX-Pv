@@ -1,4 +1,4 @@
-waitUntil { sleep 1; !isNil "blufor_sectors" };
+waitUntil { sleep 1; !isNil "west_sectors" };
 waitUntil { sleep 1; !isNil "GRLIB_player_spawned" };
 private ["_near_arsenal", "_near_medic", "_needammo1", "_needammo2", "_needmedic", "_magType", "_list_vehicles", "_min"];
 
@@ -152,7 +152,7 @@ while { true } do {
 	};
 
 	// Show Hint
-	private _neartower = ((sectors_allSectors select {_x select [0,6] == "tower_" && !(_x in blufor_sectors) && player distance2D (getMarkerPos _x) <= 20})) select 0;
+	private _neartower = ((sectors_allSectors select {_x select [0,6] == "tower_" && !(_x in west_sectors) && player distance2D (getMarkerPos _x) <= 20})) select 0;
 	if (!isNil "_neartower") then {
 		_msg = format ["Use <t color='#FF0000'>Explosives</t> to destroy<br/>the <t color='#0000FF'>Radio Tower</t>."];
 		[_msg, 0, 0, 5, 0, 0, 90] spawn BIS_fnc_dynamicText;

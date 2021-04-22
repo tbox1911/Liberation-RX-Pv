@@ -1,5 +1,5 @@
 waitUntil { !isNil "save_is_loaded" };
-waitUntil { !isNil "blufor_sectors" };
+waitUntil { !isNil "west_sectors" };
 
 while { GRLIB_endgame == 0 } do {
 	sleep (floor random [10,15,20] * 60);
@@ -12,7 +12,7 @@ while { GRLIB_endgame == 0 } do {
 			if ( _x in sectors_military ) then {
 				_blufor_mil_sectors pushback _x;
 			};
-		} foreach blufor_sectors;
+		} foreach west_sectors;
 
 		if ( count _blufor_mil_sectors > 0 ) then {
 			if ( GRLIB_passive_income ) then {
@@ -44,7 +44,7 @@ while { GRLIB_endgame == 0 } do {
 			if ( _x in sectors_factory ) then {
 				_blufor_fuel_sectors pushback _x;
 			};
-		} foreach blufor_sectors;
+		} foreach west_sectors;
 
 		if ( count _blufor_fuel_sectors > 0 ) then {
 			if ( ( { typeof _x == fuelbarrel_typename } count vehicles ) <= ( ceil ( ( count _blufor_fuel_sectors ) * 0.95 ) ) ) then {
@@ -60,7 +60,7 @@ while { GRLIB_endgame == 0 } do {
 			if ( _x in sectors_tower ) then {
 				_blufor_water_sectors pushback _x;
 			};
-		} foreach blufor_sectors;
+		} foreach west_sectors;
 
 		if ( count _blufor_water_sectors > 0 ) then {
 			if ( ( { typeof _x == waterbarrel_typename } count vehicles ) <= ( ceil ( ( count _blufor_water_sectors ) * 0.95 ) ) ) then {
@@ -76,7 +76,7 @@ while { GRLIB_endgame == 0 } do {
 			if ( _x in sectors_bigtown ) then {
 				_blufor_food_sectors pushback _x;
 			};
-		} foreach blufor_sectors;
+		} foreach west_sectors;
 
 		if ( count _blufor_food_sectors > 0 ) then {
 			if ( ( { typeof _x == foodbarrel_typename } count vehicles ) <= ( ceil ( ( count _blufor_food_sectors ) * 3 ) ) ) then {

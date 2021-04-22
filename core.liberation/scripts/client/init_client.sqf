@@ -19,7 +19,32 @@ get_lrx_name = compileFinal preprocessFileLineNumbers "scripts\client\misc\get_l
 R3F_LOG_joueur_deplace_objet = objNull;
 GRLIB_player_spawned = false;
 GRLIB_side_friendly = side player;
+
 GRLIB_respawn_marker = format ["respawn_%1", GRLIB_side_friendly];
+if (side player == west) then {
+	my_lhd = lhd_west;
+	GRLIB_color_friendly = GRLIB_color_west;
+	infantry_units = [ infantry_units_west ] call F_filterMods;
+	light_vehicles = [ light_vehicles_west ] call F_filterMods;
+	heavy_vehicles = [ heavy_vehicles_west ] call F_filterMods;
+	air_vehicles = [ air_vehicles_west ] call F_filterMods;
+	support_vehicles = [ support_vehicles_west ] call F_filterMods;
+	static_vehicles = [ static_vehicles_west ] call F_filterMods;
+	buildings = [ buildings_west ] call F_filterMods;
+	squads = squads_west;
+} else {
+	my_lhd = lhd_east;
+	GRLIB_color_friendly = GRLIB_color_east;
+	infantry_units = [ infantry_units_east ] call F_filterMods;
+	light_vehicles = [ light_vehicles_east ] call F_filterMods;
+	heavy_vehicles = [ heavy_vehicles_east ] call F_filterMods;
+	air_vehicles = [ air_vehicles_east ] call F_filterMods;
+	support_vehicles = [ support_vehicles_east ] call F_filterMods;
+	static_vehicles = [ static_vehicles_east ] call F_filterMods;
+	buildings = [ buildings_west ] call F_filterMods;
+	squads = squads_east;
+};
+build_lists = [[],infantry_units,light_vehicles,heavy_vehicles,air_vehicles,static_vehicles,buildings,support_vehicles,squads];
 
 setTerrainGrid 12.5;  //Very High = 6.25, Ultra = 3.125
 player setVariable ["GRLIB_score_set", 0, true];

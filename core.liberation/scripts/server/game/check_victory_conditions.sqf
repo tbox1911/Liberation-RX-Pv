@@ -1,8 +1,8 @@
 sleep 5;
 
-_blufor_bigtowns = [ blufor_sectors, { _x in sectors_bigtown } ] call BIS_fnc_conditionalSelect;
+_blufor_bigtowns = [ west_sectors, { _x in sectors_bigtown } ] call BIS_fnc_conditionalSelect;
 
-if ( (count _blufor_bigtowns == count sectors_bigtown) && (count (sectors_allSectors - blufor_sectors) == 0) ) then {
+if ( (count _blufor_bigtowns == count sectors_bigtown) && (count (sectors_allSectors - west_sectors) == 0) ) then {
 	GRLIB_endgame = 1;
 	publicVariable "GRLIB_endgame";
 	{ _x allowDamage false; (vehicle _x) allowDamage false; } foreach allPlayers;
@@ -41,6 +41,6 @@ if ( (count _blufor_bigtowns == count sectors_bigtown) && (count (sectors_allSec
 
 	sleep 20;
 
-	{ if ( !(isPlayer _x) && _x distance lhd > 500  ) then { deleteVehicle _x } } foreach allUnits;
+	{ if ( !(isPlayer _x) && _x distance lhd_west > GRLIB_sector_size && _x distance lhd_east > GRLIB_sector_size ) then { deleteVehicle _x } } foreach allUnits;
 
 };

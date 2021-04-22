@@ -60,7 +60,7 @@ if ( (_unit isKindOf "Man") && ( alive _unit ) && (vehicle _unit == _unit) && (s
 			while {(count (waypoints _grp)) != 0} do {deleteWaypoint ((waypoints _grp) select 0);};
 			{_x doFollow leader _grp} foreach units _grp;
 
-			private _sectors = (sectors_allSectors - blufor_sectors);
+			private _sectors = (sectors_allSectors - west_sectors);
 			private _nearest_sector = [_sectors, _unit] call BIS_fnc_nearestPosition;
 
 			if (!isNil "_nearest_sector") then {

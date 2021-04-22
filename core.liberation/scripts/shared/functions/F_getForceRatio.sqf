@@ -13,7 +13,7 @@ _ratio = -1;
 if (_red_forces > 0) then {
 	_ratio = _blue_forces / ( _red_forces + _blue_forces );
 } else {
-	if ( _sector in blufor_sectors || _blue_forces != 0 ) then {
+	if ( _sector in west_sectors || _blue_forces != 0 ) then {
 		_ratio = 1;
 	} else {
 		_ratio = 0;

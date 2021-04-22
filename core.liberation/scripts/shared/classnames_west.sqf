@@ -252,13 +252,3 @@ uavs_west = [
 	"B_UGV_01_rcws_F",
 	"B_UGV_02_Demining_F"
 ];
-
-
-infantry_units_west = [ infantry_units_west ] call F_filterMods;
-light_vehicles_west = [ light_vehicles_west ] call F_filterMods;
-heavy_vehicles_west = [ heavy_vehicles_west ] call F_filterMods;
-air_vehicles_west = [ air_vehicles_west ] call F_filterMods;
-support_vehicles_west = [ support_vehicles_west ] call F_filterMods;
-static_vehicles_west = [ static_vehicles_west ] call F_filterMods;
-buildings_west = [ buildings_west ] call F_filterMods;
-build_lists = [[],infantry_units_west,light_vehicles_west,heavy_vehicles_west,air_vehicles_west,static_vehicles_west,buildings_west,support_vehicles_west,squads_west];

@@ -27,7 +27,7 @@ if ( isServer ) then {
 
 	if ( side _killer == GRLIB_side_friendly ) then {
 
-		_nearby_bigtown = [ sectors_bigtown, {  (!(_x in blufor_sectors)) && ( _unit distance (markerpos _x) < 250 ) } ] call BIS_fnc_conditionalSelect;
+		_nearby_bigtown = [ sectors_bigtown, {  (!(_x in west_sectors)) && ( _unit distance (markerpos _x) < 250 ) } ] call BIS_fnc_conditionalSelect;
 		if ( count _nearby_bigtown > 0 ) then {
 			combat_readiness = combat_readiness + (0.5 * GRLIB_difficulty_modifier);
 			stats_readiness_earned = stats_readiness_earned + (0.5 * GRLIB_difficulty_modifier);

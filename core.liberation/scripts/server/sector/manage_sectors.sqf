@@ -1,6 +1,6 @@
 active_sectors = [];
 
-waitUntil {sleep 1; !isNil "blufor_sectors" };
+waitUntil {sleep 1; !isNil "west_sectors" };
 waitUntil {sleep 1; !isNil "sectors_allSectors" };
 
 while { GRLIB_endgame == 0 } do {
@@ -25,7 +25,7 @@ while { GRLIB_endgame == 0 } do {
 			};
 		};
 		sleep 0.25;
-	} foreach ( sectors_allSectors - blufor_sectors );
+	} foreach ( sectors_allSectors - west_sectors );
 
 	//diag_log format [ "Full sector scan at %1, active sectors: %2", time, active_sectors ];
 	sleep 3;

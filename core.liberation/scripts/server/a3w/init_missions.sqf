@@ -25,7 +25,7 @@ checkSpawn = compileFinal preprocessFileLineNumbers "scripts\server\a3w\scripts\
 updateMissionsList = compileFinal preprocessFileLineNumbers "scripts\server\a3w\scripts\F_updateMissionsList.sqf";
 getNbUnits = compileFinal preprocessFileLineNumbers "scripts\server\a3w\scripts\F_getNbUnits.sqf";
 
-waitUntil {sleep 1; !isNil "blufor_sectors" };
+waitUntil {sleep 1; !isNil "west_sectors" };
 waitUntil {sleep 1; !isNil "sectors_allSectors" };
 waitUntil {sleep 1; !isNil "save_is_loaded" };
 

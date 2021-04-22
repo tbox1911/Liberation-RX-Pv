@@ -27,7 +27,8 @@ while { count (units _grp) > 0 } do {
 				alive _x &&
 				side _x == GRLIB_side_friendly &&
 				!(_x getVariable ['R3F_LOG_disabled', false]) &&
-				_x distance2D lhd > 500 &&
+				_x distance2D lhd_west > GRLIB_sector_size &&
+				_x distance2D lhd_east > GRLIB_sector_size &&
 				_x distance2D ([getPos _x] call F_getNearestFob) >= GRLIB_sector_size
 			} ] call BIS_fnc_conditionalSelect;
 
@@ -74,14 +75,14 @@ while { count (units _grp) > 0 } do {
 		} else {
 			private _patrol_startpos = getpos (leader _grp);
 			private _sector_radius = 4000;
-			private _sector_list = (sectors_allSectors - blufor_sectors - sectors_tower);
+			private _sector_list = (sectors_allSectors - west_sectors - sectors_tower);
 			private _max_waypoints = 4;  // + back to startpos and cycle
 
 			if (_patrol_type == 1) then {
 				_sector_radius = 2000;
 				_a3w_missions = [];
 				{_a3w_missions pushBack ( _x select 0 )} foreach (SpawnMissionMarkers + ForestMissionMarkers);
-				_sector_list = (sectors_allSectors + _a3w_missions - blufor_sectors );
+				_sector_list = (sectors_allSectors + _a3w_missions - west_sectors );
 				_max_waypoints = 5;
 			};
 

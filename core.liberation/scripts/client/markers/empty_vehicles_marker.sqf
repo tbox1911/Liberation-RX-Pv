@@ -28,7 +28,7 @@ while { true } do {
 
 	private _veh_list = [ vehicles, {
 		alive _x &&
-		_x distance lhd > 500 &&
+		_x distance my_lhd > 500 &&
 		locked _x != 2 &&
 		!(typeOf _x in _no_marker_classnames) &&
 		!(_x getVariable ['R3F_LOG_disabled', true]) &&

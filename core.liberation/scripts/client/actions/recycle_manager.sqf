@@ -5,7 +5,7 @@ private _searchradius = 100;
 private _nearrecycl = [];
 private _recycleable_blacklist = [];
 private _recycleable_classnames = ["LandVehicle","Air","Ship","Slingload_01_Base_F", "Pod_Heli_Transport_04_base_F"];
-{_recycleable_classnames pushBack ( _x select 0 )} foreach (static_vehicles + support_vehicles + buildings + opfor_recyclable);
+{_recycleable_classnames pushBack ( _x select 0 )} foreach (static_vehicles_west + support_vehicles_west + static_vehicles_east + support_vehicles_east + buildings + opfor_recyclable);
 _recycleable_classnames = _recycleable_classnames + GRLIB_vehicle_whitelist;
 
 waitUntil {sleep 1; !isNil "build_confirmed" };
@@ -16,7 +16,8 @@ waituntil {sleep 1; GRLIB_player_spawned; (player getVariable ["GRLIB_score_set"
 
 while { true } do {
 	_nearrecycl = [nearestObjects [player, _recycleable_classnames, _searchradius], {
-		(_x distance lhd) >= 1000 &&
+		(_x distance lhd_west) >= GRLIB_sector_size &&
+		(_x distance lhd_east) >= GRLIB_sector_size &&
 		!(typeOf _x in _recycleable_blacklist) &&
 		!([_x] call is_public) &&
 		isNil {_x getVariable "GRLIB_recycle_action"}

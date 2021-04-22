@@ -72,8 +72,8 @@ while {
 	{
 		private _unit = _x;
 		if ( alive _unit && vehicle _unit == _unit ) then {
-			private _sectors = (sectors_allSectors - blufor_sectors);
-			if (_side == GRLIB_side_friendly) then {_sectors = blufor_sectors};
+			private _sectors = (sectors_allSectors - west_sectors);
+			if (_side == GRLIB_side_friendly) then {_sectors = west_sectors};
 			private _nearest_sector = [_sectors, _unit] call BIS_fnc_nearestPosition;
 
 			if (!isNil "_nearest_sector") then {

@@ -18,9 +18,9 @@ while { _move_is_disabled && local _unit && alive _unit && !(captive _unit) } do
 	};
 
 	if ( _sector != "" ) then {
-		_hostile_sectors = blufor_sectors;
+		_hostile_sectors = west_sectors;
 		if (side _unit != GRLIB_side_enemy) then {
-			_hostile_sectors = sectors_allSectors - blufor_sectors;
+			_hostile_sectors = sectors_allSectors - west_sectors;
 		};
 		if ( _sector in _hostile_sectors ) then {
 			_resume_movement = true;

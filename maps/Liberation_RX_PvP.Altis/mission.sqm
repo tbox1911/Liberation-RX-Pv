@@ -16,11 +16,11 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=68;
+		nextID=69;
 	};
 	class Camera
 	{
-		pos[]={14523.75,34.583424,5845.8301};
+		pos[]={9992.1074,54.216995,25129.566};
 		dir[]={0,-0.70710683,0.70710683};
 		up[]={0,0.70710677,0.70710677};
 		aside[]={0.99999994,0,-0};
@@ -3224,7 +3224,7 @@ class Mission
 		{
 			dataType="Marker";
 			position[]={8534.2695,113.21,25037.5};
-			name="base_chimera";
+			name="base_chimera_east";
 			text="BASE CHIMERA";
 			type="mil_start";
 			colorName="ColorEAST";
@@ -3575,11 +3575,11 @@ class Mission
 			class Attributes
 			{
 				skill=0.60000002;
-				name="base_boxspawn_red";
+				name="base_boxspawn_east";
 			};
 			id=361;
 			type="Land_ClutterCutter_medium_F";
-			atlOffset=1.9249954;
+			atlOffset=1.9250031;
 		};
 		class Item333
 		{
@@ -8206,11 +8206,11 @@ class Mission
 		{
 			dataType="Marker";
 			position[]={9993.499,26.700001,25110.811};
-			name="base_chimera_blu";
+			name="base_chimera_west";
 			text="BASE CHIMERA";
 			type="mil_start";
 			colorName="ColorWEST";
-			angle=200.17497;
+			angle=200.17499;
 			id=1098;
 			atlOffset=7.6293945e-005;
 		};
@@ -8985,7 +8985,7 @@ class Mission
 			class Attributes
 			{
 				skill=0.60000002;
-				name="base_boxspawn_blu";
+				name="base_boxspawn_west";
 				createAsSimpleObject=1;
 			};
 			id=1103;

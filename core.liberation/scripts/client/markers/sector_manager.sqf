@@ -2,7 +2,7 @@ private [ "_sector_count", "_vehicle_unlock_markers", "_marker", "_nextbase", "_
 
 waitUntil {sleep 1; !isNil "sectors_allSectors" };
 waitUntil {sleep 1; !isNil "save_is_loaded" };
-waitUntil {sleep 1; !isNil "blufor_sectors" };
+waitUntil {sleep 1; !isNil "west_sectors" };
 
 _getMarkerType = {
 	params ["_marker"];
@@ -32,20 +32,20 @@ _sector_count = -1;
 uiSleep 1;
 
 while { true } do {
-	waitUntil {sleep 1;count blufor_sectors != _sector_count};
+	waitUntil {sleep 1;count west_sectors != _sector_count};
 
 	if (GRLIB_hide_opfor) then {
 		{
 			_x setMarkerColorLocal GRLIB_color_enemy;
 			_x setMarkerTypeLocal "Empty";
-		} foreach (sectors_allSectors - blufor_sectors);
+		} foreach (sectors_allSectors - west_sectors);
 		{
 			_x setMarkerColorLocal GRLIB_color_friendly;
 			_x setMarkerTypeLocal ([_x] call _getMarkerType);
-		 } foreach blufor_sectors;
+		 } foreach west_sectors;
 	} else {
-		{ _x setMarkerColorLocal GRLIB_color_enemy; } foreach (sectors_allSectors - blufor_sectors);
-		{ _x setMarkerColorLocal GRLIB_color_friendly; } foreach blufor_sectors;
+		{ _x setMarkerColorLocal GRLIB_color_enemy; } foreach (sectors_allSectors - west_sectors);
+		{ _x setMarkerColorLocal GRLIB_color_friendly; } foreach west_sectors;
 	};
 
 	{
@@ -53,7 +53,7 @@ while { true } do {
 		(_nextmarker select 0) setMarkerColorLocal GRLIB_color_enemy;
 		{
 			if ( _x == (_nextmarker select 1) ) exitWith { (_nextmarker select 0) setMarkerColorLocal GRLIB_color_friendly; };
-		} foreach blufor_sectors;
+		} foreach west_sectors;
 	} foreach _vehicle_unlock_markers;
-	_sector_count = count blufor_sectors;
+	_sector_count = count west_sectors;
 };

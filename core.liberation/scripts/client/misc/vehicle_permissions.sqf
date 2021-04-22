@@ -3,7 +3,7 @@ params ["_unit", "_role", "_vehicle"];
 private _doeject = false;
 private _role = (assignedVehicleRole _unit) select 0;
 if (isNil "_role") exitWith {false};  // Eject unit
-if (count GRLIB_all_fobs == 0 && typeOf _vehicle in [FOB_truck_typename,huron_typename]) exitWith {true}; // Allowed at start
+if (count GRLIB_fobs_west == 0 && typeOf _vehicle in [FOB_truck_typename,huron_typename]) exitWith {true}; // Allowed at start
 
 private _msg = "";
 if (!((_role == "cargo") || (_vehicle isKindOf "Steerable_Parachute_F"))) then {
