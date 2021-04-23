@@ -19,10 +19,10 @@ while { true } do {
 		} foreach group_owners;
 
 		if ( count _group_owner > 0 ) then {
-			if ( side _currentgroup == GRLIB_side_friendly ) then {
+			if ( side _currentgroup == GRLIB_side_west ) then {
 				group_owners set [_idx_group_owner, [_group_owner select 0, _group_owner select 1,_group_owner select 2, (_group_owner select 3) + (count units _currentgroup), (_group_owner select 4), (_group_owner select 5)]];
 			};
-			if ( side _currentgroup == GRLIB_side_enemy ) then {
+			if ( side _currentgroup == GRLIB_side_east ) then {
 				group_owners set [_idx_group_owner, [_group_owner select 0, _group_owner select 1,_group_owner select 2, (_group_owner select 3), (_group_owner select 4)  + (count units _currentgroup), (_group_owner select 5)]];
 			};
 			if ( side _currentgroup == GRLIB_side_civilian ) then {

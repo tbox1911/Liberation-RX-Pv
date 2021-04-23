@@ -6,7 +6,7 @@ _frame_pos = [];
 _spawn_str = "";
 _basenamestr = "BASE CHIMERA";
 
-waitUntil { !isNil "GRLIB_fobs_west" };
+waitUntil { !isNil "GRLIB_my_fobs" };
 
 fullmap = 0;
 _old_fullmap = 0;
@@ -54,8 +54,8 @@ lbSetCurSel [ 203, 0 ];
 while { dialog && alive player && deploy == 0} do {
 	choiceslist = [ [ _basenamestr, getpos my_lhd ] ];
 
-	for [{_idx=0},{_idx < count GRLIB_fobs_west},{_idx=_idx+1}] do {
-		choiceslist = choiceslist + [[format [ "FOB %1 - %2", (military_alphabet select _idx),mapGridPosition (GRLIB_fobs_west select _idx) ],GRLIB_fobs_west select _idx]];
+	for [{_idx=0},{_idx < count GRLIB_my_fobs},{_idx=_idx+1}] do {
+		choiceslist = choiceslist + [[format [ "FOB %1 - %2", (military_alphabet select _idx),mapGridPosition (GRLIB_my_fobs select _idx) ],GRLIB_my_fobs select _idx]];
 	};
 
 	_respawn_trucks = call F_getMobileRespawns;

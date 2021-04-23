@@ -25,7 +25,7 @@ if (isServer) then {
 };
 
 if (!isDedicated && !hasInterface && isMultiplayer) then {
-	[] execVM "scripts\server\offloading\hc_manager.sqf";
+	//[] execVM "scripts\server\offloading\hc_manager.sqf";
 };
 
 if (!isDedicated && hasInterface) then {

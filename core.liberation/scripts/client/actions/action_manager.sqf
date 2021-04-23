@@ -285,7 +285,7 @@ while { true } do {
 
 		// Secondary Objectives
 		_idact_secondary = _id_actions select 21;
-		if (count GRLIB_fobs_west > 0 && ( GRLIB_endgame == 0 ) && (_fobdistance < _distredeploy || (player distance my_lhd) <= 200) && ([player] call F_getScore >= GRLIB_perm_air ||  player == ( [] call F_getCommander ) || [] call is_admin) ) then {
+		if (count GRLIB_my_fobs > 0 && ( GRLIB_endgame == 0 ) && (_fobdistance < _distredeploy || (player distance my_lhd) <= 200) && ([player] call F_getScore >= GRLIB_perm_air ||  player == ( [] call F_getCommander ) || [] call is_admin) ) then {
 			if ( _idact_secondary == -1 ) then {
 				_idact = player addAction ["<t color='#FFFF00'>" + localize "STR_SECONDARY_OBJECTIVES" + "</t>","scripts\client\ui\secondary_ui.sqf","",-995,false,true,"","build_confirmed == 0"];
 				_id_actions set [21, _idact];

@@ -19,8 +19,8 @@ if ( dorepackage > 0 ) then {
 	closeDialog 0;
 	waitUntil { !dialog };
 
-	GRLIB_fobs_west = GRLIB_fobs_west - [ _fob_pos ];
-	publicVariable "GRLIB_fobs_west";
+	GRLIB_my_fobs = GRLIB_my_fobs - [ _fob_pos ];
+	publicVariable "GRLIB_my_fobs";
 	deleteVehicle _fob_hq;
 	sleep 0.5;
 

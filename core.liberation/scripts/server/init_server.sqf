@@ -94,8 +94,8 @@ waitUntil { sleep 1; !isNil "save_is_loaded" };
 
 
 // Offloading
-[] execVM "scripts\server\offloading\offload_calculation.sqf";
-[] execVM "scripts\server\offloading\offload_manager.sqf";
+//[] execVM "scripts\server\offloading\offload_calculation.sqf";
+//[] execVM "scripts\server\offloading\offload_manager.sqf";
 [] execVM "scripts\server\offloading\show_fps.sqf";
 
 if (isNil "global_locked_group") then { global_locked_group = [] };

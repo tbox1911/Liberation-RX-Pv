@@ -137,7 +137,7 @@ if ( !isNil "greuh_liberation_savegame" ) then {
 	stats_saves_loaded = stats_saves_loaded + 1;
 
 	_list_static = [] + opfor_statics;
-	{_list_static pushBack ( _x select 0 )} foreach (static_vehicles);
+	{_list_static pushBack ( _x select 0 )} foreach (static_vehicles_west + static_vehicles_east);
 	diag_log format [ "--- LRX Load Game %1 objects to load...", count(buildings_to_save)];
 	{
 		_nextclass = _x select 0;

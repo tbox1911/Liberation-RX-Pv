@@ -1,9 +1,7 @@
 F_getScore = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getScore.sqf";
 F_addScore = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_addScore.sqf";
 F_getNearestFob = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getNearestFob.sqf";
-F_getMobileRespawns = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getMobileRespawns.sqf";
 F_getUnitsCount = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getUnitsCount.sqf";
-F_spartanScan = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_spartanScan.sqf";
 F_getGroupType = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getGroupType.sqf";
 F_getForceRatio = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getForceRatio.sqf";
 F_localCap = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_localCap.sqf";

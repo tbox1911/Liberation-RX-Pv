@@ -1,6 +1,73 @@
 diag_log "--- Client Init start ---";
 titleText ["Loading...","BLACK FADED", 1000];
 
+R3F_LOG_joueur_deplace_objet = objNull;
+GRLIB_player_spawned = false;
+GRLIB_side_friendly = side player;
+
+GRLIB_respawn_marker = format ["respawn_%1", GRLIB_side_friendly];
+if (side player == west) then {
+	my_lhd = lhd_west;
+	GRLIB_my_fobs = GRLIB_fobs_west;
+	GRLIB_color_friendly = GRLIB_color_west;
+	huron_typename = huron_typename_west;
+	FOB_typename = FOB_typename_west;
+	FOB_box_typename = FOB_box_typename_west;
+	FOB_truck_typename = FOB_truck_typename_west;
+	Respawn_truck_typename = Respawn_truck_typename_west;
+	ammo_truck_typename = ammo_truck_typename_west;
+	fuel_truck_typename = fuel_truck_typename_west;
+	repair_truck_typename = repair_truck_typename_west;
+	repair_sling_typename = repair_sling_typename_west;
+	fuel_sling_typename = fuel_sling_typename_west;
+	ammo_sling_typename = ammo_sling_typename_west;
+	medic_sling_typename = medic_sling_typename_west;
+	commander_classname = commander_classname_west;
+	crewman_classname = crewman_classname_west;
+	pilot_classname = pilot_classname_west;
+	infantry_units = [ infantry_units_west ] call F_filterMods;
+	light_vehicles = [ light_vehicles_west ] call F_filterMods;
+	heavy_vehicles = [ heavy_vehicles_west ] call F_filterMods;
+	air_vehicles = [ air_vehicles_west ] call F_filterMods;
+	support_vehicles = [ support_vehicles_west ] call F_filterMods;
+	blufor_air = blufor_air_west;
+	static_vehicles = [ static_vehicles_west ] call F_filterMods;
+	buildings = [ buildings_west ] call F_filterMods;
+	uavs = uavs_west;
+	squads = squads_west;
+} else {
+	my_lhd = lhd_east;
+	GRLIB_my_fobs = GRLIB_fobs_east;
+	GRLIB_color_friendly = GRLIB_color_east;
+	huron_typename = huron_typename_east;
+	FOB_typename = FOB_typename_east;
+	FOB_box_typename = FOB_box_typename_east;
+	FOB_truck_typename = FOB_truck_typename_east;
+	Respawn_truck_typename = Respawn_truck_typename_east;
+	ammo_truck_typename = ammo_truck_typename_east;
+	fuel_truck_typename = fuel_truck_typename_east;
+	repair_truck_typename = repair_truck_typename_east;
+	repair_sling_typename = repair_sling_typename_east;
+	fuel_sling_typename = fuel_sling_typename_east;
+	ammo_sling_typename = ammo_sling_typename_east;
+	medic_sling_typename = medic_sling_typename_east;
+	commander_classname = commander_classname_east;
+	crewman_classname = crewman_classname_east;
+	pilot_classname = pilot_classname_east;
+	infantry_units = [ infantry_units_east ] call F_filterMods;
+	light_vehicles = [ light_vehicles_east ] call F_filterMods;
+	heavy_vehicles = [ heavy_vehicles_east ] call F_filterMods;
+	air_vehicles = [ air_vehicles_east ] call F_filterMods;
+	support_vehicles = [ support_vehicles_east ] call F_filterMods;
+	blufor_air = blufor_air_east;
+	static_vehicles = [ static_vehicles_east ] call F_filterMods;
+	buildings = [ buildings_east ] call F_filterMods;
+	uavs = uavs_east;
+	squads = squads_east;
+};
+build_lists = [[],infantry_units,light_vehicles,heavy_vehicles,air_vehicles,static_vehicles,buildings,support_vehicles,squads];
+
+// *** FNC ***
 respawn_lhd = compileFinal preprocessFileLineNumbers "scripts\client\spawn\respawn_lhd.sqf";
 spawn_camera = compileFinal preprocessFileLineNumbers "scripts\client\spawn\spawn_camera.sqf";
 cinematic_camera = compileFinal preprocessFileLineNumbers "scripts\client\ui\cinematic_camera.sqf";
@@ -15,37 +82,10 @@ is_neartransport = compileFinal preprocessFileLineNumbers "scripts\client\misc\i
 player_EVH = compileFinal preprocessFileLineNumbers "addons\PAR\PAR_EventHandler.sqf";
 paraDrop = compileFinal preprocessFileLineNumbers "scripts\client\spawn\paraDrop.sqf";
 get_lrx_name = compileFinal preprocessFileLineNumbers "scripts\client\misc\get_lrx_name.sqf";
+F_getMobileRespawns = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getMobileRespawns.sqf";
+F_spartanScan = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_spartanScan.sqf";
 
-R3F_LOG_joueur_deplace_objet = objNull;
-GRLIB_player_spawned = false;
-GRLIB_side_friendly = side player;
-
-GRLIB_respawn_marker = format ["respawn_%1", GRLIB_side_friendly];
-if (side player == west) then {
-	my_lhd = lhd_west;
-	GRLIB_color_friendly = GRLIB_color_west;
-	infantry_units = [ infantry_units_west ] call F_filterMods;
-	light_vehicles = [ light_vehicles_west ] call F_filterMods;
-	heavy_vehicles = [ heavy_vehicles_west ] call F_filterMods;
-	air_vehicles = [ air_vehicles_west ] call F_filterMods;
-	support_vehicles = [ support_vehicles_west ] call F_filterMods;
-	static_vehicles = [ static_vehicles_west ] call F_filterMods;
-	buildings = [ buildings_west ] call F_filterMods;
-	squads = squads_west;
-} else {
-	my_lhd = lhd_east;
-	GRLIB_color_friendly = GRLIB_color_east;
-	infantry_units = [ infantry_units_east ] call F_filterMods;
-	light_vehicles = [ light_vehicles_east ] call F_filterMods;
-	heavy_vehicles = [ heavy_vehicles_east ] call F_filterMods;
-	air_vehicles = [ air_vehicles_east ] call F_filterMods;
-	support_vehicles = [ support_vehicles_east ] call F_filterMods;
-	static_vehicles = [ static_vehicles_east ] call F_filterMods;
-	buildings = [ buildings_west ] call F_filterMods;
-	squads = squads_east;
-};
-build_lists = [[],infantry_units,light_vehicles,heavy_vehicles,air_vehicles,static_vehicles,buildings,support_vehicles,squads];
-
+// *** Init ***
 setTerrainGrid 12.5;  //Very High = 6.25, Ultra = 3.125
 player setVariable ["GRLIB_score_set", 0, true];
 player setVariable ["GREUH_ammo_count", 0, true];
