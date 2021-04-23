@@ -39,7 +39,6 @@ _idxposit = 0;
 		if ( floor(random 100) < 40 ) then {
 			_nextunit addPrimaryWeaponItem "acc_flashlight";
 		};
-
 	};
 
 	_idxposit = _idxposit + 1;

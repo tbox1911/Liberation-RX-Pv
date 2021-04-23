@@ -3,6 +3,7 @@ private [ "_sector_count", "_vehicle_unlock_markers", "_marker", "_nextbase", "_
 waitUntil {sleep 1; !isNil "sectors_allSectors" };
 waitUntil {sleep 1; !isNil "save_is_loaded" };
 waitUntil {sleep 1; !isNil "west_sectors" };
+waitUntil {sleep 1; !isNil "east_sectors" };
 
 _getMarkerType = {
 	params ["_marker"];
