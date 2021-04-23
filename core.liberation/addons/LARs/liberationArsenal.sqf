@@ -89,12 +89,12 @@ if ( GRLIB_OPTRE_enabled ) then {
 
 // if mod enabled
 if ( GRLIB_GM_enabled || GRLIB_OPTRE_enabled ) then {
-	[myLARsBox, ["GRLIB_whitelisted_from_arsenal", "GRLIB_blacklisted_from_arsenal"], false, "Liberation", { false }] call LARs_fnc_blacklistArsenal;
+	[GRLIB_Arsenal, ["GRLIB_whitelisted_from_arsenal", "GRLIB_blacklisted_from_arsenal"], false, "Liberation", { false }] call LARs_fnc_blacklistArsenal;
 } else {
 	//[ myBox, [ whitelist, blacklist ], targets, name, condition ] call LARs_fnc_blacklistArsenal;
-	[myLARsBox, [GRLIB_side_friendly, "GRLIB_blacklisted_from_arsenal"], false, "Liberation", { false }] call LARs_fnc_blacklistArsenal;
+	[GRLIB_Arsenal, [GRLIB_side_friendly, "GRLIB_blacklisted_from_arsenal"], false, "Liberation", { false }] call LARs_fnc_blacklistArsenal;
 	waitUntil {sleep 0.5; !(isNil "LARs_initBlacklist")};
 
 	//[ box, arsenalName, [ white, black ], _targets ] call LARs_fnc_updateArsenal
-	[myLARsBox, "Liberation", ["GRLIB_whitelisted_from_arsenal"], false] call LARs_fnc_updateArsenal;
+	[GRLIB_Arsenal, "Liberation", ["GRLIB_whitelisted_from_arsenal"], false] call LARs_fnc_updateArsenal;
 };

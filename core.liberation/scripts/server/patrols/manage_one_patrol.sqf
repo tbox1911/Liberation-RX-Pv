@@ -90,7 +90,9 @@ while { GRLIB_endgame == 0 } do {
 				_patrol_continue = false;
 			} else {
 				if ( time - _started_time > 900 ) then {
-					if ( [ getpos (leader _grp) , (GRLIB_sector_size * 2) , GRLIB_side_friendly ] call F_getUnitsCount == 0 ) then {
+					_west_units = [getpos (leader _grp) , (GRLIB_sector_size * 2) , GRLIB_side_west] call F_getUnitsCount;
+					_east_units = [getpos (leader _grp) , (GRLIB_sector_size * 2) , GRLIB_side_east] call F_getUnitsCount;
+					if ( _west_units == 0 && _east_units == 0 ) then {
 						_patrol_continue = false;
 						{
 							if ( vehicle _x != _x ) then {

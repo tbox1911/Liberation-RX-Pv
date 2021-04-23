@@ -5,13 +5,9 @@ _unit setUnitPos "UP";
 _unit disableAI "MOVE";
 _move_is_disabled = true;
 _resume_movement = false;
-_hostile_side = GRLIB_side_friendly;
-if (side _unit != GRLIB_side_enemy) then {
-	_hostile_side = GRLIB_side_enemy;
-};
 
 while { _move_is_disabled && local _unit && alive _unit && !(captive _unit) } do {
-	_hostilecount = { alive _x && side _x == _hostile_side } count ( (getpos _unit) nearEntities [ ["Man"], 50 ] );
+	_hostilecount = { alive _x && side _x in [ GRLIB_side_west, GRLIB_side_east ] } count ( (getpos _unit) nearEntities [ ["Man"], 50 ] );
 
 	if ( _hostilecount > 0 || ( damage _unit > 0.25 ) ) then {
 		_resume_movement = true;

@@ -122,7 +122,11 @@ while { dialog && (alive player) && edit_loadout == 0 } do {
 if ( edit_loadout > 0 ) then {
 	closeDialog 0;
 	waitUntil {!dialog};
-	_box = missionNamespace getVariable ["myLARsBox", objNull];
+	_box = missionNamespace getVariable ["LARsBox_west", objNull];
+	if (side player == east) then {
+		_box = missionNamespace getVariable ["LARsBox_east", objNull];
+	};
+
 	if (GRLIB_ACE_enabled) then {
 		[_box, true] call ace_arsenal_fnc_initBox;
 		[_box, player, true] call ace_arsenal_fnc_openBox;

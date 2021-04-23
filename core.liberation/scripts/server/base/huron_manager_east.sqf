@@ -1,5 +1,5 @@
 if ( GRLIB_fob_type == 1 ) exitWith {};
-waitUntil {sleep 1; !isNil "GRLIB_fobs_west" };
+waitUntil {sleep 1; !isNil "GRLIB_fobs_east" };
 waitUntil {sleep 1; !isNil "save_is_loaded" };
 
 private _huron = objNull;

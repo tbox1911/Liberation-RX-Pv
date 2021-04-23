@@ -25,7 +25,7 @@ if ( isServer ) then {
 	if (isNil "air_weight") then { air_weight = 33 };
 	if ( isPlayer _unit ) then { stats_player_deaths = stats_player_deaths + 1 };
 
-	if ( side _killer == GRLIB_side_friendly ) then {
+	if ( side _killer in [ GRLIB_side_west, GRLIB_side_east ] ) then {
 
 		_nearby_bigtown = [ sectors_bigtown, {  (!(_x in west_sectors)) && ( _unit distance (markerpos _x) < 250 ) } ] call BIS_fnc_conditionalSelect;
 		if ( count _nearby_bigtown > 0 ) then {
@@ -86,7 +86,7 @@ if ( isServer ) then {
 				};
 				_isDriver = (driver (vehicle _killer) == _killer);
 
-				if ( side (group _killer) == GRLIB_side_friendly && (!isPlayer _killer) && (!_isDriver) ) then {
+				if ( side (group _killer) in [ GRLIB_side_west, GRLIB_side_east ] && (!isPlayer _killer) && (!_isDriver) ) then {
 					_owner_id = (vehicle _killer) getVariable ["GRLIB_vehicle_owner", ""];
 					if (_owner_id == "") then {
 						_owner_id = (_killer getVariable ["PAR_Grp_ID", "0_0"]) splitString "_" select 1;
@@ -102,7 +102,7 @@ if ( isServer ) then {
 				};
 			};
 
-			if ( side _killer == GRLIB_side_friendly ) then {
+			if (  side _killer in [ GRLIB_side_west, GRLIB_side_east ] ) then {
 				if ( side (group _unit) == GRLIB_side_enemy ) then {
 					stats_opfor_soldiers_killed = stats_opfor_soldiers_killed + 1;
 					if ( isplayer _killer ) then {
@@ -115,14 +115,14 @@ if ( isServer ) then {
 						_killer setVariable ["PAR_AI_score", (_ai_score - 1), true];
 					};
 				};
-				if ( side (group _unit) == GRLIB_side_friendly ) then {
+				if ( side (group _unit) in [ GRLIB_side_west, GRLIB_side_east ]  ) then {
 					stats_blufor_teamkills = stats_blufor_teamkills + 1;
 					[_killer, -10] call F_addScore;
 					_msg = localize "STR_FRIENDLY_FIRE";
 					[gamelogic, _msg] remoteExec ["globalChat", 0];
 				};
 			} else {
-				if ( side (group _unit) == GRLIB_side_friendly ) then {
+				if ( side (group _unit) in [ GRLIB_side_west, GRLIB_side_east ] ) then {
 					stats_blufor_soldiers_killed = stats_blufor_soldiers_killed + 1;
 				};
 			};

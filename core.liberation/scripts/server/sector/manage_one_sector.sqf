@@ -29,9 +29,13 @@ active_sectors pushback _sector; publicVariable "active_sectors";
 
 
 _opforcount = [] call F_opforCap;
-[ _sector, _opforcount ] call wait_to_spawn_sector;
+//[ _sector, _opforcount ] call wait_to_spawn_sector;
+sleep 20;
 
-if ( (!(_sector in west_sectors)) &&  ( ( [ getmarkerpos _sector , [ _opforcount ] call F_getCorrectedSectorRange , GRLIB_side_friendly ] call F_getUnitsCount ) > 0 ) ) then {
+_west_units = [getmarkerpos _sector , [ _opforcount ] call F_getCorrectedSectorRange , GRLIB_side_west] call F_getUnitsCount;
+_east_units = [getmarkerpos _sector , [ _opforcount ] call F_getCorrectedSectorRange , GRLIB_side_east] call F_getUnitsCount;
+
+if ( (!(_sector in [west_sectors, east_sectors])) && ( _west_units > 0 || _east_units > 0) ) then {
 
 	if ( _sector in sectors_bigtown ) then {
 		_vehtospawn =
@@ -183,8 +187,7 @@ if ( (!(_sector in west_sectors)) &&  ( ( [ getmarkerpos _sector , [ _opforcount
 	};
 
 	while { !_stopit } do {
-
-		if ( ([_sectorpos, _local_capture_size] call F_sectorOwnership == GRLIB_side_friendly) && (GRLIB_endgame == 0) ) then {
+		if ( ([_sectorpos, _local_capture_size] call F_sectorOwnership != GRLIB_side_enemy) && (GRLIB_endgame == 0) ) then {
 			[ _sector ] spawn sector_liberated_remote_call;
 			_stopit = true;
 			{ [_x] spawn prisonner_ai; } foreach ( (getmarkerpos _sector) nearEntities [ ["Man"], _local_capture_size * 1.2 ] );
@@ -193,7 +196,9 @@ if ( (!(_sector in west_sectors)) &&  ( ( [ getmarkerpos _sector , [ _opforcount
 			active_sectors = active_sectors - [ _sector ]; publicVariable "active_sectors";
 			{ _x setVariable ["GRLIB_counter_TTL", 0] } foreach _managed_units;
 		} else {
-			if ( ([_sectorpos, (([_opforcount] call F_getCorrectedSectorRange) + 300), GRLIB_side_friendly] call F_getUnitsCount) == 0 ) then {
+			_west_units = [getmarkerpos _sectorpos , ([_opforcount] call F_getCorrectedSectorRange +300) , GRLIB_side_west] call F_getUnitsCount;
+			_east_units = [getmarkerpos _sectorpos , ([_opforcount] call F_getCorrectedSectorRange +300) , GRLIB_side_east] call F_getUnitsCount;
+			if ( _west_units == 0 && _east_units == 0) then {
 				_sector_despawn_tickets = _sector_despawn_tickets - 1;
 			} else {
 				_sector_despawn_tickets = 24;

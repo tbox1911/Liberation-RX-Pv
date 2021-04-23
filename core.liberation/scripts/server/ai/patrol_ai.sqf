@@ -25,7 +25,7 @@ while { count (units _grp) > 0 } do {
 
 			_scan_target =  [ ((getPos _vehicle) nearEntities [ _kind, _radius]), {
 				alive _x &&
-				side _x == GRLIB_side_friendly &&
+				side _x in [ GRLIB_side_west, GRLIB_side_east ] &&
 				!(_x getVariable ['R3F_LOG_disabled', false]) &&
 				_x distance2D lhd_west > GRLIB_sector_size &&
 				_x distance2D lhd_east > GRLIB_sector_size &&

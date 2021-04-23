@@ -8,6 +8,7 @@ GRLIB_side_friendly = side player;
 GRLIB_respawn_marker = format ["respawn_%1", GRLIB_side_friendly];
 if (side player == west) then {
 	my_lhd = lhd_west;
+	GRLIB_Arsenal = LARsBox_west;
 	GRLIB_my_fobs = GRLIB_fobs_west;
 	GRLIB_color_friendly = GRLIB_color_west;
 	huron_typename = huron_typename_west;
@@ -37,6 +38,7 @@ if (side player == west) then {
 	squads = squads_west;
 } else {
 	my_lhd = lhd_east;
+	GRLIB_Arsenal = LARsBox_east;
 	GRLIB_my_fobs = GRLIB_fobs_east;
 	GRLIB_color_friendly = GRLIB_color_east;
 	huron_typename = huron_typename_east;
