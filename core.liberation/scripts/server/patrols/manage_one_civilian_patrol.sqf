@@ -8,7 +8,9 @@ while { GRLIB_endgame == 0 } do {
 	private _spawnsector = "";
 	private _usable_sectors = [];
 	{
-		if ( ( ( [ getmarkerpos _x , 1000 , GRLIB_side_friendly ] call F_getUnitsCount ) == 0 ) && ( count ( [ getmarkerpos _x , 3500 ] call F_getNearbyPlayers ) > 0 ) ) then {
+		_west_units = [ getmarkerpos _x , 1000 , GRLIB_side_west ] call F_getUnitsCount;
+		_east_units = [ getmarkerpos _x , 1000 , GRLIB_side_east ] call F_getUnitsCount;
+		if ( ( _west_units == 0 && _east_units == 0 ) && ( count ( [ getmarkerpos _x , 3500 ] call F_getNearbyPlayers ) > 0 ) ) then {
 			_usable_sectors pushback _x;
 		}
 	} foreach ((sectors_bigtown + sectors_capture + sectors_factory) - (active_sectors));
@@ -46,7 +48,7 @@ while { GRLIB_endgame == 0 } do {
 					_civ moveInDriver _civveh;
 
 					_civveh addMPEventHandler ['MPKilled', {_this spawn kill_manager}];
-					_civveh addEventHandler ["HandleDamage", { private [ "_damage" ]; if ( side (_this select 3) == GRLIB_side_friendly ) then { _damage = _this select 2 } else { _damage = 0 }; _damage }];
+					_civveh addEventHandler ["HandleDamage", { private [ "_damage" ]; if ( side (_this select 3) in [ GRLIB_side_west, GRLIB_side_east ] ) then { _damage = _this select 2 } else { _damage = 0 }; _damage }];
 					_civveh addEventHandler ["Fuel", { if (!(_this select 1)) then {(_this select 0) setFuel 1}}];
 					[_grp] call add_civ_waypoints;
 				};
@@ -66,7 +68,7 @@ while { GRLIB_endgame == 0 } do {
 
 			if ( alive _civ ) then {
 				if ( !(isNull _civveh) ) then {
-						if ( {(alive _x) && (side group _x == GRLIB_side_friendly)} count (crew _civveh) == 0 && [_civveh] call is_abandoned) then { [_civveh] call clean_vehicle; deleteVehicle _civveh };
+						if ( {(alive _x) && (side group _x in [ GRLIB_side_west, GRLIB_side_east ])} count (crew _civveh) == 0 && [_civveh] call is_abandoned) then { [_civveh] call clean_vehicle; deleteVehicle _civveh };
 				};
 				deletevehicle _civ;
 				deleteGroup _grp;

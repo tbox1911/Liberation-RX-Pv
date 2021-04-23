@@ -12,7 +12,7 @@ while { true } do {
 		_new_fuel_used = 0;
 
 		{
-			if ( ( side group _x == GRLIB_side_friendly ) && ( !isPlayer _x ) ) then {
+			if ( ( side group _x in [ GRLIB_side_west, GRLIB_side_east ] ) && ( !isPlayer _x ) ) then {
 				if ( ( _x distance lhd_west ) > GRLIB_sector_size && ( _x distance lhd_east) > GRLIB_sector_size && ( alive _x ) ) then {
 					_unit = _x;
 					{
@@ -27,7 +27,7 @@ while { true } do {
 
 		{
 			if (
-				(side _x == GRLIB_side_friendly || !(_x getVariable ["GRLIB_vehicle_owner", ""] in ["", "server", "public"]) ) &&
+				(side _x in [ GRLIB_side_west, GRLIB_side_east ] || !(_x getVariable ["GRLIB_vehicle_owner", ""] in ["", "server", "public"]) ) &&
 				(_x distance lhd_west > GRLIB_sector_size) &&
 				(_x distance lhd_east > GRLIB_sector_size) &&
 				!(_x getVariable ['R3F_LOG_disabled', false]) &&

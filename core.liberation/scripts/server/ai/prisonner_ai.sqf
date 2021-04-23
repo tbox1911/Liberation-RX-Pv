@@ -29,7 +29,7 @@ if ( (_unit isKindOf "Man") && ( alive _unit ) && (vehicle _unit == _unit) && (s
 	_unit setVariable ["GRLIB_is_prisonner", true, true];
 
 	// Wait
-	waitUntil { sleep 1;!alive _unit || side group _unit == GRLIB_side_friendly	};
+	waitUntil { sleep 1;!alive _unit || side group _unit in [ GRLIB_side_west, GRLIB_side_east ] };
 	if (!alive _unit) exitWith {};
 
 	// Follow
@@ -43,8 +43,8 @@ if ( (_unit isKindOf "Man") && ( alive _unit ) && (vehicle _unit == _unit) && (s
 	while {alive _unit} do {
 
 		// Flee
-		private _is_near_blufor = count ([allUnits, { side _x == GRLIB_side_friendly && (_x distance2D _unit) < 100 }] call BIS_fnc_conditionalSelect);
-		if ( _is_near_blufor == 0 && side group _unit == GRLIB_side_friendly ) then {
+		private _is_near_blufor = count ([allUnits, { side _x in [ GRLIB_side_west, GRLIB_side_east ] && (_x distance2D _unit) < 100 }] call BIS_fnc_conditionalSelect);
+		if ( _is_near_blufor == 0 && side group _unit in [ GRLIB_side_west, GRLIB_side_east ] ) then {
 			_grp = createGroup [GRLIB_side_enemy, true];
 			[_unit] joinSilent _grp;
 			_unit setUnitPos "AUTO";
@@ -83,7 +83,7 @@ if ( (_unit isKindOf "Man") && ( alive _unit ) && (vehicle _unit == _unit) && (s
 				doGetOut _unit;
 			};
 			sleep 4;
-			_grp = createGroup [GRLIB_side_friendly, true];
+			_grp = createGroup [side _unit_owner, true];
 			[_unit] joinSilent _grp;
 			_unit playmove "AmovPercMstpSnonWnonDnon_AmovPsitMstpSnonWnonDnon_ground";
 			_unit disableAI "ANIM";

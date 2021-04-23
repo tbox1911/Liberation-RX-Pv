@@ -108,7 +108,7 @@ air_vehicles_east = [
 	["O_Plane_Fighter_02_Stealth_F",20,4500,40,GRLIB_perm_max]
 ];
 
-blufor_air_east = [
+air_attack_east = [
 	"O_Heli_Light_02_dynamicLoadout_F",
 	"O_Heli_Attack_02_dynamicLoadout_F",
 	"O_T_VTOL_02_infantry_dynamicLoadout_F",

@@ -8,7 +8,7 @@ while {true} do {
 		_max =  count GRLIB_player_scores;
 	};
 
-	if (_max > 1 && (GRLIB_side_friendly countSide allPlayers) > 1) then {
+	if (_max > 1 && (count allPlayers) > 1) then {
 		_HoF=[];
 		{ _HoF pushback [(_x select 1),  (_x select 3)]} foreach GRLIB_player_scores;
 		_HoF sort false;

@@ -1,8 +1,8 @@
 params ["_first_objective", "_side"];
 
 if (isNil "_side") then {_side = GRLIB_side_enemy};
-private _planeType = opfor_air;
-if (_side == GRLIB_side_friendly) then {_planeType = blufor_air};
+private _planeType = air_attack_east;
+if (_side == GRLIB_side_west) then {_planeType = air_attack_west};
 
 private _planes_number = 1;
 if ( combat_readiness >= 50 ) then { _planes_number = 2 };
@@ -72,8 +72,8 @@ while {
 	{
 		private _unit = _x;
 		if ( alive _unit && vehicle _unit == _unit ) then {
-			private _sectors = (sectors_allSectors - west_sectors);
-			if (_side == GRLIB_side_friendly) then {_sectors = west_sectors};
+			private _sectors = (sectors_allSectors - east_sectors);
+			if (_side == GRLIB_side_west) then {_sectors = west_sectors};
 			private _nearest_sector = [_sectors, _unit] call BIS_fnc_nearestPosition;
 
 			if (!isNil "_nearest_sector") then {

@@ -31,7 +31,7 @@ if (side player == west) then {
 	heavy_vehicles = [ heavy_vehicles_west ] call F_filterMods;
 	air_vehicles = [ air_vehicles_west ] call F_filterMods;
 	support_vehicles = [ support_vehicles_west ] call F_filterMods;
-	blufor_air = blufor_air_west;
+	air_attack = air_attack_west;
 	static_vehicles = [ static_vehicles_west ] call F_filterMods;
 	buildings = [ buildings_west ] call F_filterMods;
 	uavs = uavs_west;
@@ -61,7 +61,7 @@ if (side player == west) then {
 	heavy_vehicles = [ heavy_vehicles_east ] call F_filterMods;
 	air_vehicles = [ air_vehicles_east ] call F_filterMods;
 	support_vehicles = [ support_vehicles_east ] call F_filterMods;
-	blufor_air = blufor_air_east;
+	air_attack = air_attack_east;
 	static_vehicles = [ static_vehicles_east ] call F_filterMods;
 	buildings = [ buildings_east ] call F_filterMods;
 	uavs = uavs_east;

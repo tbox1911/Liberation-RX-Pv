@@ -112,7 +112,7 @@ air_vehicles_west = [
 	["B_Plane_Fighter_01_Stealth_F",20,4500,40,GRLIB_perm_max]
 ];
 
-blufor_air_west = [
+air_attack_west = [
 	"B_Heli_Attack_01_F",
 	"B_Plane_CAS_01_F",
 	"B_Plane_Fighter_01_F",
