@@ -412,7 +412,7 @@ while { true } do {
 
 			if(buildtype == 99 && build_confirmed != 3) then {
 				[_vehicle, false] remoteExec ["allowDamage", 0];
-				[(getpos _vehicle), false] remoteExec ["build_fob_remote_call", 0];
+				[(getpos _vehicle), false, GRLIB_side_friendly] remoteExec ["build_fob_remote_call", 0];
 				buildtype = 1;
 			};
 

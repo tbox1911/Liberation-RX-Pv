@@ -7,7 +7,7 @@ _cap_min_ratio = 0.51;
 
 _sectorside = GRLIB_side_enemy;
 _countblufor_ownership = [_thatpos, _localsize, GRLIB_side_west ] call F_getUnitsCount;
-_countopfor_ownership = [_thatpos, _localsize, GRLIB_side_est ] call F_getUnitsCount;
+_countopfor_ownership = [_thatpos, _localsize, GRLIB_side_east ] call F_getUnitsCount;
 
 _blufor_ratio = 0;
 _opfor_ratio = 0;

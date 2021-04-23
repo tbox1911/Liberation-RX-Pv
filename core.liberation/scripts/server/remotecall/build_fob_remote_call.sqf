@@ -1,10 +1,15 @@
 if (!isServer) exitWith {};
 
-params [ "_new_fob", "_create_fob_building" ];
+params [ "_new_fob", "_create_fob_building", "_side" ];
 private [ "_fob_building", "_fob_pos", "_fob_box_list", "_ruin_list" ];
 
-GRLIB_fobs_west pushback _new_fob;
-publicVariable "GRLIB_fobs_west";
+if (_side == west) then {
+	GRLIB_fobs_west pushback _new_fob;
+	publicVariable "GRLIB_fobs_west";
+} else {
+	GRLIB_fobs_east pushback _new_fob;
+	publicVariable "GRLIB_fobs_east";
+};
 
 if ( _create_fob_building ) then {
 	_fob_pos = [ (_new_fob select 0) + 15, (_new_fob select 1) + 2, 0 ];
