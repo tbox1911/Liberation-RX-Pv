@@ -263,12 +263,6 @@ class Params
 		texts[] = { $STR_PARAMS_ENABLED, $STR_PARAMS_DISABLED };
 		default = 0;
 	};
-/*	class FirstFob {
-		title = $STR_PARAMS_FIRSTFOB;
-		values[] = { 1, 0 };
-		texts[] = { $STR_YES, $STR_NO };
-		default = 0;
-	};*/
 	class AdminMenu {
 		title = "Enable the Admin Menu";
 		values[] = { 1, 0 };
@@ -280,12 +274,6 @@ class Params
 		values[] = { "" };
 		texts[] = { "" };
 		default = "";
-	};
-	class Whitelist {
-		title = $STR_WHITELIST_PARAM;
-		values[] = { 1, 0 };
-		texts[] = { $STR_WHITELIST_ENABLED, $STR_PARAMS_DISABLED };
-		default = 1;
 	};
 	class WipeSave1{
 		title = $STR_WIPE_TITLE;

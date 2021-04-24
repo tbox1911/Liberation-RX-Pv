@@ -36,6 +36,8 @@ if (side player == west) then {
 	buildings = [ buildings_west ] call F_filterMods;
 	uavs = uavs_west;
 	squads = squads_west;
+	deleteMarkerLocal "base_chimera_east";
+	deleteMarkerLocal "huronmarker_east";
 } else {
 	my_lhd = lhd_east;
 	GRLIB_Arsenal = LARsBox_east;
@@ -66,6 +68,10 @@ if (side player == west) then {
 	buildings = [ buildings_east ] call F_filterMods;
 	uavs = uavs_east;
 	squads = squads_east;
+	deleteMarkerLocal "base_chimera_west";
+	deleteMarkerLocal "huronmarker_west";
+	deleteMarkerLocal "marker_332";
+	deleteMarkerLocal "marker_334";
 };
 build_lists = [[],infantry_units,light_vehicles,heavy_vehicles,air_vehicles,static_vehicles,buildings,support_vehicles,squads];
 
@@ -101,7 +107,6 @@ if (isMultiplayer) then {
 my_group = group player;
 [my_group, "add"] remoteExec ["addel_group_remote_call", 2];
 
-[] execVM "scripts\client\commander\enforce_whitelist.sqf";
 [] execVM "scripts\client\misc\init_markers.sqf";
 if (!([] call F_getValid)) exitWith {endMission "LOSER"};
 

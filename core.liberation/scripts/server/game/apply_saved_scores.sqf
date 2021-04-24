@@ -17,6 +17,7 @@ while { true } do {
 					[_nextplayer, ((_x select 1) - ([_nextplayer] call F_getScore))] call F_addScore;
 					_nextplayer setVariable ["GREUH_score_last",[_nextplayer] call F_getScore, true];
 					_nextplayer setVariable ["GREUH_ammo_count", (_x select 2), true];
+					_nextplayer setVariable ["GREUH_pvp_side", (_x select 3), true];
 				};
 			} foreach GRLIB_player_scores;
 
@@ -24,7 +25,8 @@ while { true } do {
 			if (isNil {_nextplayer getVariable ["GREUH_score_last", nil]}) then {
 				_nextplayer setVariable ["GREUH_score_last", 0, true];
 				_nextplayer setVariable ["GREUH_ammo_count", GREUH_start_ammo, true];
-				GRLIB_player_scores pushback [getPlayerUID _nextplayer, 0, GREUH_start_ammo, name _nextplayer];
+				_nextplayer setVariable ["GREUH_pvp_side", side _nextplayer, true];
+				GRLIB_player_scores pushback [getPlayerUID _nextplayer, 0, GREUH_start_ammo, name _nextplayer, side _nextplayer];
 			};
 			_nextplayer setVariable ["GRLIB_score_set", 1, true];
 		};
@@ -33,9 +35,9 @@ while { true } do {
 			_ammo = _nextplayer getVariable ["GREUH_ammo_count",0];
 			_playerindex = _knownplayers find (getPlayerUID _nextplayer);
 			if ( _playerindex >= 0 ) then {
-				_newscores set [_playerindex, [getPlayerUID _nextplayer, [_nextplayer] call F_getScore, _ammo, name _nextplayer]];
+				_newscores set [_playerindex, [getPlayerUID _nextplayer, [_nextplayer] call F_getScore, _ammo, name _nextplayer, side _nextplayer]];
 			} else {
-				_newscores pushback [getPlayerUID _nextplayer, [_nextplayer] call F_getScore, _ammo, name _nextplayer];
+				_newscores pushback [getPlayerUID _nextplayer, [_nextplayer] call F_getScore, _ammo, name _nextplayer, side _nextplayer];
 			};
 		};
 	} foreach allPlayers;

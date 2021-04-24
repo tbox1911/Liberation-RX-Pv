@@ -59,7 +59,7 @@ while { cinematic_camera_started } do {
 		_nearentities = _position nearEntities [ "Man", 100 ];
 		_camtarget = _cinematic_pointer;
 		if ( first_camera_round ) then {
-			_camtarget = chimeraofficer;
+			_camtarget = _cinematic_pointer;
 		} else {
 			if ( count ( [ _nearentities , { alive _x && isPlayer _x } ] call BIS_fnc_conditionalSelect ) != 0 ) then {
 				_camtarget = selectRandom ( [ _nearentities , { alive _x && isPlayer _x } ] call BIS_fnc_conditionalSelect );
