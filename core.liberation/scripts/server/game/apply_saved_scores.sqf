@@ -17,7 +17,7 @@ while { true } do {
 					[_nextplayer, ((_x select 1) - ([_nextplayer] call F_getScore))] call F_addScore;
 					_nextplayer setVariable ["GREUH_score_last",[_nextplayer] call F_getScore, true];
 					_nextplayer setVariable ["GREUH_ammo_count", (_x select 2), true];
-					_nextplayer setVariable ["GREUH_pvp_side", (_x select 3), true];
+					_nextplayer setVariable ["GREUH_pvp_side", (_x select 4), true];
 				};
 			} foreach GRLIB_player_scores;
 

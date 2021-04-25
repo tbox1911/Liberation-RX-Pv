@@ -1,6 +1,7 @@
 F_getScore = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getScore.sqf";
 F_addScore = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_addScore.sqf";
 F_getNearestFob = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getNearestFob.sqf";
+F_getNearestFobEnemy = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getNearestFobEnemy.sqf";
 F_getUnitsCount = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getUnitsCount.sqf";
 F_getGroupType = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getGroupType.sqf";
 F_getForceRatio = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getForceRatio.sqf";

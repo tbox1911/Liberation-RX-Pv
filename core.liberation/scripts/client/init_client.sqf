@@ -6,10 +6,11 @@ GRLIB_player_spawned = false;
 GRLIB_side_friendly = side player;
 
 GRLIB_respawn_marker = format ["respawn_%1", GRLIB_side_friendly];
-if (side player == west) then {
+if (GRLIB_side_friendly == GRLIB_side_west) then {
 	my_lhd = lhd_west;
 	GRLIB_Arsenal = LARsBox_west;
 	GRLIB_my_fobs = GRLIB_fobs_west;
+	GRLIB_my_sectors = west_sectors;
 	GRLIB_color_friendly = GRLIB_color_west;
 	huron_typename = huron_typename_west;
 	FOB_typename = FOB_typename_west;
@@ -43,6 +44,7 @@ if (side player == west) then {
 	GRLIB_Arsenal = LARsBox_east;
 	GRLIB_my_fobs = GRLIB_fobs_east;
 	GRLIB_color_friendly = GRLIB_color_east;
+	GRLIB_my_sectors = east_sectors;
 	huron_typename = huron_typename_east;
 	FOB_typename = FOB_typename_east;
 	FOB_box_typename = FOB_box_typename_east;
@@ -94,6 +96,7 @@ F_getMobileRespawns = compileFinal preprocessFileLineNumbers "scripts\shared\fun
 F_spartanScan = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_spartanScan.sqf";
 F_getLocationName = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getLocationName.sqf";
 F_getFobName = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getFobName.sqf";
+F_getFobSide = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getFobSide.sqf";
 
 // *** Init ***
 setTerrainGrid 12.5;  //Very High = 6.25, Ultra = 3.125

@@ -1,19 +1,14 @@
-_fobposdestroy = _this select 0;
+params ["_fobpos", "_side"];
 
-classnames_to_destroy = [FOB_typename];
-{
-	classnames_to_destroy = classnames_to_destroy + [(_x select 0)];
-} foreach buildings;
+private _buildingsdestroy = [ (_fobpos nearobjects 150) , { getObjectType _x >= 8 && side _x != _side } ] call BIS_fnc_conditionalSelect;
 
-_nextbuildingsdestroy = [ (_fobposdestroy nearobjects 150) , { getObjectType _x >= 8 } ] call BIS_fnc_conditionalSelect;
-_all_buildings_to_destroy = [];
 {
-	if ( (typeof _x) in classnames_to_destroy ) then {
-		_all_buildings_to_destroy = _all_buildings_to_destroy + [_x];
+	[_x] spawn {
+		params ["_unit"];
+		sleep floor(random 2);
+		_unit setdamage 1;
+		sleep floor(random 60);
+		deletevehicle _unit;
 	};
-} foreach _nextbuildingsdestroy;
-
-{
-	_x setdamage 1;
-	sleep floor(random 4);
-} foreach _all_buildings_to_destroy
+	sleep 0.1;
+} foreach _buildingsdestroy;

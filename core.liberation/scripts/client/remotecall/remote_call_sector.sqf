@@ -1,8 +1,7 @@
 if ( isDedicated ) exitWith {};
-
+params [ "_sector", "_status", "_side" ];
+if (GRLIB_side_friendly != _side)  exitWith {};
 if ( isNil "sector_timer" ) then { sector_timer = 0 };
-
-params [ "_sector", "_status" ];
 
 if ( _status == 0 ) then {
 	private _lst_player = "Thanks to: - ";
@@ -13,6 +12,8 @@ if ( _status == 0 ) then {
 	} forEach allPlayers;
 	[ "lib_sector_captured_info", [ _lst_player ], 3 ] call BIS_fnc_showNotification;
 	[ "lib_sector_captured", [ markerText _sector ], 7 ] call BIS_fnc_showNotification;
+	"opfor_capture_marker" setMarkerPosLocal markers_reset;
+	sector_timer = 0;
 };
 
 if ( _status == 1 ) then {
@@ -33,5 +34,5 @@ if ( _status == 3 ) then {
 	sector_timer = 0;
 };
 
-{ _x setMarkerColorLocal GRLIB_color_enemy; } foreach (sectors_allSectors - west_sectors);
-{ _x setMarkerColorLocal GRLIB_color_friendly; } foreach west_sectors;
+{ _x setMarkerColorLocal GRLIB_color_enemy; } foreach (sectors_allSectors - west_sectors - east_sectors);
+{ _x setMarkerColorLocal GRLIB_color_friendly; } foreach GRLIB_my_sectors;

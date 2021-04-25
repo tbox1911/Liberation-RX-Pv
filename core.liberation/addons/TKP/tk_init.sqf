@@ -22,7 +22,6 @@ if (!([] call F_getValid)) exitWith {endMission "LOSER"};
 if (GRLIB_tk_mode == 2) exitWith {};
 
 // TK VIP Protect
-LRX_tk_vip = [];
 LRX_tk_player_action = 0;
 
 LRX_tk_check = {

@@ -5,7 +5,7 @@ _beacmarkers = [];
 _markedveh = [];
 _markedbeac = [];
 _enemy_faction = "OPF_F";
-if (GRLIB_side_friendly == east) then { _enemy_faction = "BLU_F" };
+if (GRLIB_side_friendly == GRLIB_side_east) then { _enemy_faction = "BLU_F" };
 
 private _no_marker_classnames = [];
 { _no_marker_classnames pushback (_x select 0) } foreach buildings;
@@ -30,6 +30,9 @@ while { true } do {
 		alive _x &&
 		_x distance lhd_west > GRLIB_sector_size &&
 		_x distance lhd_east > GRLIB_sector_size &&
+		// veh is in GRLIB_my_sectors
+
+		(_x distance2D ([] call F_getNearestFobEnemy) > GRLIB_fob_range) &&
 		locked _x != 2 &&
 		!(typeOf _x in _no_marker_classnames) &&
 		!(_x getVariable ['R3F_LOG_disabled', true]) &&

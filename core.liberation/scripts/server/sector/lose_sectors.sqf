@@ -1,28 +1,43 @@
 waitUntil { !isNil "GRLIB_fobs_west" };
+waitUntil { !isNil "GRLIB_fobs_east" };
 waitUntil { !isNil "west_sectors" };
-
+waitUntil { !isNil "east_sectors" };
+active_fobs = [];
 sleep 5;
-
-attack_in_progress = false;
 
 while { GRLIB_endgame == 0 } do {
 
 	{
 		_ownership = [ markerpos _x ] call F_sectorOwnership;
-		if ( _ownership == GRLIB_side_enemy ) then {
-			[ _x ] call attack_in_progress_sector;
+		if ( _ownership == GRLIB_side_enemy || _ownership == GRLIB_side_east) then {
+			[ _x, _ownership ] spawn attack_in_progress_sector;
 		};
 		sleep 0.5;
-	} foreach west_sectors;
+	} foreach west_sectors - active_sectors;
+
+	{
+		_ownership = [ markerpos _x ] call F_sectorOwnership;
+		if ( _ownership == GRLIB_side_enemy || _ownership == GRLIB_side_west) then {
+			[ _x, _ownership ] spawn attack_in_progress_sector;
+		};
+		sleep 0.5;
+	} foreach east_sectors - active_sectors;
 
 	{
 		_ownership = [ _x ] call F_sectorOwnership;
-		if ( _ownership == GRLIB_side_enemy ) then {
-			[ _x ] call attack_in_progress_fob;
+		if ( _ownership == GRLIB_side_enemy || _ownership == GRLIB_side_east) then {
+			[ _x, _ownership ] spawn attack_in_progress_fob;
 		};
 		sleep 0.5;
-	} foreach GRLIB_fobs_west;
+	} foreach GRLIB_fobs_west - active_fobs;
 
-	sleep 2;
+	{
+		_ownership = [ _x ] call F_sectorOwnership;
+		if ( _ownership == GRLIB_side_enemy || _ownership == GRLIB_side_west) then {
+			[ _x, _ownership ] spawn attack_in_progress_fob;
+		};
+		sleep 0.5;
+	} foreach GRLIB_fobs_east - active_fobs;
 
+	sleep 10;
 };

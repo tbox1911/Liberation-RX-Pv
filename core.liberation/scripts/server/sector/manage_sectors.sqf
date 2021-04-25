@@ -1,7 +1,7 @@
-active_sectors = [];
-
 waitUntil {sleep 1; !isNil "west_sectors" };
 waitUntil {sleep 1; !isNil "sectors_allSectors" };
+active_sectors = [];
+sleep 5;
 
 while { GRLIB_endgame == 0 } do {
 

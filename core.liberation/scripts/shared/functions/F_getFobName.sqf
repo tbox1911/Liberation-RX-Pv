@@ -9,7 +9,16 @@ _currentidx = 0;
 		_fobindex = _currentidx;
 	};
 	_currentidx = _currentidx + 1;
-} foreach GRLIB_my_fobs;
+} foreach GRLIB_fobs_west;
+
+if ( _fobindex == -1 ) then {
+	{
+		if ( _x distance _fob < 100 ) then {
+			_fobindex = _currentidx;
+		};
+		_currentidx = _currentidx + 1;
+	} foreach GRLIB_fobs_east;
+};
 
 _fobname = "";
 if ( _fobindex != -1 ) then {

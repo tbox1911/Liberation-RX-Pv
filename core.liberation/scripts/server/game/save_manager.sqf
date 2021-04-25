@@ -136,8 +136,6 @@ if ( !isNil "greuh_liberation_savegame" ) then {
 
 	stats_saves_loaded = stats_saves_loaded + 1;
 
-	_list_static = [] + opfor_statics;
-	{_list_static pushBack ( _x select 0 )} foreach (static_vehicles_west + static_vehicles_east);
 	diag_log format [ "--- LRX Load Game %1 objects to load...", count(buildings_to_save)];
 	{
 		_nextclass = _x select 0;
@@ -208,10 +206,6 @@ if ( !isNil "greuh_liberation_savegame" ) then {
 				if ( _hascrew ) then {
 					[ _nextbuilding ] call F_forceBluforCrew;
 					_nextbuilding setVariable ["GRLIB_vehicle_manned", true, true];
-				};
-
-				if (_nextclass in _list_static) then {
-					[_nextbuilding] spawn protect_static;
 				};
 
 				if ( !(_nextclass in no_kill_handler_classnames ) ) then {
