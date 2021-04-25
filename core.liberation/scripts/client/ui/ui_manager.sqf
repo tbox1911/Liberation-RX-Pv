@@ -113,14 +113,27 @@ while { true } do {
 				if ( [ markerpos _nearest_active_sector, _zone_size ] call F_sectorOwnership == GRLIB_side_enemy ) then { _colorzone = GRLIB_color_enemy };
 				"zone_capture" setmarkercolorlocal _colorzone;
 
-				private _color_F = getArray (configFile >> "CfgMarkerColors" >> GRLIB_color_friendly >> "color") call BIS_fnc_colorConfigToRGBA;
+				private _color_west = getArray (configFile >> "CfgMarkerColors" >> GRLIB_color_west >> "color") call BIS_fnc_colorConfigToRGBA;
+				private _color_east = getArray (configFile >> "CfgMarkerColors" >> GRLIB_color_east >> "color") call BIS_fnc_colorConfigToRGBA;
 				private _color_E = getArray (configFile >> "CfgMarkerColors" >> GRLIB_color_enemy >> "color") call BIS_fnc_colorConfigToRGBA;
+				private _color_F = getArray (configFile >> "CfgMarkerColors" >> GRLIB_color_friendly >> "color") call BIS_fnc_colorConfigToRGBA;
+
 				((uiNamespace getVariable 'GUI_OVERLAY') displayCtrl (244)) ctrlSetBackgroundColor _color_F;
 				((uiNamespace getVariable 'GUI_OVERLAY') displayCtrl (203)) ctrlSetBackgroundColor _color_E;
 				if ( _nearest_active_sector in west_sectors ) then {
-					((uiNamespace getVariable 'GUI_OVERLAY') displayCtrl (205)) ctrlSetTextColor _color_F;
+					((uiNamespace getVariable 'GUI_OVERLAY') displayCtrl (205)) ctrlSetTextColor _color_west;
+					//((uiNamespace getVariable 'GUI_OVERLAY') displayCtrl (244)) ctrlSetBackgroundColor _color_F;
+					//((uiNamespace getVariable 'GUI_OVERLAY') displayCtrl (203)) ctrlSetBackgroundColor _color_F;
 				} else {
-					((uiNamespace getVariable 'GUI_OVERLAY') displayCtrl (205)) ctrlSetTextColor _color_E;
+					if ( _nearest_active_sector in east_sectors ) then {
+						((uiNamespace getVariable 'GUI_OVERLAY') displayCtrl (205)) ctrlSetTextColor _color_east;
+						//((uiNamespace getVariable 'GUI_OVERLAY') displayCtrl (244)) ctrlSetBackgroundColor _color_G;
+						//((uiNamespace getVariable 'GUI_OVERLAY') displayCtrl (203)) ctrlSetBackgroundColor _color_G;
+					} else {
+						((uiNamespace getVariable 'GUI_OVERLAY') displayCtrl (205)) ctrlSetTextColor _color_E;
+						//((uiNamespace getVariable 'GUI_OVERLAY') displayCtrl (244)) ctrlSetBackgroundColor _color_E;
+						//((uiNamespace getVariable 'GUI_OVERLAY') displayCtrl (203)) ctrlSetBackgroundColor _color_E;
+					};
 				};
 
 				_ratio = [_nearest_active_sector] call F_getForceRatio;

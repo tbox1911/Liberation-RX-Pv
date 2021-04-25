@@ -9,7 +9,7 @@ _currentidx = 0;
 		_fobindex = _currentidx;
 	};
 	_currentidx = _currentidx + 1;
-} foreach GRLIB_fobs_west;
+} foreach GRLIB_my_fobs;
 
 _fobname = "";
 if ( _fobindex != -1 ) then {

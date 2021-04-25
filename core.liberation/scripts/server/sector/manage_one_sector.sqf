@@ -187,8 +187,9 @@ if ( (!(_sector in [west_sectors, east_sectors])) && ( _west_units > 0 || _east_
 	};
 
 	while { !_stopit } do {
-		if ( ([_sectorpos, _local_capture_size] call F_sectorOwnership != GRLIB_side_enemy) && (GRLIB_endgame == 0) ) then {
-			[ _sector ] spawn sector_liberated_remote_call;
+		private _winner_side = [_sectorpos, _local_capture_size] call F_sectorOwnership;
+		if ( (_winner_side != GRLIB_side_enemy) && (GRLIB_endgame == 0) ) then {
+			[ _sector, _winner_side ] spawn sector_liberated_remote_call;
 			_stopit = true;
 			{ [_x] spawn prisonner_ai; } foreach ( (getmarkerpos _sector) nearEntities [ ["Man"], _local_capture_size * 1.2 ] );
 			sleep 60;
@@ -196,8 +197,8 @@ if ( (!(_sector in [west_sectors, east_sectors])) && ( _west_units > 0 || _east_
 			active_sectors = active_sectors - [ _sector ]; publicVariable "active_sectors";
 			{ _x setVariable ["GRLIB_counter_TTL", 0] } foreach _managed_units;
 		} else {
-			_west_units = [getmarkerpos _sectorpos , ([_opforcount] call F_getCorrectedSectorRange +300) , GRLIB_side_west] call F_getUnitsCount;
-			_east_units = [getmarkerpos _sectorpos , ([_opforcount] call F_getCorrectedSectorRange +300) , GRLIB_side_east] call F_getUnitsCount;
+			_west_units = [_sectorpos , GRLIB_sector_size +300, GRLIB_side_west] call F_getUnitsCount;
+			_east_units = [_sectorpos , GRLIB_sector_size +300, GRLIB_side_east] call F_getUnitsCount;
 			if ( _west_units == 0 && _east_units == 0) then {
 				_sector_despawn_tickets = _sector_despawn_tickets - 1;
 			} else {

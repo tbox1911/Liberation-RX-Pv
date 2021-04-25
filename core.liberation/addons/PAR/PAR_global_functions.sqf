@@ -220,7 +220,7 @@ PAR_HandleDamage_EH = {
 		// TK Protect
 		private _veh_unit = vehicle _unit;
 		private _veh_killer = vehicle _killer;
-		if ( _isNotWounded && isPlayer _killer && _killer != _unit && _veh_unit != _veh_killer && LRX_tk_vip find (name _killer) == -1) then {
+		if ( _isNotWounded && isPlayer _killer && _killer != _unit && side _killer == side _unit && _veh_unit != _veh_killer && LRX_tk_vip find (name _killer) == -1) then {
 			if ( _unit getVariable ["GRLIB_isProtected", 0] < time ) then {
 				PAR_tkMessage = [_unit, _killer];
 				publicVariable "PAR_tkMessage";

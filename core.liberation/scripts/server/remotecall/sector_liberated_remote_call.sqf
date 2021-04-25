@@ -1,6 +1,6 @@
 if (isServer) then {
 
-	params [ "_liberated_sector" ];
+	params [ "_liberated_sector", "_side" ];
 
 	_combat_readiness_increase = 0;
 
@@ -43,7 +43,7 @@ if (isServer) then {
 	private _income = (75 + floor(random 100));
 	private _text = format ["Reward Received: + %1 Ammo.", _income];
 	{
-		if (_x distance2D (markerpos _liberated_sector) < GRLIB_sector_size ) then {
+		if (_x distance2D (markerpos _liberated_sector) < GRLIB_sector_size && side _x == _side) then {
 			private _ammo_collected = _x getVariable ["GREUH_ammo_count",0];
 			_x setVariable ["GREUH_ammo_count", _ammo_collected + _income, true];
 			[gamelogic, _text] remoteExec ["globalChat", owner _x];
@@ -57,7 +57,13 @@ if (isServer) then {
 	[ _liberated_sector, 0 ] remoteExec ["remote_call_sector", 0];
 	reset_battlegroups_ai = true; publicVariable "reset_battlegroups_ai";
 
-	west_sectors pushback _liberated_sector; publicVariable "west_sectors";
+	if (_side == GRLIB_side_west) then {
+		west_sectors pushback _liberated_sector; publicVariable "west_sectors";
+	};
+	if (_side == GRLIB_side_east) then {
+		east_sectors pushback _liberated_sector; publicVariable "east_sectors";
+	};
+
 	stats_sectors_liberated = stats_sectors_liberated + 1;
 
 	[] call recalculate_caps;

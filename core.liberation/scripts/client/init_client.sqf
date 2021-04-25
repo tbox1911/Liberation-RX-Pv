@@ -92,6 +92,8 @@ paraDrop = compileFinal preprocessFileLineNumbers "scripts\client\spawn\paraDrop
 get_lrx_name = compileFinal preprocessFileLineNumbers "scripts\client\misc\get_lrx_name.sqf";
 F_getMobileRespawns = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getMobileRespawns.sqf";
 F_spartanScan = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_spartanScan.sqf";
+F_getLocationName = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getLocationName.sqf";
+F_getFobName = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getFobName.sqf";
 
 // *** Init ***
 setTerrainGrid 12.5;  //Very High = 6.25, Ultra = 3.125

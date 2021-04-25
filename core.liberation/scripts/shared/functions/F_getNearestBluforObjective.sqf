@@ -5,9 +5,9 @@ _currentnearest = [];
 _refdistance = 99999;
 _tpositions = [];
 
-if ( count GRLIB_fobs_west != 0 || count west_sectors != 0 ) then {
+if ( count GRLIB_fobs_west != 0 || count west_sectors != 0 || count GRLIB_fobs_east != 0 || count eaest_sectors != 0) then {
 
-	{ _tpositions pushback _x; } foreach GRLIB_fobs_west;
+	{ _tpositions pushback _x; } foreach GRLIB_fobs_west + GRLIB_fobs_east;
 
 	{
 		if ( _startpos distance2D _x < _refdistance ) then {
@@ -19,7 +19,7 @@ if ( count GRLIB_fobs_west != 0 || count west_sectors != 0 ) then {
 	if ( _refdistance > 4000 ) then {
 		{
 			_tpositions pushback (markerpos _x);
-		} foreach west_sectors;
+		} foreach west_sectors + east_sectors;
 
 		{
 			if ( _startpos distance2D _x < _refdistance ) then {
