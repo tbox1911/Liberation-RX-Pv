@@ -30,7 +30,7 @@ while { true } do {
 		alive _x &&
 		_x distance lhd_west > GRLIB_sector_size &&
 		_x distance lhd_east > GRLIB_sector_size &&
-		// veh is in GRLIB_my_sectors
+		// veh is not in GRLIB_enemy_sectors
 
 		(_x distance2D ([] call F_getNearestFobEnemy) > GRLIB_fob_range) &&
 		locked _x != 2 &&

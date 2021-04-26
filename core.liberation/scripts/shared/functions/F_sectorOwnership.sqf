@@ -7,8 +7,8 @@ _countblufor_ownership = [_thatpos, _localsize, GRLIB_side_west ] call F_getUnit
 _countopfor_ownership = [_thatpos, _localsize, GRLIB_side_east ] call F_getUnitsCount;
 
 if ( _countenemy_ownership > _countblufor_ownership && _countenemy_ownership > _countopfor_ownership ) then { _sectorside = GRLIB_side_enemy; };
-if ( _countblufor_ownership > _countenemy_ownership && _countblufor_ownership > _countenemy_ownership ) then { _sectorside = GRLIB_side_west; };
-if ( _countopfor_ownership > _countenemy_ownership && _countopfor_ownership > _countenemy_ownership ) then { _sectorside = GRLIB_side_east; };
+if ( _countblufor_ownership > _countenemy_ownership && _countblufor_ownership > _countopfor_ownership ) then { _sectorside = GRLIB_side_west; };
+if ( _countopfor_ownership > _countenemy_ownership && _countopfor_ownership > _countblufor_ownership ) then { _sectorside = GRLIB_side_east; };
 
 //radio is down
 if ( [_thatpos, GRLIB_side_enemy, GRLIB_capture_size] call F_getNearestTower != "" ) then {

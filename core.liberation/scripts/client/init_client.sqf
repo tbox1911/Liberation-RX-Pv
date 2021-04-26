@@ -96,7 +96,6 @@ F_getMobileRespawns = compileFinal preprocessFileLineNumbers "scripts\shared\fun
 F_spartanScan = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_spartanScan.sqf";
 F_getLocationName = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getLocationName.sqf";
 F_getFobName = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getFobName.sqf";
-F_getFobSide = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getFobSide.sqf";
 
 // *** Init ***
 setTerrainGrid 12.5;  //Very High = 6.25, Ultra = 3.125

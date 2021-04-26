@@ -121,7 +121,6 @@ air_attack_west = [
 
 static_vehicles_west = [
 	["B_UGV_02_Demining_F",0,5,0,GRLIB_perm_inf],
-	["B_Static_Designator_01_F",0,5,0,GRLIB_perm_inf],
 	["B_HMG_01_F",0,10,0,GRLIB_perm_log],
 	["B_HMG_01_high_F",0,10,0,GRLIB_perm_tank],
 	["B_GMG_01_F",0,20,0,GRLIB_perm_log],
@@ -130,7 +129,7 @@ static_vehicles_west = [
 	["B_static_AT_F",0,50,0,GRLIB_perm_air],
 	["B_Mortar_01_F",0,500,0,GRLIB_perm_max],
 	["B_AAA_System_01_F",10,500,0,GRLIB_perm_max],
-	["B_Ship_Gun_01_F",10,1500,0,GRLIB_perm_max]
+	["B_SAM_System_02_F",10,500,0,GRLIB_perm_max]
 ];
 
 buildings_west = buildings + [

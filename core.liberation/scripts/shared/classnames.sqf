@@ -14,7 +14,7 @@ if ( isNil "PAR_Medikit" ) then { PAR_Medikit = "Medikit" };
 if ( isNil "PAR_AidKit" ) then { PAR_AidKit = "FirstAidKit" };
 if ( isNil "A3W_BoxWps" ) then { A3W_BoxWps = "Box_East_Wps_F" };
 if ( isNil "canisterFuel" ) then { canisterFuel = "Land_CanisterFuel_Red_F" };
-if ( isNil "opfor_ammobox_transport" ) then { opfor_ammobox_transport = "I_Truck_03_transport_F" };
+if ( isNil "opfor_ammobox_transport" ) then { opfor_ammobox_transport = "I_Truck_02_transport_F" };
 
 // *** BUILDINGS ***
 buildings = [
@@ -206,10 +206,7 @@ militia_vehicles = [
 ];
 
 opfor_boat = [
-	"I_Boat_Armed_01_hmg_F",
-	"I_T_Boat_Armed_01_hmg_F",
-	"I_Boat_Armed_01_hmg_F",
-	"I_T_Boat_Armed_01_hmg_F"
+	"I_Boat_Armed_01_minigun_F"
 ];
 
 opfor_vehicles = [
@@ -276,6 +273,7 @@ opfor_choppers = [
 
 opfor_air = [
 	"I_Heli_light_03_F",
+	"I_Plane_Fighter_03_CAS_F",
 	"I_Plane_Fighter_04_F"
 ];
 
@@ -319,7 +317,7 @@ opfor_recyclable = [
 	// ["I_Truck_03_transport_F",5,round (50 / GRLIB_recycling_percentage),5],
 	// ["I_MRAP_02_hmg_F",5,round (50 / GRLIB_recycling_percentage),3],
 	// ["I_MRAP_02_gmg_F",5,round (50 / GRLIB_recycling_percentage),3],
-	// ["I_Boat_Armed_01_hmg_F",2,round (100 / GRLIB_recycling_percentage),2],
+	["I_Boat_Armed_01_minigun_F",2,round (100 / GRLIB_recycling_percentage),2],
 	// ["I_T_Boat_Armed_01_hmg_F",2,round (100 / GRLIB_recycling_percentage),2],
 	// ["I_APC_Wheeled_02_rcws_F",10,round (150 / GRLIB_recycling_percentage),10],
 	// ["I_APC_Tracked_02_cannon_F",10,round (200 / GRLIB_recycling_percentage),10],
@@ -330,6 +328,7 @@ opfor_recyclable = [
 	["I_MBT_03_cannon_F",15,round (800 / GRLIB_recycling_percentage),15],
 	["I_Heli_light_03_F",10,round (700 / GRLIB_recycling_percentage),15],
 	["I_Heli_Transport_02_F",10,round (500 / GRLIB_recycling_percentage),10],
+	["I_Plane_Fighter_03_CAS_F",20,round (1000 / GRLIB_recycling_percentage),30],
 	["I_Plane_Fighter_04_F",20,round (1000 / GRLIB_recycling_percentage),30]
 ];
 
@@ -552,7 +551,7 @@ all_hostile_classnames = (opfor_vehicles + opfor_vehicles_low_intensity + opfor_
 markers_reset = [99999,99999,0];
 zeropos = [0,0,0];
 squads_names = [ localize "STR_LIGHT_RIFLE_SQUAD", localize "STR_RIFLE_SQUAD", localize "STR_AT_SQUAD", localize "STR_AA_SQUAD", localize "STR_MIXED_SQUAD", localize "STR_RECON_SQUAD" ];
-boats_names = [ "B_Boat_Transport_01_F", "C_Boat_Transport_02_F", "B_Boat_Armed_01_minigun_F" ];
+boats_names = [ "B_Boat_Transport_01_F", "C_Boat_Transport_02_F", "I_Boat_Armed_01_minigun_F" ];
 ammobox_transports_typenames = [];
 { ammobox_transports_typenames pushback (_x select 0) } foreach box_transport_config;
 ammobox_transports_typenames = [ ammobox_transports_typenames , { [ _x ] call F_checkClass } ]  call BIS_fnc_conditionalSelect;

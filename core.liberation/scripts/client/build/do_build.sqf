@@ -325,13 +325,13 @@ while { true } do {
 
 				// Crewed vehicle
 				if ( (_classname in uavs) || manned ) then {
-					[ _vehicle ] call F_forceBluforCrew;
+					[ _vehicle ] call F_forceSideCrew;
 					_vehicle setVariable ["GRLIB_vehicle_manned", true, true];
 					player hcSetGroup [group _vehicle];
 				};
 
 				// set mass heavy Static
-				if ( _classname in ["B_AAA_System_01_F","B_Ship_Gun_01_F"] ) then {
+				if ( _classname in ["B_AAA_System_01_F", "O_SAM_System_04_F", "B_SAM_System_02_F"] ) then {
 					_vehicle setMass 5000;
 				};
 
@@ -376,6 +376,11 @@ while { true } do {
 				// Static Weapon
 				if (_classname in _list_static) then {
 					[_vehicle] spawn protect_static;
+						if (_classname in ["B_AAA_System_01_F", "O_SAM_System_04_F", "B_SAM_System_02_F"] ) then {
+						[ _vehicle ] call F_forceSideCrew;
+						_vehicle setVariable ["GRLIB_vehicle_manned", true, true];
+					};
+
 				};
 
 				sleep 0.3;

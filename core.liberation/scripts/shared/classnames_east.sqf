@@ -119,7 +119,6 @@ air_attack_east = [
 
 static_vehicles_east = [
 	["O_UGV_02_Demining_F",0,5,0,GRLIB_perm_inf],
-	["O_Static_Designator_01_F",0,5,0,GRLIB_perm_inf],
 	["O_HMG_01_F",0,10,0,GRLIB_perm_log],
 	["O_HMG_01_high_F",0,10,0,GRLIB_perm_tank],
 	["O_GMG_01_F",0,20,0,GRLIB_perm_log],
@@ -127,6 +126,7 @@ static_vehicles_east = [
 	["O_static_AA_F",0,50,0,GRLIB_perm_air],
 	["O_static_AT_F",0,50,0,GRLIB_perm_air],
 	["O_Mortar_01_F",0,500,0,GRLIB_perm_max],
+	["B_AAA_System_01_F",10,500,0,GRLIB_perm_max],
 	["O_SAM_System_04_F",10,500,0,GRLIB_perm_max]
 ];
 

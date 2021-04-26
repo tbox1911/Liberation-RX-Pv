@@ -204,7 +204,7 @@ if ( !isNil "greuh_liberation_savegame" ) then {
 				};
 
 				if ( _hascrew ) then {
-					[ _nextbuilding ] call F_forceBluforCrew;
+					[ _nextbuilding ] call F_forceSideCrew;
 					_nextbuilding setVariable ["GRLIB_vehicle_manned", true, true];
 				};
 
