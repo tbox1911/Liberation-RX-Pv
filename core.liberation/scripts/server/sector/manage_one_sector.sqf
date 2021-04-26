@@ -30,7 +30,7 @@ active_sectors pushback _sector; publicVariable "active_sectors";
 
 _opforcount = [] call F_opforCap;
 //[ _sector, _opforcount ] call wait_to_spawn_sector;
-sleep 20;
+sleep 5;
 
 _west_units = [getmarkerpos _sector , [ _opforcount ] call F_getCorrectedSectorRange , GRLIB_side_west] call F_getUnitsCount;
 _east_units = [getmarkerpos _sector , [ _opforcount ] call F_getCorrectedSectorRange , GRLIB_side_east] call F_getUnitsCount;
@@ -123,8 +123,8 @@ if ( (!(_sector in [west_sectors, east_sectors])) && ( _west_units > 0 || _east_
 		[markerPos _sector, 50] call createlandmines;
 	};
 
-	if ( _building_ai_max > 0 && GRLIB_adaptive_opfor ) then {
-		_building_ai_max = round ( _building_ai_max * ([] call F_adaptiveOpforFactor));
+	if ( _building_ai_max > 0 ) then {
+		_building_ai_max = round ( _building_ai_max );
 	};
 
 	{

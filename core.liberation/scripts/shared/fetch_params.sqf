@@ -9,7 +9,6 @@ if ( isMultiplayer ) then {
 	GRLIB_introduction = ["Introduction",1] call bis_fnc_getParamValue;
 	GRLIB_deployment_cinematic = ["DeploymentCinematic",1] call bis_fnc_getParamValue;
 	GRLIB_unitcap = ["Unitcap",1] call bis_fnc_getParamValue;
-	GRLIB_adaptive_opfor = ["AdaptToPlayercount",1] call bis_fnc_getParamValue;
 	GRLIB_civilian_activity = ["Civilians",1] call bis_fnc_getParamValue;
 	GRLIB_wildlife_manager = ["Wildlife",1] call bis_fnc_getParamValue;
 	GRLIB_Patrol_manager = ["Patrol",1] call bis_fnc_getParamValue;
@@ -50,7 +49,6 @@ if ( isMultiplayer ) then {
 	GRLIB_tk_count = 4;
 	GRLIB_introduction = 0;
 	GRLIB_deployment_cinematic = 0;
-	GRLIB_adaptive_opfor = 1;
 	GRLIB_unitcap = 1;
 	GRLIB_civilian_activity = 1;
 	GRLIB_wildlife_manager = 1;
@@ -117,7 +115,6 @@ if ( GRLIB_hide_opfor == 1 ) then { GRLIB_hide_opfor = true } else { GRLIB_hide_
 if ( GRLIB_enable_arsenal == 1 ) then { GRLIB_enable_arsenal = true } else { GRLIB_enable_arsenal = false };
 if ( GRLIB_limited_arsenal == 1 ) then { GRLIB_limited_arsenal = true } else { GRLIB_limited_arsenal = false };
 if ( GRLIB_permission_vehicles == 1 ) then { GRLIB_permission_vehicles = true } else { GRLIB_permission_vehicles = false };
-if ( GRLIB_adaptive_opfor == 1 ) then { GRLIB_adaptive_opfor = true } else { GRLIB_adaptive_opfor = false };
 if ( GRLIB_passive_income == 1 ) then { GRLIB_passive_income = true } else { GRLIB_passive_income = false };
 if ( GRLIB_permissions_param == 1 ) then { GRLIB_permissions_param = true } else { GRLIB_permissions_param = false };
 if ( GRLIB_shorter_nights == 1 ) then { GRLIB_shorter_nights = true } else { GRLIB_shorter_nights = false };

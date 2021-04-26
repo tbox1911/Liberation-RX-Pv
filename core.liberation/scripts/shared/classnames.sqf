@@ -134,6 +134,7 @@ if ( isNil "opfor_officer") then { opfor_officer = "I_officer_F" };
 if ( isNil "opfor_sharpshooter") then { opfor_sharpshooter = "I_Soldier_M_F" };
 if ( isNil "opfor_sniper") then { opfor_sniper = "I_sniper_F" };
 if ( isNil "opfor_engineer") then { opfor_engineer = "I_engineer_F" };
+if ( isNil "opfor_pilot" ) then { opfor_pilot = "I_Pilot_F" };
 if ( isNil "opfor_paratrooper") then { opfor_paratrooper = "I_soldier_PG_F" };
 if ( isNil "opfor_mrap") then { opfor_mrap = "I_MRAP_02_F" };
 if ( isNil "opfor_mrap_hmg") then { opfor_mrap_hmg = "I_MRAP_02_hmg_F" };
@@ -256,7 +257,9 @@ opfor_battlegroup_vehicles_low_intensity = [
 	"I_G_Offroad_01_armed_F",
 	"I_APC_Wheeled_03_cannon_F",
 	"I_MRAP_03_hmg_F",
-	"I_MRAP_03_gmg_F"
+	"I_MRAP_03_gmg_F",
+	"I_Heli_Transport_02_F",
+	"I_Truck_02_covered_F"
 ];
 
 opfor_troup_transports = [

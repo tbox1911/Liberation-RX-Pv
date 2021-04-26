@@ -18,7 +18,7 @@ for "_i" from 1 to _nbcivs do {
 	_spawnpos = [(((_sectorpos select 0) + (75 * _spread)) - (random (150 * _spread))),(((_sectorpos select 1) + (75 * _spread)) - (random (150 * _spread))),0];
 	( selectRandom civilians ) createUnit [_spawnpos, _grp, "this addMPEventHandler [""MPKilled"", {_this spawn kill_manager}]", 0.5, "PRIVATE"];
 	_nextciv = ((units _grp) select 0);
-	_nextciv addEventHandler ["HandleDamage", { private [ "_damage" ]; if (( side (_this select 3) != GRLIB_side_friendly ) && ( side (_this select 3) != GRLIB_side_enemy )) then { _damage = 0 } else { _damage = _this select 2 }; _damage } ];
+	_nextciv addEventHandler ["HandleDamage", { private [ "_damage" ]; if ( !(side (_this select 3) in [GRLIB_side_west, GRLIB_side_east]) ) then { _damage = 0 } else { _damage = _this select 2 }; _damage } ];
 	_nextciv setVariable ['GRLIB_can_speak', true, true];
 	_nextciv disableAI "FSM";
 	_nextciv disableAI "AUTOCOMBAT";

@@ -32,7 +32,7 @@ while { true } do {
 		_x distance lhd_east > GRLIB_sector_size &&
 		// veh is not in GRLIB_enemy_sectors
 
-		(_x distance2D ([] call F_getNearestFobEnemy) > GRLIB_fob_range) &&
+		(_x distance2D ([_x] call F_getNearestFobEnemy) > GRLIB_fob_range) &&
 		locked _x != 2 &&
 		!(typeOf _x in _no_marker_classnames) &&
 		!(_x getVariable ['R3F_LOG_disabled', true]) &&

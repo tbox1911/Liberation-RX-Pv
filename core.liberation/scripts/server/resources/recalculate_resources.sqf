@@ -20,7 +20,7 @@ while { true } do {
 							_new_manpower_used = _new_manpower_used + (_x select 1);
 							_new_fuel_used = _new_fuel_used + (_x select 3);
 						};
-					} foreach infantry_units;
+					} foreach infantry_units_west + infantry_units_east;
 				};
 			};
 		} foreach allUnits;
@@ -40,7 +40,9 @@ while { true } do {
 						_new_manpower_used = _new_manpower_used + (_x select 1);
 						_new_fuel_used = _new_fuel_used + (_x select 3);
 					};
-				} foreach ( light_vehicles + heavy_vehicles + air_vehicles + static_vehicles + support_vehicles + opfor_recyclable );
+				} foreach ( light_vehicles_west + heavy_vehicles_west + air_vehicles_west + static_vehicles_west + support_vehicles_west +
+							light_vehicles_east + heavy_vehicles_east + air_vehicles_east + static_vehicles_east + support_vehicles_east +
+							opfor_recyclable );
 			};
 		} foreach vehicles + GRLIB_mobile_respawn;
 

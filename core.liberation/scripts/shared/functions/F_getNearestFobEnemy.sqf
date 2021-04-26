@@ -3,7 +3,7 @@ params [ [ "_source_position", (getpos player) ] ];
 private _retvalue = [0,0,0];
 private _enemyFOB = GRLIB_fobs_west;
 
-if (GRLIB_side_friendly == west) then {
+if (GRLIB_side_friendly == GRLIB_side_west) then {
 	_enemyFOB = GRLIB_fobs_east;
 };
 

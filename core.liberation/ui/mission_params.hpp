@@ -72,12 +72,7 @@ class Params
 		texts[] = {$STR_AGGRESSIVITY_PARAM0, $STR_AGGRESSIVITY_PARAM1,$STR_AGGRESSIVITY_PARAM2,$STR_AGGRESSIVITY_PARAM3,$STR_AGGRESSIVITY_PARAM4};
 		default = 1;
 	};
-	class AdaptToPlayercount{
-		title = $STR_PARAM_ADAPT_TO_PLAYERCOUNT;
-		values[] = {1,0};
-		texts[] = {$STR_PARAMS_ENABLED,$STR_PARAMS_DISABLED};
-		default = 1;
-	};
+
 	class SectorRadius{
 		title = $STR_PARAM_SECTOR_RADIUS;
 		values[] = {0,300,400,500,600,700,800,900,1000,1200,1500};
