@@ -21,11 +21,12 @@ sleep 8;
 {
   if (isDedicated) exitWith {};
   params ["_wnded"];
+  // Revive
   [
   _wnded,
   "<t color='#00C900'>" + localize "STR_PAR_AC_01" + "</t>",
   "\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_reviveMedic_ca.paa","\a3\ui_f\data\IGUI\Cfg\holdactions\holdAction_reviveMedic_ca.paa",
-   "round(_this distance2D _target) < 3 &&
+   "round(_this distance2D _target) < 3  && side group _this == side group _target &&
     lifeState _target == 'INCAPACITATED' &&
     _target getVariable ['PAR_isDragged',0] == 0 &&
     ( [_this] call PAR_has_medikit || [_this] call PAR_is_medic )",
@@ -64,6 +65,39 @@ sleep 8;
     _caller switchMove "";
   },
   [time],6,12] call BIS_fnc_holdActionAdd;
+
+  // Killed
+  [
+  _wnded,
+  "<t color='#FF0080'>" + "Finish him !!" + "</t>",
+  getMissionPath "res\skull.paa",getMissionPath "res\skull.paa",
+   "round(_this distance2D _target) < 3 && side group _this != side group _target &&
+    lifeState _target == 'INCAPACITATED'",
+  "round(_caller distance2D _target) < 3 ",
+  {
+    _grbg = createVehicle [(selectRandom PAR_BloodSplat), getPos _target, [], 0, "CAN_COLLIDE"];
+    _grbg spawn {sleep (60 + floor(random 30)); deleteVehicle _this};
+  },
+  {},
+  {
+    if (local _target) then {
+      [_target, _caller] call PAR_fn_sortie_killed;
+    } else {
+      [[_target, _caller], {
+        if (isDedicated) exitWith {};
+        if (!isNil "GRLIB_player_spawned") then {
+           if (GRLIB_player_spawned) then {
+            [(_this select 0),(_this select 1)] call PAR_fn_sortie_killed;
+           };
+         };
+        }] remoteExec ["bis_fnc_call", 0];
+    };
+  },
+  {
+    _caller switchMove "";
+  },
+  [time],6,12] call BIS_fnc_holdActionAdd;
+
   _wnded addAction ["<t color='#C90000'>" + localize "STR_PAR_AC_02" + "</t>", "addons\PAR\PAR_fn_drag.sqf", ["action_drag"], 9, false, true, "", "!PAR_isDragging", 3];
   _wnded addAction ["<t color='#C90000'>" + localize "STR_PAR_AC_03" + "</t>", { PAR_isDragging = false }, ["action_release"], 10, true, true, "", "PAR_isDragging"];
 }] remoteExec ["bis_fnc_call", 0];
