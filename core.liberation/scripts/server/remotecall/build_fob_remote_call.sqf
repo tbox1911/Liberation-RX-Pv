@@ -19,5 +19,5 @@ if (_side == GRLIB_side_east) then {
 
 trigger_server_save = true;
 sleep 3;
-[ [ _new_fob, 0 ] , "remote_call_fob", "_side" ] call BIS_fnc_MP;
+[ _new_fob, 0, _side ] remoteExec ["remote_call_fob", 0];
 stats_fobs_built = stats_fobs_built + 1;

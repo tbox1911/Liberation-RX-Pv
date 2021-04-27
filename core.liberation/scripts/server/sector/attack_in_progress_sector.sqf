@@ -1,6 +1,8 @@
 params [ "_sector", "_side" ];
-
+if (_sector in active_sectors) exitWith {};
 active_sectors pushback _sector;
+sleep 1;
+
 private _sector_oldside = GRLIB_side_enemy;
 if (_sector in west_sectors) then { _sector_oldside = GRLIB_side_west};
 if (_sector in east_sectors) then { _sector_oldside = GRLIB_side_east};

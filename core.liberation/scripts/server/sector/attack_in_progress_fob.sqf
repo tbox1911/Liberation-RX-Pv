@@ -1,5 +1,7 @@
 params [ "_thispos", "_side" ];
+if (_thispos in active_fobs) exitWith {};
 active_fobs pushback _thispos;
+sleep 1;
 
 private _fobside = [_thispos] call F_getFobSide;
 
