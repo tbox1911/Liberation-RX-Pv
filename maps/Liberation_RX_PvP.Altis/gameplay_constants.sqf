@@ -4,9 +4,10 @@ GRLIB_side_west = WEST;
 GRLIB_side_east = EAST;
 GRLIB_side_enemy = RESISTANCE;
 GRLIB_side_civilian = CIVILIAN;
-GRLIB_color_west = "ColorBLUFOR";
-GRLIB_color_east = "ColorOPFOR";
-GRLIB_color_enemy = "colorIndependent";
+GRLIB_color_west = "ColorWEST";
+GRLIB_color_east = "ColorEAST";
+GRLIB_color_guer = "ColorGUER";
+GRLIB_color_enemy = "ColorGUER";
 GRLIB_color_enemy_bright = "ColorGREEN";
 
 GRLIB_sector_size = 700;

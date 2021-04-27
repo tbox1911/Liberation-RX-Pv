@@ -4,8 +4,8 @@ private _my_dog = player getVariable ["my_dog", nil];
 if (!isNil "_my_dog") then {
 
 	if (_cmd == "del") then {
-		_msg = format ["<t align='center'>Dismiss the Dog<br/>Are you sure ?</t>"];
-		_result = [_msg, "Warning !", true, true] call BIS_fnc_guiMessage;
+		private _msg = format ["<t align='center'>Dismiss the Dog<br/>Are you sure ?</t>"];
+		private _result = [_msg, "Warning !", true, true] call BIS_fnc_guiMessage;
 		if (_result) then {
 			_my_dog setDir (_my_dog getDir player);
 			playSound3D ["a3\sounds_f\ambient\animals\dog2.wss", _my_dog, false, getPosASL _my_dog, 2, 0.8, 0];
@@ -17,8 +17,9 @@ if (!isNil "_my_dog") then {
 	};
 
 	if (_cmd == "find") then {
-		_enemy_lst = (getPos player) nearEntities ["Man", 300];
-		_enemy_lst = _enemy_lst select {alive _x && (side _x == GRLIB_side_enemy || {_x getVariable ["GRLIB_is_prisonner", false]})};
+		private _enemy_lst = (getPos player) nearEntities ["Man", 300];
+		private _my_enemy = [GRLIB_side_west, GRLIB_side_east, GRLIB_side_enemy] - [GRLIB_side_friendly];
+		_enemy_lst = _enemy_lst select {alive _x && (side _x in _my_enemy || {_x getVariable ["GRLIB_is_prisonner", false]})};
 
 		_msg = "The dog found nothing...";
 		if (count _enemy_lst > 0) then {

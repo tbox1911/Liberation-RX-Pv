@@ -115,20 +115,26 @@ while { true } do {
 
 				private _color_west = getArray (configFile >> "CfgMarkerColors" >> GRLIB_color_west >> "color") call BIS_fnc_colorConfigToRGBA;
 				private _color_east = getArray (configFile >> "CfgMarkerColors" >> GRLIB_color_east >> "color") call BIS_fnc_colorConfigToRGBA;
-				private _color_E = getArray (configFile >> "CfgMarkerColors" >> GRLIB_color_enemy >> "color") call BIS_fnc_colorConfigToRGBA;
+				private _color_guer = getArray (configFile >> "CfgMarkerColors" >> GRLIB_color_enemy >> "color") call BIS_fnc_colorConfigToRGBA;
 				private _color_F = getArray (configFile >> "CfgMarkerColors" >> GRLIB_color_friendly >> "color") call BIS_fnc_colorConfigToRGBA;
 
 				((uiNamespace getVariable 'GUI_OVERLAY') displayCtrl (244)) ctrlSetBackgroundColor _color_F;
-				((uiNamespace getVariable 'GUI_OVERLAY') displayCtrl (203)) ctrlSetBackgroundColor _color_E;
-				if ( _nearest_active_sector in west_sectors ) then {
-					((uiNamespace getVariable 'GUI_OVERLAY') displayCtrl (205)) ctrlSetTextColor _color_west;
-				} else {
-					if ( _nearest_active_sector in east_sectors ) then {
-						((uiNamespace getVariable 'GUI_OVERLAY') displayCtrl (205)) ctrlSetTextColor _color_east;
-					} else {
-						((uiNamespace getVariable 'GUI_OVERLAY') displayCtrl (205)) ctrlSetTextColor _color_E;
-					};
-				};
+
+				private _my_enemy = [GRLIB_side_west, GRLIB_side_east, GRLIB_side_enemy] - [GRLIB_side_friendly];
+				private _e1 = [ getmarkerpos _nearest_active_sector , _zone_size , _my_enemy select 0 ] call F_getUnitsCount;
+				private _e2 = [ getmarkerpos _nearest_active_sector , _zone_size , _my_enemy select 1 ] call F_getUnitsCount;
+
+				_my_enemy_color = "ColorUNKNOWN";
+				if (_e1 > _e2) then { _my_enemy_color = call compile format["GRLIB_color_%1", (_my_enemy select 0)] };
+				if (_e2 > _e1) then { _my_enemy_color = call compile format["GRLIB_color_%1", (_my_enemy select 1)] };
+
+				_color_P = getArray (configFile >> "CfgMarkerColors" >> _my_enemy_color >> "color") call BIS_fnc_colorConfigToRGBA;
+				((uiNamespace getVariable 'GUI_OVERLAY') displayCtrl (203)) ctrlSetBackgroundColor _color_P;
+
+				_sector_color = _color_guer;
+				if ( _nearest_active_sector in west_sectors ) then { _sector_color = _color_west };
+				if ( _nearest_active_sector in east_sectors ) then { _sector_color = _color_east };
+				((uiNamespace getVariable 'GUI_OVERLAY') displayCtrl (205)) ctrlSetTextColor _sector_color;
 
 				_ratio = [_nearest_active_sector] call F_getForceRatio;
 				_barwidth = 0.084 * safezoneW * _ratio;

@@ -198,7 +198,7 @@ if ( !isNil "greuh_liberation_savegame" ) then {
 					};
 				};
 
-				if (_nextclass == huron_typename ) then {
+				if (_nextclass in [huron_typename_west, huron_typename_west]) then {
 					_nextbuilding setVariable ["GRLIB_vehicle_owner", "public", true];
 					_nextbuilding setVariable ["GRLIB_vehicle_ishuron", true, true];
 				};

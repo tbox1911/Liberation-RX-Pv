@@ -7,7 +7,7 @@ _tpositions = [];
 
 if ( count GRLIB_fobs_west != 0 || count west_sectors != 0 || count GRLIB_fobs_east != 0 || count east_sectors != 0) then {
 
-	{ _tpositions pushback _x; } foreach GRLIB_fobs_west + GRLIB_fobs_east;
+	{ _tpositions pushback _x; } foreach GRLIB_fobs_west + GRLIB_fobs_east; //check nb player
 
 	{
 		if ( _startpos distance2D _x < _refdistance ) then {
@@ -19,7 +19,7 @@ if ( count GRLIB_fobs_west != 0 || count west_sectors != 0 || count GRLIB_fobs_e
 	if ( _refdistance > 4000 ) then {
 		{
 			_tpositions pushback (markerpos _x);
-		} foreach west_sectors + east_sectors;
+		} foreach west_sectors + east_sectors; //check nb player
 
 		{
 			if ( _startpos distance2D _x < _refdistance ) then {
