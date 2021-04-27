@@ -1,7 +1,6 @@
 private [ "_last_transition", "_last_position", "_cinematic_camera", "_cinematic_pointer", "_positions", "_last_position", "_nearentities", "_camtarget", "_startpos", "_endpos", "_startfov", "_endfov", "_nearest_sector", "_unitname", "_position" ];
 
 if ( isNil "active_sectors" ) then { active_sectors = [] };
-if ( isNil "GRLIB_my_fobs" ) then { GRLIB_my_fobs = [] };
 
 titleText ["" ,"BLACK IN", 3];
 cinematic_camera_started = true;
@@ -16,6 +15,7 @@ _cinematic_camera camSetTarget _cinematic_pointer;
 _cinematic_camera cameraEffect ["internal","back"];
 _cinematic_camera camcommit 0;
 if ( isNil "first_camera_round" ) then { first_camera_round = true; };
+private _myfobs = ([] call get_myFobs);
 
 while { cinematic_camera_started } do {
 
@@ -27,9 +27,9 @@ while { cinematic_camera_started } do {
 		_positions = [ getpos my_lhd ];
 		if ( !first_camera_round ) then {
 
-			if ( count GRLIB_my_fobs > 0 ) then {
+			if ( count _myfobs > 0 ) then {
 				for [ {_idx=0},{_idx < 2},{_idx=_idx+1} ] do {
-					_positions pushback (selectRandom GRLIB_my_fobs);
+					_positions pushback (selectRandom _myfobs);
 				};
 			};
 
@@ -259,9 +259,9 @@ while { cinematic_camera_started } do {
 					if ( _nearest_sector != "" ) then {
 						_nearest_sector = markertext _nearest_sector;
 					} else {
-						_nearfobs = [ GRLIB_my_fobs, { _x distance _position < 300 } ] call BIS_fnc_conditionalSelect;
+						_nearfobs = [ _myfobs, { _x distance _position < 300 } ] call BIS_fnc_conditionalSelect;
 						if ( count _nearfobs > 0 ) then {
-							_nearest_sector = format [ "FOB %1", military_alphabet select ( GRLIB_my_fobs find ( _nearfobs select 0 ) ) ];
+							_nearest_sector = format [ "FOB %1", military_alphabet select ( _myfobs find ( _nearfobs select 0 ) ) ];
 						};
 					};
 				};

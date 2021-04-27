@@ -9,8 +9,6 @@ GRLIB_respawn_marker = format ["respawn_%1", GRLIB_side_friendly];
 if (GRLIB_side_friendly == GRLIB_side_west) then {
 	my_lhd = lhd_west;
 	GRLIB_Arsenal = LARsBox_west;
-	GRLIB_my_fobs = GRLIB_fobs_west;
-	GRLIB_my_sectors = west_sectors;
 	GRLIB_color_friendly = GRLIB_color_west;
 	huron_typename = huron_typename_west;
 	FOB_typename = FOB_typename_west;
@@ -42,9 +40,7 @@ if (GRLIB_side_friendly == GRLIB_side_west) then {
 } else {
 	my_lhd = lhd_east;
 	GRLIB_Arsenal = LARsBox_east;
-	GRLIB_my_fobs = GRLIB_fobs_east;
 	GRLIB_color_friendly = GRLIB_color_east;
-	GRLIB_my_sectors = east_sectors;
 	huron_typename = huron_typename_east;
 	FOB_typename = FOB_typename_east;
 	FOB_box_typename = FOB_box_typename_east;
@@ -92,6 +88,8 @@ is_neartransport = compileFinal preprocessFileLineNumbers "scripts\client\misc\i
 player_EVH = compileFinal preprocessFileLineNumbers "addons\PAR\PAR_EventHandler.sqf";
 paraDrop = compileFinal preprocessFileLineNumbers "scripts\client\spawn\paraDrop.sqf";
 get_lrx_name = compileFinal preprocessFileLineNumbers "scripts\client\misc\get_lrx_name.sqf";
+get_myFobs = compileFinal preprocessFileLineNumbers "scripts\client\misc\get_myfobs.sqf";
+get_mySectors = compileFinal preprocessFileLineNumbers "scripts\client\misc\get_mysectors.sqf";
 F_getMobileRespawns = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getMobileRespawns.sqf";
 F_spartanScan = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_spartanScan.sqf";
 F_getLocationName = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getLocationName.sqf";

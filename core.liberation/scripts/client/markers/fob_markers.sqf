@@ -3,19 +3,18 @@ private [ "_markers", "_markers_mobilespawns", "_marker", "_idx", "_respawn_truc
 _markers = [];
 _markers_mobilespawns = [];
 
-waitUntil { !isNil "GRLIB_my_fobs" };
-
 uiSleep 3;
 
 while { true } do {
-	if ( count _markers != count GRLIB_my_fobs ) then {
+	private _myfobs = ([] call get_myFobs);
+	if ( count _markers != count _myfobs ) then {
 		{ deleteMarkerLocal _x } foreach _markers;
 		_markers = [];
-		for [ {_idx=0},{_idx < count GRLIB_my_fobs},{_idx=_idx+1}] do {
+		for [ {_idx=0},{_idx < count _myfobs},{_idx=_idx+1}] do {
 			_marker = createMarkerLocal [format ["fobmarker%1",_idx], markers_reset];
 			_marker setMarkerTypeLocal "b_hq";
 			_marker setMarkerSizeLocal [ 1.7, 1.7 ];
-			_marker setMarkerPosLocal (GRLIB_my_fobs select _idx);
+			_marker setMarkerPosLocal (_myfobs select _idx);
 			_marker setMarkerTextLocal format ["FOB %1",military_alphabet select _idx];
 			_marker setMarkerColorLocal "ColorYellow";
 			_markers pushback _marker;

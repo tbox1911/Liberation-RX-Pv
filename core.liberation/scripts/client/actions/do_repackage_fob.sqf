@@ -18,9 +18,13 @@ _fob_hq setVariable ["fob_in_use", false, true];
 if ( dorepackage > 0 ) then {
 	closeDialog 0;
 	waitUntil { !dialog };
-
-	GRLIB_my_fobs = GRLIB_my_fobs - [ _fob_pos ];
-	publicVariable "GRLIB_my_fobs";
+	if (GRLIB_side_friendly == GRLIB_side_west) then {
+		GRLIB_fobs_west = GRLIB_fobs_west - [ _fob_pos ];
+		publicVariable "GRLIB_fobs_west";
+	} else {
+		GRLIB_fobs_east = GRLIB_fobs_east - [ _fob_pos ];
+		publicVariable "GRLIB_fobs_east";
+	};
 	deleteVehicle _fob_hq;
 	sleep 0.5;
 

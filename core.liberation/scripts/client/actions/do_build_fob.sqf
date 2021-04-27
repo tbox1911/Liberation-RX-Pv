@@ -7,7 +7,8 @@ private [ "_minfobdist", "_minsectordist", "_distfob", "_clearedtobuildfob", "_d
 if ((_box getVariable ["box_in_use", false])) exitWith {};
 _box setVariable ["box_in_use", true, true];
 
-if ( count GRLIB_my_fobs >= GRLIB_maximum_fobs ) exitWith {
+private _myfobs = ([] call get_myFobs);
+if ( count _myfobs >= GRLIB_maximum_fobs ) exitWith {
 	hint format [ localize "STR_HINT_FOBS_EXCEEDED", GRLIB_maximum_fobs ];
 };
 
@@ -19,10 +20,10 @@ _distsector = 1;
 _clearedtobuildsector = true;
 
 _idx = 0;
-while { (_idx < (count GRLIB_my_fobs)) && _clearedtobuildfob } do {
-	if ( player distance (GRLIB_my_fobs select _idx) < _minfobdist ) then {
+while { (_idx < (count _myfobs)) && _clearedtobuildfob } do {
+	if ( player distance (_myfobs select _idx) < _minfobdist ) then {
 		_clearedtobuildfob = false;
-		_distfob = player distance (GRLIB_my_fobs select _idx);
+		_distfob = player distance (_myfobs select _idx);
 	};
 	_idx = _idx + 1;
 };

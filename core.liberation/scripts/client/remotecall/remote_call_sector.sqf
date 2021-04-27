@@ -35,4 +35,4 @@ if ( _status == 3 ) then {
 };
 
 { _x setMarkerColorLocal GRLIB_color_enemy; } foreach (sectors_allSectors - west_sectors - east_sectors);
-{ _x setMarkerColorLocal GRLIB_color_friendly; } foreach GRLIB_my_sectors;
+{ _x setMarkerColorLocal GRLIB_color_friendly; } foreach ([] call get_mySectors);

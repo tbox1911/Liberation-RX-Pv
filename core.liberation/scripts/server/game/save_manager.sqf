@@ -286,7 +286,7 @@ while { true } do {
 				( speed _x < 5 ) &&
 				( isNull attachedTo _x ) &&
 				(((getpos _x) select 2) < 10 ) &&
-				( (_x getVariable ['R3F_LOG_disabled', false]) || !(_x getVariable ['GRLIB_vehicle_owner', ""] in ["server", "public"]) || typeOf _x == huron_typename )
+				( (_x getVariable ['R3F_LOG_disabled', false]) || !(_x getVariable ['GRLIB_vehicle_owner', ""] in ["server", "public"]) || typeOf _x in [huron_typename_west, huron_typename_east] )
  				} ] call BIS_fnc_conditionalSelect;
 
 			_all_buildings = _all_buildings + _nextbuildings;

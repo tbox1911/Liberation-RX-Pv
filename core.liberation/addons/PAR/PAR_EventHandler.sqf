@@ -53,7 +53,7 @@ _unit addEventHandler ["WeaponAssembled", {
 _unit addEventHandler ["FiredMan",	{
 	params ["_unit", "_weapon", "_muzzle", "_mode", "_ammo", "_magazine", "_projectile", "_vehicle"];
 
-	if (count GRLIB_my_fobs >= 0) then {
+	if (count ([] call get_myFobs) >= 0) then {
 		if (((_unit distance2D ([] call F_getNearestFob) < GRLIB_fob_range) || (_unit distance2D my_lhd < 500)) && _weapon == "Put") then {deleteVehicle _projectile};
 	};
 }];
