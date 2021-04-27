@@ -3,7 +3,7 @@
 */
 waitUntil {sleep 1;GRLIB_player_spawned};
 
-private _score = [player] call F_getScore;
+private _score = score player;
 private _rank = [player] call set_rank;
 private _ammo_collected = player getVariable ["GREUH_ammo_count",0];
 

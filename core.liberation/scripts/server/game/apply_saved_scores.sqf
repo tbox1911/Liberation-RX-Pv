@@ -14,8 +14,8 @@ while { true } do {
 			// player saved score/ammo
 			{
 				if ( (getPlayerUID _nextplayer) == (_x select 0) ) then {
-					[_nextplayer, ((_x select 1) - ([_nextplayer] call F_getScore))] call F_addScore;
-					_nextplayer setVariable ["GREUH_score_last",[_nextplayer] call F_getScore, true];
+					_nextplayer addScore ((_x select 1) - score _nextplayer);
+					_nextplayer setVariable ["GREUH_score_last",score _nextplayer], true];
 					_nextplayer setVariable ["GREUH_ammo_count", (_x select 2), true];
 					_nextplayer setVariable ["GREUH_pvp_side", (_x select 4), true];
 				};
@@ -36,9 +36,9 @@ while { true } do {
 			_ammo = _nextplayer getVariable ["GREUH_ammo_count",0];
 			_playerindex = _knownplayers find (getPlayerUID _nextplayer);
 			if ( _playerindex >= 0 ) then {
-				_newscores set [_playerindex, [getPlayerUID _nextplayer, [_nextplayer] call F_getScore, _ammo, name _nextplayer, side _nextplayer]];
+				_newscores set [_playerindex, [getPlayerUID _nextplayer, score _nextplayer, _ammo, name _nextplayer, side _nextplayer]];
 			} else {
-				_newscores pushback [getPlayerUID _nextplayer, [_nextplayer] call F_getScore, _ammo, name _nextplayer, side _nextplayer];
+				_newscores pushback [getPlayerUID _nextplayer, score _nextplayer, _ammo, name _nextplayer, side _nextplayer];
 			};
 		};
 	} foreach allPlayers;

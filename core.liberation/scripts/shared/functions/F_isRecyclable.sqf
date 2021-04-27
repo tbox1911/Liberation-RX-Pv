@@ -26,7 +26,7 @@ if ( _alive && _onfoot && _R3F_move && (_far_lhd_west || _far_lhd_east) && _near
 		_ret = true;
 	};
 
-	if (typeOf _vehicle in buildings && [player] call F_getScore >= GRLIB_perm_tank) then {
+	if (typeOf _vehicle in buildings && score player >= GRLIB_perm_tank) then {
 		_ret = true;
 	};
 
