@@ -1,5 +1,5 @@
 private [ "_nextplayer" ];
-waitUntil { !isNil "GRLIB_player_scores"};
+waitUntil {sleep 1; !isNil "GRLIB_player_scores"};
 if (!([] call F_getValid)) exitWith {};
 
 while { true } do {
@@ -10,7 +10,7 @@ while { true } do {
 
 	{
 		_nextplayer = _x;
-		if (_nextplayer getVariable "GRLIB_score_set" == 0) then {
+		if (_nextplayer getVariable ["GRLIB_score_set", 0] == 0) then {
 			// player saved score/ammo
 			{
 				if ( (getPlayerUID _nextplayer) == (_x select 0) ) then {
@@ -31,6 +31,7 @@ while { true } do {
 			_nextplayer setVariable ["GRLIB_score_set", 1, true];
 		};
 
+		sleep 0.2;
 		if (_nextplayer getVariable "GRLIB_score_set" == 1) then {
 			_ammo = _nextplayer getVariable ["GREUH_ammo_count",0];
 			_playerindex = _knownplayers find (getPlayerUID _nextplayer);
@@ -42,5 +43,5 @@ while { true } do {
 		};
 	} foreach allPlayers;
 	GRLIB_player_scores = _newscores;
-	sleep 5;
+	sleep 3;
 };

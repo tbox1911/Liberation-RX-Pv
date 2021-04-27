@@ -100,9 +100,6 @@ F_getNearestFobEnemy = compileFinal preprocessFileLineNumbers "scripts\shared\fu
 F_getForceRatio = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getForceRatio.sqf";
 
 // *** Init ***
-setTerrainGrid 12.5;  //Very High = 6.25, Ultra = 3.125
-player setVariable ["GRLIB_score_set", 0, true];
-player setVariable ["GREUH_ammo_count", 0, true];
 
 if (isMultiplayer) then {
 	PAR_Grp_ID = getPlayerUID player;
@@ -204,5 +201,6 @@ chimera_sign addAction ["<t color='#FFFFFF'>-=   TIPS   =-</t>",{createDialog "l
 waitUntil { time > 2 };
 initAmbientLife;
 enableEnvironment [true, true];
+setTerrainGrid 12.5;  //Very High = 6.25, Ultra = 3.125
 
 diag_log "--- Client Init stop ---";

@@ -27,7 +27,7 @@ if ( GRLIB_introduction ) then {
 	uisleep 8.5;
 };
 
-while {	(player getVariable "GRLIB_score_set" == 0) } do {
+while {	(player getVariable ["GRLIB_score_set", 0] == 0) } do {
 	_msg= "... Loading Player Data ...";
     [_msg, 0, 0, 5, 0, 0, 90] spawn BIS_fnc_dynamicText;
 	uIsleep 2;
@@ -36,7 +36,7 @@ while {	(player getVariable "GRLIB_score_set" == 0) } do {
 	uIsleep 2;
 };
 
-if ( !((getPlayerUID player) in GRLIB_whitelisted_steamids) && ([player] call F_getPlayerSide) != GRLIB_side_friendly ) exitWith {
+if ( !((getPlayerUID player) in GRLIB_whitelisted_steamids) && (([player] call F_getPlayerSide) != GRLIB_side_friendly) ) exitWith {
 	titleText ["Wrong side selected...","BLACK FADED", 1000];
 	sleep 5;
 	endMission "LOSER";
