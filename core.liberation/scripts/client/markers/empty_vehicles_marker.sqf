@@ -22,7 +22,7 @@ private _force_marker_classnames = [
 	foodbarrel_typename
 ];
 
-waitUntil { !isNil "GRLIB_mobile_respawn" };
+waitUntil { sleep 1; !isNil "GRLIB_player_spawned" };
 
 while { true } do {
 

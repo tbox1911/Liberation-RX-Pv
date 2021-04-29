@@ -12,7 +12,8 @@ west_sectors = [];
 east_sectors = [];
 GRLIB_fobs_west = [];
 GRLIB_fobs_east = [];
-GRLIB_mobile_respawn = [];
+GRLIB_mobile_respawn_west = [];
+GRLIB_mobile_respawn_east = [];
 buildings_to_save= [];
 combat_readiness = 0;
 stats_opfor_soldiers_killed = 0;
@@ -173,7 +174,7 @@ if ( !isNil "greuh_liberation_savegame" ) then {
 					_nextbuilding setAmmoCargo 0;
 				};
 
-				if ( _owner != "" && _owner != "public" ) then {
+				if ( _owner != "" && _owner != "public" &&  _nextclass != mobile_respawn) then {
 					[_x select 5] params [["_color", ""]];
 					[_x select 6] params [["_color_name", ""]];
 					[_x select 7] params [["_lst_a3", []]];
@@ -217,7 +218,11 @@ if ( !isNil "greuh_liberation_savegame" ) then {
 				};
 
 				if ( _nextclass == mobile_respawn ) then {
-					GRLIB_mobile_respawn pushback _nextbuilding;
+					if ([_owner] call F_getPlayerSide == GRLIB_side_west) then {
+						GRLIB_mobile_respawn_west pushback _nextbuilding;
+					} else {
+						GRLIB_mobile_respawn_east pushback _nextbuilding;
+					};
 					_nextbuilding addMPEventHandler ["MPKilled", {_this spawn kill_manager}];
 				};
 			};
@@ -256,7 +261,8 @@ publicVariable "west_sectors";
 publicVariable "east_sectors";
 publicVariable "GRLIB_fobs_west";
 publicVariable "GRLIB_fobs_east";
-publicVariable "GRLIB_mobile_respawn";
+publicVariable "GRLIB_mobile_respawn_west";
+publicVariable "GRLIB_mobile_respawn_east";
 publicVariable "GRLIB_vehicle_to_military_base_links";
 publicVariable "GRLIB_permissions";
 publicVariable "GRLIB_player_scores";
@@ -292,6 +298,19 @@ while { true } do {
 			_all_buildings = _all_buildings + _nextbuildings;
 		} foreach GRLIB_fobs_west + GRLIB_fobs_east;
 
+		// Filter low score Player
+		private _player_scores = [];
+		private _keep_score_id = ["Default"];
+		{
+			_id = _x select 0;
+			_score = _x select 1;
+			if (_score >= 20 ) then {
+				_keep_score_id pushback _id;
+				_player_scores pushback _x;
+			};
+		} forEach GRLIB_player_scores;
+
+		// Save objects
 		{
 			private _savedpos = [];
 
@@ -326,25 +345,16 @@ while { true } do {
 						{_lst_r3f pushback (typeOf _x)} forEach (_x getVariable ["R3F_LOG_objets_charges", []]);
 						{_lst_grl pushback (typeOf _x)} forEach (attachedObjects _x);
 					};
-					buildings_to_save pushback [ _nextclass, _savedpos, _nextdir, _hascrew, _owner, _color, _color_name, _lst_a3, _lst_r3f, _lst_grl];
+					if (_owner in _keep_score_id) then {
+						buildings_to_save pushback [ _nextclass, _savedpos, _nextdir, _hascrew, _owner, _color, _color_name, _lst_a3, _lst_r3f, _lst_grl];
+					};
 				};
 			} else {
 				buildings_to_save pushback [ _nextclass, _savedpos, _nextdir ];
 			};
 		} foreach _all_buildings;
 
-		// Filter low score Player
-		private _player_scores = [];
-		private _keep_score_id = ["Default"];
-		{
-			_id = _x select 0;
-			_score = _x select 1;
-			if (_score >= 20 ) then {
-				_keep_score_id pushback _id;
-				_player_scores pushback _x;
-			};
-		} forEach GRLIB_player_scores;
-
+		// Save scores
 		private _permissions = [];
 		{
 			_id = _x select 0;

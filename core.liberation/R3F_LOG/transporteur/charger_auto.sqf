@@ -120,7 +120,7 @@ _objets_charges = _transporteur getVariable ["R3F_LOG_objets_charges", []];
 
 				// Mobile respawn
 				if (_classe == mobile_respawn) then {
-					[_objet, "add"] remoteExec ["addel_beacon_remote_call", 2];
+					[_objet, "add", GRLIB_side_friendly] remoteExec ["addel_beacon_remote_call", 2];
 				};
 
 				// Clear Cargo

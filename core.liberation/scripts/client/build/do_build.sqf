@@ -364,7 +364,7 @@ while { true } do {
 
 				// Mobile respawn
 				if (_classname == mobile_respawn) then {
-					[_vehicle, "add"] remoteExec ["addel_beacon_remote_call", 2];
+					[_vehicle, "add", GRLIB_side_friendly] remoteExec ["addel_beacon_remote_call", 2];
 				};
 
 				// A3 / R3F Inventory

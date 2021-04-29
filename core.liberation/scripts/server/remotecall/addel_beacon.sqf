@@ -1,7 +1,12 @@
-params ["_beacon", "_action"];
+params ["_beacon", "_action", "_side"];
 
 if (!isServer) exitWith {};
 if (isNil "_beacon") exitWith {};
+
+private _beacon_source = GRLIB_mobile_respawn_east;
+if (_side == GRLIB_side_west) then {
+	_beacon_source = GRLIB_mobile_respawn_west;
+};
 
 private _tmp_global_locked_beacon = [];
 {
@@ -10,12 +15,35 @@ private _tmp_global_locked_beacon = [];
 			_tmp_global_locked_beacon pushBack _x;
 		};
 	};
-} foreach GRLIB_mobile_respawn;
+} foreach _beacon_source;
 
-switch (_action) do {
-	case "add" : {GRLIB_mobile_respawn = _tmp_global_locked_beacon + [_beacon]};
-	case "del" : {GRLIB_mobile_respawn = _tmp_global_locked_beacon - [_beacon];	deleteVehicle _beacon };
-	default {GRLIB_mobile_respawn = _tmp_global_locked_beacon};
+if (_side == GRLIB_side_west) then {
+	switch (_action) do {
+		case "add" : {GRLIB_mobile_respawn_west = _tmp_global_locked_beacon + [_beacon]};
+		case "del" : {GRLIB_mobile_respawn_west = _tmp_global_locked_beacon - [_beacon]; deleteVehicle _beacon };
+		default {GRLIB_mobile_respawn_west = _tmp_global_locked_beacon};
+	};
+	publicVariable "GRLIB_mobile_respawn_west";
 };
 
-publicVariable "GRLIB_mobile_respawn";
+if (_side == GRLIB_side_east) then {
+	switch (_action) do {
+		case "add" : {GRLIB_mobile_respawn_east = _tmp_global_locked_beacon + [_beacon]};
+		case "del" : {GRLIB_mobile_respawn_east = _tmp_global_locked_beacon - [_beacon]; deleteVehicle _beacon };
+		default {GRLIB_mobile_respawn_east = _tmp_global_locked_beacon};
+	};
+	publicVariable "GRLIB_mobile_respawn_east";
+};
+
+if (_side == sideUnknown) then {
+	switch (_action) do {
+		//case "add" : {GRLIB_mobile_respawn_east = _tmp_global_locked_beacon + [_beacon]};
+		case "del" : {
+			GRLIB_mobile_respawn_west = _tmp_global_locked_beacon - [_beacon];
+			GRLIB_mobile_respawn_east = _tmp_global_locked_beacon - [_beacon];
+			deleteVehicle _beacon;
+		};
+	};
+	publicVariable "GRLIB_mobile_respawn_west";	
+	publicVariable "GRLIB_mobile_respawn_east";
+};

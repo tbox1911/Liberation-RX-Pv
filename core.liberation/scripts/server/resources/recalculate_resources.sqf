@@ -44,7 +44,7 @@ while { true } do {
 							light_vehicles_east + heavy_vehicles_east + air_vehicles_east + static_vehicles_east + support_vehicles_east +
 							opfor_recyclable );
 			};
-		} foreach vehicles + GRLIB_mobile_respawn;
+		} foreach vehicles + GRLIB_mobile_respawn_west + GRLIB_mobile_respawn_east;
 
 		resources_infantry = _new_manpower_used;
 		resources_fuel = _new_fuel_used;

@@ -462,7 +462,7 @@ GRLIB_vehicle_blacklist = [
 	ammobox_b_typename,
 	ammobox_o_typename,
 	ammobox_i_typename,
-	mobile_respawn,
+	//mobile_respawn,
 	opfor_ammobox_transport,
 	FOB_box_typename_west,
 	FOB_truck_typename_west,

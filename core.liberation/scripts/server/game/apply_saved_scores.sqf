@@ -15,7 +15,7 @@ while { true } do {
 			{
 				if ( (getPlayerUID _nextplayer) == (_x select 0) ) then {
 					_nextplayer addScore ((_x select 1) - score _nextplayer);
-					_nextplayer setVariable ["GREUH_score_last",score _nextplayer], true];
+					_nextplayer setVariable ["GREUH_score_last", score _nextplayer, true];
 					_nextplayer setVariable ["GREUH_ammo_count", (_x select 2), true];
 					_nextplayer setVariable ["GREUH_pvp_side", (_x select 4), true];
 				};

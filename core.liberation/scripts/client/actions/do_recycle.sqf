@@ -57,7 +57,7 @@ if ( dorecycle == 1 && !(isNull _vehicle) && alive _vehicle) exitWith {
 	player addRating 500;
 
 	if (typeOf _vehicle == mobile_respawn) exitWith {
-		[_vehicle, "del"] remoteExec ["addel_beacon_remote_call", 2];
+		[_vehicle, "del", GRLIB_side_friendly] remoteExec ["addel_beacon_remote_call", 2];
 	};
 	[_vehicle] remoteExec ["deleteVehicle", 2];
 	stats_vehicles_recycled = stats_vehicles_recycled + 1; publicVariable "stats_vehicles_recycled";

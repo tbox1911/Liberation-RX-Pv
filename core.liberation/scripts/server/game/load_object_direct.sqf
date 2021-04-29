@@ -13,7 +13,7 @@ private _object_created = [];
 
 	// Mobile respawn
 	if (_x == mobile_respawn) then {
-		[_object, "add"] remoteExec ["addel_beacon_remote_call", 2];
+		[_object, "add", ([_object] call F_getPlayerSide)] remoteExec ["addel_beacon_remote_call", 2];
 	};
 
 	// MPKilled

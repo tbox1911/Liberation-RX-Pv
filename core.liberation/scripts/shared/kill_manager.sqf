@@ -150,7 +150,9 @@ if ( isServer ) then {
 			deleteVehicle _unit;
 		};
 
-		if ( typeof _unit == mobile_respawn ) exitWith { [_unit, "del"] remoteExec ["addel_beacon_remote_call", 2] };
+		if ( typeof _unit == mobile_respawn ) exitWith {
+			[_unit, "del", ([_unit] call F_getPlayerSide)] remoteExec ["addel_beacon_remote_call", 2];
+		};
 
 		if ( ((typeof _unit) in [ammobox_o_typename, ammobox_b_typename, ammobox_i_typename, fuelbarrel_typename]) && ((getPosATL _unit) select 2 < 10) ) exitWith {
 			sleep random 1;
