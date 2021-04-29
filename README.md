@@ -1,4 +1,4 @@
-# Liberation-RX-Pv
+# Liberation-RX-PvP
 
 The PVP version of Liberation RX on Altis
 
