@@ -33,12 +33,7 @@ F_getNearestFobEnemy = compileFinal preprocessFileLineNumbers "scripts\shared\fu
 F_getForceRatio = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getForceRatio.sqf";
 
 // *** Init ***
-
-if (isMultiplayer) then {
-	PAR_Grp_ID = getPlayerUID player;
-} else {
-	PAR_Grp_ID = str floor(random 4096);
-};
+PAR_Grp_ID = getPlayerUID player;
 ((units player) - [player]) joinSilent grpNull;
 my_group = group player;
 [my_group, "add"] remoteExec ["addel_group_remote_call", 2];
