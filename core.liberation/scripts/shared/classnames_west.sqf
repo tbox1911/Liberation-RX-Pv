@@ -154,7 +154,6 @@ support_vehicles_west = [
 	[ammo_truck_typename_west,5,200,10,GRLIB_perm_tank],
 	[repair_truck_typename_west,10,130,10,GRLIB_perm_tank],
 	[fuel_truck_typename_west,5,120,40,GRLIB_perm_tank],
-	["Box_NATO_Ammo_F",0,80,0,GRLIB_perm_log],
 	["Box_NATO_WpsLaunch_F",0,150,0,GRLIB_perm_tank],
 	["Land_CargoBox_V1_F",0,500,0,GRLIB_perm_max],
 	[FOB_box_typename_west,50,1500,50,GRLIB_perm_max],

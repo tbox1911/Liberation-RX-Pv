@@ -95,12 +95,14 @@ ai_healing_sources = [
 ];
 
 vehicle_rearm_sources = [
+	ammobox_b_typename,
+	ammobox_o_typename,
+	ammobox_i_typename,
 	ammo_truck_typename_west,
 	ammo_sling_typename_west,
 	ammo_truck_typename_east,
 	ammo_sling_typename_east,
-	"B_APC_Tracked_01_CRV_F",
-	"Box_NATO_Ammo_F"
+	"B_APC_Tracked_01_CRV_F"
 ];
 
 vehicle_big_units = [
@@ -485,7 +487,6 @@ GRLIB_vehicle_blacklist = [
 	fuel_sling_typename_east,
 	ammo_sling_typename_east,
 	medic_sling_typename_east,
-	"Box_NATO_Ammo_F",
   	"Box_NATO_WpsLaunch_F",
 	"Land_CargoBox_V1_F"
 ];
@@ -573,7 +574,6 @@ GRLIB_ignore_colisions_objects = [
 	mobile_respawn,
 	canisterFuel,
 	medicalbox_typename,
-	"Box_NATO_Ammo_F",
   	"Box_NATO_WpsLaunch_F",
 	"Land_CargoBox_V1_F",
 	"B_HMG_01_F",
@@ -606,10 +606,10 @@ GRLIB_ignore_colisions_classes = [
 
 GRLIB_sar_wreck = "Land_Wreck_Heli_Attack_01_F";
 GRLIB_sar_fire = "test_EmptyObjectForFireBig";
-GRLIB_Ammobox = [
+// Ammobox you want keep contents
+GRLIB_Ammobox_keep = [
 	A3W_BoxWps,
 	medicalbox_typename,
-	"Box_NATO_Ammo_F",
 	"Box_NATO_WpsLaunch_F",
 	"mission_USLaunchers",
 	"Land_CargoBox_V1_F"
