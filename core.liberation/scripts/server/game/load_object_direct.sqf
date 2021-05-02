@@ -1,7 +1,6 @@
-params [ "_vehicle", "_objects" ];
+params [ "_vehicle", "_objects", "_side" ];
 
 private _object_created = [];
-
 {
 	private _object = _x createVehicle zeropos;
 
@@ -13,7 +12,7 @@ private _object_created = [];
 
 	// Mobile respawn
 	if (_x == mobile_respawn) then {
-		[_object, "add", ([_object] call F_getPlayerSide)] remoteExec ["addel_beacon_remote_call", 2];
+		[_object, "add", _side] remoteExec ["addel_beacon_remote_call", 2];
 	};
 
 	// MPKilled

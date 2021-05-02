@@ -192,7 +192,7 @@ if ( !isNil "greuh_liberation_savegame" ) then {
 						{_nextbuilding addWeaponWithAttachmentsCargoGlobal [ _x, 1]} forEach _lst_a3;
 					};
 					if (count _lst_r3f > 0) then {
-						[_nextbuilding, _lst_r3f] call load_object_direct;
+						[_nextbuilding, _lst_r3f, ([_owner] call F_getPlayerSide)] call load_object_direct;
 					};
 					if (count _lst_grl > 0) then {
 						{[_nextbuilding, _x] call attach_object_direct} forEach _lst_grl;
@@ -218,9 +218,11 @@ if ( !isNil "greuh_liberation_savegame" ) then {
 				};
 
 				if ( _nextclass == mobile_respawn ) then {
-					if ([_owner] call F_getPlayerSide == GRLIB_side_west) then {
+					private _side = [_owner] call F_getPlayerSide;
+					if (_side == GRLIB_side_west) then {
 						GRLIB_mobile_respawn_west pushback _nextbuilding;
-					} else {
+					};
+					if (_side == GRLIB_side_east) then {
 						GRLIB_mobile_respawn_east pushback _nextbuilding;
 					};
 					_nextbuilding addMPEventHandler ["MPKilled", {_this spawn kill_manager}];
