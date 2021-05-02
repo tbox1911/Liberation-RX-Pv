@@ -93,8 +93,11 @@ waitUntil {
 	if (!isNil "_waitUntilMarkerPos") then { _marker setMarkerPos (call _waitUntilMarkerPos) };
 	if (!isNil "_waitUntilExec") then { call _waitUntilExec };
 
-	_failed = ((!isNil "_waitUntilCondition" && {call _waitUntilCondition}) || diag_tickTime - _startTime >= _missionTimeout || count allPlayers == 0);
-
+	_west_units = [_missionPos, GRLIB_sector_size, GRLIB_side_west] call F_getUnitsCount;
+	_east_units = [_missionPos, GRLIB_sector_size, GRLIB_side_east] call F_getUnitsCount;
+	_expired = (diag_tickTime - _startTime >= _missionTimeout && _west_units == 0 && _east_units == 0);
+	_failed = ((!isNil "_waitUntilCondition" && {call _waitUntilCondition}) || _expired || count allPlayers == 0);
+	
 	if (!isNil "_waitUntilSuccessCondition" && {call _waitUntilSuccessCondition}) then {
 		_failed = false;
 		_complete = true;
