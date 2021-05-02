@@ -27,7 +27,7 @@ if ( isNil "active_sectors" ) then { active_sectors = [] };
 if ( _sector in active_sectors ) exitWith {};
 active_sectors pushback _sector; publicVariable "active_sectors";
 
-
+diag_log format ["Spawn Defend Sector %1 at %2", _sector, time];
 _opforcount = [] call F_opforCap;
 //[ _sector, _opforcount ] call wait_to_spawn_sector;
 sleep 5;
@@ -224,3 +224,4 @@ if ( (!(_sector in [west_sectors, east_sectors])) && ( _west_units > 0 || _east_
 	sleep 40;
 	active_sectors = active_sectors - [ _sector ]; publicVariable "active_sectors";
 };
+diag_log format ["End Defend Sector %1 at %2", _sector, time];

@@ -2,6 +2,7 @@ params [ "_thispos", "_side" ];
 if (_thispos in active_fobs) exitWith {};
 active_fobs pushback _thispos;
 sleep 1;
+diag_log format ["Spawn Attack FOB %1 by side %2 at %3", ([_thispos] call F_getFobName), _side, time];
 
 private _fobside = [_thispos] call F_getFobSide;
 
@@ -55,5 +56,6 @@ if ( GRLIB_endgame == 0 ) then {
 	};
 };
 
-sleep 60;
+sleep 120;
+diag_log format ["End Attack FOB %1 by side %2 at %3", ([_thispos] call F_getFobName), _side, time];
 active_fobs = active_fobs - [ _thispos ];

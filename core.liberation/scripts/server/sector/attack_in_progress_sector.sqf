@@ -2,7 +2,7 @@ params [ "_sector", "_side" ];
 if (_sector in active_sectors) exitWith {};
 active_sectors pushback _sector;
 sleep 1;
-
+diag_log format ["Spawn Attack Sector %1 by side %2 at %3", _sector, _side, time];
 private _sector_oldside = GRLIB_side_enemy;
 if (_sector in west_sectors) then { _sector_oldside = GRLIB_side_west};
 if (_sector in east_sectors) then { _sector_oldside = GRLIB_side_east};
@@ -54,5 +54,6 @@ if ( GRLIB_endgame == 0 ) then {
 	};
 };
 
-sleep 60;
+sleep 120;
+diag_log format ["End Attack Sector %1 by side %2 at %3", _sector, _side, time];
 active_sectors = active_sectors - [ _sector ]; publicVariable "active_sectors";
