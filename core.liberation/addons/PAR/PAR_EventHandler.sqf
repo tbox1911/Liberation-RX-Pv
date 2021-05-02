@@ -46,7 +46,7 @@ _unit addEventHandler ["InventoryOpened", {
 
 _unit addEventHandler ["WeaponAssembled", {
 	params ["_unit", "_staticWeapon"];
-	if ((typeOf _staticWeapon) in uavs) then { [_staticWeapon] spawn F_forceSideCrew };
+	if ((typeOf _staticWeapon) in uavs) then { [_staticWeapon, GRLIB_side_friendly] spawn F_forceSideCrew };
 }];
 
 // No mines in the base zone + pay artillery fire

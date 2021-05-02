@@ -325,7 +325,7 @@ while { true } do {
 
 				// Crewed vehicle
 				if ( (_classname in uavs) || manned ) then {
-					[ _vehicle ] call F_forceSideCrew;
+					[ _vehicle, GRLIB_side_friendly] call F_forceSideCrew;
 					_vehicle setVariable ["GRLIB_vehicle_manned", true, true];
 					player hcSetGroup [group _vehicle];
 				};
@@ -377,7 +377,7 @@ while { true } do {
 				if (_classname in _list_static) then {
 					[_vehicle] spawn protect_static;
 						if (_classname in ["B_AAA_System_01_F", "O_SAM_System_04_F", "B_SAM_System_02_F"] ) then {
-						[ _vehicle ] call F_forceSideCrew;
+						[ _vehicle, GRLIB_side_friendly] call F_forceSideCrew;
 						_vehicle setVariable ["GRLIB_vehicle_manned", true, true];
 					};
 

@@ -135,7 +135,8 @@ if ( isNil "opfor_sharpshooter") then { opfor_sharpshooter = "I_Soldier_M_F" };
 if ( isNil "opfor_sniper") then { opfor_sniper = "I_sniper_F" };
 if ( isNil "opfor_engineer") then { opfor_engineer = "I_engineer_F" };
 if ( isNil "opfor_pilot" ) then { opfor_pilot = "I_Pilot_F" };
-if ( isNil "opfor_paratrooper") then { opfor_paratrooper = "I_soldier_PG_F" };
+if ( isNil "opfor_crew" ) then { opfor_crew = "I_crew_F" };
+if ( isNil "opfor_paratrooper") then { opfor_paratrooper = "I_soldier_F" };
 if ( isNil "opfor_mrap") then { opfor_mrap = "I_MRAP_02_F" };
 if ( isNil "opfor_mrap_hmg") then { opfor_mrap_hmg = "I_MRAP_02_hmg_F" };
 if ( isNil "opfor_mrap_gmg") then { opfor_mrap_gmg = "I_MRAP_02_gmg_F" };
@@ -270,14 +271,17 @@ opfor_troup_transports = [
 
 opfor_choppers = [
 	"I_Heli_Transport_02_F",
-	"I_Heli_light_03_F",
-	"I_Plane_Fighter_04_F"
+	"B_Heli_Transport_03_F",
+	"B_T_VTOL_01_infantry_F",
+	"O_Heli_Attack_02_F"
 ];
 
 opfor_air = [
 	"I_Heli_light_03_F",
 	"I_Plane_Fighter_03_CAS_F",
-	"I_Plane_Fighter_04_F"
+	"I_Plane_Fighter_04_F",
+	"B_T_VTOL_01_infantry_F",
+	"O_Heli_Attack_02_F"
 ];
 
 opfor_statics = [
