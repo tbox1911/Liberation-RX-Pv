@@ -30,6 +30,7 @@ GRLIB_autodanger = [ "Autodanger",0] call bis_fnc_getParamValue;
 GRLIB_maximum_fobs = [ "MaximumFobs",5] call bis_fnc_getParamValue;
 GRLIB_fob_type = [ "FobType",0] call bis_fnc_getParamValue;
 GRLIB_huron_type = [ "HuronType", 0] call bis_fnc_getParamValue;
+GRLIB_opfor_english = [ "EnglishOpfor", 1] call bis_fnc_getParamValue;
 GRLIB_squad_size = ["SquadSize",3] call bis_fnc_getParamValue;
 GRLIB_max_squad_size = ["MaxSquadSize",7] call bis_fnc_getParamValue;
 GRLIB_enable_arsenal = ["EnableArsenal",1] call bis_fnc_getParamValue;
@@ -80,6 +81,7 @@ if ( GRLIB_ammo_bounties == 1 ) then { GRLIB_ammo_bounties = true } else { GRLIB
 if ( GRLIB_civ_penalties == 1 ) then { GRLIB_civ_penalties = true } else { GRLIB_civ_penalties = false };
 if ( GRLIB_autodanger == 1 ) then { GRLIB_autodanger = true } else { GRLIB_autodanger = false };
 if ( GRLIB_thermic == 1 ) then { GRLIB_thermic = true } else { GRLIB_thermic = false };
+if ( GRLIB_opfor_english == 1 ) then { GRLIB_opfor_english = true } else { GRLIB_opfor_english = false };
 
 // Define constant
 [] call compileFinal preprocessFileLineNUmbers "gameplay_constants.sqf";
