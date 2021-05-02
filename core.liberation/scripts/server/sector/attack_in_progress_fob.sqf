@@ -55,5 +55,5 @@ if ( GRLIB_endgame == 0 ) then {
 	};
 };
 
-sleep 3;
+sleep 60;
 active_fobs = active_fobs - [ _thispos ];

@@ -34,8 +34,8 @@ if ( _wounded ) then {
 		_unit setSkill ["commanding", 0.5];
 		_unit setSkill ["reloadSpeed", 0.7];
 	} else {
-		_unit setSkill ["aimingspeed", [ 0.40 * _skillmodifier ] call limit_skill];
-		_unit setSkill ["aimingaccuracy", [ 0.65 * _skillmodifier ] call limit_skill];
+		_unit setSkill ["aimingspeed", [ 0.35 * _skillmodifier ] call limit_skill];
+		_unit setSkill ["aimingaccuracy", [ 0.25 * _skillmodifier ] call limit_skill];
 		_unit setSkill ["aimingshake", [ 0.35 * _skillmodifier ] call limit_skill];
 		_unit setSkill ["spottime", [ 0.5 * _skillmodifier ] call limit_skill];
 		_unit setSkill ["spotdistance", [ 0.5 * _skillmodifier ] call limit_skill];

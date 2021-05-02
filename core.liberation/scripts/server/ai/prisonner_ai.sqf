@@ -10,7 +10,7 @@ if ( (_unit isKindOf "Man") && ( alive _unit ) && (vehicle _unit == _unit) && (s
 
 	// Init priso
 	removeAllWeapons _unit;
-	if(typeof _unit != pilot_classname) then {
+	if(typeof _unit in [pilot_classname_west, pilot_classname_west]) then {
 		removeHeadgear _unit;
 	};
 	removeBackpack _unit;

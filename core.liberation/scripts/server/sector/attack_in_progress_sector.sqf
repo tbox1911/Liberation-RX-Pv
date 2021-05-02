@@ -54,5 +54,5 @@ if ( GRLIB_endgame == 0 ) then {
 	};
 };
 
-sleep 3;
+sleep 60;
 active_sectors = active_sectors - [ _sector ]; publicVariable "active_sectors";

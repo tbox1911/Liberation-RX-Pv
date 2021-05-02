@@ -72,8 +72,15 @@ while { true } do {
 			_marker setMarkerColorLocal "ColorGUER";
 		};
 		if (!((_x getVariable ["GRLIB_vehicle_owner", ""]) in ["server",""])) then {
-			_marker setMarkerColorLocal GRLIB_color_friendly;
+			_marker setMarkerColorLocal GRLIB_color_enemy;
+			if (side _x == GRLIB_side_friendly && side _x == GRLIB_side_west) then {
+				_marker setMarkerColorLocal GRLIB_color_west;
+			};			
+			if (side _x == GRLIB_side_friendly && side _x == GRLIB_side_east) then {
+				_marker setMarkerColorLocal GRLIB_color_east;
+			};
 		};
+
 		_marker setMarkerSizeLocal [ 0.75, 0.75 ];
 	} foreach _markedveh;
 

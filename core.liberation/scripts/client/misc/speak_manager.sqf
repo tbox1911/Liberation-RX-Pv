@@ -37,7 +37,6 @@ speak_mission_delivery_1 = {
 		[_can] spawn R3F_LOG_FNCT_objet_deplacer;
 	};
 	player setVariable ["GRLIB_A3W_Mission_Marker", _next_unit];
-	["Special Delivery"] remoteExec ["A3W_extend_timer_remote_call", 2];
 	uIsleep 3;
 };
 // Orestes
@@ -63,7 +62,6 @@ speak_mission_delivery_2 = {
 		gamelogic globalChat "Look at the marker on your Map.";
 	};
 	player setVariable ["GRLIB_A3W_Mission_Marker", _next_unit];
-	["Special Delivery"] remoteExec ["A3W_extend_timer_remote_call", 2];
 	uIsleep 3;
 };
 // Nikos Old

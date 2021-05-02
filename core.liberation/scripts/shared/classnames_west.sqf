@@ -41,20 +41,20 @@ infantry_units_west = [
 
 // calc units price
 [] call compileFinal preprocessFileLineNumbers "scripts\loadouts\init_loadouts.sqf";
-_grp = createGroup [west, true];
+private _grp = createGroup [west, true];
 {
-	_unit_class = _x select 0;
-	_unit_mp = _x select 1;
-	_unit_rank = _x select 4;
-	_unit = _grp createUnit [_unit_class, [0,0,0], [], 0, "NONE"];
+	private _unit_class = _x select 0;
+	private _unit_mp = _x select 1;
+	private _unit_rank = _x select 4;
+	private _unit = _grp createUnit [_unit_class, [0,0,0], [], 0, "NONE"];
 	if (typeOf _unit in units_loadout_overide) then {
 		_loadouts_folder = format ["scripts\loadouts\%1\%2.sqf", west, typeOf _unit];
 		[_unit] call compileFinal preprocessFileLineNUmbers _loadouts_folder;
 	};
-	_price = [_unit] call F_loadoutPrice;
+	private _price = [_unit] call F_loadoutPrice;
 	infantry_units_west set [_forEachIndex, [_unit_class, _unit_mp, _price, 0,_unit_rank] ];
 	deleteVehicle _unit;
-} foreach infantry_units_west ;
+} foreach infantry_units_west;
 
 light_vehicles_west = [
 	["B_Quadbike_01_F",1,5,1,0],
