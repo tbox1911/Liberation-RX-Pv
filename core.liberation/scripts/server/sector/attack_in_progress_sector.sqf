@@ -50,7 +50,7 @@ if ( GRLIB_endgame == 0 ) then {
 	} else {
 		[ _sector, 3, GRLIB_side_west ] remoteExec ["remote_call_sector", 0];
 		[ _sector, 3, GRLIB_side_east ] remoteExec ["remote_call_sector", 0];
-		{ [_x] spawn prisonner_ai; } foreach ( (getmarkerpos _sector) nearEntities [ ["Man"], GRLIB_capture_size * 0.8 ] );
+		//{ [_x] spawn prisonner_ai; } foreach ( (getmarkerpos _sector) nearEntities [ ["Man"], GRLIB_capture_size * 0.8 ] );
 	};
 };
 

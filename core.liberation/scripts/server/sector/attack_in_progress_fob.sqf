@@ -52,7 +52,7 @@ if ( GRLIB_endgame == 0 ) then {
 	} else {
 		[ _thispos, 3, GRLIB_side_west ] remoteExec ["remote_call_fob", 0];
 		[ _thispos, 3, GRLIB_side_east ] remoteExec ["remote_call_fob", 0];
-		{ [_x] spawn prisonner_ai; } foreach ( _thispos nearEntities [ ["Man"], GRLIB_capture_size * 0.8 ] );
+		//{ [_x] spawn prisonner_ai; } foreach ( _thispos nearEntities [ ["Man"], GRLIB_capture_size * 0.8 ] );
 	};
 };
 
