@@ -30,7 +30,6 @@ infantry_units_west = [
 	["B_HeavyGunner_F",1,0,0,GRLIB_perm_inf],
 	["B_recon_F",1,0,0,GRLIB_perm_log],
 	["B_recon_M_F",1,0,0,GRLIB_perm_log],
-	["B_Recon_Sharpshooter_F",1,0,0,GRLIB_perm_log],
 	["B_soldier_AA_F",1,0,0,GRLIB_perm_log],
 	["B_soldier_AT_F",1,0,0,GRLIB_perm_log],
 	["B_sniper_F",1,0,0,GRLIB_perm_log],

@@ -3,8 +3,13 @@ private _spawn_marker = [ GRLIB_spawn_min, 99999, false ] call F_findOpforSpawnP
 if ( _spawn_marker == "" ) exitWith { [gamelogic,"Could not find position for search and rescue mission"] remoteExec ["globalChat", 0] };
 used_positions pushbackUnique _spawn_marker;
 
-params [ ["_mission_cost", 0] ];
-resources_intel = resources_intel - _mission_cost;
+params [ ["_mission_cost", 0], "_side" ];
+if (_side == GRLIB_side_west) then {
+	resources_intel_west = resources_intel_west - _mission_cost;
+};
+if (_side == GRLIB_side_east) then {
+	resources_intel_east = resources_intel_east - _mission_cost;
+};
 
 private _helopos = [ getmarkerpos _spawn_marker, random 200, random 360 ] call BIS_fnc_relPos;
 private _helowreck = GRLIB_sar_wreck createVehicle _helopos;
@@ -86,6 +91,7 @@ waitUntil {
 
 sleep 5;
 
+// check side owner
 private _alive_crew_count = { alive _x } count _pilotUnits;
 if ( _alive_crew_count == 0 ) then {
 	[ 7 ] remoteExec ["remote_call_intel", 0];
@@ -97,8 +103,13 @@ if ( _alive_crew_count == 0 ) then {
 	{_x doFollow (leader _grp)} foreach units _grp;
 	{ [ _x ] spawn { sleep 600; deleteVehicle (_this select 0) } } foreach _pilotUnits;
 };
-
-resources_intel = resources_intel + (25 * _alive_crew_count);
+// check if started by server
+if (_side == GRLIB_side_west) then {
+	resources_intel_west = resources_intel_west + (25 * _alive_crew_count);
+};
+if (_side == GRLIB_side_east) then {
+	resources_intel_east = resources_intel_east + (25 * _alive_crew_count);
+};
 stats_secondary_objectives = stats_secondary_objectives + 1;
 
 GRLIB_secondary_in_progress = -1; publicVariable "GRLIB_secondary_in_progress";

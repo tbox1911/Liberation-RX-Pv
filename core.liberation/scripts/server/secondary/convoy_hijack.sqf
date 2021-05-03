@@ -19,8 +19,13 @@ private _boxes_amount = 0;
 } foreach box_transport_config;
 if ( _boxes_amount == 0 ) exitWith { diag_log "Opfor ammobox truck classname doesn't allow for ammobox transport, correct your classnames.sqf"; };
 
-params [ ["_mission_cost", 0] ];
-resources_intel = resources_intel - _mission_cost;
+params [ ["_mission_cost", 0], "_side" ];
+if (_side == GRLIB_side_west) then {
+	resources_intel_west = resources_intel_west - _mission_cost;
+};
+if (_side == GRLIB_side_east) then {
+	resources_intel_east = resources_intel_east - _mission_cost;
+};
 GRLIB_secondary_in_progress = 1; publicVariable "GRLIB_secondary_in_progress";
 
 private _convoy_destinations = [];

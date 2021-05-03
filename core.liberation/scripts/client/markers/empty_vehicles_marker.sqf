@@ -35,12 +35,7 @@ while { true } do {
 		!(typeOf _x in _no_marker_classnames) &&
 		!(_x getVariable ['R3F_LOG_disabled', true]) &&
 		isNull (_x getVariable ["R3F_LOG_est_transporte_par", objNull]) &&
-		(
-		 side _x == GRLIB_side_friendly ||
-		 (side _x == GRLIB_side_civilian && count (crew _x) == 0 && faction _x != _enemy_faction) ||
-		 !((_x getVariable ["GRLIB_vehicle_owner", ""]) in ["server",""]) ||
-		 typeOf _x in _force_marker_classnames
-		)
+		(side _x != GRLIB_side_civilian || count (crew _x) == 0)
 	} ] call BIS_fnc_conditionalSelect;
 
 	private _markedveh = [];
@@ -71,14 +66,14 @@ while { true } do {
 		if (typeOf _x in [ammobox_b_typename,ammobox_o_typename,ammobox_i_typename]) then {
 			_marker setMarkerColorLocal "ColorGUER";
 		};
-		if (!((_x getVariable ["GRLIB_vehicle_owner", ""]) in ["server",""])) then {
-			_marker setMarkerColorLocal GRLIB_color_enemy;
-			if (side _x == GRLIB_side_friendly && side _x == GRLIB_side_west) then {
-				_marker setMarkerColorLocal GRLIB_color_west;
-			};			
-			if (side _x == GRLIB_side_friendly && side _x == GRLIB_side_east) then {
-				_marker setMarkerColorLocal GRLIB_color_east;
-			};
+
+		_side = [_x getVariable ["GRLIB_vehicle_owner", ""]] call F_getPlayerSide;
+		if (_side == GRLIB_side_west) then {
+			_marker setMarkerColorLocal GRLIB_color_west;
+		};
+
+		if (_side == GRLIB_side_east) then {
+			_marker setMarkerColorLocal GRLIB_color_east;
 		};
 
 		_marker setMarkerSizeLocal [ 0.75, 0.75 ];

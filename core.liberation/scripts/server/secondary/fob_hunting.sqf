@@ -12,9 +12,13 @@ _fob_templates = [
 _spawn_marker = [GRLIB_spawn_min, 99999, false] call F_findOpforSpawnPoint;
 if ( _spawn_marker == "" ) exitWith { [gamelogic, "Could not find position for fob hunting mission"] remoteExec ["globalChat", 0] };
 
-params [ ["_mission_cost", 0] ];
-resources_intel = resources_intel - _mission_cost;
-
+params [ ["_mission_cost", 0], "_side" ];
+if (_side == GRLIB_side_west) then {
+	resources_intel_west = resources_intel_west - _mission_cost;
+};
+if (_side == GRLIB_side_east) then {
+	resources_intel_east = resources_intel_east - _mission_cost;
+};
 used_positions = used_positions + [ _spawn_marker ];
 _base_position = markerpos _spawn_marker;
 _base_objects = [];

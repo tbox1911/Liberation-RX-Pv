@@ -88,7 +88,8 @@ waitUntil { sleep 1; !isNil "save_is_loaded" };
 [] execVM "scripts\server\a3w\init_missions.sqf";
 [] execVM "scripts\server\game\init_marker.sqf";
 [] execVM "scripts\server\secondary\autostart.sqf";
-[] execVM "scripts\server\game\synchronise_vars.sqf";
+[] execVM "scripts\server\game\synchronise_vars_west.sqf";
+[] execVM "scripts\server\game\synchronise_vars_east.sqf";
 [] execVM "scripts\server\game\playtime.sqf";
 [] execVM "scripts\server\game\clean.sqf";
 
