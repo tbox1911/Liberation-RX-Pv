@@ -6,6 +6,7 @@ sectors_military = [];
 sectors_tower = [];
 sectors_opfor = [];
 sectors_airspawn = [];
+sectors_missions = [];
 
 {
 	_ismissionsector = false;
@@ -19,6 +20,11 @@ sectors_airspawn = [];
 		sectors_airspawn pushback _x;
 		_ismissionsector = false;
 	};
+	_tempmarker = toArray _x; _tempmarker resize 12;
+	if ( toString _tempmarker == "side_mission" ) then {
+		sectors_missions pushback _x;
+		_ismissionsector = false;
+	};	
 	_tempmarker = toArray _x; _tempmarker resize 7;
 	if ( toString _tempmarker == "capture" ) then {
 		sectors_capture pushback _x;
