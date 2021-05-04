@@ -43,5 +43,6 @@ while { true } do {
 		};
 	} foreach allPlayers;
 	GRLIB_player_scores = _newscores;
-	sleep 3;
+	publicVariable "GRLIB_player_scores";
+	sleep 5;
 };

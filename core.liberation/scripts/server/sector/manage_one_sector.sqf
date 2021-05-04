@@ -188,11 +188,11 @@ if ( (!(_sector in [west_sectors, east_sectors])) && ( _west_units > 0 || _east_
 
 	while { !_stopit } do {
 		private _winner_side = [_sectorpos, _local_capture_size] call F_sectorOwnership;
-		if ( (_winner_side != GRLIB_side_enemy) && (GRLIB_endgame == 0) ) then {
+		if ( !(_winner_side in [GRLIB_side_enemy, GRLIB_side_civilian]) && (GRLIB_endgame == 0) ) then {
 			[ _sector, _winner_side ] spawn sector_liberated_remote_call;
 			_stopit = true;
 			{ [_x] spawn prisonner_ai; } foreach ( (getmarkerpos _sector) nearEntities [ ["Man"], _local_capture_size * 1.2 ] );
-			sleep 60;
+			sleep 600;
 
 			active_sectors = active_sectors - [ _sector ]; publicVariable "active_sectors";
 			{ _x setVariable ["GRLIB_counter_TTL", 0] } foreach _managed_units;

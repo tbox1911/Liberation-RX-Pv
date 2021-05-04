@@ -30,7 +30,7 @@ while { true } do {
 		alive _x && locked _x != 2 &&
 		_x distance lhd_west > GRLIB_sector_size &&
 		_x distance lhd_east > GRLIB_sector_size &&
-		(([_x] call F_getSectorSide) in [GRLIB_side_friendly, GRLIB_side_enemy]) &&
+		(([_x] call F_getSectorSide) == GRLIB_side_friendly) &&
 		(_x distance2D ([_x] call F_getNearestFobEnemy) > GRLIB_fob_range) &&
 		!(typeOf _x in _no_marker_classnames) &&
 		!(_x getVariable ['R3F_LOG_disabled', true]) &&

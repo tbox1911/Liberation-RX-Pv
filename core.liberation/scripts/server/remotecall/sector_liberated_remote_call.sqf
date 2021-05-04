@@ -1,9 +1,8 @@
 if (isServer) then {
 
 	params [ "_liberated_sector", "_side" ];
-
+	diag_log format ["Sector %1 liberated by %2 at %3", _liberated_sector, _side, time];
 	_combat_readiness_increase = 0;
-
 
 	if ( _liberated_sector in sectors_bigtown ) then {
 		_combat_readiness_increase = (floor (random 10)) * GRLIB_difficulty_modifier;
@@ -59,9 +58,11 @@ if (isServer) then {
 
 	if (_side == GRLIB_side_west) then {
 		west_sectors pushback _liberated_sector; publicVariable "west_sectors";
+		east_sectors = east_sectors  - [_liberated_sector]; publicVariable "east_sectors";
 	};
 	if (_side == GRLIB_side_east) then {
 		east_sectors pushback _liberated_sector; publicVariable "east_sectors";
+		west_sectors = west_sectors  - [_liberated_sector]; publicVariable "west_sectors";
 	};
 
 	stats_sectors_liberated = stats_sectors_liberated + 1;

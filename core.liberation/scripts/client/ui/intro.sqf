@@ -36,7 +36,8 @@ while {	(player getVariable ["GRLIB_score_set", 0] == 0) } do {
 	uIsleep 2;
 };
 
-if ( !((getPlayerUID player) in GRLIB_whitelisted_steamids) && (([getPlayerUID player] call F_getPlayerSide) != GRLIB_side_friendly) ) exitWith {
+private _side = player getvariable ["GREUH_pvp_side", sideUnknown];
+if ( !((getPlayerUID player) in GRLIB_whitelisted_steamids) && (_side != GRLIB_side_friendly) ) exitWith {
 	titleText ["Wrong side selected...","BLACK FADED", 1000];
 	sleep 5;
 	endMission "LOSER";

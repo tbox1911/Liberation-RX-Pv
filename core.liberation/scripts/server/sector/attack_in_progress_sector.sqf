@@ -54,6 +54,6 @@ if ( GRLIB_endgame == 0 ) then {
 	};
 };
 
-sleep 120;
+sleep 600;
 diag_log format ["End Attack Sector %1 by side %2 at %3", _sector, _side, time];
 active_sectors = active_sectors - [ _sector ]; publicVariable "active_sectors";

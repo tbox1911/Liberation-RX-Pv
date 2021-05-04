@@ -28,7 +28,6 @@ get_myBeacons = compileFinal preprocessFileLineNumbers "scripts\client\misc\get_
 F_getMobileRespawns = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getMobileRespawns.sqf";
 F_spartanScan = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_spartanScan.sqf";
 F_getLocationName = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getLocationName.sqf";
-F_getFobName = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getFobName.sqf";
 F_getNearestFobEnemy = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getNearestFobEnemy.sqf";
 F_getForceRatio = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getForceRatio.sqf";
 

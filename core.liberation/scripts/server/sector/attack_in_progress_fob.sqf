@@ -56,6 +56,6 @@ if ( GRLIB_endgame == 0 ) then {
 	};
 };
 
-sleep 120;
+sleep 600;
 diag_log format ["End Attack FOB %1 by side %2 at %3", ([_thispos] call F_getFobName), _side, time];
 active_fobs = active_fobs - [ _thispos ];

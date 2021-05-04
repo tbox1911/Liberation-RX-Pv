@@ -2,6 +2,7 @@ F_getNearestFob = compileFinal preprocessFileLineNumbers "scripts\shared\functio
 F_getUnitsCount = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getUnitsCount.sqf";
 F_getGroupType = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getGroupType.sqf";
 F_getFobSide = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getFobSide.sqf";
+F_getFobName = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getFobName.sqf";
 F_localCap = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_localCap.sqf";
 F_opforCap = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_opforCap.sqf";
 F_getNearestSector = compileFinal preprocessFileLineNumbers "scripts\shared\functions\F_getNearestSector.sqf";
