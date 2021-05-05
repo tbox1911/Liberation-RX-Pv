@@ -34,11 +34,12 @@ while { true } do {
 		sleep 0.2;
 		if (_nextplayer getVariable "GRLIB_score_set" == 1) then {
 			_ammo = _nextplayer getVariable ["GREUH_ammo_count",0];
+			_side = _nextplayer getVariable ["GREUH_pvp_side", sideUnknown];
 			_playerindex = _knownplayers find (getPlayerUID _nextplayer);
 			if ( _playerindex >= 0 ) then {
-				_newscores set [_playerindex, [getPlayerUID _nextplayer, score _nextplayer, _ammo, name _nextplayer, side _nextplayer]];
+				_newscores set [_playerindex, [getPlayerUID _nextplayer, score _nextplayer, _ammo, name _nextplayer, _side]];
 			} else {
-				_newscores pushback [getPlayerUID _nextplayer, score _nextplayer, _ammo, name _nextplayer, side _nextplayer];
+				_newscores pushback [getPlayerUID _nextplayer, score _nextplayer, _ammo, name _nextplayer, _side];
 			};
 		};
 	} foreach allPlayers;
