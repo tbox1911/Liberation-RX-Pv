@@ -3,7 +3,7 @@ private [ "_increment", "_opfor_spawn_point", "_all_possible_sectors", "_filtere
 
 _increment = 500;
 _opfor_spawn_point = '';
-_all_possible_sectors = sectors_allSectors - west_sectors - east_sectors;
+_all_possible_sectors = (sectors_allSectors - west_sectors - east_sectors);
 _filtered_possible_sectors = [];
 
 {
@@ -44,7 +44,7 @@ _filtered_possible_sectors = [];
 					_current_sector_distance = (( markerpos _current_sector ) distance (markerpos _x));
 				};
 			};
-		} foreach west_sectors + east_sectors;
+		} foreach (west_sectors + east_sectors);
 	};
 
 	if ( _accept_current_sector ) then {

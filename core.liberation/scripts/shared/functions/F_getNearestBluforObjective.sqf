@@ -26,7 +26,7 @@ if ( count GRLIB_fobs_west != 0 || count west_sectors != 0 || count GRLIB_fobs_e
 	} foreach _tpositions;
 
 	if ( _refdistance > 4000 ) then {
-		private _sectors_list = west_sectors + east_sectors;
+		private _sectors_list = (west_sectors + east_sectors);
 		if (_west_units > _east_units) then {
 			_sectors_list = west_sectors;
 		};

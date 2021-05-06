@@ -57,7 +57,7 @@ while { GRLIB_endgame == 0 } do {
 
 	if (_patrol_type == 3) then {
 		private [ "_vehicle_object" ];
-		_opfor_spawn = [sectors_tower + sectors_military, {!( _x in [west_sectors + east_sectors] )}] call BIS_fnc_conditionalSelect;
+		_opfor_spawn = [sectors_tower + sectors_military, {!( _x in (west_sectors + east_sectors) )}] call BIS_fnc_conditionalSelect;
 		if ( count _opfor_spawn > 0) then {
 			_grp = createGroup [GRLIB_side_enemy, true];
 			_tower_spawn_pos = [ getMarkerPos (selectRandom _opfor_spawn), floor(random 50), random 360 ] call BIS_fnc_relPos;
