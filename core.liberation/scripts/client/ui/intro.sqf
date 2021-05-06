@@ -13,7 +13,6 @@ uiSleep 1;
 if (serverName == "DevSrv") then {
 	GRLIB_introduction = false;
 };
-GRLIB_introduction = false;
 
 if ( GRLIB_introduction ) then {
 	uisleep 2;

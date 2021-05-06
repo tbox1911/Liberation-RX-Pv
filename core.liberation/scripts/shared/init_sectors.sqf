@@ -43,6 +43,7 @@ sectors_missions = [];
 	if ( toString _tempmarker == "tower" ) then {
 		sectors_tower pushback _x;
 		_x setMarkerTextLocal format ["%1 %2",markerText _x, mapGridPosition (markerPos _x)];
+		_x setMarkerShadowLocal true;
 		_ismissionsector = true;
 	};
 
@@ -73,8 +74,9 @@ sectors_missions = [];
 			if (_marker in sectors_factory) then {_marker_text = "Fuel Depot"};
 			diag_log format ["--- LRX World: %1 - Auto-Name failed for marker: %2", worldname, _marker]
 		};
-		_marker setMarkerText _marker_text;
-  };
+		_marker setMarkerTextLocal _marker_text;
+	};
+	_marker setMarkerShadowLocal true;
 } forEach sectors_capture + sectors_bigtown + sectors_factory + sectors_military;
 GRLIB_sectors_init = true;
 publicVariable "GRLIB_sectors_init";

@@ -43,24 +43,20 @@ while { true } do {
 
 	_localunits_civ = 0;
 	_localvehicles_civ = 0;
-	_localunits_blu = 0;
-	_localvehicles_blu = 0;
-	_localunits_opfor = 0;
-	_localvehicles_opfor = 0;
+	_localunits_enemy = 0;
+	_localvehicles_enemy = 0;
 
 	{
 		switch (side _x) do {
 			case GRLIB_side_civilian: {_localunits_civ = _localunits_civ +1};
-			case GRLIB_side_west: {_localunits_blu = _localunits_blu +1};
-			case GRLIB_side_east: {_localunits_opfor = _localunits_opfor +1};
+			case GRLIB_side_enemy: {_localunits_enemy = _localunits_enemy +1};
 		};
 	} forEach ([allUnits, {(local _x) && (alive _x) && (_x distance2D lhd_west) >= GRLIB_sector_size && (_x distance2D lhd_east) >= GRLIB_sector_size}] call BIS_fnc_conditionalSelect);
 
 	{
 		switch (side _x) do {
 			case GRLIB_side_civilian: {_localvehicles_civ = _localvehicles_civ +1};
-			case GRLIB_side_west: {_localvehicles_blu = _localvehicles_blu +1};
-			case GRLIB_side_east: {_localvehicles_opfor = _localvehicles_opfor +1};
+			case GRLIB_side_enemy: {_localvehicles_enemy = _localvehicles_enemy +1};
 		};
 	} forEach ([vehicles, {(local _x) && (alive _x) && (_x distance2D lhd_west) >= GRLIB_sector_size && (_x distance2D lhd_east) >= GRLIB_sector_size && (!isNull (currentPilot _x))}] call BIS_fnc_conditionalSelect);
 
@@ -77,10 +73,10 @@ while { true } do {
 		sleep 3;
 	};
 
-	_myfpsmarker setMarkerText format [ "%1: %2 fps - Unt: civ:%3 blu:%4 red:%5 - Veh:civ:%6 blu:%7 red:%8",
+	_myfpsmarker setMarkerText format [ "%1: %2 fps - Unt: civ:%3 ind:%4 - Veh:civ:%5 ind:%6",
 		_sourcestr, ( round ( _myfps * 100.0 ) ) / 100.0 ,
-		_localunits_civ,_localunits_blu,_localunits_opfor,
-		_localvehicles_civ,_localvehicles_blu,_localvehicles_opfor];
+		_localunits_civ,_localunits_enemy,
+		_localvehicles_civ,_localvehicles_enemy];
 
 	sleep 15;
 };

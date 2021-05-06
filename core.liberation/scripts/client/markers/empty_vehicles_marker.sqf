@@ -47,9 +47,6 @@ while { true } do {
 
 		{
 			_marker = createMarkerLocal [ format [ "markedveh%1" ,_x], markers_reset ];
-			//_marker setMarkerColorLocal "ColorKhaki";
-			//_marker setMarkerTypeLocal "mil_dot";
-			//_marker setMarkerSizeLocal [ 0.75, 0.75 ];
 			_vehmarkers pushback _marker;
 		} foreach _markedveh;
 	};
@@ -58,19 +55,28 @@ while { true } do {
 		_marker = _vehmarkers select (_markedveh find _x);
 		_marker setMarkerPosLocal getpos _x;
 		_text = [(typeOf _x)] call get_lrx_name;
-		_marker setMarkerTextLocal _text;
-		_marker setMarkerColorLocal "ColorKhaki";
-		_marker setMarkerTypeLocal "mil_dot";
 
 		if (typeOf _x in [waterbarrel_typename,fuelbarrel_typename,foodbarrel_typename]) then {
+			_marker setMarkerTextLocal _text;
+			_marker setMarkerTypeLocal "mil_triangle";
 			_marker setMarkerColorLocal "ColorGrey";
+			_marker setMarkerSizeLocal [ 0.75, 0.75 ];
 		};
 
 		if (typeOf _x in [ammobox_b_typename,ammobox_o_typename,ammobox_i_typename]) then {
+			_marker setMarkerTextLocal _text;
+			_marker setMarkerTypeLocal "mil_box";
 			_marker setMarkerColorLocal "ColorGUER";
+			_marker setMarkerSizeLocal [ 0.75, 0.75 ];
 		};
 
+		// Owned sector
 		if (([_x] call F_getSectorSide) == GRLIB_side_friendly) then {
+			_marker setMarkerTextLocal _text;
+			_marker setMarkerTypeLocal "mil_dot";
+			_marker setMarkerColorLocal "ColorKhaki";
+			_marker setMarkerSizeLocal [ 0.75, 0.75 ];
+
 			_side = [_x getVariable ["GRLIB_vehicle_owner", ""]] call F_getPlayerSide;
 			if (_side == GRLIB_side_west) then {
 				_marker setMarkerColorLocal GRLIB_color_west;
@@ -79,9 +85,31 @@ while { true } do {
 			if (_side == GRLIB_side_east) then {
 				_marker setMarkerColorLocal GRLIB_color_east;
 			};
+
+			if (_side == GRLIB_side_enemy) then {
+				_marker setMarkerColorLocal GRLIB_color_enemy;
+			};
+
 		};
 		
-		_marker setMarkerSizeLocal [ 0.75, 0.75 ];
+		// Civilian sector
+		if (([_x] call F_getSectorSide) == GRLIB_side_civilian) then {
+			_side = [_x getVariable ["GRLIB_vehicle_owner", ""]] call F_getPlayerSide;
+			if (_side == GRLIB_side_friendly) then {
+				_marker setMarkerTextLocal _text;
+				_marker setMarkerTypeLocal "mil_dot";
+				_marker setMarkerColorLocal GRLIB_color_friendly;
+				_marker setMarkerSizeLocal [ 0.75, 0.75 ];
+			};
+
+			if (_side == sideUnknown) then {
+				_marker setMarkerTextLocal _text;
+				_marker setMarkerTypeLocal "mil_dot";
+				_marker setMarkerColorLocal "ColorKhaki";
+				_marker setMarkerSizeLocal [ 0.75, 0.75 ];
+			};
+		};
+
 	} foreach _markedveh;
 
 	sleep 5;
