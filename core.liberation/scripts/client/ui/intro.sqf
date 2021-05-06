@@ -36,12 +36,12 @@ while {	(player getVariable ["GRLIB_score_set", 0] == 0) } do {
 	uIsleep 2;
 };
 
-//private _side = player getvariable ["GREUH_pvp_side", sideUnknown];
-// !((getPlayerUID player) in GRLIB_whitelisted_steamids) && 
-if ((player getvariable ["GREUH_pvp_side", sideUnknown]) != GRLIB_side_friendly) exitWith {
-	titleText ["Wrong side selected...","BLACK FADED", 1000];
-	sleep 5;
-	endMission "LOSER";
+if (! ((getPlayerUID player) in GRLIB_whitelisted_steamids)) then {
+	if ((player getvariable ["GREUH_pvp_side", sideUnknown]) != GRLIB_side_friendly) exitWith {
+		titleText ["Wrong side selected...","BLACK FADED", 1000];
+		sleep 5;
+		endMission "LOSER";
+	};
 };
 
 showcaminfo = true;

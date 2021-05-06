@@ -16,7 +16,7 @@ AR_active = false;
 private _valuable_veh = [] + opfor_air ;
 { _valuable_veh pushBack ( _x select 0 ) } foreach (heavy_vehicles_west + heavy_vehicles_east + opfor_recyclable);
 
-//disableUserInput true;
+disableUserInput true;
 player playMove 'ainvpknlmstpslaywrfldnon_medic';
 playSound3D ["a3\sounds_f\sfx\ui\vehicles\vehicle_repair.wss", _vehicle];
 sleep 5;

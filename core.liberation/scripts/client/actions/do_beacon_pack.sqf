@@ -7,7 +7,7 @@ _tent setVariable ["tent_in_use", true, true];
 _tent setVariable ["R3F_LOG_disabled", true, true];
 _pos = getPosATL _tent;
 
-//disableUserInput true;
+disableUserInput true;
 player playMove "AinvPknlMstpSlayWnonDnon_medic";
 sleep 7;
 [_tent, "del", GRLIB_side_friendly] remoteExec ["addel_beacon_remote_call", 2];

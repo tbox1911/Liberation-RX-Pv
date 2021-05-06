@@ -4,7 +4,7 @@ if ( isNil "cinematic_camera_started" ) then { cinematic_camera_started = false 
 _line_delay = 0.75;
 _page_delay = 5;
 
-//disableUserInput true;
+disableUserInput true;
 closeDialog 0;
 if (lifestate player == "INCAPACITATED") then {
 	player setDamage 1;
