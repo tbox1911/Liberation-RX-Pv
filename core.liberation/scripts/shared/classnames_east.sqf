@@ -129,12 +129,14 @@ static_vehicles_east = [
 	["O_SAM_System_04_F",10,500,0,GRLIB_perm_max]
 ];
 
-buildings_east = buildings + [
+buildings_custom_east = [
 	["Land_Cargo_Tower_V3_F",0,0,0,GRLIB_perm_tank],
 	["Land_Cargo_House_V3_F",0,0,0,GRLIB_perm_inf],
 	["Land_Cargo_Patrol_V3_F",0,0,0,GRLIB_perm_log],
 	["Flag_CSAT_F",0,0,0,0]
 ];
+
+buildings_east = buildings + buildings_custom_east;
 
 support_vehicles_east = [
 	[Arsenal_typename,0,10,0,0],

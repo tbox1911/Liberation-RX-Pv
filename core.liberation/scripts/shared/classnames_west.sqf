@@ -130,13 +130,14 @@ static_vehicles_west = [
 	["B_AAA_System_01_F",10,500,0,GRLIB_perm_max],
 	["B_SAM_System_02_F",10,500,0,GRLIB_perm_max]
 ];
-
-buildings_west = buildings + [
+buildings_custom_west =  [
 	["Land_Cargo_Tower_V1_F",0,0,0,GRLIB_perm_tank],
 	["Land_Cargo_House_V1_F",0,0,0,GRLIB_perm_inf],
 	["Land_Cargo_Patrol_V1_F",0,0,0,GRLIB_perm_log],
 	["Flag_NATO_F",0,0,0,0]
 ];
+
+buildings_west = buildings + buildings_custom_west;
 
 support_vehicles_west = [
 	[Arsenal_typename,0,10,0,0],

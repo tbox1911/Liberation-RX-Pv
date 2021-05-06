@@ -63,7 +63,7 @@ _building_classnames = [FOB_typename_west, FOB_typename_east];
 	no_kill_handler_classnames pushback (_x select 0);
 	_classnames_to_save pushback (_x select 0);
 	_building_classnames pushback (_x select 0);
-} foreach buildings;
+} foreach buildings + buildings_custom_west + buildings_custom_east;
 
 {
 	_classnames_to_save_blu pushback (_x select 0);

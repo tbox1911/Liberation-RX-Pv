@@ -1,8 +1,12 @@
 sleep 5;
 
-_blufor_bigtowns = [ west_sectors, { _x in sectors_bigtown } ] call BIS_fnc_conditionalSelect;
+_maxSector = count (sectors_allSectors);
+_bluSector = count (west_sectors);
+_opfSector = count (east_sectors);
+_indSector = (_maxsector - _bluSector - _opfSector);
 
-if ( (count _blufor_bigtowns == count sectors_bigtown) && (count (sectors_allSectors - west_sectors) == 0) ) then {
+//_maxSector = _maxSector * 0.80; // 80% sector captured
+if (_indSector == 0 && (_bluSector >= _maxSector || _opfSector  >= _maxSector)) then {
 	GRLIB_endgame = 1;
 	publicVariable "GRLIB_endgame";
 	{ _x allowDamage false; (vehicle _x) allowDamage false; } foreach allPlayers;

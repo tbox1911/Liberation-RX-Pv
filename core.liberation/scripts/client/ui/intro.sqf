@@ -49,8 +49,8 @@ dostartgame = 0;
 howtoplay = 0;
 
 _dialog = createDialog "liberation_menu";
-_noesckey = (findDisplay 5651) displayAddEventHandler ["KeyDown", "if ((_this select 1) == 1) then { true }"];
 waitUntil { dialog };
+_noesckey = (findDisplay 5651) displayAddEventHandler ["KeyDown", "if ((_this select 1) == 1) then { true }"];
 disableUserInput false;
 disableUserInput true;
 disableUserInput false;
