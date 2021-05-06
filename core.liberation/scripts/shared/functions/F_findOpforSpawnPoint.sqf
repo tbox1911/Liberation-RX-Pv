@@ -3,7 +3,7 @@ private [ "_increment", "_opfor_spawn_point", "_all_possible_sectors", "_filtere
 
 _increment = 500;
 _opfor_spawn_point = '';
-_all_possible_sectors = sectors_opfor;
+_all_possible_sectors = sectors_allSectors - west_sectors - east_sectors;
 _filtered_possible_sectors = [];
 
 {
@@ -53,7 +53,7 @@ _filtered_possible_sectors = [];
 			if ( (( markerpos _current_sector ) distance (markerpos _x)) < 2000 ) then {
 				_one_opfor_sector_in_range = true;
 			}
-		} foreach (sectors_allSectors - west_sectors);
+		} foreach _all_possible_sectors;
 		_accept_current_sector = _one_opfor_sector_in_range;
 	};
 
