@@ -73,6 +73,8 @@ buildings = [
 elite_vehicles = [];
 { if (_x select 4 == GRLIB_perm_max) then { elite_vehicles pushback (_x select 0)} } foreach heavy_vehicles_west + air_vehicles_west + heavy_vehicles_east + air_vehicles_east;
 
+// *** UAVs ***
+uavs = uavs_west + uavs_east;
 
 // Everything the AI troups should be able to resupply from
 ai_resupply_sources = [
@@ -204,9 +206,7 @@ militia_vehicles = [
 	"I_G_Offroad_01_armed_F",
 	"I_G_Offroad_01_armed_F",
 	"I_G_Offroad_01_AT_F",
-	"I_C_Offroad_02_LMG_F",
-	"O_LSV_02_armed_F",
-	"O_LSV_02_AT_F"
+	"I_C_Offroad_02_LMG_F"
 ];
 
 opfor_boat = [
@@ -247,7 +247,8 @@ opfor_battlegroup_vehicles = [
 	"I_MRAP_03_hmg_F",
 	"I_MRAP_03_gmg_F",
 	"I_Heli_Transport_02_F",
-	"I_Truck_02_covered_F"
+	"I_Truck_02_covered_F",
+	"I_MBT_03_cannon_F"
 ];
 
 opfor_battlegroup_vehicles_low_intensity = [
@@ -272,18 +273,13 @@ opfor_troup_transports = [
 ];
 
 opfor_choppers = [
-	"I_Heli_Transport_02_F",
-	"B_Heli_Transport_03_F",
-	"B_T_VTOL_01_infantry_F",
-	"O_Heli_Attack_02_F"
+	"I_Heli_Transport_02_F"
 ];
 
 opfor_air = [
 	"I_Heli_light_03_F",
 	"I_Plane_Fighter_03_CAS_F",
-	"I_Plane_Fighter_04_F",
-	"B_T_VTOL_01_infantry_F",
-	"O_Heli_Attack_02_F"
+	"I_Plane_Fighter_04_F"
 ];
 
 opfor_statics = [

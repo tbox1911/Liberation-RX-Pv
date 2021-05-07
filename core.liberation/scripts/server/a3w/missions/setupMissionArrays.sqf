@@ -8,7 +8,6 @@ if (!isServer) exitWith {};
 
 SideMissions = [
 	// Mission filename, weight
-	["mission_SpecialDelivery", 1],
 	["mission_WaterDelivery", 1],
 	["mission_FoodDelivery", 1],
 	["mission_FuelDelivery", 1],

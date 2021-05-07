@@ -24,7 +24,6 @@ if (GRLIB_side_friendly == GRLIB_side_west) then {
 	support_vehicles = [ support_vehicles_west ] call F_filterMods;
 	static_vehicles = [ static_vehicles_west ] call F_filterMods;
 	buildings = [ buildings_west ] call F_filterMods;
-	uavs = uavs_west;
 	squads = squads_west;
 	air_attack = air_attack_west;
 	deleteMarkerLocal "base_chimera_east";
@@ -55,7 +54,6 @@ if (GRLIB_side_friendly == GRLIB_side_west) then {
 	support_vehicles = [ support_vehicles_east ] call F_filterMods;
 	static_vehicles = [ static_vehicles_east ] call F_filterMods;
 	buildings = [ buildings_east ] call F_filterMods;
-	uavs = uavs_east;
 	squads = squads_east;
 	air_attack = air_attack_east;
 	deleteMarkerLocal "base_chimera_west";

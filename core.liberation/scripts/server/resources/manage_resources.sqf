@@ -8,7 +8,7 @@ while { GRLIB_endgame == 0 } do {
 	if ( count allPlayers > 0 ) then {
 
 		// AmmoBox
-		_blufor_mil_sectors = [];
+		private _blufor_mil_sectors = [];
 		{
 			if ( _x in sectors_military ) then {
 				_blufor_mil_sectors pushback _x;
@@ -40,7 +40,7 @@ while { GRLIB_endgame == 0 } do {
 		};
 
 		// Fuel Barrel
-		_blufor_fuel_sectors = [];
+		private _blufor_fuel_sectors = [];
 		{
 			if ( _x in sectors_factory ) then {
 				_blufor_fuel_sectors pushback _x;
@@ -56,7 +56,7 @@ while { GRLIB_endgame == 0 } do {
 		};
 
 		// Water Barrel
-		_blufor_water_sectors = [];
+		private _blufor_water_sectors = [];
 		{
 			if ( _x in sectors_tower ) then {
 				_blufor_water_sectors pushback _x;
@@ -72,7 +72,7 @@ while { GRLIB_endgame == 0 } do {
 		};
 
 		// Food Barrel
-		_blufor_food_sectors = [];
+		private _blufor_food_sectors = [];
 		{
 			if ( _x in sectors_bigtown ) then {
 				_blufor_food_sectors pushback _x;

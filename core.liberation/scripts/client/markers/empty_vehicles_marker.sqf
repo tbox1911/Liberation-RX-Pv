@@ -30,8 +30,8 @@ while { true } do {
 		alive _x && locked _x != 2 &&
 		_x distance lhd_west > GRLIB_sector_size &&
 		_x distance lhd_east > GRLIB_sector_size &&
-		(([_x] call F_getSectorSide) in [GRLIB_side_friendly, GRLIB_side_civilian]) &&
-		(_x distance2D ([_x] call F_getNearestFobEnemy) > GRLIB_fob_range) &&
+		//(([_x] call F_getSectorSide) in [GRLIB_side_friendly, GRLIB_side_civilian]) &&
+		(_x distance2D ([_x] call F_getNearestFobEnemy) > GRLIB_sector_size) &&
 		!(typeOf _x in _no_marker_classnames) &&
 		!(_x getVariable ['R3F_LOG_disabled', true]) &&
 		isNull (_x getVariable ["R3F_LOG_est_transporte_par", objNull]) &&
@@ -55,20 +55,6 @@ while { true } do {
 		_marker = _vehmarkers select (_markedveh find _x);
 		_marker setMarkerPosLocal getpos _x;
 		_text = [(typeOf _x)] call get_lrx_name;
-
-		if (typeOf _x in [waterbarrel_typename,fuelbarrel_typename,foodbarrel_typename]) then {
-			_marker setMarkerTextLocal _text;
-			_marker setMarkerTypeLocal "mil_triangle";
-			_marker setMarkerColorLocal "ColorGrey";
-			_marker setMarkerSizeLocal [ 0.75, 0.75 ];
-		};
-
-		if (typeOf _x in [ammobox_b_typename,ammobox_o_typename,ammobox_i_typename]) then {
-			_marker setMarkerTextLocal _text;
-			_marker setMarkerTypeLocal "mil_box";
-			_marker setMarkerColorLocal "ColorGUER";
-			_marker setMarkerSizeLocal [ 0.75, 0.75 ];
-		};
 
 		// Owned sector
 		if (([_x] call F_getSectorSide) == GRLIB_side_friendly) then {
@@ -102,12 +88,28 @@ while { true } do {
 				_marker setMarkerSizeLocal [ 0.75, 0.75 ];
 			};
 
-			if (_side == sideUnknown) then {
+			if (_side == sideUnknown && side _x != GRLIB_side_enemy) then {
 				_marker setMarkerTextLocal _text;
 				_marker setMarkerTypeLocal "mil_dot";
 				_marker setMarkerColorLocal "ColorKhaki";
 				_marker setMarkerSizeLocal [ 0.75, 0.75 ];
 			};
+		};
+
+		// Side Items
+		if (typeOf _x in [waterbarrel_typename,fuelbarrel_typename,foodbarrel_typename]) then {
+			_marker setMarkerTextLocal _text;
+			_marker setMarkerTypeLocal "mil_triangle";
+			_marker setMarkerColorLocal "ColorGrey";
+			_marker setMarkerSizeLocal [ 0.75, 0.75 ];
+		};
+
+		// Ammobox
+		if (typeOf _x in [ammobox_b_typename,ammobox_o_typename,ammobox_i_typename]) then {
+			_marker setMarkerTextLocal _text;
+			_marker setMarkerTypeLocal "mil_box";
+			_marker setMarkerColorLocal "ColorGUER";
+			_marker setMarkerSizeLocal [ 0.75, 0.75 ];
 		};
 
 	} foreach _markedveh;

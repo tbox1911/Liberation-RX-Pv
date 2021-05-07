@@ -99,7 +99,17 @@ while { true } do {
 				((uiNamespace getVariable 'GUI_OVERLAY') displayCtrl (517)) ctrlShow false;
 			};
 
-			_nearest_active_sector = [ GRLIB_sector_size ] call F_getNearestSector;
+			private _nearest_fobs = [];
+			private _nearest_active_sector = "";
+			if ( player distance2D ([] call F_getNearestFob) < GRLIB_capture_size ) then {
+				_nearest_fobs = [allMapMarkers, { markerType _x == "b_hq" }] call BIS_fnc_conditionalSelect;
+				_nearest_active_sector = [GRLIB_capture_size, player, _nearest_fobs] call F_getNearestSector;
+			};
+
+			if ( _nearest_active_sector == "" ) then {
+				_nearest_active_sector = [ GRLIB_sector_size ] call F_getNearestSector;
+			};
+
 			if ( _nearest_active_sector != "" ) then {
 				_zone_size = GRLIB_capture_size;
 				if ( _nearest_active_sector in sectors_bigtown ) then {
@@ -123,8 +133,10 @@ while { true } do {
 				private _my_enemy = [GRLIB_side_west, GRLIB_side_east, GRLIB_side_enemy] - [GRLIB_side_friendly];
 				private _e1 = [ getmarkerpos _nearest_active_sector , _zone_size , _my_enemy select 0 ] call F_getUnitsCount;
 				private _e2 = [ getmarkerpos _nearest_active_sector , _zone_size , _my_enemy select 1 ] call F_getUnitsCount;
+				private _e3 = [ getmarkerpos _nearest_active_sector , _zone_size , GRLIB_side_friendly] call F_getUnitsCount;
 
 				_my_enemy_color = "ColorUNKNOWN";
+				if (_e3 > (_e1 + _e2)) then { _my_enemy_color = GRLIB_color_friendly };
 				if (_e1 > _e2) then { _my_enemy_color = call compile format["GRLIB_color_%1", (_my_enemy select 0)] };
 				if (_e2 > _e1) then { _my_enemy_color = call compile format["GRLIB_color_%1", (_my_enemy select 1)] };
 
@@ -132,8 +144,8 @@ while { true } do {
 				((uiNamespace getVariable 'GUI_OVERLAY') displayCtrl (203)) ctrlSetBackgroundColor _color_P;
 
 				_sector_color = _color_guer;
-				if ( _nearest_active_sector in west_sectors ) then { _sector_color = _color_west };
-				if ( _nearest_active_sector in east_sectors ) then { _sector_color = _color_east };
+				if ( _nearest_active_sector in (west_sectors + _nearest_fobs)) then { _sector_color = _color_west };
+				if ( _nearest_active_sector in (east_sectors + _nearest_fobs)) then { _sector_color = _color_east };
 				((uiNamespace getVariable 'GUI_OVERLAY') displayCtrl (205)) ctrlSetTextColor _sector_color;
 
 				_ratio = [_nearest_active_sector] call F_getForceRatio;

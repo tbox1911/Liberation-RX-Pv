@@ -6,7 +6,7 @@ _hostile_markers = [];
 
 waitUntil {
 	sleep 1;
-	!isNil "west_sectors"
+	!isNil "west_sectors" && !isNil "east_sectors"
 };
 
 while { true } do {
