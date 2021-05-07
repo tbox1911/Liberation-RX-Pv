@@ -43,7 +43,7 @@ private _spawnpos = _convoy_destinations select 0;
 
 // scout
 private _scout_vehicle = [_spawnpos, selectRandom opfor_vehicles_low_intensity, true, false ] call F_libSpawnVehicle;
-_scout_vehicle addEventHandler ["HandleDamage", { private [ "_damage" ]; if ( side (_this select 3) != GRLIB_side_friendly ) then { _damage = 0 } else { _damage = _this select 2 }; _damage } ];
+_scout_vehicle addEventHandler ["HandleDamage", { private [ "_damage" ]; if ( !(side (_this select 3) in [GRLIB_side_west, GRLIB_side_east]) ) then { _damage = 0 } else { _damage = _this select 2 }; _damage } ];
 private _convoy_group = group driver _scout_vehicle;
 
 //-----------------------------------------
@@ -82,7 +82,7 @@ sleep 10;
 waitUntil {sleep 2; speed _scout_vehicle > 2};
 
 private _transport_vehicle = [ _spawnpos, opfor_ammobox_transport, true, false ] call F_libSpawnVehicle;
-_transport_vehicle addEventHandler ["HandleDamage", { private [ "_damage" ]; if ( side (_this select 3) != GRLIB_side_friendly ) then { _damage = 0 } else { _damage = _this select 2 }; _damage } ];
+_transport_vehicle addEventHandler ["HandleDamage", { private [ "_damage" ]; if ( !(side (_this select 3) in [GRLIB_side_west, GRLIB_side_east]) ) then { _damage = 0 } else { _damage = _this select 2 }; _damage } ];
 for "_n" from 1 to _boxes_amount do { [_transport_vehicle, ammobox_o_typename] call attach_object_direct };
 ( crew _transport_vehicle ) joinSilent _convoy_group;
 
@@ -90,7 +90,7 @@ for "_n" from 1 to _boxes_amount do { [_transport_vehicle, ammobox_o_typename] c
 sleep 10;
 waitUntil {sleep 2; speed _transport_vehicle > 2};
 private _troop_vehicle = [ _spawnpos, opfor_transport_truck, true, false ] call F_libSpawnVehicle;
-_troop_vehicle addEventHandler ["HandleDamage", { private [ "_damage" ]; if ( side (_this select 3) != GRLIB_side_friendly ) then { _damage = 0 } else { _damage = _this select 2 }; _damage } ];
+_troop_vehicle addEventHandler ["HandleDamage", { private [ "_damage" ]; if ( !(side (_this select 3) in [GRLIB_side_west, GRLIB_side_east]) ) then { _damage = 0 } else { _damage = _this select 2 }; _damage } ];
 
 private _troops_group = createGroup [GRLIB_side_enemy, true];
 { _x createUnit [_spawnpos, _troops_group,"this addMPEventHandler [""MPKilled"", {_this spawn kill_manager}]", 0.65, "PRIVATE"] } foreach ([] call F_getAdaptiveSquadComp);

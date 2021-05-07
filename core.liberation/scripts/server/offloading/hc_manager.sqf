@@ -12,7 +12,6 @@ manage_one_sector = compileFinal preprocessFileLineNumbers "scripts\server\secto
 manage_one_patrol = compileFinal preprocessFileLineNumbers "scripts\server\patrols\manage_one_patrol.sqf";
 manage_one_civilian_patrol = compileFinal preprocessFileLineNumbers "scripts\server\patrols\manage_one_civilian_patrol.sqf";
 manage_one_wildlife = compileFinal preprocessFileLineNumbers "scripts\server\patrols\manage_one_wildlife.sqf";
-wait_to_spawn_sector = compileFinal preprocessFileLineNumbers "scripts\server\sector\wait_to_spawn_sector.sqf";
 
 [] execVM "scripts\client\misc\synchronise_vars.sqf";
 [] execVM "scripts\server\offloading\show_fps.sqf";

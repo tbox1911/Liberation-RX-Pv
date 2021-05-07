@@ -97,7 +97,7 @@ if ( _alive_crew_count == 0 ) then {
 	[ 7 ] remoteExec ["remote_call_intel", 0];
 } else {
 	[ 8 ] remoteExec ["remote_call_intel", 0];
-	private _grp = createGroup [GRLIB_side_friendly, true];
+	private _grp = createGroup [_side, true];
 	{ [_x ] joinSilent _grp; } foreach _pilotUnits;
 	while {(count (waypoints _grp)) != 0} do {deleteWaypoint ((waypoints _grp) select 0);};
 	{_x doFollow (leader _grp)} foreach units _grp;

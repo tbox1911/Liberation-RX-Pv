@@ -29,7 +29,6 @@ active_sectors pushback _sector; publicVariable "active_sectors";
 
 diag_log format ["Spawn Defend Sector %1 at %2", _sector, time];
 _opforcount = [] call F_opforCap;
-//[ _sector, _opforcount ] call wait_to_spawn_sector;
 sleep 5;
 
 _west_units = [getmarkerpos _sector , [ _opforcount ] call F_getCorrectedSectorRange , GRLIB_side_west] call F_getUnitsCount;
