@@ -137,12 +137,6 @@ class Params
 		default = 4;
 	};
 
-	class PassiveIncome{
-		title = $STR_PARAM_PASSIVE_INCOME;
-		values[] = {1,0};
-		texts[] = { $STR_PARAMS_ENABLED, $STR_PARAMS_DISABLED };
-		default = 0;
-	};
 	class Civilians{
 		title = $STR_PARAMS_CIVILIANS;
 		values[] = {0,0.5,1,2};

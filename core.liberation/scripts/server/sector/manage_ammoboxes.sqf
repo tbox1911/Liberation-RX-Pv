@@ -29,22 +29,22 @@ if ( !( _sector in GRLIB_military_sectors_already_activated )) then {
 
 	GRLIB_military_sectors_already_activated pushback _sector;
 
-	if ( !GRLIB_passive_income ) then {
-		_crates_amount = ceil (((0.5 * GRLIB_sector_military_value) + (random (0.5 * GRLIB_sector_military_value ))) * GRLIB_resources_multiplier);
-		if ( _crates_amount > 4 ) then { _crates_amount = 4 };
 
-		_vehicle = opfor_ammobox_transport createVehicle (markerpos _sector);
-		_vehicle addMPEventHandler ["MPKilled", {_this spawn kill_manager}];
-		_vehicle setVariable ["GRLIB_vehicle_owner", "server", true];
+	_crates_amount = ceil (((0.5 * GRLIB_sector_military_value) + (random (0.5 * GRLIB_sector_military_value ))) * GRLIB_resources_multiplier);
+	if ( _crates_amount > 4 ) then { _crates_amount = 4 };
 
-		for "_i" from 1 to _crates_amount do {
-			_newbox = [ammobox_o_typename, markerpos _sector, true] call boxSetup;
-			clearWeaponCargoGlobal _newbox;
-			clearMagazineCargoGlobal _newbox;
-			clearItemCargoGlobal _newbox;
-			clearBackpackCargoGlobal _newbox;
-		};
+	_vehicle = opfor_ammobox_transport createVehicle (markerpos _sector);
+	_vehicle addMPEventHandler ["MPKilled", {_this spawn kill_manager}];
+	_vehicle setVariable ["GRLIB_vehicle_owner", "server", true];
+
+	for "_i" from 1 to _crates_amount do {
+		_newbox = [ammobox_o_typename, markerpos _sector, true] call boxSetup;
+		clearWeaponCargoGlobal _newbox;
+		clearMagazineCargoGlobal _newbox;
+		clearItemCargoGlobal _newbox;
+		clearBackpackCargoGlobal _newbox;
 	};
+
 	_nearbuildings = [ nearestObjects [ markerpos _sector , _compatible_classnames, _intel_range ], { alive _x } ] call BIS_fnc_conditionalSelect;
 
 	if ( count _nearbuildings > 0 ) then {

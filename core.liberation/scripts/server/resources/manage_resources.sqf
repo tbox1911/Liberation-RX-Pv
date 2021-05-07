@@ -16,27 +16,15 @@ while { GRLIB_endgame == 0 } do {
 		} foreach (west_sectors + east_sectors);
 
 		if ( count _blufor_mil_sectors > 0 ) then {
-			if ( GRLIB_passive_income ) then {
+			if ( ( { typeof _x == ammobox_b_typename } count vehicles ) <= ( ceil ( ( count _blufor_mil_sectors ) * 1.1 ) ) ) then {
 
-				private _income = (75 + floor(random 100));
-				{
-					private _ammo_collected = _x getVariable ["GREUH_ammo_count",0];
-					_x setVariable ["GREUH_ammo_count", _ammo_collected + _income, true];
-				} forEach allPlayers;
-				_text = format ["Reward Received: + %1 Ammo.", _income];
-				[gamelogic, _text] remoteExec ["globalChat", 0];
-			} else {
-				if ( ( { typeof _x == ammobox_b_typename } count vehicles ) <= ( ceil ( ( count _blufor_mil_sectors ) * 1.1 ) ) ) then {
-
-					_spawnsector = ( selectRandom _blufor_mil_sectors );
-					_newbox = [ammobox_b_typename,  markerpos _spawnsector, false] call boxSetup;
-
-					clearWeaponCargoGlobal _newbox;
-					clearMagazineCargoGlobal _newbox;
-					clearItemCargoGlobal _newbox;
-					clearBackpackCargoGlobal _newbox;
-				};
-			};
+				_spawnsector = ( selectRandom _blufor_mil_sectors );
+				_newbox = [ammobox_b_typename,  markerpos _spawnsector, false] call boxSetup;
+				clearWeaponCargoGlobal _newbox;
+				clearMagazineCargoGlobal _newbox;
+				clearItemCargoGlobal _newbox;
+				clearBackpackCargoGlobal _newbox;
+			};			
 		};
 
 		// Fuel Barrel

@@ -16,7 +16,6 @@ GRLIB_sector_radius = ["SectorRadius",0] call bis_fnc_getParamValue;
 GRLIB_admin_menu = ["AdminMenu",1] call bis_fnc_getParamValue;
 GRLIB_param_wipe_savegame_1 = ["WipeSave1",0] call bis_fnc_getParamValue;
 GRLIB_param_wipe_savegame_2 = ["WipeSave2",0] call bis_fnc_getParamValue;
-GRLIB_passive_income = ["PassiveIncome",0] call bis_fnc_getParamValue;
 GRLIB_permissions_param = ["Permissions",1] call bis_fnc_getParamValue;
 GRLIB_halo_param = ["HaloJump",1] call bis_fnc_getParamValue;
 GRLIB_cleanup_vehicles = ["CleanupVehicles",2] call bis_fnc_getParamValue;
@@ -74,7 +73,6 @@ if ( GRLIB_hide_opfor == 1 ) then { GRLIB_hide_opfor = true } else { GRLIB_hide_
 if ( GRLIB_enable_arsenal == 1 ) then { GRLIB_enable_arsenal = true } else { GRLIB_enable_arsenal = false };
 if ( GRLIB_limited_arsenal == 1 ) then { GRLIB_limited_arsenal = true } else { GRLIB_limited_arsenal = false };
 if ( GRLIB_permission_vehicles == 1 ) then { GRLIB_permission_vehicles = true } else { GRLIB_permission_vehicles = false };
-if ( GRLIB_passive_income == 1 ) then { GRLIB_passive_income = true } else { GRLIB_passive_income = false };
 if ( GRLIB_permissions_param == 1 ) then { GRLIB_permissions_param = true } else { GRLIB_permissions_param = false };
 if ( GRLIB_shorter_nights == 1 ) then { GRLIB_shorter_nights = true } else { GRLIB_shorter_nights = false };
 if ( GRLIB_ammo_bounties == 1 ) then { GRLIB_ammo_bounties = true } else { GRLIB_ammo_bounties = false };
