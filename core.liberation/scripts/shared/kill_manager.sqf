@@ -114,7 +114,7 @@ if ( isServer ) then {
 						_killer setVariable ["PAR_AI_score", (_ai_score - 1), true];
 					};
 				};
-				if ( side (group _unit) in [ GRLIB_side_west, GRLIB_side_east ]  ) then {
+				if ( side (group _unit) == side (group _killer) ) then {
 					stats_blufor_teamkills = stats_blufor_teamkills + 1;
 					_killer addScore -10;
 					_msg = localize "STR_FRIENDLY_FIRE";

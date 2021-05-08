@@ -3165,12 +3165,12 @@
 			</Key>
 
 			<!-- Added in v0.922 -->
-			<Key ID="STR_PARAM_BLUFOR_DEFENDERS">
-					<Original>BLUFOR defenders in owned sectors</Original>
-					<French>Défenseurs BLUFOR dans les secteurs capturés</French>
-					<German>BLUFOR Verteidiger in besetzten Sektoren</German>
-					<Russian>BLUFOR защитники в захваченных зонах</Russian>
-					<Chinesesimp>BLUFOR所属地区的保护者</Chinesesimp>
+			<Key ID="STR_PARAM_CITY_DEFENDERS">
+					<Original>Defenders in owned sectors</Original>
+					<French>Défenseurs dans les secteurs capturés</French>
+					<German>Verteidiger in besetzten Sektoren</German>
+					<Russian> защитники в захваченных зонах</Russian>
+					<Chinesesimp>所属地区的保护者</Chinesesimp>
 			</Key>
 			<Key ID="STR_PARAM_AUTODANGER">
 					<Original>Auto-danger behaviour on BLUFOR forces</Original>

@@ -273,13 +273,17 @@ opfor_troup_transports = [
 ];
 
 opfor_choppers = [
-	"I_Heli_Transport_02_F"
+	"I_Heli_Transport_02_F",
+	"I_Heli_light_03_unarmed_F"
 ];
 
 opfor_air = [
-	"I_Heli_light_03_F",
 	"I_Plane_Fighter_03_CAS_F",
-	"I_Plane_Fighter_04_F"
+	"I_Plane_Fighter_04_F",
+	"I_Heli_light_03_F",
+	"I_Heli_light_03_F",
+	"I_Heli_light_03_F",
+	"I_Heli_light_03_F"			
 ];
 
 opfor_statics = [

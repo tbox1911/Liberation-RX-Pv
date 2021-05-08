@@ -25,7 +25,7 @@ GRLIB_shorter_nights = ["ShorterNights",1] call bis_fnc_getParamValue;
 GRLIB_ammo_bounties = [ "AmmoBounties",0] call bis_fnc_getParamValue;
 GRLIB_civ_penalties = [ "CivPenalties",0] call bis_fnc_getParamValue;
 GRLIB_remote_sensors = [ "DisableRemoteSensors",0] call bis_fnc_getParamValue;
-GRLIB_autodanger = [ "Autodanger",0] call bis_fnc_getParamValue;
+GRLIB_city_defenders = [ "CityDefenders",1] call bis_fnc_getParamValue;
 GRLIB_maximum_fobs = [ "MaximumFobs",5] call bis_fnc_getParamValue;
 GRLIB_fob_type = [ "FobType",0] call bis_fnc_getParamValue;
 GRLIB_huron_type = [ "HuronType", 0] call bis_fnc_getParamValue;
@@ -77,7 +77,7 @@ if ( GRLIB_permissions_param == 1 ) then { GRLIB_permissions_param = true } else
 if ( GRLIB_shorter_nights == 1 ) then { GRLIB_shorter_nights = true } else { GRLIB_shorter_nights = false };
 if ( GRLIB_ammo_bounties == 1 ) then { GRLIB_ammo_bounties = true } else { GRLIB_ammo_bounties = false };
 if ( GRLIB_civ_penalties == 1 ) then { GRLIB_civ_penalties = true } else { GRLIB_civ_penalties = false };
-if ( GRLIB_autodanger == 1 ) then { GRLIB_autodanger = true } else { GRLIB_autodanger = false };
+if ( GRLIB_city_defenders == 1 ) then { GRLIB_city_defenders = true } else { GRLIB_city_defenders = false };
 if ( GRLIB_thermic == 1 ) then { GRLIB_thermic = true } else { GRLIB_thermic = false };
 if ( GRLIB_opfor_english == 1 ) then { GRLIB_opfor_english = true } else { GRLIB_opfor_english = false };
 
