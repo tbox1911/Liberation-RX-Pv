@@ -15,3 +15,4 @@ while { true } do {
 		sector_timer = sector_timer - 1;
 	};
 };
+//couleur de l'attaquant ?
