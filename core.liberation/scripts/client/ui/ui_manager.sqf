@@ -99,11 +99,12 @@ while { true } do {
 				((uiNamespace getVariable 'GUI_OVERLAY') displayCtrl (517)) ctrlShow false;
 			};
 
-			private _nearest_fobs = [];
+			private _nearest_fobs = [] call F_getNearestFob;
+			private _nearest_fobs_side = sideUnknown;
 			private _nearest_active_sector = "";
-			if ( player distance2D ([] call F_getNearestFob) < GRLIB_capture_size ) then {
-				_nearest_fobs = [allMapMarkers, { markerType _x == "b_hq" }] call BIS_fnc_conditionalSelect;
-				_nearest_active_sector = [GRLIB_capture_size, player, _nearest_fobs] call F_getNearestSector;
+			if ( player distance2D _nearest_fobs < GRLIB_capture_size ) then {
+				_nearest_fobs_side = [_nearest_fobs] call F_getFobSide;
+				_nearest_active_sector = [allMapMarkers, { markerType _x == "b_hq" && markerPos _x distance2D _nearest_fobs < 5}] call BIS_fnc_conditionalSelect select 0;
 			};
 
 			if ( _nearest_active_sector == "" ) then {
@@ -144,8 +145,8 @@ while { true } do {
 				((uiNamespace getVariable 'GUI_OVERLAY') displayCtrl (203)) ctrlSetBackgroundColor _color_P;
 
 				_sector_color = _color_guer;
-				if ( _nearest_active_sector in (west_sectors + _nearest_fobs)) then { _sector_color = _color_west };
-				if ( _nearest_active_sector in (east_sectors + _nearest_fobs)) then { _sector_color = _color_east };
+				if ( _nearest_active_sector in (west_sectors) || _nearest_fobs_side == GRLIB_side_west ) then { _sector_color = _color_west };
+				if ( _nearest_active_sector in (east_sectors) || _nearest_fobs_side == GRLIB_side_east ) then { _sector_color = _color_east };
 				((uiNamespace getVariable 'GUI_OVERLAY') displayCtrl (205)) ctrlSetTextColor _sector_color;
 
 				_ratio = [_nearest_active_sector] call F_getForceRatio;

@@ -1,8 +1,9 @@
 params ["_first_objective", "_side"];
 
 if (isNil "_side") then {_side = GRLIB_side_enemy};
-private _planeType = air_attack_east;
+private _planeType = opfor_air;
 if (_side == GRLIB_side_west) then {_planeType = air_attack_west};
+if (_side == GRLIB_side_east) then {_planeType = air_attack_east};
 
 private _planes_number = 1;
 if ( combat_readiness >= 50 ) then { _planes_number = 2 };

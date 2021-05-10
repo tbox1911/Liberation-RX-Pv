@@ -13,7 +13,7 @@ _vehicle setVariable ["wreck_in_use", true, true];
 // Stop running
 AR_active = false;
 
-private _valuable_veh = [] + opfor_air ;
+private _valuable_veh = [] + opfor_air + air_attack_west + air_attack_east ;
 { _valuable_veh pushBack ( _x select 0 ) } foreach (heavy_vehicles_west + heavy_vehicles_east + opfor_recyclable);
 
 disableUserInput true;

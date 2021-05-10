@@ -13,6 +13,9 @@ while { true } do {
 	if ( sector_timer > 0 ) then {
 		"opfor_capture_marker" setMarkerTextLocal format ["%1",([sector_timer] call F_secondsToTimer)];
 		sector_timer = sector_timer - 1;
+	} else {
+		"opfor_capture_marker" setMarkerTextLocal "VULNERABLE";
+		//waitUntil{sleep 1;sector_timer > 0};
 	};
 };
 //couleur de l'attaquant ?

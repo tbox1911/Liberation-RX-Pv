@@ -36,7 +36,7 @@ _setupObjects =
  	sleep 1;
  	[_man1,"LHD_krajPaluby"] remoteExec ["switchMove"];
 
-	_marker_zone = createMarker ["A3W_Mission_DF", _missionPos];
+	_marker_zone = createMarker ["A3W_Mission_DA", _missionPos];
 	_marker_zone setMarkerColor "ColorCivilian";
 	_marker_zone setMarkerShape "ELLIPSE";
 	_marker_zone setMarkerBrush "FDiagonal";

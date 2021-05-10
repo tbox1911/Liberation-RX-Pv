@@ -76,6 +76,13 @@ elite_vehicles = [];
 // *** UAVs ***
 uavs = uavs_west + uavs_east;
 
+// *** Static Weapon with AI ***
+static_vehicles_AI = [
+	"B_AAA_System_01_F",
+	"B_SAM_System_02_F",
+	"O_SAM_System_04_F"
+];
+
 // Everything the AI troups should be able to resupply from
 ai_resupply_sources = [
 	Arsenal_typename,

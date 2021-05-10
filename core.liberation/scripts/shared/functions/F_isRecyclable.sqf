@@ -30,7 +30,8 @@ if ( _alive && _onfoot && _R3F_move && (_far_lhd_west || _far_lhd_east) && _near
 		_ret = true;
 	};
 
-	if (([player, _vehicle] call is_owner) && ((count crew _vehicle) == 0 || typeOf _vehicle in uavs)) then {
+	_manned = _vehicle getVariable ["GRLIB_vehicle_manned", false];
+	if (([player, _vehicle] call is_owner) && ((count crew _vehicle) == 0 || _manned )) then {
 		_ret = true;
 	};
 
