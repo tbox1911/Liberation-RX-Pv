@@ -242,10 +242,9 @@ squads_west = [
 uavs_west = [
 	"B_UAV_01_F",
 	"B_UAV_02_dynamicLoadout_F",
-	"B_T_UAV_03_F",
+	"B_T_UAV_03_dynamicLoadout_F",
 	"B_UAV_05_F",
 	"B_UAV_06_F",
-	"C_UAV_06_F",
 	"B_UGV_01_F",
 	"B_UGV_01_rcws_F",
 	"B_UGV_02_Demining_F"

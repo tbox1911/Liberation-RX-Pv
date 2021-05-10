@@ -73,6 +73,12 @@ _building_classnames = [FOB_typename_west, FOB_typename_east];
 	_classnames_to_save_red pushback (_x select 0);
 } foreach (static_vehicles_east + air_vehicles_east + heavy_vehicles_east + light_vehicles_east + support_vehicles_east );
 
+_list_static_weapons = [];
+{
+	_list_static_weapons pushback (_x select 0);
+} foreach (static_vehicles_west + static_vehicles_east);
+_vehicles_blacklist = _list_static_weapons + uavs + [mobile_respawn];
+
 _classnames_to_save = _classnames_to_save + _classnames_to_save_blu + _classnames_to_save_red + all_hostile_classnames;
 _buildings_created = [];
 
@@ -175,7 +181,7 @@ if ( !isNil "greuh_liberation_savegame" ) then {
 					_nextbuilding setAmmoCargo 0;
 				};
 
-				if ( _owner != "" && _owner != "public" &&  !(_nextclass in [uavs + [mobile_respawn]]) ) then {
+				if ( _owner != "" && _owner != "public" && !(_nextclass in _vehicles_blacklist) ) then {
 					[_x select 5] params [["_color", ""]];
 					[_x select 6] params [["_color_name", ""]];
 					[_x select 7] params [["_lst_a3", []]];
@@ -200,10 +206,19 @@ if ( !isNil "greuh_liberation_savegame" ) then {
 					};
 				};
 
-				if (_nextclass in static_vehicles_AI) then {
+				if (_nextclass in _list_static_weapons) then {
+					[_nextbuilding] spawn protect_static;
+					_nextbuilding setVariable ["GRLIB_vehicle_owner", _owner, true];
+					_nextbuilding setVariable ["R3F_LOG_disabled", false, true];
+					if (_nextclass in static_vehicles_AI) then {
+						_nextbuilding setVehicleLock "LOCKEDPLAYER";						
+					};
+				};
+
+				if (_nextclass in uavs) then {
 					_nextbuilding setVariable ["GRLIB_vehicle_owner", _owner, true];
 					_nextbuilding setVehicleLock "LOCKED";
-					_nextbuilding setVariable ["R3F_LOG_disabled", false, true];
+					_nextbuilding setVariable ["R3F_LOG_disabled", true, true];
 				};
 
 				if (_nextclass in [huron_typename_west, huron_typename_west]) then {

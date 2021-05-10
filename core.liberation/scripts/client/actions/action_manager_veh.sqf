@@ -6,7 +6,19 @@ private _recycleable_classnames_exp = [
 	"Land_Cargo_HQ_V1_ruins_F",
 	"Land_Cargo_Tower_V1_ruins_F",
 	"Land_Cargo_House_V1_ruins_F",
-	"Land_Cargo_Patrol_V1_ruins_F"
+	"Land_Cargo_Patrol_V1_ruins_F",
+	"Land_Cargo_HQ_V3_ruins_F",
+	"Land_Cargo_Tower_V3_ruins_F",
+	"Land_Cargo_House_V3_ruins_F",
+	"Land_Cargo_Patrol_V3_ruins_F"
+];
+
+private _wreck_class = [
+	"Slingload_01_Base_F",
+	"Pod_Heli_Transport_04_base_F",
+	"B_AAA_System_01_F",
+	"B_SAM_System_02_F",
+	"O_SAM_System_04_F"
 ];
 
 private _recycleable_blacklist = [] + opfor_statics;
@@ -51,7 +63,7 @@ while { true } do {
 
 	// Salvage Wreck & Ruins
 	_nearruins = [nearestObjects [player, ["Ruins_F"], _searchradius], {(_x distance my_lhd) >= GRLIB_sector_size && (typeof _x in _recycleable_classnames_exp) && isNil {_x getVariable "GRLIB_salvage_action"}}] call BIS_fnc_conditionalSelect;
-	_nearwreck = [nearestObjects [player, ["Slingload_01_Base_F", "Pod_Heli_Transport_04_base_F"], _searchradius], {(_x distance my_lhd) >= GRLIB_sector_size && !(alive _x) && isNil {_x getVariable "GRLIB_salvage_action"}}] call BIS_fnc_conditionalSelect;
+	_nearwreck = [nearestObjects [player, _wreck_class, _searchradius], {(_x distance my_lhd) >= GRLIB_sector_size && !(alive _x) && isNil {_x getVariable "GRLIB_salvage_action"}}] call BIS_fnc_conditionalSelect;
 	{
 		_vehicle = _x;
 		_vehicle addAction ["<t color='#FFFF00'>-- SALVAGE</t> <img size='1' image='res\ui_recycle.paa'/>","scripts\client\actions\do_wreck.sqf","",-900,true,true,"","[] call is_menuok && !(_target getVariable ['wreck_in_use', false]) && !(player getVariable ['salvage_wreck', false])", (_distveh + 5)];

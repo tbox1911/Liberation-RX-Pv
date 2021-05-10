@@ -241,11 +241,9 @@ squads_east = [
 // All the UAVs must be declared here
 uavs_east = [
 	"O_UAV_01_F",
+	"O_UAV_06_F",
 	"O_UAV_02_dynamicLoadout_F",
-	"O_T_UAV_03_F",
-	"O_UAV_05_F",
-	"O_UAV_06_F",
-	"O_UAV_06_F",
+	"O_T_UAV_04_CAS_F",
 	"O_UGV_01_F",
 	"O_UGV_01_rcws_F",
 	"O_UGV_02_Demining_F"

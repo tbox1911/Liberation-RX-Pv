@@ -58,30 +58,56 @@ R3F_LOG_CFG_can_transport_cargo = R3F_LOG_CFG_can_transport_cargo +
 	["O_T_VTOL_01_infantry_F", 100],
 	["O_T_VTOL_01_vehicle_F", 100],
 	["O_T_VTOL_01_armed_F", 100],
-	["B_UAV_01_F", 1],
-	["B_UAV_02_dynamicLoadout_F", 1],
-	["B_UAV_06_F", 5],
-	["C_UAV_06_F", 5],
+	["C_UAV_06_F", 7],
+	["B_UAV_01_F", 0],
+	["B_UAV_05_F", 0],
+	["B_UAV_06_F", 7],
+	["B_UAV_02_dynamicLoadout_F", 0],
+	["B_T_UAV_03_dynamicLoadout_F", 0],
+	["B_UGV_01_F", 10],
+	["B_UGV_01_rcws_F", 10],
 	["B_UGV_02_Demining_F", 0],
-	["B_T_UAV_03_F", 15]
+	["O_UAV_01_F", 0],
+	["O_UAV_06_F", 7],
+	["O_UAV_02_dynamicLoadout_F", 0],
+	["O_T_UAV_04_CAS_F", 0],
+	["O_UGV_01_F", 10],
+	["O_UGV_01_rcws_F", 10],
+	["O_UGV_02_Demining_F", 10]
 ];
 
 R3F_LOG_CFG_can_be_transported_cargo = R3F_LOG_CFG_can_be_transported_cargo +
 [
-	["B_UAV_01_F", 3],
-	["B_UAV_06_F", 3],
 	["C_UAV_06_F", 3],
-	["B_UGV_02_Demining_F", 5],
-	["B_UAV_02_dynamicLoadout_F", 30]
+	["B_UAV_01_F", 3],
+	["B_UAV_02_dynamicLoadout_F", 20],
+	["B_UAV_05_F", 50],
+	["B_UAV_06_F", 3],
+	["B_T_UAV_03_dynamicLoadout_F", 50],
+	["O_UAV_01_F", 3],
+	["O_UAV_02_dynamicLoadout_F", 20],
+	["O_T_UAV_04_CAS_F", 30],
+	["O_UAV_06_F", 3]
 ];
 
 R3F_LOG_CFG_can_be_moved_by_player = R3F_LOG_CFG_can_be_moved_by_player +
 [
-	"B_UAV_01_F",
-	"B_UAV_02_dynamicLoadout_F",
-	"B_UAV_06_F",
 	"C_UAV_06_F",
-	"B_UGV_02_Demining_F"
+	"B_UAV_01_F",
+	"B_UAV_05_F",
+	"B_UAV_06_F",
+	"B_UAV_02_dynamicLoadout_F",
+	"B_T_UAV_03_dynamicLoadout_F",
+	"B_UGV_01_F",
+	"B_UGV_01_rcws_F",
+	"B_UGV_02_Demining_F",
+	"O_UAV_01_F",
+	"O_UAV_06_F",
+	"O_UAV_02_dynamicLoadout_F",
+	"O_T_UAV_04_CAS_F",
+	"O_UGV_01_F",
+	"O_UGV_01_rcws_F",
+	"O_UGV_02_Demining_F"
 ];
 
 //--------------- Ground ---------------

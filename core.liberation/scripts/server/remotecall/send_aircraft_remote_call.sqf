@@ -1,3 +1,4 @@
+if ( !isServer ) exitWith {};
 params ["_unit"];
 
 _targetsector = [sectors_allSectors, _unit] call BIS_fnc_nearestPosition;

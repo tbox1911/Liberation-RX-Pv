@@ -318,7 +318,7 @@ while { true } do {
 				};
 
 				// Vehicle owner
-				if(buildtype in [2,3,4,7,9] || _classname in static_vehicles_AI) then {
+				if(buildtype in [2,3,4,5,7,9]) then {
 					if (!(typeOf _vehicle in GRLIB_vehicle_blacklist) ) then {
 						_vehicle setVariable ["GRLIB_vehicle_owner", getPlayerUID player, true];
 						_vehicle allowCrewInImmobile true;

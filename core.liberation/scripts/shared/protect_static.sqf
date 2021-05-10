@@ -1,6 +1,6 @@
 params ["_static"];
 
-//if (!(typeOf _static in opfor_statics)) exitWith {};
+if (typeOf _static in static_vehicles_AI) exitWith {};
 
 while { alive _static } do {
 	// No damage
@@ -20,3 +20,5 @@ while { alive _static } do {
 
 	sleep 5;
 };
+
+deleteVehicle _static;
