@@ -57,7 +57,8 @@ _i = 0;
 	_build_combo lbAdd format["%1", getText(configFile >> "cfgVehicles" >> ( _x select 0 ) >> "DisplayName")];
 	_build_combo lbSetData [_i, ( _x select 0 )];
 	_i = _i + 1;
-} forEach light_vehicles + heavy_vehicles + air_vehicles + static_vehicles + support_vehicles + opfor_recyclable;
+} forEach light_vehicles_west + heavy_vehicles_west + air_vehicles_west + static_vehicles_west + support_vehicles_west +
+		  light_vehicles_east + heavy_vehicles_east + air_vehicles_east + static_vehicles_east + support_vehicles_east + opfor_recyclable;
 
 _ban_combo lbSetCurSel 0;
 _score_combo lbSetCurSel 0;

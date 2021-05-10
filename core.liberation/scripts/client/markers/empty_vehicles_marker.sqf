@@ -53,11 +53,11 @@ while { true } do {
 
 	{
 		_marker = _vehmarkers select (_markedveh find _x);
-		_marker setMarkerPosLocal getpos _x;
-		_text = [(typeOf _x)] call get_lrx_name;
 
 		// Owned sector
 		if (([_x] call F_getSectorSide) == GRLIB_side_friendly) then {
+			_marker setMarkerPosLocal getpos _x;
+			_text = [(typeOf _x)] call get_lrx_name;
 			_marker setMarkerTextLocal _text;
 			_marker setMarkerTypeLocal "mil_dot";
 			_marker setMarkerColorLocal "ColorKhaki";
@@ -82,6 +82,8 @@ while { true } do {
 		if (([_x] call F_getSectorSide) == GRLIB_side_civilian) then {
 			_side = [_x getVariable ["GRLIB_vehicle_owner", ""]] call F_getPlayerSide;
 			if (_side == GRLIB_side_friendly) then {
+				_marker setMarkerPosLocal getpos _x;
+				_text = [(typeOf _x)] call get_lrx_name;
 				_marker setMarkerTextLocal _text;
 				_marker setMarkerTypeLocal "mil_dot";
 				_marker setMarkerColorLocal GRLIB_color_friendly;
@@ -89,6 +91,8 @@ while { true } do {
 			};
 
 			if (_side == sideUnknown && side _x != GRLIB_side_enemy) then {
+				_marker setMarkerPosLocal getpos _x;
+				_text = [(typeOf _x)] call get_lrx_name;
 				_marker setMarkerTextLocal _text;
 				_marker setMarkerTypeLocal "mil_dot";
 				_marker setMarkerColorLocal "ColorKhaki";
@@ -98,6 +102,8 @@ while { true } do {
 
 		// Side Items
 		if (typeOf _x in [waterbarrel_typename,fuelbarrel_typename,foodbarrel_typename]) then {
+			_marker setMarkerPosLocal getpos _x;
+			_text = [(typeOf _x)] call get_lrx_name;
 			_marker setMarkerTextLocal _text;
 			_marker setMarkerTypeLocal "mil_triangle";
 			_marker setMarkerColorLocal "ColorGrey";
@@ -106,6 +112,8 @@ while { true } do {
 
 		// Ammobox
 		if (typeOf _x in [ammobox_b_typename,ammobox_o_typename,ammobox_i_typename]) then {
+			_marker setMarkerPosLocal getpos _x;
+			_text = [(typeOf _x)] call get_lrx_name;
 			_marker setMarkerTextLocal _text;
 			_marker setMarkerTypeLocal "mil_box";
 			_marker setMarkerColorLocal "ColorGUER";

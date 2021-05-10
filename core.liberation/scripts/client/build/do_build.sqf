@@ -382,8 +382,8 @@ while { true } do {
 					if (_classname in static_vehicles_AI) then {
 						[ _vehicle, GRLIB_side_friendly] call F_forceSideCrew;
 						_vehicle setVariable ["GRLIB_vehicle_manned", true, true];
+						_vehicle setVehicleLock "LOCKEDPLAYER";
 					};
-
 				};
 
 				sleep 0.3;

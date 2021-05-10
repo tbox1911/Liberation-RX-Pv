@@ -1,14 +1,15 @@
 params [ "_thatpos", [ "_localsize", GRLIB_capture_size ] ];
-private ["_sectorside", "_countenemy_ownership", "_countblufor_ownership", "_countopfor_ownership", "_tower" ];
+private ["_sectorside", "_countenemy_guer", "_countenemy_west", "_countenemy_east", "_tower" ];
 
-_sectorside = GRLIB_side_civilian;
-_countenemy_ownership = [_thatpos, _localsize, GRLIB_side_enemy ] call F_getUnitsCount;
-_countblufor_ownership = [_thatpos, _localsize, GRLIB_side_west ] call F_getUnitsCount;
-_countopfor_ownership = [_thatpos, _localsize, GRLIB_side_east ] call F_getUnitsCount;
+_cap_thresold_count = 3;
+_sectorside = GRLIB_side_civilian; 
+_countenemy_guer = [_thatpos, _localsize, GRLIB_side_enemy ] call F_getUnitsCount;
+_countenemy_west = [_thatpos, _localsize, GRLIB_side_west ] call F_getUnitsCount;
+_countenemy_east = [_thatpos, _localsize, GRLIB_side_east ] call F_getUnitsCount;
 
-if ( _countenemy_ownership > _countblufor_ownership && _countenemy_ownership > _countopfor_ownership ) then { _sectorside = GRLIB_side_enemy; };
-if ( _countblufor_ownership > _countenemy_ownership && _countblufor_ownership > _countopfor_ownership ) then { _sectorside = GRLIB_side_west; };
-if ( _countopfor_ownership > _countenemy_ownership && _countopfor_ownership > _countblufor_ownership ) then { _sectorside = GRLIB_side_east; };
+if ( _countenemy_guer >= _cap_thresold_count && _countenemy_guer > _countenemy_west && _countenemy_guer > _countenemy_east ) then { _sectorside = GRLIB_side_enemy; };
+if ( _countenemy_west > _countenemy_guer && _countenemy_west > _countenemy_east ) then { _sectorside = GRLIB_side_west; };
+if ( _countenemy_east > _countenemy_guer && _countenemy_east > _countenemy_west ) then { _sectorside = GRLIB_side_east; };
 
 //radio is down
 if ( [_thatpos, GRLIB_side_enemy, GRLIB_capture_size] call F_getNearestTower != "" ) then {

@@ -41,20 +41,21 @@ if ( GRLIB_city_defenders ) then {
 };
 
 private _attacktime = GRLIB_vulnerability_timer;
-private _ownership = [ markerpos _sector ] call F_sectorOwnership;
 private _enemycount = [ getmarkerpos _sector , GRLIB_capture_size , _side] call F_getUnitsCount;
+private _ownership = [markerpos _sector] call F_sectorOwnership;
 
-while { _attacktime > 0 && _ownership == _side && _enemycount >= 1} do {
+while { _attacktime > 0 && (_ownership == _side || _enemycount >= 1) } do {
 	_ownership = [markerpos _sector] call F_sectorOwnership;
-	 _enemycount = [ getmarkerpos _sector , GRLIB_capture_size , _side] call F_getUnitsCount;
+	_enemycount = [ getmarkerpos _sector , GRLIB_capture_size , _side] call F_getUnitsCount;
 	_attacktime = _attacktime - 1;
 	sleep 1;
 };
 
 if ( GRLIB_endgame == 0 ) then {
-	private _sector_owner =  [markerpos _sector] call F_sectorOwnership;
-	if ( _attacktime <= 1 && _sector_owner == _side ) then {
-
+	private _sector_owner = [markerpos _sector] call F_sectorOwnership;
+	if ( _sector_owner != _sector_oldside ) then {
+		
+		diag_log format ["End Attack Sector %1 captured by %2 to %3", _sector, _sector_owner, _sector_oldside];
 		if (_sector_owner == GRLIB_side_west) then {
 			west_sectors = west_sectors + [ _sector ];publicVariable "west_sectors";
 			[ _sector, 0, GRLIB_side_west ] remoteExec ["remote_call_sector", 0];
@@ -85,10 +86,12 @@ if ( GRLIB_endgame == 0 ) then {
 		//{ [_x] spawn prisonner_ai; } foreach ( (getmarkerpos _sector) nearEntities [ ["Man"], GRLIB_capture_size * 0.8 ] );
 	};
 };
+
+diag_log format ["End Attack Sector %1 by side %2 at %3", _sector, _side, time];
+sleep 60;
 if ( GRLIB_city_defenders ) then {
 	{ if ( alive _x ) then { deleteVehicle _x } } foreach units _grp;
 };
 
-sleep 600;
-diag_log format ["End Attack Sector %1 by side %2 at %3", _sector, _side, time];
+sleep 300;
 active_sectors = active_sectors - [ _sector ]; publicVariable "active_sectors";

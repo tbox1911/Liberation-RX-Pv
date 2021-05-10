@@ -10,7 +10,7 @@ private _recycleable_classnames_exp = [
 ];
 
 private _recycleable_blacklist = [] + opfor_statics;
-{_recycleable_blacklist pushBack ( _x select 0 )} foreach (static_vehicles);
+{_recycleable_blacklist pushBack ( _x select 0 )} foreach (static_vehicles_west + static_vehicles_east);
 
 waitUntil { sleep 1; !isNil "build_confirmed" };
 waitUntil { sleep 1; !isNil "one_synchro_done" };

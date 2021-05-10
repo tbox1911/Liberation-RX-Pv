@@ -175,7 +175,7 @@ if ( !isNil "greuh_liberation_savegame" ) then {
 					_nextbuilding setAmmoCargo 0;
 				};
 
-				if ( _owner != "" && _owner != "public" &&  _nextclass != mobile_respawn) then {
+				if ( _owner != "" && _owner != "public" &&  !(_nextclass in [uavs + [mobile_respawn]]) ) then {
 					[_x select 5] params [["_color", ""]];
 					[_x select 6] params [["_color_name", ""]];
 					[_x select 7] params [["_lst_a3", []]];
@@ -198,6 +198,12 @@ if ( !isNil "greuh_liberation_savegame" ) then {
 					if (count _lst_grl > 0) then {
 						{[_nextbuilding, _x] call attach_object_direct} forEach _lst_grl;
 					};
+				};
+
+				if (_nextclass in static_vehicles_AI) then {
+					_nextbuilding setVariable ["GRLIB_vehicle_owner", _owner, true];
+					_nextbuilding setVehicleLock "LOCKED";
+					_nextbuilding setVariable ["R3F_LOG_disabled", false, true];
 				};
 
 				if (_nextclass in [huron_typename_west, huron_typename_west]) then {

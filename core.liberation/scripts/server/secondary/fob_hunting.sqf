@@ -64,7 +64,7 @@ sleep 1;
 	_nextobject setVectorUp [0,0,1];
 	_nextobject setpos _nextpos;
 	_nextobject setdir _nextdir;
-	_nextobject lock 2;
+	_nextobject setVehicleLock "LOCKED";
 	_nextobject setVariable ["R3F_LOG_disabled", true, true];
 	_base_objectives = _base_objectives + [_nextobject];
 } foreach _objectives_to_build;

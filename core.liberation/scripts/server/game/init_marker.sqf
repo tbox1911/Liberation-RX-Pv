@@ -97,7 +97,7 @@ private _tmp_marker = [];
     if (_find_pos) then {
       _vehicle = "C_Offroad_01_repair_F" createVehicle _pos;
       _vehicle allowDamage false;
-      _vehicle lock 2;
+      _vehicle setVehicleLock "LOCKED";
       _vehicle setVariable ["GRLIB_vehicle_owner", "server", true];
       _vehicle setVariable ["R3F_LOG_disabled", true, true];
       clearWeaponCargoGlobal _vehicle;
