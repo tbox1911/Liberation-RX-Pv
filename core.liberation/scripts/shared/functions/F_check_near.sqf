@@ -15,7 +15,7 @@ switch ( _list ) do {
 	case "ATM" : { _classlist = GRLIB_Marker_ATM};
 	case "FUEL" : { _classlist = GRLIB_Marker_FUEL};
 	case "REPAIR" : { _classlist = GRLIB_Marker_REPAIR};
-	case "RESPAWN" : { _classlist = [] call get_myBeacons};
+	case "RESPAWN" : { _object = ([] call get_myBeacons) + (_vehpos nearEntities [[Respawn_truck_typename, huron_typename], _distspawn])};
 	case "MEDIC" : { _object = ai_healing_sources};
 	case "ARSENAL" : { _object = Arsenal_typename};
 	case "REAMMO" : { _object = vehicle_rearm_sources};

@@ -74,7 +74,7 @@ if ( (_unit isKindOf "Man") && ( alive _unit ) && (vehicle _unit == _unit) && (s
 		};
 
 		// Captured
-		private _is_near_fob = (( _unit distance ([getpos _unit] call F_getNearestFob) ) < 30 );
+		private _is_near_fob = (( _unit distance ([_unit, true] call F_getNearestFob) ) < 30 );
 		if ( _is_near_fob ) then {
 			private _unit_owner = leader group _unit;
 			sleep (3 + floor(random 5));

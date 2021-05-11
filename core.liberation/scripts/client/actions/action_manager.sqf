@@ -32,9 +32,10 @@ if (!(player diarySubjectExists str(parseText GRLIB_r3))) exitWith {};
 
 while { true } do {
 	if ([] call is_menuok) then {
-		_fobdistance = round (player distance2D ([] call F_getNearestFob));
+		_nearest_fobs = [] call F_getNearestFob;
+		_fobdistance = round (player distance2D (_nearest_fobs));
 		_near_arsenal = [player, "ARSENAL", _distarsenal, true] call F_check_near;
-		_near_spawn = ([player, "RESPAWN", _distvehclose, true] call F_check_near) || (count(player nearEntities [[Respawn_truck_typename, huron_typename], _distspawn])>0) ;
+		_near_spawn = [player, "RESPAWN", _distvehclose, true] call F_check_near;
 		_near_fobbox = player nearEntities [[FOB_box_typename, FOB_truck_typename], _distspawn];
 		_near_fuel = [player, "FUEL", _distvehclose, false] call F_check_near;
 		_near_repair = [player, "REPAIR", _distvehclose, false] call F_check_near;

@@ -29,7 +29,7 @@ while { count (units _grp) > 0 } do {
 				!(_x getVariable ['R3F_LOG_disabled', false]) &&
 				_x distance2D lhd_west > GRLIB_sector_size &&
 				_x distance2D lhd_east > GRLIB_sector_size &&
-				_x distance2D ([getPos _x] call F_getNearestFob) >= GRLIB_sector_size
+				_x distance2D ([_x, true] call F_getNearestFob) >= GRLIB_sector_size
 			} ] call BIS_fnc_conditionalSelect;
 
 			if (count (_scan_target) > 0 ) then {
