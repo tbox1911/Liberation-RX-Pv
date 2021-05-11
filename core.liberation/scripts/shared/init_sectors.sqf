@@ -43,7 +43,7 @@ sectors_missions = [];
 	if ( toString _tempmarker == "tower" ) then {
 		sectors_tower pushback _x;
 		_x setMarkerTextLocal format ["%1 %2",markerText _x, mapGridPosition (markerPos _x)];
-		_x setMarkerShadowLocal true;
+		//_x setMarkerShadowLocal true;
 		_ismissionsector = true;
 	};
 
@@ -76,7 +76,7 @@ sectors_missions = [];
 		};
 		_marker setMarkerTextLocal _marker_text;
 	};
-	_marker setMarkerShadowLocal true;
+	//_marker setMarkerShadowLocal true;   // cause Bad conversion: string
 } forEach sectors_capture + sectors_bigtown + sectors_factory + sectors_military;
 GRLIB_sectors_init = true;
 publicVariable "GRLIB_sectors_init";

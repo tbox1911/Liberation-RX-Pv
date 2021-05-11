@@ -211,7 +211,8 @@ if ( !isNil "greuh_liberation_savegame" ) then {
 					_nextbuilding setVariable ["GRLIB_vehicle_owner", _owner, true];
 					_nextbuilding setVariable ["R3F_LOG_disabled", false, true];
 					if (_nextclass in static_vehicles_AI) then {
-						_nextbuilding setVehicleLock "LOCKEDPLAYER";						
+						_nextbuilding setVehicleLock "LOCKEDPLAYER";
+						_nextbuilding addEventHandler ["Fired", { (_this select 0) setVehicleAmmo 1}];					
 					};
 				};
 

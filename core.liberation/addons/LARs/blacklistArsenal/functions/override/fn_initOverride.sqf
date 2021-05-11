@@ -25,8 +25,6 @@ if ( hasInterface ) then {
 		
 		waitUntil { !isNil "BIS_fnc_arsenal_target" };
 
-		diag_log "SEH target done";
-
 		_center = BIS_fnc_arsenal_center;
 		_cargo = BIS_fnc_arsenal_cargo;
 		

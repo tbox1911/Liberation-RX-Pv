@@ -383,6 +383,7 @@ while { true } do {
 						[ _vehicle, GRLIB_side_friendly] call F_forceSideCrew;
 						_vehicle setVariable ["GRLIB_vehicle_manned", true, true];
 						_vehicle setVehicleLock "LOCKEDPLAYER";
+						_vehicle addEventHandler ["Fired", { (_this select 0) setVehicleAmmo 1}];
 					};
 				};
 

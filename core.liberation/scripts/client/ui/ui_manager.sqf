@@ -105,13 +105,14 @@ while { true } do {
 			if ( player distance2D _nearest_fobs < GRLIB_capture_size ) then {
 				_nearest_fobs_side = [_nearest_fobs] call F_getFobSide;
 				_nearest_active_sector = [allMapMarkers, { markerType _x == "b_hq" && markerPos _x distance2D _nearest_fobs < 5}] call BIS_fnc_conditionalSelect select 0;
+				if (isNil "_nearest_active_sector") then {_nearest_active_sector = "skip"};  //enemy fob
 			};
 
 			if ( _nearest_active_sector == "" ) then {
 				_nearest_active_sector = [ GRLIB_sector_size ] call F_getNearestSector;
 			};
 
-			if ( _nearest_active_sector != "" ) then {
+			if ( !(_nearest_active_sector in ["", "skip"]) ) then {
 				_zone_size = GRLIB_capture_size;
 				if ( _nearest_active_sector in sectors_bigtown ) then {
 					_zone_size = GRLIB_capture_size * 1.4;
