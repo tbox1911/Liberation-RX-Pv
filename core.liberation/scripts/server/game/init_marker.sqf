@@ -7,7 +7,7 @@ GRLIB_Marker_ATM = [];
 GRLIB_Marker_FUEL = [];
 GRLIB_Marker_REPAIR = [];
 
-marker_dist = {
+private _marker_dist = {
   params ["_type", "_pos"];
   private _list = [];
   {
@@ -30,10 +30,9 @@ marker_dist = {
 private _tmp_marker = GRLIB_Marker_ATM;
 GRLIB_Marker_ATM = [];
 {
-  _dist = ["ATM", _x] call marker_dist;
+  _dist = ["ATM", _x] call _marker_dist;
   if (_dist > 100) then {
-    _marker = createMarker [format ["marked_atm%1" ,_x], markers_reset];
-    _marker setMarkerPos _x;
+    _marker = createMarker [format ["marked_atm%1", _forEachIndex], _x];
     _marker setMarkerColor "ColorGreen";
     _marker setMarkerType "mil_dot";
     _marker setMarkerText "ATM";
@@ -46,10 +45,9 @@ publicVariable "GRLIB_Marker_ATM";
 private _tmp_marker = GRLIB_Marker_SRV;
 GRLIB_Marker_SRV = [];
 {
-  _dist = ["SELL", _x] call marker_dist;
+  _dist = ["SELL", _x] call _marker_dist;
   if (_dist > 100) then {
-    _marker = createMarker [format ["marked_car%1" ,_x], markers_reset];
-    _marker setMarkerPos _x;
+    _marker = createMarker [format ["marked_car%1", _forEachIndex], _x];
     _marker setMarkerColor "ColorBlue";
     _marker setMarkerType "mil_dot";
     _marker setMarkerText "SELL";
@@ -62,10 +60,9 @@ publicVariable "GRLIB_Marker_SRV";
 private _tmp_marker = GRLIB_Marker_FUEL;
 GRLIB_Marker_FUEL = [];
 {
-  _dist = ["FUEL", _x] call marker_dist;
+  _dist = ["FUEL", _x] call _marker_dist;
   if (_dist > 100) then {
-    _marker = createMarker [format ["marked_fuel%1" ,_x], markers_reset];
-    _marker setMarkerPos _x;
+    _marker = createMarker [format ["marked_fuel%1", _forEachIndex], _x];
     _marker setMarkerColor "ColorYellow";
     _marker setMarkerType "mil_dot";
     _marker setMarkerText "FUEL";
@@ -78,7 +75,7 @@ publicVariable "GRLIB_Marker_FUEL";
 private _tmp_marker = [];
 { _tmp_marker pushback (markerpos _x) } forEach sectors_factory;
 {
-  _dist = ["Repair", _x] call marker_dist;
+  _dist = ["Repair", _x] call _marker_dist;
   if (_dist > 300) then {
     //add repair pickup
     private _pos = [];
@@ -105,8 +102,7 @@ private _tmp_marker = [];
       clearItemCargoGlobal _vehicle;
       clearBackpackCargoGlobal _vehicle;
 
-      _marker = createMarker [format ["marked_repair%1" ,_pos], markers_reset];
-      _marker setMarkerPos _pos;
+      _marker = createMarker [format ["marked_repair%1", _forEachIndex], _pos];
       _marker setMarkerColor "ColorOrange";
       _marker setMarkerType "mil_dot";
       _marker setMarkerText "Repair";

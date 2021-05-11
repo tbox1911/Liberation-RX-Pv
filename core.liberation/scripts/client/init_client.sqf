@@ -52,17 +52,13 @@ if ( typeOf player == "VirtualSpectator_F" ) exitWith {
 };
 
 [] execVM "scripts\client\ui\intro.sqf";
-[] execVM "scripts\client\ammoboxes\ammobox_action_manager.sqf";
 [] execVM "scripts\client\markers\sector_manager.sqf";
-[] execVM "scripts\client\misc\sides_stats_manager.sqf";
-[] execVM "scripts\client\build\build_overlay.sqf";
-[] execVM "scripts\client\build\do_build.sqf";
-[] execVM "scripts\client\markers\empty_vehicles_marker.sqf";
 [] execVM "scripts\client\markers\fob_markers.sqf";
 [] execVM "scripts\client\markers\a3w_mission_marker.sqf";
 [] execVM "scripts\client\markers\hostile_groups.sqf";
 [] execVM "scripts\client\markers\huron_marker.sqf";
 [] execVM "scripts\client\markers\spot_timer.sqf";
+[] execVM "scripts\client\markers\empty_vehicles_marker.sqf";
 [] execVM "scripts\client\misc\broadcast_squad_colors.sqf";
 [] execVM "scripts\client\misc\disable_remote_sensors.sqf";
 //[] execVM "scripts\client\misc\offload_diag.sqf";
@@ -79,7 +75,11 @@ if ( typeOf player == "VirtualSpectator_F" ) exitWith {
 [] execVM "scripts\client\actions\dog_manager.sqf";
 [] execVM "scripts\client\actions\man_manager.sqf";
 [] execVM "scripts\client\actions\squad_manager.sqf";
+[] execVM "scripts\client\ammoboxes\ammobox_action_manager.sqf";
+[] execVM "scripts\client\build\build_overlay.sqf";
+[] execVM "scripts\client\build\do_build.sqf";
 [] execVM "scripts\client\ui\ui_manager.sqf";
+[] execVM "scripts\client\misc\sides_stats_manager.sqf";
 
 if (GRLIB_enable_arsenal) then {
 	[] execVM "addons\LARs\liberationArsenal.sqf";

@@ -162,11 +162,8 @@ if ( isServer ) then {
 
 		if ((_unit iskindof "LandVehicle") || (_unit iskindof "Air") || (_unit iskindof "Ship") ) then {
 			[_unit] spawn clean_vehicle;
-		};
-
-		if ( typeof _unit in all_hostile_classnames ) then {
 			stats_opfor_vehicles_killed = stats_opfor_vehicles_killed + 1;
-			if ( isplayer _killer ) then {
+			if ( isplayer _killer && ( side (group _unit) != side (group _killer)) ) then {
 				stats_opfor_vehicles_killed_by_players = stats_opfor_vehicles_killed_by_players + 1;
 
 				if ( GRLIB_ammo_bounties ) then {
