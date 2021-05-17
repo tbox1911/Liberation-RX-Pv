@@ -95,8 +95,6 @@ blacklisted_bag = [
 ];
 
 blacklisted_weapon = [
-	"SMG_03_black",
-	"SMG_03C_black",
 	"optic_Nightstalker",
 	"optic_tws",
 	"optic_tws_mg",
