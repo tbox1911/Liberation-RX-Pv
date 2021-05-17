@@ -8,6 +8,10 @@ if ( GRLIB_fob_type == 1 ) then {
 	_fob_type = FOB_truck_typename_east;
 };
 
+// AI in Praetorian
+private _deflist = (getPosATL base_boxspawn_east) nearEntities ["B_AAA_System_01_F", 250];
+{ [_x, EAST] call F_forceSideCrew } forEach _deflist;
+
 while { true } do {
 
 	_foblist = [entities _fob_type, {[_x] call is_public}] call BIS_fnc_conditionalSelect;
