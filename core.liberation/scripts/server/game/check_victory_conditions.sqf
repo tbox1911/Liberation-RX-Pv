@@ -6,7 +6,7 @@ _opfSector = count (east_sectors);
 _indSector = (_maxsector - _bluSector - _opfSector);
 
 //_maxSector = _maxSector * 0.80; // 80% sector captured
-if (_indSector == 0 && (_bluSector >= _maxSector || _opfSector  >= _maxSector)) then {
+if (_indSector == 0 && (_bluSector >= _maxSector || _opfSector >= _maxSector)) then {
 	GRLIB_endgame = 1;
 	publicVariable "GRLIB_endgame";
 	{ _x allowDamage false; (vehicle _x) allowDamage false; } foreach allPlayers;
