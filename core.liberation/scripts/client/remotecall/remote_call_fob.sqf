@@ -1,8 +1,8 @@
 if ( isDedicated ) exitWith {};
 params [ "_fob", "_status", "_side" ];
+
 if (GRLIB_side_friendly != _side)  exitWith {};
 if ( isNil "sector_timer" ) then { sector_timer = 0 };
-
 
 private _fobname = [ _fob ] call F_getFobName;
 
