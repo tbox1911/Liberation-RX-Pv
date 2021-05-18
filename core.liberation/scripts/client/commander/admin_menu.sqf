@@ -23,11 +23,10 @@ private _color_east = getArray (configFile >> "CfgMarkerColors" >> GRLIB_color_e
 private _display = findDisplay 5204;
 
 // GodMode ?
-private _ctrl = _display displayCtrl 1607;
 if (!isDamageAllowed player) then {
-	_ctrl ctrlSetChecked true;
+	(_display displayCtrl 1607) ctrlSetChecked true;
 } else {
-	_ctrl ctrlSetChecked false;
+	(_display displayCtrl 1607) ctrlSetChecked false;
 };
 
 // Teleport on map
@@ -105,7 +104,9 @@ while { alive player && dialog } do {
 		_name = _score_combo lbText (lbCurSel _score_combo);
 		_uid = _score_combo lbData (lbCurSel _score_combo);
 		[_uid, 200] remoteExec ["F_addPlayerScore", 2];
-		hint format ["Add 200 XP to player: %1.", _name];
+		_msg = format ["Add 200 XP to player: %1.", _name];
+		hint _msg;
+		systemchat _msg;
 		sleep 1;
 	};
 
@@ -113,7 +114,9 @@ while { alive player && dialog } do {
 		do_spawn = 0;
 		_veh_text = _build_combo lbText (lbCurSel _build_combo);
 		_veh_class = _build_combo lbData (lbCurSel _build_combo);
-		hint format ["Build Vehicle: %1", _veh_text];
+		_msg = format ["Build Vehicle: %1", _veh_text];
+		hint _msg;
+		systemchat _msg;
 		buildtype = 9;
 		build_unit = [_veh_class,[],1,[],[]];
 		dobuild = 1;
@@ -125,7 +128,9 @@ while { alive player && dialog } do {
 		_name = _score_combo lbText (lbCurSel _score_combo);
 		_uid = _score_combo lbData (lbCurSel _score_combo);
 		[_uid, 300] remoteExec ["F_addPlayerAmmo", 2];
-		hint format ["Add 300 Ammo to player: %1.", _name];
+		_msg = format ["Add 300 Ammo to player: %1.", _name];
+		hint _msg;
+		systemchat _msg;
 		sleep 1;
 	};
 
@@ -136,7 +141,9 @@ while { alive player && dialog } do {
 		_side = [_uid] call F_getPlayerSide;
 		if (_side == GRLIB_side_east) then {_side = GRLIB_side_west} else {_side = GRLIB_side_east};
 		[_uid, _side] remoteExec ["F_setPlayerSide", 2];
-		hint format ["Side changed for player: %1.\nPlayer must reconnect to take effect.", _name];
+		_msg = format ["Side changed for player: %1.\nPlayer must reconnect to take effect.", _name];
+		hint _msg;
+		systemchat _msg;
 		sleep 1;
 	};
 
