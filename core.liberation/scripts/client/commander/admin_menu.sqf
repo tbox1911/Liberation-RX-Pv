@@ -1,20 +1,13 @@
-//waitUntil { !isNil "GRLIB_permissions" };
-private [ "_dialog", "_players_array" ];
-
-_players_array = [];
-_dialog = createDialog "liberation_admin";
+createDialog "liberation_admin";
 waitUntil { dialog };
 disableSerialization;
-_ctrl = (findDisplay 5204) displayCtrl 1607;
+do_unban = 0;
+do_score = 0;
+do_spawn = 0;
+do_ammo = 0;
+do_change = 0;
 
-if (!isDamageAllowed player) then {
-	_ctrl ctrlSetChecked true;
-} else {
-	_ctrl ctrlSetChecked false;
-};
-player onMapSingleClick "if (_alt) then {player setPosATL _pos}";
-
-_getBannedUID = {
+private _getBannedUID = {
 	params ["_ban_combo"];
 	lbClear _ban_combo;
 	{
@@ -25,33 +18,64 @@ _getBannedUID = {
 	} foreach allVariables BTC_logic;
 };
 
-do_unban = 0;
-do_score = 0;
-do_spawn = 0;
-do_ammo = 0;
+private _color_west = getArray (configFile >> "CfgMarkerColors" >> GRLIB_color_west >> "color") call BIS_fnc_colorConfigToRGBA;
+private _color_east = getArray (configFile >> "CfgMarkerColors" >> GRLIB_color_east >> "color") call BIS_fnc_colorConfigToRGBA;
+private _display = findDisplay 5204;
+
+// GodMode ?
+private _ctrl = _display displayCtrl 1607;
+if (!isDamageAllowed player) then {
+	_ctrl ctrlSetChecked true;
+} else {
+	_ctrl ctrlSetChecked false;
+};
+
+// Teleport on map
+player onMapSingleClick "if (_alt) then {player setPosATL _pos}";
 
 // Clear listbox
-_display = findDisplay 5204;
 _ban_combo = _display displayCtrl 1611;
 lbClear _ban_combo;
 _score_combo = _display displayCtrl 1612;
 lbClear _score_combo;
-_ammo_combo = _display displayCtrl 1616;
-lbClear _ammo_combo;
 _build_combo = _display displayCtrl 1614;
 lbClear _build_combo;
 
+(_display displayCtrl 1603) ctrlSetText getMissionPath "res\ui_confirm.paa";
+(_display displayCtrl 1603) ctrlSetToolTip "Add 200 XP Score";
+(_display displayCtrl 1615) ctrlSetText getMissionPath "res\ui_arsenal.paa";
+(_display displayCtrl 1615) ctrlSetToolTip "Add 300 Ammo";
+(_display displayCtrl 1616) ctrlSetText getMissionPath "res\ui_rotation.paa";
+(_display displayCtrl 1616) ctrlSetToolTip "Change Player Side";
+
+// Build Banned
 [_ban_combo] call _getBannedUID;
 
+// Build Players list
 _i = 0;
 {
 	_score_combo lbAdd format["%1", name _x];
-	_score_combo lbSetData [_i, getPlayerUID _x];
-	_ammo_combo lbAdd format["%1", name _x];
-	_ammo_combo lbSetData [_i, getPlayerUID _x];
+	_uid = getPlayerUID _x;
+	_score_combo lbSetData [_i, _uid];
+	_side = [_uid] call F_getPlayerSide;
+	_color = _color_west;
+	if (_side == GRLIB_side_east) then {_color = _color_east};
+	_score_combo lbSetColor [_i, _color];
 	_i = _i + 1;
 } foreach AllPlayers;
 
+{
+	_score_combo lbAdd format["%1", _x select 3];
+	_uid = _x  select 0;
+	_score_combo lbSetData [_i, _uid];
+	_side = _x select 4;
+	_color = _color_west;
+	if (_side == GRLIB_side_east) then {_color = _color_east};
+	_score_combo lbSetColor [_i, _color];
+	_i = _i + 1;
+} foreach GRLIB_player_scores;
+
+// Build Vehicles list
 _i = 0;
 {
 	_build_combo lbAdd format["%1", getText(configFile >> "cfgVehicles" >> ( _x select 0 ) >> "DisplayName")];
@@ -63,55 +87,57 @@ _i = 0;
 _ban_combo lbSetCurSel 0;
 _score_combo lbSetCurSel 0;
 _build_combo lbSetCurSel 0;
-_ammo_combo lbSetCurSel 0;
 
-while { dialog && (alive player) } do {
+while { alive player && dialog } do {
 	if (do_unban == 1) then {
+		do_unban = 0;
 		_dst_id = _ban_combo lbText (lbCurSel _ban_combo);
 		if (_dst_id != "") then {
 			BTC_logic setVariable [_dst_id, 0, true];
-			systemchat format ["Unban player UID: %1", _dst_id];
+			hint format ["Unban player UID: %1", _dst_id];
+			lbClear _ban_combo;
 			[_ban_combo] call _getBannedUID;
-			sleep 1;
 		};
-		do_unban = 0;
 	};
 
 	if (do_score == 1) then {
-		_dst_name = _score_combo lbText (lbCurSel _score_combo);
-		_dst_id = _score_combo lbData (lbCurSel _score_combo);
-		_player = _dst_id call BIS_fnc_getUnitByUID;
-		if (!isNull _player) then {
-			[_player, 200] remoteExec ["addScore", 2];
-			systemchat format ["Add 200 XP to player: %1.", _dst_name];
-			sleep 1;
-		};
 		do_score = 0;
+		_name = _score_combo lbText (lbCurSel _score_combo);
+		_uid = _score_combo lbData (lbCurSel _score_combo);
+		[_uid, 200] remoteExec ["F_addPlayerScore", 2];
+		hint format ["Add 200 XP to player: %1.", _name];
+		sleep 1;
 	};
 
 	if (do_spawn == 1) then {
+		do_spawn = 0;
 		_veh_text = _build_combo lbText (lbCurSel _build_combo);
 		_veh_class = _build_combo lbData (lbCurSel _build_combo);
-		systemchat format ["Build Vehicle: %1", _veh_text];
+		hint format ["Build Vehicle: %1", _veh_text];
 		buildtype = 9;
 		build_unit = [_veh_class,[],1,[],[]];
 		dobuild = 1;
-		do_spawn = 0;
 		closeDialog 0;
 	};
 
 	if (do_ammo == 1) then {
-		_dst_name = _ammo_combo lbText (lbCurSel _ammo_combo);
-		_dst_id = _ammo_combo lbData (lbCurSel _ammo_combo);
-		_player = _dst_id call BIS_fnc_getUnitByUID;
-
-		if (!isNull _player) then {
-			_tmp = _player getVariable ['GREUH_ammo_count', 0];
-			[_player, ['GREUH_ammo_count', _tmp + 300, true]] remoteExec ['setVariable', 2];
-			systemchat format ["Add 300 Ammo to player: %1.", _dst_name];
-			sleep 1;
-		};
 		do_ammo = 0;
+		_name = _score_combo lbText (lbCurSel _score_combo);
+		_uid = _score_combo lbData (lbCurSel _score_combo);
+		[_uid, 300] remoteExec ["F_addPlayerAmmo", 2];
+		hint format ["Add 300 Ammo to player: %1.", _name];
+		sleep 1;
+	};
+
+	if (do_change == 1) then {
+		do_change = 0;
+		_name = _score_combo lbText (lbCurSel _score_combo);
+		_uid = _score_combo lbData (lbCurSel _score_combo);
+		_side = [_uid] call F_getPlayerSide;
+		if (_side == GRLIB_side_east) then {_side = GRLIB_side_west} else {_side = GRLIB_side_east};
+		[_uid, _side] remoteExec ["F_setPlayerSide", 2];
+		hint format ["Side changed for player: %1.\nPlayer must reconnect to take effect.", _name];
+		sleep 1;
 	};
 
 	sleep 0.5;

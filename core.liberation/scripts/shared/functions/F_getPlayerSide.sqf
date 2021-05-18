@@ -6,8 +6,7 @@ if (!isNull _p1) then {_side = _p1 getVariable ["GREUH_pvp_side", sideUnknown]};
 
 if (_side == sideUnknown) then {
     {
-        _p1 = _x;
-        if ( (_p1 select 0) == _uid) then {_side = (_p1 select 4)};
+        if ( (_x select 0) == _uid) exitWith {_side = (_x select 4)};
     } forEach GRLIB_player_scores;
 };
 

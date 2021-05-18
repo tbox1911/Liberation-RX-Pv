@@ -35,12 +35,14 @@ while {	(player getVariable ["GRLIB_score_set", 0] == 0) } do {
 	uIsleep 2;
 };
 
-if (! ((getPlayerUID player) in GRLIB_whitelisted_steamids)) then {
-	if ((player getvariable ["GREUH_pvp_side", sideUnknown]) != GRLIB_side_friendly) exitWith {
-		titleText ["Wrong side selected...","BLACK FADED", 1000];
-		sleep 5;
-		endMission "LOSER";
-	};
+disableUserInput false;
+disableUserInput true;
+disableUserInput false;
+
+if ((player getvariable ["GREUH_pvp_side", sideUnknown]) != GRLIB_side_friendly) exitWith {
+	titleText ["Wrong side selected...","BLACK FADED", 1000];
+	sleep 5;
+	endMission "LOSER";
 };
 
 showcaminfo = true;
@@ -50,9 +52,6 @@ howtoplay = 0;
 _dialog = createDialog "liberation_menu";
 waitUntil { dialog };
 _noesckey = (findDisplay 5651) displayAddEventHandler ["KeyDown", "if ((_this select 1) == 1) then { true }"];
-disableUserInput false;
-disableUserInput true;
-disableUserInput false;
 
 waitUntil { dostartgame == 1 || howtoplay == 1 };
 disableUserInput true;
