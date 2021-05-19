@@ -333,11 +333,6 @@ while { true } do {
 					player hcSetGroup [group _vehicle];
 				};
 
-				// set mass heavy Static
-				if ( _classname in ["B_AAA_System_01_F", "O_SAM_System_04_F", "B_SAM_System_02_F"] ) then {
-					_vehicle setMass 5000;
-				};
-
 				// Default Paint
 				if ( _classname in ["I_E_Truck_02_MRL_F"] ) then {
 					[_vehicle, ["EAF",1], true ] call BIS_fnc_initVehicle;
@@ -380,6 +375,7 @@ while { true } do {
 				if (_classname in _list_static) then {
 					[_vehicle] spawn protect_static;
 					if (_classname in static_vehicles_AI) then {
+						_vehicle setMass 5000;
 						[ _vehicle, GRLIB_side_friendly] call F_forceSideCrew;
 						_vehicle setVariable ["GRLIB_vehicle_manned", true, true];
 						_vehicle setVehicleLock "LOCKEDPLAYER";
