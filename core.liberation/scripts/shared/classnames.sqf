@@ -67,7 +67,9 @@ buildings = [
 
 // *** FRIENDLIES ***
 [] call compileFinal preprocessFileLineNUmbers "scripts\shared\classnames_west.sqf";
+[infantry_units_west, GRLIB_side_west] call F_calcUnitsCost;
 [] call compileFinal preprocessFileLineNUmbers "scripts\shared\classnames_east.sqf";
+[infantry_units_east, GRLIB_side_east] call F_calcUnitsCost;
 
 // *** ELITE Vehicles ***
 elite_vehicles = [];
