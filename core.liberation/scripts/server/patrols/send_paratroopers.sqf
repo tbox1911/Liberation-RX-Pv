@@ -7,10 +7,9 @@ _sendPara = {
 	private _spawnsector = ( [ sectors_airspawn , [ _targetpos ] , { (markerpos _x) distance _input0 }, "ASCEND"] call BIS_fnc_sortBy ) select 0;
 	private _newvehicle = createVehicle [ (selectRandom opfor_choppers), (markerPos _spawnsector), [], 50, "FLY"];
 	_newvehicle setPos (getPosATL _newvehicle vectorAdd [0, 0, 400]);
-	[ _newvehicle, GRLIB_side_enemy] call F_forceSideCrew;
+	[_newvehicle, GRLIB_side_enemy] call F_forceSideCrew;
 	private _pilot_group = group ((crew _newvehicle) select 0);
 	
-	sleep 1;
 	_newvehicle flyInHeight 400;
 	_newvehicle setVariable ["GRLIB_counter_TTL", round(time + 3600)];
 	_newvehicle addMPEventHandler ["MPKilled", {_this spawn kill_manager}];
