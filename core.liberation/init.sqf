@@ -1,7 +1,7 @@
 titleText ["","BLACK FADED", 1000];
-diag_log "--- Liberation RX by pSiKO ---";
+diag_log "--- Liberation RX PvP by pSiKO ---";
 [] call compileFinal preprocessFileLineNUmbers "build_info.sqf";
-if (!isMultiplayer) exitWith { diag_log "Sorry, Liberation RX is a Multiplayer Mission Only..." };
+if (!isMultiplayer) exitWith { diag_log "Sorry, Liberation RX PvP is a Multiplayer Mission Only..." };
 diag_log "--- Init start ---";
 
 enableSaving [false, false];
