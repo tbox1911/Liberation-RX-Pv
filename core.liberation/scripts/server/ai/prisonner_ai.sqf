@@ -55,7 +55,7 @@ if ( (_unit isKindOf "Man") && ( alive _unit ) && (vehicle _unit == _unit) && (s
 				unAssignVehicle _unit;
 			};
 
-			private _nearest_sector = [(sectors_allSectors - blufor_sectors), _unit] call BIS_fnc_nearestPosition;
+			private _nearest_sector = [(sectors_allSectors - west_sectors - east_sectors), _unit] call BIS_fnc_nearestPosition;
 
 			if (typeName _nearest_sector == "STRING") then {
 				private _flee_grp = createGroup [GRLIB_side_civilian, true];
