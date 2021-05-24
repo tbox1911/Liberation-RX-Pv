@@ -1,13 +1,8 @@
 if ( isNil "cinematic_camera_started" ) then { cinematic_camera_started = false };
-if (isMultiplayer) then {
-	waituntil {(time > 2) && (getClientStateNumber >= 10) && (getClientState == "BRIEFING READ")};
-} else {
-	GRLIB_introduction = true;
-};
+waituntil {(time > 2) && (getClientStateNumber >= 10) && (getClientState == "BRIEFING READ")};
 
 waitUntil {!(isNull (findDisplay 46))};
 [] spawn cinematic_camera;
-uisleep 2;
 
 if (serverName == "DevSrv") then {
 	GRLIB_introduction = false;
@@ -40,7 +35,7 @@ disableUserInput false;
 
 if ((player getvariable ["GREUH_pvp_side", sideUnknown]) != GRLIB_side_friendly) exitWith {
 	titleText ["Wrong side selected...","BLACK FADED", 1000];
-	sleep 5;
+	uisleep 10;
 	endMission "LOSER";
 };
 
