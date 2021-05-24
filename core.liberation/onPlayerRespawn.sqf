@@ -1,7 +1,7 @@
 // Welcome trigger
 if (!isMultiplayer) exitWith {
 	titleText ["Sorry, Liberation RX PvP is a Multiplayer Mission Only...","BLACK FADED", 1000];
-	sleep 5;
+	uisleep 10;
 	endMission "LOSER";
 };
 titleText ["Loading...","BLACK FADED", 1000];
