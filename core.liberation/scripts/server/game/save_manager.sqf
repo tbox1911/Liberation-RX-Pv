@@ -224,7 +224,7 @@ if ( !isNil "greuh_liberation_savegame" ) then {
 					_nextbuilding setVariable ["R3F_LOG_disabled", true, true];
 				};
 
-				if (_nextclass in [huron_typename_west, huron_typename_west]) then {
+				if (_owner == "public" && _nextclass in [huron_typename_west, huron_typename_west]) then {
 					_nextbuilding setVariable ["GRLIB_vehicle_owner", "public", true];
 					_nextbuilding setVariable ["GRLIB_vehicle_ishuron", true, true];
 				};
