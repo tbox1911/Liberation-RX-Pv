@@ -9,7 +9,7 @@ _basenamestr = "BASE CHIMERA";
 fullmap = 0;
 _old_fullmap = 0;
 
-_dialog = createDialog "liberation_deploy";
+createDialog "liberation_deploy";
 _noesckey = (findDisplay 5201) displayAddEventHandler ["KeyDown", "if ((_this select 1) == 1) then { true }"];
 disableUserInput false;
 disableUserInput true;

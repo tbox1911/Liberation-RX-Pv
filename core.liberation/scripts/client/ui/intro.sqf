@@ -52,7 +52,7 @@ createDialog "liberation_menu";
 waitUntil { dialog };
 _noesckey = (findDisplay 5651) displayAddEventHandler ["KeyDown", "if ((_this select 1) == 1) then { true }"];
 
-waitUntil { dostartgame == 1 || howtoplay == 1 };
+waitUntil { dostartgame == 1 || howtoplay == 1 || !dialog };
 disableUserInput true;
 (findDisplay 5651) displayRemoveEventHandler ["KeyDown", _noesckey];
 closeDialog 0;
