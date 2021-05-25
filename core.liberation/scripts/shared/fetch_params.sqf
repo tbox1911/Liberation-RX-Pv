@@ -37,8 +37,12 @@ GRLIB_limited_arsenal = ["LimitedArsenal",1] call bis_fnc_getParamValue;
 GRLIB_permission_vehicles = ["EnableLock",1] call bis_fnc_getParamValue;
 GRLIB_forced_loadout = ["ForcedLoadout",0] call bis_fnc_getParamValue;
 GRLIB_fancy_info = ["FancyInfo",1] call bis_fnc_getParamValue;
+GRLIB_overide_opfor = ["TextureOveride",0] call bis_fnc_getParamValue;
 GRLIB_hide_opfor = ["HideOpfor",0] call bis_fnc_getParamValue;
 GRLIB_thermic = ["Thermic",1] call bis_fnc_getParamValue;
+
+// Define constant
+[] call compileFinal preprocessFileLineNUmbers "gameplay_constants.sqf";
 
 GRLIB_r1 = "&#108;&#105;&#98;&#101;&#114;&#97;&#116;&#105;&#111;&#110;";
 GRLIB_r2 = "&#114;&#120;";
@@ -82,14 +86,15 @@ if ( GRLIB_city_defenders == 1 ) then { GRLIB_city_defenders = true } else { GRL
 if ( GRLIB_thermic == 1 ) then { GRLIB_thermic = true } else { GRLIB_thermic = false };
 if ( GRLIB_opfor_english == 1 ) then { GRLIB_opfor_english = true } else { GRLIB_opfor_english = false };
 
-// Define constant
-[] call compileFinal preprocessFileLineNUmbers "gameplay_constants.sqf";
 
 // Overide sector radius
 if (GRLIB_sector_radius != 0) then { GRLIB_sector_size = GRLIB_sector_radius };
 
-// Define classname
-[] call compileFinal preprocessFileLineNUmbers "scripts\shared\classnames.sqf";
-
-// Start R3F if ACE no present
-if (!GRLIB_ACE_enabled) then {[] execVM "R3F_LOG\init.sqf"};
+// Overide Textures
+opfor_texture_overide = [];
+if (GRLIB_overide_opfor > 0) then {
+	switch (GRLIB_overide_opfor) do {
+		case 1: {opfor_texture_overide = ["Urban","Digital"] };
+		case 2: {opfor_texture_overide = ["Pink"] };
+	};
+};

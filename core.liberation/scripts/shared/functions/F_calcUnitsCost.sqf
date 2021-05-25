@@ -1,6 +1,4 @@
 params ["_list", "_side"];
-
-[] call compileFinal preprocessFileLineNumbers "scripts\loadouts\init_loadouts.sqf";
 private _grp = createGroup [_side, true];
 {
 	_unit_class = _x select 0;

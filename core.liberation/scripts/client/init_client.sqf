@@ -51,7 +51,6 @@ if ( typeOf player == "VirtualSpectator_F" ) exitWith {
 	[] execVM "scripts\client\ui\ui_manager.sqf";
 };
 
-[] execVM "scripts\client\ui\intro.sqf";
 [] execVM "scripts\client\markers\sector_manager.sqf";
 [] execVM "scripts\client\markers\fob_markers.sqf";
 [] execVM "scripts\client\markers\a3w_mission_marker.sqf";
@@ -130,4 +129,5 @@ initAmbientLife;
 enableEnvironment [true, true];
 setTerrainGrid 12.5;  //Very High = 6.25, Ultra = 3.125
 
+[] execVM "scripts\client\ui\intro.sqf";
 diag_log "--- Client Init stop ---";

@@ -1,7 +1,12 @@
+if ((player getvariable ["GREUH_pvp_side", sideUnknown]) != GRLIB_side_friendly) exitWith {
+	titleText ["Wrong side selected...","BLACK FADED", 1000];
+	uisleep 10;
+	endMission "LOSER";
+};
+
 if ( isNil "cinematic_camera_started" ) then { cinematic_camera_started = false };
 waituntil {(time > 2) && (getClientStateNumber >= 10) && (getClientState == "BRIEFING READ")};
 
-waitUntil {!(isNull (findDisplay 46))};
 [] spawn cinematic_camera;
 
 if (serverName == "DevSrv") then {
@@ -33,22 +38,19 @@ disableUserInput false;
 disableUserInput true;
 disableUserInput false;
 
-if ((player getvariable ["GREUH_pvp_side", sideUnknown]) != GRLIB_side_friendly) exitWith {
-	titleText ["Wrong side selected...","BLACK FADED", 1000];
-	uisleep 10;
-	endMission "LOSER";
-};
-
 showcaminfo = true;
 dostartgame = 0;
 howtoplay = 0;
+
+closeDialog 0;
+uisleep 1;
 
 createDialog "liberation_menu";
 waitUntil { dialog };
 _noesckey = (findDisplay 5651) displayAddEventHandler ["KeyDown", "if ((_this select 1) == 1) then { true }"];
 
 waitUntil { dostartgame == 1 || howtoplay == 1 || !dialog };
-disableUserInput true;
+//disableUserInput true;
 (findDisplay 5651) displayRemoveEventHandler ["KeyDown", _noesckey];
 closeDialog 0;
 

@@ -65,6 +65,8 @@ buildings = [
 	["Land_CzechHedgehog_01_new_F",0,0,0,GRLIB_perm_inf]
 ];
 
+[] call compileFinal preprocessFileLineNumbers "scripts\loadouts\init_loadouts.sqf";
+
 // *** FRIENDLIES ***
 [] call compileFinal preprocessFileLineNUmbers "scripts\shared\classnames_west.sqf";
 [infantry_units_west, GRLIB_side_west] call F_calcUnitsCost;
@@ -300,11 +302,6 @@ opfor_statics = [
 	"I_static_AA_F",
 	"I_static_AT_F",
 	"I_Mortar_01_F"
-];
-
-opfor_texture_overide = [
-	//"Urban",
-	//"Digital"
 ];
 
 opfor_recyclable = [
