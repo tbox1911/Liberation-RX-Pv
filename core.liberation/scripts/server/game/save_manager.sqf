@@ -239,6 +239,7 @@ if ( !isNil "greuh_liberation_savegame" ) then {
 				};
 
 				if ( _nextclass in [FOB_typename_west, FOB_typename_east] ) then {
+					_nextbuilding allowDamage false;
 					_nextbuilding addEventHandler ["HandleDamage", { 0 }];
 				};
 

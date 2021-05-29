@@ -387,16 +387,20 @@ while { true } do {
 				_vehicle allowDamage true;
 				_vehicle setDamage 0;
 
-				if(buildtype == 99) then {
-					_vehicle addEventHandler ["HandleDamage", { 0 }];
-				};
-
 				if(buildtype != 6) then {
 					_vehicle addMPEventHandler ["MPKilled", { _this spawn kill_manager }];
 				};
 
 				if (!([_price] call F_pay)) exitWith {};
 				stats_blufor_vehicles_built = stats_blufor_vehicles_built + 1; publicVariable "stats_blufor_vehicles_built";
+			};
+
+			// FOB
+			if(buildtype == 99 && build_confirmed != 3) then {
+				[_vehicle, false] remoteExec ["allowDamage", 0];
+				_vehicle addEventHandler ["HandleDamage", { 0 }];
+				[(getpos _vehicle), GRLIB_side_friendly] remoteExec ["build_fob_remote_call", 0];
+				buildtype = 1;
 			};
 
 			if ( _idactcancel != -1 ) then {
@@ -414,12 +418,6 @@ while { true } do {
 			};
 			player removeAction _idactrotate;
 			player removeAction _idactplace;
-
-			if(buildtype == 99 && build_confirmed != 3) then {
-				[_vehicle, false] remoteExec ["allowDamage", 0];
-				[(getpos _vehicle), GRLIB_side_friendly] remoteExec ["build_fob_remote_call", 0];
-				buildtype = 1;
-			};
 
 			build_confirmed = 0;
 		};
