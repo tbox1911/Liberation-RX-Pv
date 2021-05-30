@@ -1,7 +1,6 @@
 params [ "_unit", ["_force_surrender", false] ];
 
 if ( (!_force_surrender) && (typeof _unit in [pilot_classname_west, pilot_classname_west]) ) exitWith {};
-if ( (!_force_surrender) && ((random 100) > GRLIB_surrender_chance) ) exitWith {};
 if ( (!_force_surrender) && (_unit getVariable ["mission_AI", false]) ) exitWith {};
 
 if ( (_unit isKindOf "Man") && ( alive _unit ) && (vehicle _unit == _unit) && (side group _unit == GRLIB_side_enemy) ) then {
