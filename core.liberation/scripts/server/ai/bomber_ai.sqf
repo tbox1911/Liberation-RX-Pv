@@ -1,4 +1,5 @@
 params ["_unit", ["_side", west]];
+
 if (typeof _unit == pilot_classname) exitWith {};
 if ((_unit getVariable ["mission_AI", false]) exitWith {};
 
@@ -38,7 +39,7 @@ while {alive _unit} do {
 	_targets = [getpos _unit , 100] call F_getNearbyPlayers;
 	if (count _targets > 0) then {
 		_target = _targets select 0;
-		if (_unit distance2D _target < 15 && && alive _unit) then {
+		if (_unit distance2D _target < 15) then {
 			_explosive = createMine [_explosiveClass, (getPos _unit), [], 0];
 			_explosive attachTo [_unit, [0, 0.15, 0.15], "Pelvis"];
 			_explosive setVectorDirAndUp [[1, 0, 0], [0, 1, 0]];
@@ -48,12 +49,12 @@ while {alive _unit} do {
 				if ((_unit distance2D _x) <= 100) then { ["bombershout"] remoteExec ["playSound", owner _x] };
 			} forEach allPlayers;
 
-			sleep 1;
+			sleep 0.5;
 			_explosive setDamage 1;
 		} else {
 			_unit doMove (getPos _target);
-			sleep 4;
 		};
+		sleep 4;
 	};
 	sleep 1;
 };
