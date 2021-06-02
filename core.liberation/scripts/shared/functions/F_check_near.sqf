@@ -28,7 +28,7 @@ if (_includeFOB) then {
 	if (_fobdistance <= (_dist * 2) ) then {_ret = true};
 };
 
-if (count(_classlist) == 0 ) exitWith {_ret};
+if (count(_classlist) == 0) exitWith {_ret};
 
 if (typeName (_classlist select 0) == "STRING") then {
 	// From Objects classname
