@@ -1,7 +1,7 @@
 params ["_unit", ["_side", west]];
 
 if (typeof _unit == pilot_classname) exitWith {};
-if ((_unit getVariable ["mission_AI", false]) exitWith {};
+if (_unit getVariable ["mission_AI", false]) exitWith {};
 
 sleep 3;
 if (!alive _unit) exitWith {};
