@@ -1,6 +1,6 @@
+if (!isServer && hasInterface) exitWith {};
 params ["_beacon", "_action", "_side"];
 
-if (!isServer) exitWith {};
 if (isNil "_beacon") exitWith {};
 
 private _beacon_source = GRLIB_mobile_respawn_east;

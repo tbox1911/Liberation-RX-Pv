@@ -433,7 +433,7 @@ while { true } do {
 			buildings_to_save,
 			0,		//free for extened use
 			_stats,
-			[ round infantry_weight, round armor_weight, round air_weight ],
+			[ round infantry_weight max 33, round armor_weight max 33, round air_weight max 33 ],
 			GRLIB_vehicle_to_military_base_links,
 			_permissions,
 			resources_intel_west,

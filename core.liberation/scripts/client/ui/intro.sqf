@@ -1,7 +1,9 @@
-if ((player getvariable ["GREUH_pvp_side", sideUnknown]) != GRLIB_side_friendly) exitWith {
-	titleText ["Wrong side selected...","BLACK FADED", 1000];
-	uisleep 10;
-	endMission "LOSER";
+if (!([] call is_admin)) then {
+	if ((player getvariable ["GREUH_pvp_side", sideUnknown]) != GRLIB_side_friendly) exitWith {
+		titleText ["Wrong side selected...","BLACK FADED", 1000];
+		uisleep 10;
+		endMission "LOSER";
+	};
 };
 
 if ( isNil "cinematic_camera_started" ) then { cinematic_camera_started = false };

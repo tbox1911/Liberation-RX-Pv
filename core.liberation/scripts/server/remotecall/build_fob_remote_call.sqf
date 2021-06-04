@@ -1,5 +1,4 @@
-if (!isServer) exitWith {};
-
+if (!isServer && hasInterface) exitWith {};
 params [ "_new_fob", "_side" ];
 private _delete_items = [
 	FOB_box_typename_west, FOB_truck_typename_west, "Land_Cargo_HQ_V1_ruins_F",

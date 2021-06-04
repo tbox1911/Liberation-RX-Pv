@@ -1,4 +1,4 @@
-if ( !isServer ) exitWith {};
+if (!isServer && hasInterface) exitWith {};
 if ( isNil "_intel_object" ) exitWith {};
 params [ "_intel_object", "_side", "_unit_owner" ];
 
