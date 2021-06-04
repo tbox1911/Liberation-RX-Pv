@@ -1,3 +1,10 @@
+while {	(player getVariable ["GRLIB_score_set", 0] == 0) } do {
+	titleText ["... Loading Player Data ...", 100];
+	uIsleep 2;
+	titleText ["... Please Wait ...", 100];
+	uIsleep 2;
+};
+
 if (!([] call is_admin)) then {
 	if ((player getvariable ["GREUH_pvp_side", sideUnknown]) != GRLIB_side_friendly) exitWith {
 		titleText ["Wrong side selected...","BLACK FADED", 1000];
@@ -25,15 +32,6 @@ if ( GRLIB_introduction ) then {
 	uisleep 2.5;
 	cutRsc ["intro2","PLAIN",1,true];
 	uisleep 8.5;
-};
-
-while {	(player getVariable ["GRLIB_score_set", 0] == 0) } do {
-	_msg= "... Loading Player Data ...";
-    [_msg, 0, 0, 5, 0, 0, 90] spawn BIS_fnc_dynamicText;
-	uIsleep 2;
-	_msg= "... Please Wait ...";
-    [_msg, 0, 0, 5, 0, 0, 90] spawn BIS_fnc_dynamicText;
-	uIsleep 2;
 };
 
 disableUserInput false;
