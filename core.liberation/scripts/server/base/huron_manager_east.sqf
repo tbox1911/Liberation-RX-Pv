@@ -37,10 +37,7 @@ while { true } do {
 			stats_spartan_respawns = stats_spartan_respawns + 1;
 			sleep 15;
 		};
-
-		if (_huron distance lhd_east < GRLIB_sector_size) then {
-			deletevehicle _huron;
-		};
+		deletevehicle _huron;
 	};
 	sleep 10;
 };
