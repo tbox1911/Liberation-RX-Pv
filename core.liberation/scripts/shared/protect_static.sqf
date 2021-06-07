@@ -1,6 +1,7 @@
 params ["_static"];
 
 if (typeOf _static in static_vehicles_AI) exitWith {};
+if (!(typeOf _static in [static_vehicles_west, static_vehicles_east])) exitWith {};
 
 while { alive _static } do {
 	// No damage

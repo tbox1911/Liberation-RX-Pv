@@ -14,6 +14,7 @@ private _recycleable_classnames_exp = [
 ];
 
 private _wreck_class = [
+	"StaticWeapon",
 	"Slingload_01_Base_F",
 	"Pod_Heli_Transport_04_base_F",
 	"B_AAA_System_01_F",

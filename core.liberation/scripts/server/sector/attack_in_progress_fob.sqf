@@ -9,7 +9,7 @@ private _fobside = [_thispos] call F_getFobSide;
 [ _thispos, 1, _fobside ] remoteExec ["remote_call_fob", 0];
 [ _thispos, 5, _side ] remoteExec ["remote_call_fob", 0];
 
-private _attacktime = GRLIB_vulnerability_timer;
+private _attacktime = (GRLIB_vulnerability_timer + (5 * 60));;
 private _ownership = [ _thispos ] call F_sectorOwnership;
 
 while { _attacktime > 0 && ( _ownership == _side ) } do {
