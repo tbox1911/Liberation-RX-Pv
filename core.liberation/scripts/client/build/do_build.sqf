@@ -84,7 +84,7 @@ while { true } do {
 		} else {
 			_grp = group player;
 			_unit = _grp createUnit [_classname, _pos, [], 5, "NONE"];
-			_unit addUniform uniform player;
+			_unit forceAddUniform (uniform player);
 			_unit setMass 10;
 			_unit setUnitRank "PRIVATE";
 			_unit setSkill 0.6;
