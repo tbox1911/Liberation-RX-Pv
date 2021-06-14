@@ -55,7 +55,7 @@ class Params
 		default = "";
 	};
 	class ModPresetWest {
-		title = "MOD Preset - BLUE";
+		title = "MOD Preset - BLU";
 		values[] = { 0,1,2 };
 		texts[] = { "A3_BLU", "A3_OPF", "A3_IND" };
 		default = 0;

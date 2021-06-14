@@ -2,9 +2,18 @@
 // Default classname: scripts\shared\default_classnames.sqf
 // Advanced definition: scripts\shared\classnames.sqf
 
-//huron_typename = "B_Heli_Transport_03_unarmed_F";  // comment to use value from lobby/server.cfg
 FOB_typename = "Land_DeconTent_01_NATO_tropic_F";
+huron_typename = "B_Heli_Transport_03_unarmed_F";
+FOB_box_typename = "B_Slingload_01_Cargo_F";
+FOB_truck_typename = "B_Truck_01_box_F";
 Respawn_truck_typename = "rhsusf_M1085A1P2_B_WD_Medical_fmtv_usarmy";
+ammo_truck_typename = "B_Truck_01_ammo_F";
+fuel_truck_typename = "B_Truck_01_fuel_F";
+repair_truck_typename = "B_Truck_01_Repair_F";
+repair_sling_typename = "B_Slingload_01_Repair_F";
+fuel_sling_typename = "B_Slingload_01_Fuel_F";
+ammo_sling_typename = "B_Slingload_01_Ammo_F";
+medic_sling_typename = "B_Slingload_01_Medevac_F";
 commander_classname = "B_officer_F";
 pilot_classname = "B_Helipilot_F";
 crewman_classname = "B_crew_F";

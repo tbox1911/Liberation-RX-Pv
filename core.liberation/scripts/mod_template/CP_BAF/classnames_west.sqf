@@ -3,10 +3,18 @@
 // Advanced definition: scripts\shared\classnames.sqf
 
 huron_typename = "CUP_B_Merlin_HC3_GB";
+FOB_typename = "Land_Cargo_HQ_V1_F";
+FOB_box_typename = "B_Slingload_01_Cargo_F";
+FOB_truck_typename = "B_Truck_01_box_F" ;
 Respawn_truck_typename = "CUP_B_LR_Ambulance_GB_D";
+repair_sling_typename = "B_Slingload_01_Repair_F";
+fuel_sling_typename = "B_Slingload_01_Fuel_F";
+ammo_sling_typename = "B_Slingload_01_Ammo_F";
+medic_sling_typename = "B_Slingload_01_Medevac_F";
 ammo_truck_typename = "CUP_B_T810_Reammo_CZ_DES";
 fuel_truck_typename = "CUP_B_T810_Refuel_CZ_DES";
 repair_truck_typename = "CUP_B_T810_Repair_CZ_DES";
+commander_classname = "B_officer_F";
 pilot_classname = "CUP_B_BAF_Soldier_Pilot_DDPM";
 crewman_classname = "CUP_B_BAF_Soldier_Crew_DDPM";
 
