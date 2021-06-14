@@ -4,6 +4,14 @@ if (!isMultiplayer) exitWith {
 	uisleep 10;
 	endMission "LOSER";
 };
+
+waitUntil {!isNil "abort_loading" };
+if (abort_loading) exitWith {
+	titleText ["Sorry, An error occured on savegame loading.\nPlease check the error logs.","BLACK FADED", 1000];
+	uisleep 10;
+	endMission "LOSER";
+};
+
 titleText ["Loading...","BLACK FADED", 1000];
 waitUntil {sleep 1; alive player};
 player setPos ((getmarkerpos 'respawn_point') findEmptyPosition [0,20, "B_soldier_F"]);

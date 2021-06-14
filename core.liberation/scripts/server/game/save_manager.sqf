@@ -63,7 +63,7 @@ _building_classnames = [FOB_typename_west, FOB_typename_east];
 	no_kill_handler_classnames pushback (_x select 0);
 	_classnames_to_save pushback (_x select 0);
 	_building_classnames pushback (_x select 0);
-} foreach buildings + buildings_custom_west + buildings_custom_east;
+} foreach buildings + buildings_west + buildings_east;
 
 {
 	_classnames_to_save_blu pushback (_x select 0);
@@ -84,6 +84,10 @@ _buildings_created = [];
 
 trigger_server_save = false;
 greuh_liberation_savegame = profileNamespace getVariable GRLIB_save_key;
+
+_side_west = "";
+_side_east = "";
+abort_loading = false;
 
 // Manager Load Save
 diag_log format [ "--- LRX Load Game start at %1", time ];
@@ -139,7 +143,13 @@ if ( !isNil "greuh_liberation_savegame" ) then {
 	resources_intel_west = greuh_liberation_savegame select 13;
 	resources_intel_east = greuh_liberation_savegame select 14;
 	GRLIB_player_scores = greuh_liberation_savegame select 15;
-
+	_side_west = greuh_liberation_savegame select 16;
+	_side_east = greuh_liberation_savegame select 17;
+	if ( typeName _side_west == "STRING" && typeName _side_east == "STRING" ) then {
+		if ( _side_west != GRLIB_mod_west || _side_east != GRLIB_mod_east ) then {
+			abort_loading = true;
+		};
+	};
 	setDate [ GRLIB_date_year, GRLIB_date_month, GRLIB_date_day, time_of_day, 0];
 
 	stats_saves_loaded = stats_saves_loaded + 1;
@@ -295,6 +305,15 @@ publicVariable "GRLIB_vehicle_to_military_base_links";
 publicVariable "GRLIB_permissions";
 publicVariable "GRLIB_player_scores";
 save_is_loaded = true; publicVariable "save_is_loaded";
+publicVariable "abort_loading";
+if (abort_loading) exitWith {
+	diag_log "*********************************************************************************";
+	diag_log format ["FATAL! - This Savegame was made with a differents Modset (%1/%2)", _side_west, _side_east];
+	diag_log "Loading Aborted to protect data integrity.";
+	diag_log "Correct the Modset or Wipe the savegame.";
+	diag_log "*********************************************************************************";
+};
+
 diag_log format [ "--- LRX Load Game finish at %1", time ];
 sleep 5;
 
@@ -438,7 +457,8 @@ while { true } do {
 			_permissions,
 			resources_intel_west,
 			resources_intel_east,
-			_player_scores
+			_player_scores,
+			GRLIB_mod_west,GRLIB_mod_east
 		];
 
 		profileNamespace setVariable [ GRLIB_save_key, greuh_liberation_savegame ];

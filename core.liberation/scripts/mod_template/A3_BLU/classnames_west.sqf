@@ -2,7 +2,18 @@
 // Default classname: scripts\shared\default_classnames.sqf
 // Advanced definition: scripts\shared\classnames.sqf
 
-//huron_typename = "B_Heli_Transport_03_unarmed_F";  // comment to use value from lobby/server.cfg
+huron_typename = "B_Heli_Transport_03_unarmed_F";
+FOB_typename = "Land_Cargo_HQ_V1_F";
+FOB_box_typename = "B_Slingload_01_Cargo_F";
+FOB_truck_typename = "B_Truck_01_box_F" ;
+Respawn_truck_typename = "B_Truck_01_medical_F";
+ammo_truck_typename = "B_Truck_01_ammo_F";
+fuel_truck_typename = "B_Truck_01_fuel_F";
+repair_truck_typename = "B_Truck_01_Repair_F";
+repair_sling_typename = "B_Slingload_01_Repair_F";
+fuel_sling_typename = "B_Slingload_01_Fuel_F";
+ammo_sling_typename = "B_Slingload_01_Ammo_F";
+medic_sling_typename = "B_Slingload_01_Medevac_F";
 commander_classname = "B_officer_F";
 pilot_classname = "B_Helipilot_F";
 crewman_classname = "B_crew_F";
@@ -89,9 +100,6 @@ air_vehicles = [
 	["B_Heli_Transport_03_unarmed_F",10,500,35,GRLIB_perm_tank],
 	["B_Heli_Transport_03_F",10,1500,35,GRLIB_perm_air],
 	["B_Heli_Transport_01_F",10,1500,35,GRLIB_perm_tank],
-	["B_T_VTOL_01_infantry_F",10,1300,40,GRLIB_perm_air],
-	["B_T_VTOL_01_vehicle_F",10,1400,40,GRLIB_perm_air],
-	["B_T_VTOL_01_armed_F",20,2500,40,GRLIB_perm_max],
 	["B_Heli_Attack_01_dynamicLoadout_F",10,2250,30,GRLIB_perm_air],
 	["B_Plane_CAS_01_dynamicLoadout_F",20,3000,50,GRLIB_perm_max],
 	["B_Plane_Fighter_01_F",20,4500,50,GRLIB_perm_max],
@@ -237,14 +245,14 @@ vehicle_rearm_sources_west = [
 	"B_APC_Tracked_01_CRV_F"
 ];
 
-vehicle_artillery = [
+vehicle_artillery_west = [
 	"B_Mortar_01_F",
 	"B_Ship_Gun_01_F",
 	"I_E_Truck_02_MRL_F",
 	"B_MBT_01_arty_F"
 ];
 
-vehicle_big_units = [
+vehicle_big_units_west = [
 	"Land_Cargo_Tower_V1_F",
 	"B_T_VTOL_01_infantry_F",
 	"B_T_VTOL_01_vehicle_F",

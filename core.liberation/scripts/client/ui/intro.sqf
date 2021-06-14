@@ -1,3 +1,6 @@
+waitUntil {!isNil "abort_loading" };
+if (abort_loading) exitWith {};
+
 while {	(player getVariable ["GRLIB_score_set", 0] == 0) } do {
 	titleText ["... Loading Player Data ...", "BLACK FADED", 100];
 	uIsleep 2;

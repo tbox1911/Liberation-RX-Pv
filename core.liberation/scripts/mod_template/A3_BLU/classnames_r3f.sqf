@@ -10,10 +10,6 @@ R3F_LOG_CFG_can_be_towed = R3F_LOG_CFG_can_be_towed +
 
 R3F_LOG_CFG_can_lift = R3F_LOG_CFG_can_lift +
 [
-	huron_typename,
-	"O_Heli_Light_02_unarmed_F",
-	"O_Heli_Transport_04_F",
-	"O_Heli_Light_02_unarmed_F",
 	"B_Heli_Transport_03_F",
 	"B_Heli_Transport_03_unarmed_F",
 	"B_Heli_Transport_01_F",
@@ -36,23 +32,18 @@ R3F_LOG_CFG_can_transport_cargo = R3F_LOG_CFG_can_transport_cargo +
 	[huron_typename, 200],
 	["B_Heli_Light_01_F", 10],
 	["B_Heli_Light_01_armed_F", 10],
-	["O_Heli_Light_02_unarmed_F", 50],
 	["B_Heli_Attack_01_F", 25],
 	["B_Heli_Attack_01_dynamicLoadout_F", 25],
 	["I_Heli_light_03_unarmed_F", 50],
 	["B_Heli_Transport_01_F", 100],
 	["B_Heli_Transport_01_camo_F", 100],
 	["B_Heli_Transport_03_F", 150],
-	["O_Heli_Transport_04_F", 150],
 	["I_Heli_Transport_02_F", 150],
 	["B_Heli_Transport_03_unarmed_F", 200],
 	["I_Heli_light_03_F",100],
 	["B_T_VTOL_01_infantry_F", 100],
 	["B_T_VTOL_01_vehicle_F", 100],
 	["B_T_VTOL_01_armed_F", 40],
-	["O_T_VTOL_01_infantry_F", 100],
-	["O_T_VTOL_01_vehicle_F", 150],
-	["O_T_VTOL_01_armed_F", 40],
 	["B_UAV_01_F", 1],
 	["B_UAV_02_dynamicLoadout_F", 1],
 	["B_UAV_06_F", 5],
@@ -218,31 +209,10 @@ R3F_LOG_CFG_can_be_towed = R3F_LOG_CFG_can_be_towed +
 //--------------- Building ---------------
 R3F_LOG_CFG_can_transport_cargo = R3F_LOG_CFG_can_transport_cargo +
 [
-	[FOB_box_typename, 0],
-  	[FOB_truck_typename, 0],
-	[ammo_truck_typename, 0],
-	[fuel_truck_typename, 0],
-	[repair_truck_typename, 0]
 ];
 
 R3F_LOG_CFG_can_be_transported_cargo = R3F_LOG_CFG_can_be_transported_cargo +
 [
-	[mobile_respawn, 2],
-	[Arsenal_typename, 5],
-	[FOB_box_typename, 50],
-	[ammobox_b_typename, 15],
-	[ammobox_o_typename, 15],
-	[ammobox_i_typename, 15],
-	[waterbarrel_typename, 10],
-	[fuelbarrel_typename, 10],
-	[foodbarrel_typename, 10],
-	[medicalbox_typename, 2],
-	[repair_sling_typename, 25],
-	[fuel_sling_typename, 25],
-	[ammo_sling_typename, 25],
-	[medic_sling_typename, 25],
-	[A3W_BoxWps, 7],
-	[canisterFuel, 1],
 	["Land_PierLadder_F", 2],
     ["Box_NATO_WpsLaunch_F",3],
 	["Land_CargoBox_V1_F", 20]
@@ -250,22 +220,6 @@ R3F_LOG_CFG_can_be_transported_cargo = R3F_LOG_CFG_can_be_transported_cargo +
 
 R3F_LOG_CFG_can_be_moved_by_player = R3F_LOG_CFG_can_be_moved_by_player +
 [
-	mobile_respawn,
-	Arsenal_typename,
-	FOB_box_typename,
-	ammobox_b_typename,
-	ammobox_o_typename,
-	ammobox_i_typename,
-	waterbarrel_typename,
-	fuelbarrel_typename,
-	foodbarrel_typename,
-	medicalbox_typename,
-	repair_sling_typename,
-	fuel_sling_typename,
-	ammo_sling_typename,
-	medic_sling_typename,
-	A3W_BoxWps,
-	canisterFuel,
 	"Land_Pod_Heli_Transport_04_bench_F",
 	"Land_Pod_Heli_Transport_04_covered_F",
 	"Land_PierLadder_F",
@@ -273,8 +227,6 @@ R3F_LOG_CFG_can_be_moved_by_player = R3F_LOG_CFG_can_be_moved_by_player +
 	"Land_CargoBox_V1_F",
 	"Land_Cargo_House_V1_F",
 	"Land_Cargo_Patrol_V1_F",
-	"Land_Cargo_House_V3_F",
-	"Land_Cargo_Patrol_V3_F",
 	"Land_BagBunker_Large_F",
 	"Land_BagBunker_Small_F",
 	"Land_BagBunker_Tower_F",
@@ -285,7 +237,6 @@ R3F_LOG_CFG_can_be_moved_by_player = R3F_LOG_CFG_can_be_moved_by_player +
 
 R3F_LOG_CFG_can_be_lifted = R3F_LOG_CFG_can_be_lifted +
 [
-	Arsenal_typename
 ];
 //--------------- Static ---------------
 
@@ -340,8 +291,6 @@ R3F_LOG_CFG_can_be_moved_by_player = R3F_LOG_CFG_can_be_moved_by_player +
 	"Land_CncShelter_F",
 	"Land_Cargo_House_V1_F",
 	"Land_Cargo_Patrol_V1_F",
-	"Land_Cargo_House_V3_F",
-	"Land_Cargo_Patrol_V3_F",
 	"Land_PortableLight_double_F",
 	"Flag_NATO_F",
 	"Land_HelipadSquare_F",
@@ -379,8 +328,6 @@ R3F_LOG_CFG_can_be_transported_cargo = R3F_LOG_CFG_can_be_transported_cargo +
 	["Land_CncShelter_F", 5],
 	["Land_Cargo_House_V1_F", 5],
 	["Land_Cargo_Patrol_V1_F", 5],
-	["Land_Cargo_House_V3_F", 5],
-	["Land_Cargo_Patrol_V3_F", 5],
 	["Land_PortableLight_double_F", 5],
 	["Flag_NATO_F", 5],
 	["Land_HelipadSquare_F", 5],

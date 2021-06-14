@@ -28,7 +28,6 @@ GRLIB_remote_sensors = [ "DisableRemoteSensors",0] call bis_fnc_getParamValue;
 GRLIB_city_defenders = [ "CityDefenders",1] call bis_fnc_getParamValue;
 GRLIB_maximum_fobs = [ "MaximumFobs",5] call bis_fnc_getParamValue;
 GRLIB_fob_type = [ "FobType",0] call bis_fnc_getParamValue;
-GRLIB_huron_type = [ "HuronType", 0] call bis_fnc_getParamValue;
 GRLIB_opfor_english = [ "EnglishOpfor", 1] call bis_fnc_getParamValue;
 GRLIB_squad_size = ["SquadSize",3] call bis_fnc_getParamValue;
 GRLIB_max_squad_size = ["MaxSquadSize",7] call bis_fnc_getParamValue;
@@ -40,9 +39,28 @@ GRLIB_fancy_info = ["FancyInfo",1] call bis_fnc_getParamValue;
 GRLIB_overide_opfor = ["TextureOveride",0] call bis_fnc_getParamValue;
 GRLIB_hide_opfor = ["HideOpfor",0] call bis_fnc_getParamValue;
 GRLIB_thermic = ["Thermic",1] call bis_fnc_getParamValue;
+GRLIB_mod_preset_west = ["ModPresetWest", 0] call bis_fnc_getParamValue;
+GRLIB_mod_preset_east = ["ModPresetEast", 0] call bis_fnc_getParamValue;
+GRLIB_mod_preset_indp = ["ModPresetIndp", 0] call bis_fnc_getParamValue;
 
 // Define constant
 [] call compileFinal preprocessFileLineNUmbers "gameplay_constants.sqf";
+
+// Classename MOD source
+[] call compileFinal preprocessFileLineNUmbers "scripts\mod_template\mod_init.sqf";
+if (isNil "GRLIB_mod_west") then { GRLIB_mod_west = GRLIB_mod_list_west select GRLIB_mod_preset_west };
+if (isNil "GRLIB_mod_east") then { GRLIB_mod_east = GRLIB_mod_list_east select GRLIB_mod_preset_east };
+if (isNil "GRLIB_mod_indp") then { GRLIB_mod_indp = GRLIB_mod_list_indp select GRLIB_mod_preset_indp };
+
+// Check wrong sides
+if (GRLIB_mod_west == GRLIB_mod_east || GRLIB_mod_west == GRLIB_mod_indp || GRLIB_mod_east == GRLIB_mod_indp ) exitWith {
+	diag_log "*********************************************************************************";
+	diag_log "FATAL! - Invalid Side selection !";
+	diag_log "Loading Aborted to protect data integrity.";
+	diag_log "Correct the Side selection.";
+	diag_log "*********************************************************************************";
+	abort_loading = true; publicVariable "abort_loading";
+};
 
 GRLIB_r1 = "&#108;&#105;&#98;&#101;&#114;&#97;&#116;&#105;&#111;&#110;";
 GRLIB_r2 = "&#114;&#120;";
@@ -56,15 +74,6 @@ GRLIB_GM_enabled = isClass(configFile >> "cfgPatches" >> "gm_Core"); // Returns 
 GRLIB_CUPW_enabled = isClass(configFile >> "CfgPatches" >> "CUP_Weapons_AK"); // Returns true if CUP Weapons is enabled
 GRLIB_EJW_enabled = isClass(configFile >> "CfgPatches" >> "Ej_u100"); // Returns true if EricJ Weapons is enabled 
 GRLIB_Red_Edition = (missionName find "RX_Red" > 0);
-
-if ( !GRLIB_OPTRE_enabled && !GRLIB_GM_enabled && !GRLIB_Red_Edition) then {
-	// Huron type
-	switch (GRLIB_huron_type) do {
-		case 0: {huron_typename_west = "B_Heli_Transport_03_unarmed_F" };
-		case 1: {huron_typename_west = "I_Heli_Transport_02_F" };
-		case 2: {huron_typename_west = "B_Heli_Transport_01_F" };
-	};
-};
 
 if ( GRLIB_ACE_enabled ) then {	GRLIB_revive = 0; GRLIB_fatigue = 1; GRLIB_fancy_info = 0; GRLIB_limited_arsenal = 0 };  // Disable PAR/Fatigue/Fancy if ACE present
 if ( GRLIB_OPTRE_enabled ) then { GRLIB_MOD_signature = "OPTRE_" };

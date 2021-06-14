@@ -54,18 +54,24 @@ class Params
 		texts[] = { "" };
 		default = "";
 	};
-	// class ModPresetWest {
-	// 	title = "MOD Preset - Friendly";
-	// 	values[] = { 0,1,2,3,4,5,6 };
-	// 	texts[] = { "A3_BLU", "A3_OPF", "A3_IND", "CP_NATO", "CP_RF", "GM_WEST", "GM_WEST_WINT" };
-	// 	default = 0;
-	// };
-	// class ModPresetEast {
-	// 	title = "MOD Preset - Enemy";
-	// 	values[] = { 0,1,2,3,4,5,6,7 };
-	// 	texts[] = { "A3_OPF", "A3_BLU", "A3_IND", "CP_RF", "CP_TA", "GM_EAST", "GM_EAST_WINT", "EJW_TA" };
-	// 	default = 0;
-	// };
+	class ModPresetWest {
+		title = "MOD Preset - BLUE";
+		values[] = { 0,1,2 };
+		texts[] = { "A3_BLU", "A3_OPF", "A3_IND" };
+		default = 0;
+	};
+	class ModPresetEast {
+		title = "MOD Preset - RED";
+		values[] = { 0,1,2 };
+		texts[] = { "A3_OPF", "A3_BLU", "A3_IND" };
+		default = 0;
+	};
+	class ModPresetIndp {
+		title = "MOD Preset - DEF";
+		values[] = { 0,1,2 };
+		texts[] = { "A3_IND", "A3_OPF", "A3_BLU" };
+		default = 0;
+	};	
 	class ForcedLoadout {
 		title = $STR_FORCE_LOADOUT;
 		values[] = { 0,1,2 };
@@ -82,12 +88,6 @@ class Params
 		title = $STR_PARAM_FOB_TYPE ;
 		values[] = {0,1};
 		texts[] = {"Huron", "Truck"};
-		default = 0;
-	};
-	class HuronType{
-		title = $STR_PARAM_HURON_TYPE ;
-		values[] = {0,1,2,3};
-		texts[] = {$STR_PARAMS_DISABLED, "CH-67 Huron", "CH-49 Mohawk", "UH-80 Ghost Hawk"};
 		default = 0;
 	};
 	class Space1 {
