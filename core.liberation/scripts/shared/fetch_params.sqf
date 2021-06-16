@@ -51,11 +51,11 @@ GRLIB_mod_preset_indp = ["ModPresetIndp", 0] call bis_fnc_getParamValue;
 if (isNil "GRLIB_mod_west") then { GRLIB_mod_west = GRLIB_mod_list_west select GRLIB_mod_preset_west };
 if (isNil "GRLIB_mod_east") then { GRLIB_mod_east = GRLIB_mod_list_east select GRLIB_mod_preset_east };
 if (isNil "GRLIB_mod_indp") then { GRLIB_mod_indp = GRLIB_mod_list_indp select GRLIB_mod_preset_indp };
-
+GRLIB_r1 = "&#108;&#105;&#98;&#101;&#114;&#97;&#116;&#105;&#111;&#110;";
+GRLIB_r2 = "&#114;&#120;";
+GRLIB_r3 = "&#76;&#82;&#88;&#32;&#73;&#110;&#102;&#111;";
 // Check wrong sides
-abort_loading = false;
 if (GRLIB_mod_west == GRLIB_mod_east || GRLIB_mod_west == GRLIB_mod_indp || GRLIB_mod_east == GRLIB_mod_indp ) then { abort_loading = true };
-publicVariable "abort_loading";
 if (abort_loading) exitWith {
 	diag_log "*********************************************************************************";
 	diag_log "FATAL! - Invalid Side selection !";
@@ -63,10 +63,6 @@ if (abort_loading) exitWith {
 	diag_log "Correct the Side selection.";
 	diag_log "*********************************************************************************";
 };
-
-GRLIB_r1 = "&#108;&#105;&#98;&#101;&#114;&#97;&#116;&#105;&#111;&#110;";
-GRLIB_r2 = "&#114;&#120;";
-GRLIB_r3 = "&#76;&#82;&#88;&#32;&#73;&#110;&#102;&#111;";
 
 //Detect Addons ACE ACRE OPTRE GM
 GRLIB_ACE_enabled = isClass(configFile >> "cfgPatches" >> "ace_main"); // Returns true if ACE is enabled
