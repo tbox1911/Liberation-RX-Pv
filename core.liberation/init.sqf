@@ -8,6 +8,7 @@ enableSaving [false, false];
 disableMapIndicators [false,true,false,false];
 setGroupIconsVisible [false,false];
 
+abort_loading = false;
 [] call compileFinal preprocessFileLineNUmbers "whitelist.sqf";
 [] call compileFinal preprocessFileLineNUmbers "scripts\shared\liberation_functions.sqf";
 [] call compileFinal preprocessFileLineNUmbers "scripts\shared\fetch_params.sqf";

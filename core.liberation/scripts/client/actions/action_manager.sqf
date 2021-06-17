@@ -388,7 +388,7 @@ while { true } do {
 
 		// Destroy Outpost
 		_idact_destroyfob = _id_actions select 28;
-		if ((_fobdistance < _distarsenal && (player distance lhd) >= 1000) && (_near_outpost) && ( (score player >= GRLIB_perm_log) || (player == ( [] call F_getCommander ) || [] call is_admin) )) then {
+		if ((_fobdistance < _distarsenal && (player distance my_lhd) >= 1000) && (_near_outpost) && ( (score player >= GRLIB_perm_log) || (player == ( [] call F_getCommander ) || [] call is_admin) )) then {
 			if ( _idact_destroyfob == -1 ) then {
 				_idact = player addAction ["<t color='#FF6F00'>" + "-- DESTROY OUTPOST" + "</t> <img size='1' image='res\ui_deployfob.paa'/>","scripts\client\actions\do_destroy_fob.sqf",([] call F_getNearestFob),-981,false,true,"","build_confirmed == 0 && !(cursorObject getVariable ['fob_in_use', false])"];
 				_id_actions set [28, _idact];

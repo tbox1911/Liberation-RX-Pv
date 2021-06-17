@@ -55,9 +55,9 @@ while { dialog && alive player && deploy == 0} do {
 		_fobpos = _myfobs select _idx;
 		_near_outpost = (count (_fobpos nearObjects [FOB_outpost, 100]) > 0);
 		if (_near_outpost) then {
-			_choiceslist = _choiceslist + [[format [ "Outpost %1 - %2", (military_alphabet select _idx),mapGridPosition (_myfobs select _idx) ],GRLIB_all_fobs select _idx]];
+			_choiceslist = _choiceslist + [[format [ "Outpost %1 - %2", (military_alphabet select _idx),mapGridPosition (_myfobs select _idx) ],_myfobs select _idx]];
 		} else {
-			_choiceslist = _choiceslist + [[format [ "FOB %1 - %2", (military_alphabet select _idx),mapGridPosition (_myfobs select _idx) ],GRLIB_all_fobs select _idx]];
+			_choiceslist = _choiceslist + [[format [ "FOB %1 - %2", (military_alphabet select _idx),mapGridPosition (_myfobs select _idx) ],_myfobs select _idx]];
 		};
 	};
 
