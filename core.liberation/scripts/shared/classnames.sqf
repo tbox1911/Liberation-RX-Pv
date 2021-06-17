@@ -275,6 +275,7 @@ GRLIB_vehicle_blacklist append [
 	FOB_truck_typename_west,
 	FOB_box_typename_east,
 	FOB_truck_typename_east,
+	FOB_box_outpost,
 	canisterFuel,
 	waterbarrel_typename,
 	fuelbarrel_typename,

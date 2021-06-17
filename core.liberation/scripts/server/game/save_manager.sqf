@@ -54,11 +54,11 @@ resources_intel_east = 0;
 GRLIB_player_scores = [];
 GRLIB_garage = [];
 
-no_kill_handler_classnames = [FOB_typename_west, huron_typename_west, FOB_typename_east, huron_typename_east];
-_classnames_to_save = [FOB_typename_west, huron_typename_west, FOB_typename_east, huron_typename_east];
+no_kill_handler_classnames = [FOB_typename_west, huron_typename_west, FOB_typename_east, huron_typename_east, FOB_outpost];
+_classnames_to_save = [FOB_typename_west, huron_typename_west, FOB_typename_east, huron_typename_east, FOB_outpost];
 _classnames_to_save_blu = [];
 _classnames_to_save_red = [];
-_building_classnames = [FOB_typename_west, FOB_typename_east];
+_building_classnames = [FOB_typename_west, FOB_typename_east, FOB_outpost];
 {
 	no_kill_handler_classnames pushback (_x select 0);
 	_classnames_to_save pushback (_x select 0);
@@ -247,7 +247,7 @@ if ( !isNil "greuh_liberation_savegame" ) then {
 					_nextbuilding addMPEventHandler ["MPKilled", {_this spawn kill_manager}];
 				};
 
-				if ( _nextclass in [FOB_typename_west, FOB_typename_east] ) then {
+				if ( _nextclass in [FOB_typename_west, FOB_typename_east, FOB_outpost] ) then {
 					_nextbuilding allowDamage false;
 					_nextbuilding addEventHandler ["HandleDamage", { 0 }];
 				};

@@ -1,4 +1,6 @@
 // Global objects
+if ( isNil "FOB_outpost" ) then { FOB_outpost = "Land_BagBunker_Tower_F" };
+if ( isNil "FOB_box_outpost" ) then { FOB_box_outpost = "Land_Cargo10_grey_F" };
 if ( isNil "Arsenal_typename" ) then { Arsenal_typename = "B_supplyCrate_F" };
 if ( isNil "mobile_respawn" ) then { mobile_respawn = "Land_TentDome_F" };		// "Land_SatelliteAntenna_01_F"
 if ( isNil "mobile_respawn_bag" ) then { mobile_respawn_bag = "B_Kitbag_Base" };
