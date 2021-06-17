@@ -115,13 +115,10 @@ static_vehicles = [
 ];
 
 // *** Static Weapon with AI ***
-static_vehicles_AI = [
-	"B_AAA_System_01_F",
-	"B_SAM_System_02_F",
-	"O_SAM_System_04_F"
+static_vehicles_AI_west = [
 ];
 
-support_vehicles_west = [
+support_vehicles = [
 	["gm_ge_army_shelteraceII_repair",5,50,5,GRLIB_perm_inf],
 	["gm_gc_army_shelteraceII_medic",5,50,5,GRLIB_perm_inf],
 	["gm_gc_army_shelterlakII_repair",10,100,0,GRLIB_perm_log],
@@ -133,7 +130,7 @@ support_vehicles_west = [
 	["gm_AmmoBox_wood_03_empty",0,150,0,GRLIB_perm_tank]
 ];
 
-buildings_west = [
+buildings = [
 	["Land_Cargo_Tower_V1_F",0,0,0,GRLIB_perm_tank],
 	["Land_Cargo_House_V1_F",0,0,0,GRLIB_perm_inf],
 	["Land_Cargo_Patrol_V1_F",0,0,0,GRLIB_perm_log],
@@ -234,10 +231,6 @@ vehicle_rearm_sources_west = [
 	"gm_ge_army_kat1_451_reammo",
 	"gm_AmmoBox_wood_02_empty",
 	"gm_AmmoBox_wood_03_empty"
-];
-
-vehicle_artillery_west = [
-	"B_Mortar_01_F"
 ];
 
 vehicle_big_units_west = [

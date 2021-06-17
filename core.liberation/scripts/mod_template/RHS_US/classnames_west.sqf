@@ -163,13 +163,10 @@ static_vehicles = [
 ];
 
 // *** Static Weapon with AI ***
-static_vehicles_AI = [
-	"B_AAA_System_01_F",
-	"B_SAM_System_02_F",
-	"O_SAM_System_04_F"
+static_vehicles_AI_west = [
 ];
 
-support_vehicles_west = [
+support_vehicles = [
 	["rhs_D30_msv",10,150,0,GRLIB_perm_log],
 	["rhs_D30_at_msv",10,150,0,GRLIB_perm_log],
 	["rhsusf_mags_crate",0,50,0,GRLIB_perm_tank],
@@ -179,7 +176,7 @@ support_vehicles_west = [
 	["B_APC_Tracked_01_CRV_F",15,2000,50,GRLIB_perm_max]
 ];
 
-buildings_west = [
+buildings = [
 	["Land_Cargo_Tower_V1_F",0,0,0,GRLIB_perm_tank],
 	["Land_Cargo_House_V1_F",0,0,0,GRLIB_perm_inf],
 	["Land_Cargo_Patrol_V1_F",0,0,0,GRLIB_perm_log],
@@ -316,13 +313,6 @@ ai_healing_sources_west = [
 
 vehicle_rearm_sources_west = [
 	"B_APC_Tracked_01_CRV_F"
-];
-
-vehicle_artillery_west = [
-	"B_Mortar_01_F",
-	"B_Ship_Gun_01_F",
-	"I_E_Truck_02_MRL_F",
-	"B_MBT_01_arty_F"
 ];
 
 vehicle_big_units_west = [

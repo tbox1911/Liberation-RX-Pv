@@ -1,70 +1,5 @@
 // All Object classname used in RX must be declared here
 
-if ( isNil "Arsenal_typename" ) then { Arsenal_typename = "B_supplyCrate_F" };
-if ( isNil "mobile_respawn" ) then { mobile_respawn = "Land_TentDome_F" };		// "Land_SatelliteAntenna_01_F"
-if ( isNil "mobile_respawn_bag" ) then { mobile_respawn_bag = "B_Kitbag_Base" };
-if ( isNil "medicalbox_typename" ) then { medicalbox_typename = "Box_B_UAV_06_medical_F" };
-if ( isNil "ammobox_b_typename" ) then { ammobox_b_typename = "Box_NATO_AmmoVeh_F" };
-if ( isNil "ammobox_o_typename" ) then { ammobox_o_typename = "Box_East_AmmoVeh_F" };
-if ( isNil "ammobox_i_typename" ) then { ammobox_i_typename = "Box_IND_AmmoVeh_F" };
-if ( isNil "waterbarrel_typename" ) then { waterbarrel_typename = "Land_BarrelWater_F" };
-if ( isNil "fuelbarrel_typename" ) then { fuelbarrel_typename = "Land_MetalBarrel_F" };
-if ( isNil "foodbarrel_typename" ) then { foodbarrel_typename = "Land_FoodSacks_01_large_brown_idap_F" };
-if ( isNil "PAR_Medikit" ) then { PAR_Medikit = "Medikit" };
-if ( isNil "PAR_AidKit" ) then { PAR_AidKit = "FirstAidKit" };
-if ( isNil "A3W_BoxWps" ) then { A3W_BoxWps = "Box_East_Wps_F" };
-if ( isNil "canisterFuel" ) then { canisterFuel = "Land_CanisterFuel_Red_F" };
-if ( isNil "opfor_ammobox_transport" ) then { opfor_ammobox_transport = "I_Truck_02_transport_F" };
-
-// *** BUILDINGS ***
-buildings = [
-	["Land_PierLadder_F",0,0,0,GRLIB_perm_inf],
-	["Land_CncBarrierMedium4_F",0,0,0,0],
-	["Land_CncWall4_F",0,0,0,0],
-	["Land_BagFence_Round_F",0,0,0,GRLIB_perm_log],
-	["Land_BagFence_Long_F",0,0,0,0],
-	["Land_BagFence_Short_F",0,0,0,GRLIB_perm_inf],
-	["Land_BagFence_Corner_F",0,0,0,GRLIB_perm_log],
-	["Land_HBarrier_5_F",0,0,0,0],
-	["Land_HBarrierWall4_F",0,0,0,GRLIB_perm_tank],
-	["Land_HBarrierWall6_F",0,0,0,GRLIB_perm_tank],
-	["Land_HBarrierWall_corner_F",0,0,0,GRLIB_perm_tank],
-	["Land_HBarrierTower_F",0,0,0,GRLIB_perm_tank],
-	["Land_HBarrierBig_F",0,0,0,GRLIB_perm_tank],
-	["Land_CncShelter_F",0,0,0,GRLIB_perm_log],
-	["Land_BagBunker_Small_F",0,0,0,0],
-	["Land_BagBunker_Large_F",0,0,0,GRLIB_perm_tank],
-	["Land_BagBunker_Tower_F",0,0,0,GRLIB_perm_tank],
-	["Land_SM_01_shed_F",0,0,0,GRLIB_perm_max],
-	["Land_Hangar_F",0,0,0,GRLIB_perm_max],
-	["Land_PortableLight_double_F",0,0,0,GRLIB_perm_log],
-	["Land_LampHalogen_F",0,0,0,GRLIB_perm_tank],
-	["Land_HelipadSquare_F",0,0,0,GRLIB_perm_log],
-	["Land_Razorwire_F",0,0,0,GRLIB_perm_tank],
-	["Land_ToolTrolley_02_F",0,0,0,GRLIB_perm_tank],
-	["Land_WeldingTrolley_01_F",0,0,0,GRLIB_perm_tank],
-	["Land_GasTank_02_F",0,0,0,GRLIB_perm_tank],
-	["Land_Workbench_01_F",0,0,0,GRLIB_perm_tank],
-	["Land_WaterTank_F",0,0,0,GRLIB_perm_tank],
-	["Land_WaterBarrel_F",0,0,0,GRLIB_perm_tank],
-	["Land_BarGate_F",0,0,0,GRLIB_perm_log],
-	["Land_MetalCase_01_large_F",0,0,0,GRLIB_perm_tank],
-	["CargoNet_01_box_F",0,0,0,GRLIB_perm_tank],
-	["CamoNet_BLUFOR_open_F",0,0,GRLIB_perm_tank],
-	["CamoNet_BLUFOR_big_F",0,0,0,GRLIB_perm_tank],
-	["Land_CampingChair_V1_F",0,0,0,GRLIB_perm_tank],
-	["Land_CampingChair_V2_F",0,0,0,GRLIB_perm_tank],
-	["Land_CampingTable_F",0,0,0,GRLIB_perm_tank],
-	["MapBoard_altis_F",0,0,0,GRLIB_perm_tank],
-	["Land_Metal_rack_Tall_F",0,0,0,GRLIB_perm_tank],
-	["PortableHelipadLight_01_blue_F",0,0,0,GRLIB_perm_tank],
-	["Land_DieselGroundPowerUnit_01_F",0,0,0,GRLIB_perm_tank],
-	["Land_Pallet_MilBoxes_F",0,0,0,GRLIB_perm_tank],
-	["Land_PaperBox_open_full_F",0,0,0,GRLIB_perm_tank],
-	["Land_ClutterCutter_large_F",0,0,0,GRLIB_perm_tank],
-	["Land_CzechHedgehog_01_new_F",0,0,0,GRLIB_perm_inf]
-];
-
 [] call compileFinal preprocessFileLineNumbers "scripts\loadouts\init_loadouts.sqf";
 // *** DEFENSE ***
 [] call compileFinal preprocessFileLineNUmbers format ["scripts\mod_template\%1\classnames_east.sqf", GRLIB_mod_indp];
@@ -72,6 +7,7 @@ buildings = [
 // *** DEFAULT ***
 [] call compileFinal preprocessFileLineNUmbers format ["scripts\shared\default_classnames.sqf"];
 
+// ********************************************************************************************************
 // *** BLUE ***
 [] call compileFinal preprocessFileLineNUmbers format ["scripts\mod_template\%1\classnames_west.sqf", GRLIB_mod_west];
 [infantry_units, GRLIB_side_west] call F_calcUnitsCost;
@@ -92,22 +28,22 @@ medic_sling_typename_west = medic_sling_typename;
 commander_classname_west = commander_classname;
 pilot_classname_west =  pilot_classname;
 crewman_classname_west = crewman_classname;
-buildings_west append buildings;
 infantry_units_west = infantry_units;
 light_vehicles_west = light_vehicles;
 heavy_vehicles_west = heavy_vehicles;
 air_vehicles_west = air_vehicles;
 air_attack_west = blufor_air;
 static_vehicles_west = static_vehicles;
-support_vehicles_west = support_vehicles_west;
+buildings_west = default_buildings + buildings;
+support_vehicles_west = default_support_vehicles + support_vehicles;
 squads_west = squads;
 uavs_west = uavs;
 
 // remap list common (should be sided ?)
+static_vehicles_AI append static_vehicles_AI_west;
 ai_resupply_sources append ai_resupply_sources_west;
 ai_healing_sources append ai_healing_sources_west;
 vehicle_rearm_sources append vehicle_rearm_sources_west;
-vehicle_artillery append vehicle_artillery_west;
 vehicle_big_units append vehicle_big_units_west;
 GRLIB_vehicle_whitelist append GRLIB_vehicle_whitelist_west;
 GRLIB_vehicle_blacklist append GRLIB_vehicle_blacklist_west;
@@ -116,6 +52,7 @@ box_transport_config append box_transport_config_west;
 // GRLIB_AirDrop_1 per side
 //(maybe cleanup vars ?)
 
+// ********************************************************************************************************
 // *** RED ***
 [] call compileFinal preprocessFileLineNUmbers format ["scripts\mod_template\%1\classnames_west.sqf", GRLIB_mod_east];
 [infantry_units, GRLIB_side_east] call F_calcUnitsCost;
@@ -136,27 +73,28 @@ medic_sling_typename_east = medic_sling_typename;
 commander_classname_east = commander_classname;
 pilot_classname_east =  pilot_classname;
 crewman_classname_east = crewman_classname;
-buildings_east = buildings_west + buildings;
 infantry_units_east = infantry_units;
 light_vehicles_east = light_vehicles;
 heavy_vehicles_east = heavy_vehicles;
 air_vehicles_east = air_vehicles;
 air_attack_east = blufor_air;
 static_vehicles_east = static_vehicles;
-support_vehicles_east = support_vehicles_west;
+buildings_east = default_buildings +  buildings;
+support_vehicles_east = default_support_vehicles + support_vehicles;
 squads_east = squads;
 uavs_east = uavs;
 
 // remap list common
+static_vehicles_AI append static_vehicles_AI_west;
 ai_resupply_sources append ai_resupply_sources_west;
 ai_healing_sources append ai_healing_sources_west;
 vehicle_rearm_sources append vehicle_rearm_sources_west;
-vehicle_artillery append vehicle_artillery_west;
 vehicle_big_units append vehicle_big_units_west;
 GRLIB_vehicle_whitelist append GRLIB_vehicle_whitelist_west;
 GRLIB_vehicle_blacklist append GRLIB_vehicle_blacklist_west;
 box_transport_config append box_transport_config_west;
 
+// ********************************************************************************************************
 // *** CIVILIAN ***
 [] call compileFinal preprocessFileLineNUmbers format ["scripts\mod_template\%1\classnames_civ.sqf", GRLIB_mod_west];
 
@@ -166,53 +104,6 @@ elite_vehicles = [];
 
 // *** UAVs ***
 uavs = uavs_west + uavs_east;
-
-// *** Static Weapon with AI ***
-static_vehicles_AI = [
-	"B_AAA_System_01_F",
-	"B_SAM_System_02_F",
-	"O_SAM_System_04_F"
-];
-
-// Everything the AI troups should be able to resupply from
-ai_resupply_sources = [
-	Arsenal_typename,
-	ammo_truck_typename_west,
-	ammo_sling_typename_west,
-	ammo_truck_typename_east,
-	ammo_sling_typename_east
-];
-
-// Everything the AI troups should be able to healing from
-ai_healing_sources = [
-	medicalbox_typename,
-	Respawn_truck_typename_west,
-	medic_sling_typename_west,
-	Respawn_truck_typename_east,
-	medic_sling_typename_east
-];
-
-vehicle_rearm_sources = [
-	ammobox_b_typename,
-	ammobox_o_typename,
-	ammobox_i_typename,
-	ammo_truck_typename_west,
-	ammo_sling_typename_west,
-	ammo_truck_typename_east,
-	ammo_sling_typename_east
-];
-
-vehicle_big_units = [
-	"Land_Cargo_Tower_V1_F",
-	"B_T_VTOL_01_infantry_F",
-	"B_T_VTOL_01_vehicle_F",
-	"B_T_VTOL_01_armed_F",
-	"O_T_VTOL_01_infantry_F",
-	"O_T_VTOL_01_vehicle_F",
-	"O_T_VTOL_01_armed_F",
-	"Land_SM_01_shed_F",
-	"Land_Hangar_F"
-];
 
 // Configuration for ammo boxes transport
 // First entry: classname
