@@ -17,7 +17,7 @@ if ((alive _troup_transport) && (alive (driver _troup_transport))) then {
 		_unit assignAsCargo _troup_transport;
 		_unit moveInCargo _troup_transport;
 		_unit allowFleeing 0;
-		_unit setVariable ["GRLIB_counter_TTL", round(time + 1800)];
+		_unit setVariable ["GRLIB_counter_TTL", round(time + 3600)];
 		sleep 0.1;
 	} foreach ([] call F_getAdaptiveSquadComp);
 
