@@ -3,7 +3,7 @@ params [ "_new_fob", "_side" ];
 private _delete_items = [
 	FOB_box_typename_west, FOB_truck_typename_west, "Land_Cargo_HQ_V1_ruins_F",
 	FOB_box_typename_east, FOB_truck_typename_east, "Land_Cargo_HQ_V3_ruins_F",
-	FOB_outpost
+	FOB_box_outpost
 ];
 
 if (_side == GRLIB_side_west) then {
