@@ -300,7 +300,7 @@ while { true } do {
 
 		// Pack FOB
 		_idact_packfob = _id_actions select 22;
-		if ((_fobdistance < _distarsenal && (player distance my_lhd) >= GRLIB_sector_size) && ( (score player >= GRLIB_perm_max) || (player == ( [] call F_getCommander ) || [] call is_admin) )) then {
+		if ((_fobdistance < _distarsenal && (player distance my_lhd) >= GRLIB_sector_size) && (!_near_outpost) && ( (score player >= GRLIB_perm_max) || (player == ( [] call F_getCommander ) || [] call is_admin) )) then {
 			if ( _idact_packfob == -1 ) then {
 				_idact = player addAction ["<t color='#FF6F00'>" + localize "STR_FOB_REPACKAGE" + "</t> <img size='1' image='res\ui_deployfob.paa'/>","scripts\client\actions\do_repackage_fob.sqf",([] call F_getNearestFob),-981,false,true,"","build_confirmed == 0 && !(cursorObject getVariable ['fob_in_use', false])"];
 				_id_actions set [22, _idact];
