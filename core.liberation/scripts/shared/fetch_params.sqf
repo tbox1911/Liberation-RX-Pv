@@ -42,6 +42,7 @@ GRLIB_thermic = ["Thermic",1] call bis_fnc_getParamValue;
 GRLIB_mod_preset_west = ["ModPresetWest", 0] call bis_fnc_getParamValue;
 GRLIB_mod_preset_east = ["ModPresetEast", 0] call bis_fnc_getParamValue;
 GRLIB_mod_preset_indp = ["ModPresetIndp", 0] call bis_fnc_getParamValue;
+GRLIB_force_load = ["ForceLoading", 0] call bis_fnc_getParamValue;
 
 // Define constant
 [] call compileFinal preprocessFileLineNUmbers "gameplay_constants.sqf";
