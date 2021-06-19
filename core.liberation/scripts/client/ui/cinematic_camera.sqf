@@ -39,16 +39,8 @@ while { cinematic_camera_started } do {
 				};
 			} else {
 				for [ {_idx=0},{_idx < 5},{_idx=_idx+1} ] do {
-					_positions pushback (getmarkerpos (selectRandom sectors_allSectors));
-				};
-			};
-
-			if ( GRLIB_endgame == 0 ) then {
-				 _activeplayers = ( [ allPlayers , { alive _x && ( _x distance ( getmarkerpos GRLIB_respawn_marker ) ) > 100 } ] call BIS_fnc_conditionalSelect );
-				 if ( count _activeplayers > 0 ) then {
-				 	for [ {_idx=0},{_idx < 3},{_idx=_idx+1} ] do {
-						_positions pushback (getpos (selectRandom _activeplayers));
-					};
+					_sectors = (sectors_allSectors - west_sectors - east_sectors) + ([] call get_mySectors);
+					_positions pushback (getmarkerpos (selectRandom _sectors));
 				};
 			};
 
