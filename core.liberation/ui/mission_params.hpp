@@ -55,11 +55,6 @@ class Params
 		default = "";
 	};
 
-
-		texts[] = { "A3 NATO", "A3 CSAT", "A3 AAF", "CP BAF Desert", "CP CZ", "RHS USA", "RHS Russian F", "GM WEST", "GM WEST Winter" };
-		texts[] = { "A3 CSAT", "A3 NATO", "A3 AAF", "A3 CSAT Urban", "CP Takistan", "RHS Russian F", "GM EAST", "GM EAST Winter"};
-
-
 	class ModPresetWest {
 		title = "MOD Preset - BLU";
 		values[] = { 0,1,2,3,4,5,6,7 };
@@ -69,13 +64,13 @@ class Params
 	class ModPresetEast {
 		title = "MOD Preset - RED";
 		values[] = { 0,1,2,3,4,5,6,7 };
-		texts[] = { "A3 NATO", "A3 CSAT", "A3 AAF", "CP BAF Desert", "RHS USA", "RHS Russian F", "GM WEST", "GM WEST Winter" };
+		texts[] = { "A3 CSAT", "A3 NATO", "A3 AAF", "CP BAF Desert", "RHS USA", "RHS Russian F", "GM WEST", "GM WEST Winter" };
 		default = 0;
 	};
 	class ModPresetIndp {
 		title = "MOD Preset - DEF";
 		values[] = { 0,1,2,3,4,5,6,7 };
-		texts[] = { "A3 CSAT", "A3 NATO", "A3 AAF", "A3 CSAT Urban", "CP Takistan", "RHS Russian F", "GM EAST", "GM EAST Winter"};
+		texts[] = { "A3 AAF", "A3 CSAT", "A3 NATO", "A3 CSAT Urban", "CP Takistan", "RHS Russian F", "GM EAST", "GM EAST Winter"};
 		default = 0;
 	};	
 	class ForcedLoadout {
