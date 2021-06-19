@@ -48,6 +48,11 @@ militia_squad = [
 	"B_Soldier_AT_F"
 ];
 
+militia_loadout_overide = [
+	"B_Soldier_AA_F",
+	"B_Soldier_AT_F"
+];
+
 divers_squad = [
 	"B_diver_TL_F",
 	"B_diver_TL_F",
@@ -151,6 +156,9 @@ opfor_statics = [
 	"B_Mortar_01_F"
 ];
 
+// Overide Textures
+opfor_texture_overide = [
+];
 
 opfor_recyclable = [
 	["B_HMG_01_high_F",0,round (20 / GRLIB_recycling_percentage),0],

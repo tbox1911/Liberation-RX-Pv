@@ -50,6 +50,9 @@ militia_squad = [
 	"CUP_O_TK_INS_Soldier_AT"
 ];
 
+militia_loadout_overide = [
+];
+
 divers_squad = [
 	"I_diver_TL_F",
 	"I_diver_TL_F",
@@ -166,8 +169,11 @@ opfor_statics = [
 	"O_Mortar_01_F"
 ];
 
+// Overide Textures
+opfor_texture_overide = [
+];
+
 opfor_recyclable = [
-	["I_MRAP_03_F",0,round (20 / GRLIB_recycling_percentage),0],
 	["CUP_O_MTLB_pk_TK_MILITIA",0,round (50 / GRLIB_recycling_percentage),0],
 	["CUP_O_BTR40_MG_TKM",0,round (70 / GRLIB_recycling_percentage),0],
 	["O_HMG_01_high_F",0,round (80 / GRLIB_recycling_percentage),0],
@@ -209,5 +215,4 @@ opfor_recyclable = [
 	["CUP_O_T90_RU",1,round (800 / GRLIB_recycling_percentage),2],
 	["CUP_O_T55_TK",1,round (1040 / GRLIB_recycling_percentage),2],
 	["CUP_O_T72_TKA",1,round (1040 / GRLIB_recycling_percentage),2]
-
 ];
