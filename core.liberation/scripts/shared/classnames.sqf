@@ -2,14 +2,14 @@
 
 [] call compileFinal preprocessFileLineNumbers "scripts\loadouts\init_loadouts.sqf";
 // *** DEFENSE ***
-[] call compileFinal preprocessFileLineNUmbers format ["scripts\mod_template\%1\classnames_east.sqf", GRLIB_mod_indp];
+[] call compileFinal preprocessFileLineNUmbers format ["mod_template\%1\classnames_east.sqf", GRLIB_mod_indp];
 
 // *** DEFAULT ***
 [] call compileFinal preprocessFileLineNUmbers format ["scripts\shared\default_classnames.sqf"];
 
 // ********************************************************************************************************
 // *** BLUE ***
-[] call compileFinal preprocessFileLineNUmbers format ["scripts\mod_template\%1\classnames_west.sqf", GRLIB_mod_west];
+[] call compileFinal preprocessFileLineNUmbers format ["mod_template\%1\classnames_west.sqf", GRLIB_mod_west];
 [infantry_units, GRLIB_side_west] call F_calcUnitsCost;
 
 // Remap list for side
@@ -54,7 +54,7 @@ box_transport_config append box_transport_config_west;
 
 // ********************************************************************************************************
 // *** RED ***
-[] call compileFinal preprocessFileLineNUmbers format ["scripts\mod_template\%1\classnames_west.sqf", GRLIB_mod_east];
+[] call compileFinal preprocessFileLineNUmbers format ["mod_template\%1\classnames_west.sqf", GRLIB_mod_east];
 [infantry_units, GRLIB_side_east] call F_calcUnitsCost;
 
 // Remap list for side
@@ -96,7 +96,7 @@ box_transport_config append box_transport_config_west;
 
 // ********************************************************************************************************
 // *** CIVILIAN ***
-[] call compileFinal preprocessFileLineNUmbers format ["scripts\mod_template\%1\classnames_civ.sqf", GRLIB_mod_west];
+[] call compileFinal preprocessFileLineNUmbers format ["mod_template\%1\classnames_civ.sqf", GRLIB_mod_west];
 
 // *** ELITE Vehicles ***
 elite_vehicles = [];
