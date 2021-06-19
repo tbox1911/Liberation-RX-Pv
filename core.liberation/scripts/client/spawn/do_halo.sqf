@@ -32,6 +32,29 @@ if ( dialog ) then {
 
 [ "halo_map_event", "onMapSingleClick" ] call BIS_fnc_removeStackedEventHandler;
 
+private _nearset_sector = [ GRLIB_sector_size * 2, halo_position] call F_getNearestSector;
+private _denied_sectors = west_sectors;
+private _denied_fobs = GRLIB_fobs_west;
+private _denied_lhd = lhd_west;
+if (GRLIB_side_friendly == GRLIB_side_west) then {
+	_denied_sectors = east_sectors;
+	_denied_fobs = GRLIB_fobs_east;
+	_denied_lhd = lhd_east;
+};
+
+private _nearset_fob = [0,0,0];
+if ( count _denied_fobs > 0 ) then {
+	_nearset_fob = ( [ _denied_fobs , [] , { halo_position distance2D _x } , 'ASCEND' ] call BIS_fnc_sortBy ) select 0;
+};
+
+if ( _nearset_sector in _denied_sectors || 
+     halo_position distance2D _nearset_fob < GRLIB_sector_size * 2 ||
+	 halo_position distance2D _denied_lhd < GRLIB_sector_size * 2 
+	) then {
+	dojump = 0;
+	hintSilent "You cannot Halo jump on this position!";
+};
+
 if ( dojump > 0 ) then {
 	GRLIB_last_halo_jump = time;
 
