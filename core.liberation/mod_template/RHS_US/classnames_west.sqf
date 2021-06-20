@@ -138,19 +138,19 @@ static_vehicles = [
 ];
 
 // *** Static Weapon with AI ***
-static_vehicles_AI = [
+static_vehicles_AI_west = [
 ];
 
-support_vehicles_west = [
+support_vehicles = [
 	["rhs_D30_msv",10,150,0,GRLIB_perm_log],
 	["rhs_D30_at_msv",10,150,0,GRLIB_perm_log],
 	["rhsusf_mags_crate",0,50,0,GRLIB_perm_tank],
-  ["rhsusf_gear_crate",0,50,0,GRLIB_perm_tank],
-  ["rhsusf_launcher_crate",0,50,0,GRLIB_perm_tank],
-  ["rhsusf_spec_weapons_crate",0,50,0,GRLIB_perm_tank]
+	["rhsusf_gear_crate",0,50,0,GRLIB_perm_tank],
+	["rhsusf_launcher_crate",0,50,0,GRLIB_perm_tank],
+	["rhsusf_spec_weapons_crate",0,50,0,GRLIB_perm_tank]
 ];
 
-buildings_west = [
+buildings = [
 	["Land_Cargo_Tower_V1_F",0,0,0,GRLIB_perm_tank],
 	["Land_Cargo_House_V1_F",0,0,0,GRLIB_perm_inf],
 	["Land_Cargo_Patrol_V1_F",0,0,0,GRLIB_perm_log],
