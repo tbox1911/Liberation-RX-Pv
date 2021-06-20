@@ -15,7 +15,7 @@ if (_side == GRLIB_side_east) then {
 };
 
 
-{deleteVehicle _x} foreach ([_new_fob nearObjects GRLIB_fob_range ,{( typeof _x in _delete_items )}] call BIS_fnc_conditionalSelect);
+{deleteVehicle _x} foreach ([_new_fob nearObjects GRLIB_sector_size ,{( typeof _x in _delete_items )}] call BIS_fnc_conditionalSelect);
 
 trigger_server_save = true;
 sleep 3;

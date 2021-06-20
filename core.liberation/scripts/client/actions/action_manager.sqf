@@ -230,7 +230,7 @@ while { true } do {
 
 		// Virtual Garage
 		_idact_garage = _id_actions select 17;
-		if (_fobdistance > 15 && _fobdistance < _distfob && (player distance my_lhd) >= GRLIB_sector_size && score player >= GRLIB_perm_inf ) then {
+		if (_fobdistance > 15 && _fobdistance < _distfob && (!_near_outpost) && (player distance my_lhd) >= GRLIB_sector_size && score player >= GRLIB_perm_inf ) then {
 			if ( _idact_garage == -1 ) then {
 				_idact = player addAction ["<t color='#0080FF'>-- VIRTUAL GARAGE" + "</t> <img size='1' image='res\ui_veh.paa'/>","addons\VIRT\virtual_garage.sqf","",-984,false,true,"",""];
 				_id_actions set [17, _idact];
@@ -286,7 +286,7 @@ while { true } do {
 
 		// Secondary Objectives
 		_idact_secondary = _id_actions select 21;
-		if (count ([] call get_myFobs) > 0 && ( GRLIB_endgame == 0 ) && (_fobdistance < _distredeploy || (player distance my_lhd) <= 200) && (score player >= GRLIB_perm_air ||  player == ( [] call F_getCommander ) || [] call is_admin) ) then {
+		if (count ([] call get_myFobs) > 0 && ( GRLIB_endgame == 0 ) && (_fobdistance < _distredeploy || (player distance my_lhd) <= 200) && (!_near_outpost) && (score player >= GRLIB_perm_air ||  player == ( [] call F_getCommander ) || [] call is_admin) ) then {
 			if ( _idact_secondary == -1 ) then {
 				_idact = player addAction ["<t color='#FFFF00'>" + localize "STR_SECONDARY_OBJECTIVES" + "</t>","scripts\client\ui\secondary_ui.sqf","",-995,false,true,"","build_confirmed == 0"];
 				_id_actions set [21, _idact];

@@ -157,8 +157,7 @@ buildings_west = [
 	["Flag_NATO_F",0,0,0,0]
 ];
 
-if ( isNil "blufor_squad_inf_light" ) then { blufor_squad_inf_light = [] };
-if ( count blufor_squad_inf_light == 0 ) then { blufor_squad_inf_light = [
+blufor_squad_inf_light = [
 	"rhsusf_army_ucp_arb_autorifleman",
     "rhsusf_army_ucp_arb_autoriflemana",
     "rhsusf_army_ucp_arb_medic",
@@ -167,10 +166,9 @@ if ( count blufor_squad_inf_light == 0 ) then { blufor_squad_inf_light = [
     "rhsusf_army_ucp_arb_marksman",
     "rhsusf_army_ucp_arb_squadleader",
     "rhsusf_army_ucp_arb_teamleader"
-	];
-};
-if ( isNil "blufor_squad_inf" ) then { blufor_squad_inf = [] };
-if ( count blufor_squad_inf == 0 ) then { blufor_squad_inf = [
+];
+
+blufor_squad_inf = [
 	"rhsusf_army_ucp_arb_teamleader",
     "rhsusf_army_ucp_arb_squadleader",
     "rhsusf_army_ucp_arb_sniper_m107",
@@ -179,10 +177,9 @@ if ( count blufor_squad_inf == 0 ) then { blufor_squad_inf = [
     "rhsusf_army_ucp_arb_medic",
     "rhsusf_army_ucp_arb_maaws",
     "rhsusf_army_ucp_arb_maaws"
-	];
-};
-if ( isNil "blufor_squad_at" ) then { blufor_squad_at = [] };
-if ( count blufor_squad_at == 0 ) then { blufor_squad_at = [
+];
+
+blufor_squad_at = [
 	  "rhsusf_army_ucp_arb_squadleader",
     "rhsusf_usmc_recon_marpat_d_teamleader",
     "rhsusf_usmc_recon_marpat_d_sniper_M107",
@@ -191,10 +188,9 @@ if ( count blufor_squad_at == 0 ) then { blufor_squad_at = [
     "rhsusf_army_ocp_javelin",
     "rhsusf_army_ocp_javelin",
     "rhsusf_army_ocp_medic"
-	];
-};
-if ( isNil "blufor_squad_aa" ) then { blufor_squad_aa = [] };
-if ( count blufor_squad_aa == 0 ) then { blufor_squad_aa = [
+];
+
+blufor_squad_aa = [
     "rhsusf_army_ucp_arb_squadleader",
 	  "rhsusf_army_ocp_machinegunner",
     "rhsusf_army_ocp_medic",
@@ -203,10 +199,9 @@ if ( count blufor_squad_aa == 0 ) then { blufor_squad_aa = [
     "rhsusf_army_ocp_aa",
     "rhsusf_army_ocp_aa",
     "rhsusf_army_ocp_sniper_m24sws"
-	];
-};
-if ( isNil "blufor_squad_mix" ) then { blufor_squad_mix = [] };
-if ( count blufor_squad_mix == 0 ) then { blufor_squad_mix = [
+];
+
+blufor_squad_mix = [
 	"rhsusf_army_ocp_arb_teamleader",
     "rhsusf_army_ocp_arb_squadleader",
     "rhsusf_army_ocp_arb_sniper_m107",
@@ -220,18 +215,16 @@ if ( count blufor_squad_mix == 0 ) then { blufor_squad_mix = [
     "rhsusf_army_ocp_javelin",
     "rhsusf_army_ocp_aa",
     "rhsusf_army_ocp_aa"
-	];
-};
-if ( isNil "blufor_squad_recon" ) then { blufor_squad_recon = [] };
-if ( count blufor_squad_recon == 0 ) then { blufor_squad_recon = [
+];
+
+blufor_squad_recon = [
 	"B_recon_TL_F",
 	"B_recon_medic_F",
 	"B_Recon_Sharpshooter_F",
 	"B_recon_LAT_F",
 	"B_recon_M_F",
 	"B_recon_F"
-	];
-};
+];
 
 squads = [
 	[blufor_squad_inf_light,10,300,0,GRLIB_perm_max],
