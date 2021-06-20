@@ -11,7 +11,9 @@ R3F_LOG_CFG_can_be_towed = R3F_LOG_CFG_can_be_towed +
 R3F_LOG_CFG_can_lift = R3F_LOG_CFG_can_lift +
 [
 	huron_typename_west,
-	huron_typename_east
+	huron_typename_east,
+	"B_Heli_Transport_01_F",
+	"B_Heli_Transport_01_camo_F"
 ];
 
 R3F_LOG_CFG_can_be_lifted = R3F_LOG_CFG_can_be_lifted +
@@ -21,7 +23,9 @@ R3F_LOG_CFG_can_be_lifted = R3F_LOG_CFG_can_be_lifted +
 R3F_LOG_CFG_can_transport_cargo = R3F_LOG_CFG_can_transport_cargo +
 [
 	[huron_typename_west, 200],
-	[huron_typename_east, 200]
+	[huron_typename_east, 200],
+	["B_Heli_Transport_01_F", 50],
+	["B_Heli_Transport_01_camo_F", 50]
 ];
 
 R3F_LOG_CFG_can_be_transported_cargo = R3F_LOG_CFG_can_be_transported_cargo +

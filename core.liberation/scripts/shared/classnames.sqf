@@ -105,6 +105,26 @@ elite_vehicles = [];
 // *** UAVs ***
 uavs = uavs_west + uavs_east;
 
+// *** Boats ***
+boats_names = [ 
+	"B_Boat_Transport_01_F",
+	"C_Boat_Transport_02_F",
+	"B_Boat_Armed_01_minigun_F"
+] + opfor_boat + boats;
+
+// Big_units
+vehicle_big_units = [
+	"Land_Cargo_Tower_V1_F",
+	"B_T_VTOL_01_infantry_F",
+	"B_T_VTOL_01_vehicle_F",
+	"B_T_VTOL_01_armed_F",
+	"O_T_VTOL_01_infantry_F",
+	"O_T_VTOL_01_vehicle_F",
+	"O_T_VTOL_01_armed_F",
+	"Land_SM_01_shed_F",
+	"Land_Hangar_F"
+] + vehicle_big_units_west;
+
 // Configuration for ammo boxes transport
 // First entry: classname
 // Second entry: how far behind the vehicle the boxes should be unloaded
@@ -251,7 +271,6 @@ all_hostile_classnames = (opfor_vehicles + opfor_vehicles_low_intensity + opfor_
 markers_reset = [99999,99999,0];
 zeropos = [0,0,0];
 squads_names = [ localize "STR_LIGHT_RIFLE_SQUAD", localize "STR_RIFLE_SQUAD", localize "STR_AT_SQUAD", localize "STR_AA_SQUAD", localize "STR_MIXED_SQUAD", localize "STR_RECON_SQUAD" ];
-boats_names = [ "B_Boat_Transport_01_F", "C_Boat_Transport_02_F", "I_Boat_Armed_01_minigun_F" ];
 ammobox_transports_typenames = [];
 { ammobox_transports_typenames pushback (_x select 0) } foreach box_transport_config;
 ammobox_transports_typenames = [ ammobox_transports_typenames , { [ _x ] call F_checkClass } ]  call BIS_fnc_conditionalSelect;
