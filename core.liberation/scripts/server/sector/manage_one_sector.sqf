@@ -181,7 +181,7 @@ if ( (!(_sector in [west_sectors, east_sectors])) && ( _west_units > 0 || _east_
 
 	sleep 10;
 
-	if ( ( _sector in sectors_factory ) || (_sector in sectors_capture ) || (_sector in sectors_bigtown ) || (_sector in sectors_military ) ) then {
+	if ( _sector in sectors_factory + sectors_capture + sectors_bigtown + sectors_military ) then {
 		[ _sector ] spawn reinforcements_manager;
 	};
 
