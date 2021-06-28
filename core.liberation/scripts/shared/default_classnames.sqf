@@ -41,6 +41,8 @@ if ( isNil "GRLIB_vehicle_blacklist" ) then { GRLIB_vehicle_blacklist = [] };
 if ( isNil "box_transport_config" ) then { box_transport_config = [] };
 if ( isNil "civilians" ) then { civilians = ["C_man_1"] };
 if ( isNil "civilian_vehicles" ) then { civilian_vehicles = ["C_SUV_01_F"] };
+if ( isNil "box_transport_config_west" ) then { box_transport_config_west = [] };
+if ( isNil "box_transport_config_east" ) then { box_transport_config_east = [] };
 
 // Opfor
 if ( isNil "opfor_ammobox_transport" ) then { opfor_ammobox_transport = "O_Truck_03_transport_F" };
