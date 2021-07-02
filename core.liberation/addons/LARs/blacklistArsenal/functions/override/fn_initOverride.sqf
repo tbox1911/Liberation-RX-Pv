@@ -15,13 +15,13 @@ if ( hasInterface ) then {
 		"LARs_fnc_addVAKeyEvents"
 	];
 
-	diag_log "Adding arsenalOpened SEH";
+	//diag_log "Adding arsenalOpened SEH";
 
 	[ missionNamespace, "arsenalOpened", {
 	    disableSerialization;
 	    _display = _this select 0;
 		
-		diag_log "arsenalOpened SEH called";
+		//diag_log "arsenalOpened SEH called";
 		
 		waitUntil { !isNil "BIS_fnc_arsenal_target" };
 
