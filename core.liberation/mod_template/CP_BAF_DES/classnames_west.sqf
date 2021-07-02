@@ -119,7 +119,7 @@ support_vehicles_west = [
 	["CUP_B_FV432_Bulldog_GB_D",10,2000,20,GRLIB_perm_max]
 ];
 
-buildings_west = [
+buildings = [
 	["Land_Cargo_Tower_V1_F",0,0,0,GRLIB_perm_tank],
 	["Land_Cargo_House_V1_F",0,0,0,GRLIB_perm_inf],
 	["Land_Cargo_Patrol_V1_F",0,0,0,GRLIB_perm_log],
