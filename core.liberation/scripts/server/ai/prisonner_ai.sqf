@@ -8,7 +8,7 @@ if (!alive _unit) exitWith {};
 
 // Init priso
 removeAllWeapons _unit;
-if(typeof _unit in [pilot_classname_west, pilot_classname_west]) then {
+if (typeof _unit in [pilot_classname_west, pilot_classname_west]) then {
 	removeHeadgear _unit;
 };
 removeBackpack _unit;
@@ -42,7 +42,7 @@ while {alive _unit} do {
 
 	// Flee
 	private _is_near_blufor = count ([allUnits, { side _x in [ GRLIB_side_west, GRLIB_side_east ] && (_x distance2D _unit) < 100 }] call BIS_fnc_conditionalSelect);
-	if ( _is_near_blufor == 0 && side group _unit in [ GRLIB_side_west, GRLIB_side_east ] ) then {
+	if ( _is_near_blufor == 0 && side group _unit in [ GRLIB_side_west, GRLIB_side_east ] && (typeof _unit != pilot_classname) ) then {
 		_unit setUnitPos "AUTO";
 		_unit setVariable ["GRLIB_is_prisonner", true, true];
 
