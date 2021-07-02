@@ -55,9 +55,9 @@ GRLIB_player_scores = [];
 GRLIB_garage = [];
 
 no_kill_handler_classnames = [FOB_typename_west, huron_typename_west, FOB_typename_east, huron_typename_east, FOB_outpost];
-_classnames_to_save = [FOB_typename_west, huron_typename_west, FOB_typename_east, huron_typename_east, FOB_outpost];
-_classnames_to_save_blu = [];
-_classnames_to_save_red = [];
+_classnames_to_save = [];
+_classnames_to_save_blu = [FOB_typename_west, huron_typename_west, FOB_outpost];
+_classnames_to_save_red = [FOB_typename_east, huron_typename_east, FOB_outpost];
 _building_classnames = [FOB_typename_west, FOB_typename_east, FOB_outpost];
 {
 	no_kill_handler_classnames pushback (_x select 0);
@@ -162,10 +162,13 @@ if ( !isNil "greuh_liberation_savegame" ) then {
 			_nextpos = _x select 1;
 			_nextdir = _x select 2;
 
-			[_x select 3] params [["_hascrew", false]];
+			private _hascrew = false;
+			if (count _x > 3) then {
+				_hascrew = _x select 3;
+			};
 
 			private _owner = "";
-			if (count _x > 3) then {
+			if (count _x > 4) then {
 				_owner = _x select 4;
 			};
 
@@ -379,18 +382,22 @@ while { true } do {
 			private	_lst_r3f = [];
 			private	_lst_grl = [];
 
-			if ( _nextclass in _classnames_to_save_blu + _classnames_to_save_red + all_hostile_classnames - GRLIB_vehicle_blacklist) then {
+			if ( _nextclass in _classnames_to_save_blu + _classnames_to_save_red + all_hostile_classnames) then {
 				if (side _x != GRLIB_side_enemy) then {
-					_hascrew = _x getVariable ["GRLIB_vehicle_manned", false];
 					_owner = _x getVariable ["GRLIB_vehicle_owner", ""];
-					_color = _x getVariable ["GRLIB_vehicle_color", ""];
-					_color_name = _x getVariable ["GRLIB_vehicle_color_name", ""];
-					if ( _owner != "") then {
+					_hascrew = _x getVariable ["GRLIB_vehicle_manned", false];
+					if (_owner == "") then {
+						buildings_to_save pushback [ _nextclass, _savedpos, _nextdir, _hascrew ];
+					};
+					if (_owner == "public") then {
+						buildings_to_save pushback [ _nextclass, _savedpos, _nextdir, _hascrew, _owner ];
+					};		
+					if (_owner in _keep_score_id && !([_nextclass, GRLIB_vehicle_blacklist] call F_itemIsInClass)) then {
+						_color = _x getVariable ["GRLIB_vehicle_color", ""];
+						_color_name = _x getVariable ["GRLIB_vehicle_color_name", ""];
 						_lst_a3 = weaponsItemsCargo _x;
 						{_lst_r3f pushback (typeOf _x)} forEach (_x getVariable ["R3F_LOG_objets_charges", []]);
 						{_lst_grl pushback (typeOf _x)} forEach (attachedObjects _x);
-					};
-					if (_owner in _keep_score_id) then {
 						buildings_to_save pushback [ _nextclass, _savedpos, _nextdir, _hascrew, _owner, _color, _color_name, _lst_a3, _lst_r3f, _lst_grl];
 					};
 				};
