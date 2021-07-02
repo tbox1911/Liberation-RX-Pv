@@ -18,7 +18,6 @@ if ( GRLIB_unitcap > 1.3 ) then { _combat_triggers_static = [15,25,45,65,75,85,9
 
 waitUntil { sleep 0.3; !isNil "west_sectors" };
 waitUntil { sleep 0.3; !isNil "east_sectors" };
-waitUntil { sleep 1; count west_sectors > 3 || count east_sectors > 3 };
 
 {
 	[_x, 1, _forEachIndex] spawn manage_one_patrol;
