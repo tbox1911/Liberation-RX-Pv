@@ -97,12 +97,3 @@ if ( GRLIB_opfor_english == 1 ) then { GRLIB_opfor_english = true } else { GRLIB
 
 // Overide sector radius
 if (GRLIB_sector_radius != 0) then { GRLIB_sector_size = GRLIB_sector_radius };
-
-// Overide Textures
-opfor_texture_overide = [];
-if (GRLIB_overide_opfor > 0) then {
-	switch (GRLIB_overide_opfor) do {
-		case 1: {opfor_texture_overide = ["Urban","Digital"] };
-		case 2: {opfor_texture_overide = ["Pink"] };
-	};
-};

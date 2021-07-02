@@ -26,6 +26,7 @@ opfor_mrap_hmg = "CUP_O_UAZ_MG_TKA";
 opfor_mrap_gmg = "CUP_O_UAZ_SPG9_TKA";
 opfor_transport_helo = "CUP_O_MI6T_TKA";
 opfor_transport_truck = "CUP_O_V3S_Covered_TKA";
+opfor_ammobox_transport = "CUP_O_V3S_Covered_TKA";
 opfor_fuel_truck = "CUP_O_V3S_Refuel_TKA";
 opfor_ammo_truck = "CUP_O_V3S_Rearm_TKA";
 opfor_fuel_container = "Land_Pod_Heli_Transport_04_fuel_F";
@@ -169,11 +170,8 @@ opfor_statics = [
 	"O_Mortar_01_F"
 ];
 
-// Overide Textures
-opfor_texture_overide = [
-];
-
 opfor_recyclable = [
+	["I_MRAP_03_F",0,round (20 / GRLIB_recycling_percentage),0],
 	["CUP_O_MTLB_pk_TK_MILITIA",0,round (50 / GRLIB_recycling_percentage),0],
 	["CUP_O_BTR40_MG_TKM",0,round (70 / GRLIB_recycling_percentage),0],
 	["O_HMG_01_high_F",0,round (80 / GRLIB_recycling_percentage),0],
@@ -215,4 +213,10 @@ opfor_recyclable = [
 	["CUP_O_T90_RU",1,round (800 / GRLIB_recycling_percentage),2],
 	["CUP_O_T55_TK",1,round (1040 / GRLIB_recycling_percentage),2],
 	["CUP_O_T72_TKA",1,round (1040 / GRLIB_recycling_percentage),2]
+
+];
+
+box_transport_config_east = [
+	//[ "CUP_B_MTVR_BAF_DES", -6.5, [0, -0.4, 0.3], [0, -2.1, 0.3] ],
+	[ "CUP_O_V3S_Covered_TKA", -5.5, [0, 0.3, 0], [0, -1.25, 0] ]
 ];

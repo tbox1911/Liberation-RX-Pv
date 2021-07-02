@@ -34,6 +34,7 @@ militia_squad = [
 	"B_G_Soldier_SL_F",
 	"B_G_Soldier_A_F",
 	"B_G_Soldier_AR_F",
+	"B_G_Soldier_AR_F",	
 	"B_G_medic_F",
 	"B_G_engineer_F",
 	"B_G_Soldier_exp_F",
@@ -41,6 +42,7 @@ militia_squad = [
 	"B_G_Soldier_M_F",
 	"B_G_Soldier_F",
 	"B_G_Soldier_LAT_F",
+	"B_G_Soldier_LAT_F",	
 	"B_G_Soldier_lite_F",
 	"B_G_Sharpshooter_F",
 	"B_G_Soldier_TL_F",
@@ -88,6 +90,8 @@ opfor_vehicles = [
 	"B_MBT_01_cannon_F",
 	"B_MBT_01_cannon_F",
 	"B_T_APC_Tracked_01_AA_F",
+	"B_MRAP_01_gmg_F",
+	"B_MRAP_01_hmg_F",
 	"B_MRAP_01_gmg_F",
 	"B_MRAP_01_hmg_F",
 	"B_MBT_01_TUSK_F"
@@ -156,9 +160,6 @@ opfor_statics = [
 	"B_Mortar_01_F"
 ];
 
-// Overide Textures
-opfor_texture_overide = [
-];
 
 opfor_recyclable = [
 	["B_HMG_01_high_F",0,round (20 / GRLIB_recycling_percentage),0],

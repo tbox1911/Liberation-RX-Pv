@@ -115,10 +115,13 @@ static_vehicles = [
 ];
 
 // *** Static Weapon with AI ***
-static_vehicles_AI_west = [
+static_vehicles_AI = [
+	"B_AAA_System_01_F",
+	"B_SAM_System_02_F",
+	"O_SAM_System_04_F"
 ];
 
-support_vehicles = [
+support_vehicles_west = [
 	["gm_ge_army_shelteraceII_repair",5,50,5,GRLIB_perm_inf],
 	["gm_gc_army_shelteraceII_medic",5,50,5,GRLIB_perm_inf],
 	["gm_gc_army_shelterlakII_repair",10,100,0,GRLIB_perm_log],
@@ -130,22 +133,24 @@ support_vehicles = [
 	["gm_AmmoBox_wood_03_empty",0,150,0,GRLIB_perm_tank]
 ];
 
-buildings = [
+buildings_west = [
 	["Land_Cargo_Tower_V1_F",0,0,0,GRLIB_perm_tank],
 	["Land_Cargo_House_V1_F",0,0,0,GRLIB_perm_inf],
 	["Land_Cargo_Patrol_V1_F",0,0,0,GRLIB_perm_log],
 	["Flag_NATO_F",0,0,0,0]
 ];
 
-blufor_squad_inf_light = [
+if ( isNil "blufor_squad_inf_light" ) then { blufor_squad_inf_light = [] };
+if ( count blufor_squad_inf_light == 0 ) then { blufor_squad_inf_light = [
 	"gm_ge_army_sf_squadleader_mp5sd3_p2a1_80_wdl",
 	"gm_ge_army_sf_marksman_g3a3_80_wdl",
 	"gm_ge_army_sf_antitank_mp5a2_pzf84_80_wdl",
 	"gm_ge_army_sf_rifleman_g3a4_80_wdl",
 	"gm_ge_army_sf_rifleman_g3a4_80_wdl"
-];
-
-blufor_squad_inf = [
+	];
+};
+if ( isNil "blufor_squad_inf" ) then { blufor_squad_inf = [] };
+if ( count blufor_squad_inf == 0 ) then { blufor_squad_inf = [
 	"gm_ge_army_sf_squadleader_mp5sd3_p2a1_80_wdl",
 	"gm_ge_army_medic_g3a3_80_ols",
 	"gm_ge_army_sf_marksman_g3a3_80_wdl",
@@ -155,43 +160,48 @@ blufor_squad_inf = [
 	"gm_ge_army_sf_rifleman_mp5a3_80_wdl",
 	"gm_ge_army_sf_rifleman_mp5a3_80_wdl",
 	"gm_ge_army_sf_rifleman_mp5a3_80_wdl"
-];
-
-blufor_squad_at = [
+	];
+};
+if ( isNil "blufor_squad_at" ) then { blufor_squad_at = [] };
+if ( count blufor_squad_at == 0 ) then { blufor_squad_at = [
 	"gm_ge_army_sf_squadleader_mp5sd3_p2a1_80_wdl",
 	"gm_ge_army_medic_g3a3_80_ols",
 	"gm_ge_army_sf_antitank_mp5a2_pzf84_80_wdl",
 	"gm_ge_army_sf_antitank_mp5a2_pzf84_80_wdl",
 	"gm_ge_army_sf_antitank_mp5a3_milan_80_wdl",
 	"gm_ge_army_sf_rifleman_mp5a3_80_wdl"
-];
-
-blufor_squad_aa = [
+	];
+};
+if ( isNil "blufor_squad_aa" ) then { blufor_squad_aa = [] };
+if ( count blufor_squad_aa == 0 ) then { blufor_squad_aa = [
 	"gm_ge_army_sf_squadleader_mp5sd3_p2a1_80_wdl",
 	"gm_ge_army_medic_g3a3_80_ols",
 	"gm_ge_army_sf_antiair_mp5a3_fim43_80_wdl",
 	"gm_ge_army_sf_antiair_mp5a3_fim43_80_wdl",
 	"gm_ge_army_sf_antiair_mp5a3_fim43_80_wdl",
 	"gm_ge_army_sf_rifleman_mp5a3_80_wdl"
-];
-
-blufor_squad_mix = [
+	];
+};
+if ( isNil "blufor_squad_mix" ) then { blufor_squad_mix = [] };
+if ( count blufor_squad_mix == 0 ) then { blufor_squad_mix = [
 	"gm_ge_army_sf_squadleader_mp5sd3_p2a1_80_wdl",
 	"gm_ge_army_medic_g3a3_80_ols",
 	"gm_ge_army_sf_antiair_mp5a3_fim43_80_wdl",
 	"gm_ge_army_sf_antitank_mp5a2_pzf84_80_wdl",
 	"gm_ge_army_sf_rifleman_g3a4_80_wdl",
 	"gm_ge_army_sf_rifleman_g3a4_80_wdl"
-];
-
-blufor_squad_recon = [
+	];
+};
+if ( isNil "blufor_squad_recon" ) then { blufor_squad_recon = [] };
+if ( count blufor_squad_recon == 0 ) then { blufor_squad_recon = [
 	"gm_ge_army_sf_squadleader_mp5sd3_p2a1_80_wdl",
 	"gm_ge_army_medic_g3a3_80_ols",
 	"gm_ge_army_sf_marksman_g3a3_80_wdl",
 	"gm_ge_army_sf_antitank_mp5a2_pzf84_80_wdl",
 	"gm_ge_army_sf_rifleman_g3a4_80_wdl",
 	"gm_ge_army_sf_rifleman_g3a4_80_wdl"
-];
+	];
+};
 
 squads = [
 	[blufor_squad_inf_light,10,300,0,GRLIB_perm_max],
@@ -227,7 +237,7 @@ vehicle_rearm_sources_west = [
 ];
 
 vehicle_big_units_west = [
-
+	
 ];
 
 GRLIB_vehicle_whitelist_west = [

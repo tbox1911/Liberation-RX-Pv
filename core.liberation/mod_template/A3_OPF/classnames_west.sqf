@@ -86,7 +86,6 @@ air_vehicles = [
 	["O_T_UAV_04_CAS_F",5,1500,10,GRLIB_perm_max],
 	["C_Plane_Civil_01_F",1,50,5,GRLIB_perm_air],
 	["O_Heli_Light_02_unarmed_F",1,250,5,GRLIB_perm_tank],
-	["I_Heli_light_03_F",10,2000,20,GRLIB_perm_air],
 	["O_Heli_Transport_04_F",3,500,10,GRLIB_perm_air],
 	["O_Heli_Light_02_dynamicLoadout_F",5,1000,10,GRLIB_perm_air],
 	["O_Heli_Attack_02_dynamicLoadout_F",10,2000,20,GRLIB_perm_air],
@@ -115,15 +114,17 @@ static_vehicles = [
 	["O_static_AA_F",0,50,0,GRLIB_perm_air],
 	["O_static_AT_F",0,50,0,GRLIB_perm_air],
 	["O_Mortar_01_F",0,500,0,GRLIB_perm_max],
-	["O_SAM_System_04_F",10,500,0,GRLIB_perm_max],
-	["B_AAA_System_01_F",10,800,0,GRLIB_perm_max]
+	["B_AAA_System_01_F",10,800,0,GRLIB_perm_air],
+	["O_SAM_System_04_F",10,500,0,GRLIB_perm_max]
 ];
 
 // *** Static Weapon with AI ***
-static_vehicles_AI_west = [
+static_vehicles_AI = [
+	"B_AAA_System_01_F",
+	"O_SAM_System_04_F"
 ];
 
-support_vehicles = [
+support_vehicles_west = [
 	["O_G_Offroad_01_repair_F",5,15,5,GRLIB_perm_inf],
 	["O_G_Van_01_fuel_F",5,15,20,GRLIB_perm_inf],
 	["Land_Pod_Heli_Transport_04_bench_F",0,50,0,GRLIB_perm_log],
@@ -131,66 +132,73 @@ support_vehicles = [
 	["Box_NATO_WpsLaunch_F",0,150,0,GRLIB_perm_tank]
 ];
 
-buildings = [
+buildings_west = [
 	["Land_Cargo_Tower_V3_F",0,0,0,GRLIB_perm_tank],
 	["Land_Cargo_House_V3_F",0,0,0,GRLIB_perm_inf],
 	["Land_Cargo_Patrol_V3_F",0,0,0,GRLIB_perm_log],
 	["Flag_CSAT_F",0,0,0,0]
 ];
 
-blufor_squad_inf_light = [
+if ( isNil "blufor_squad_inf_light" ) then { blufor_squad_inf_light = [] };
+if ( count blufor_squad_inf_light == 0 ) then { blufor_squad_inf_light = [
 	"O_Soldier_SL_F",
 	"O_medic_F",
 	"O_Soldier_GL_F",
 	"O_soldier_AR_F",
 	"O_Soldier_F",
 	"O_Soldier_F"
-];
-
-blufor_squad_inf = [
+	];
+};
+if ( isNil "blufor_squad_inf" ) then { blufor_squad_inf = [] };
+if ( count blufor_squad_inf == 0 ) then { blufor_squad_inf = [
 	"O_Soldier_SL_F",
 	"O_medic_F",
 	"O_soldier_M_F",
 	"O_Soldier_AR_F",
 	"O_HeavyGunner_F",
 	"O_Sharpshooter_F"
-];
-
-blufor_squad_at = [
+	];
+};
+if ( isNil "blufor_squad_at" ) then { blufor_squad_at = [] };
+if ( count blufor_squad_at == 0 ) then { blufor_squad_at = [
 	"O_Soldier_SL_F",
 	"O_medic_F",
 	"O_soldier_AT_F",
 	"O_soldier_AT_F",
 	"O_soldier_F",
 	"O_soldier_F"
-];
-
-blufor_squad_aa = [
+	];
+};
+if ( isNil "blufor_squad_aa" ) then { blufor_squad_aa = [] };
+if ( count blufor_squad_aa == 0 ) then { blufor_squad_aa = [
 	"O_Soldier_SL_F",
 	"O_medic_F",
 	"O_soldier_AA_F",
 	"O_soldier_AA_F",
 	"O_soldier_F",
 	"O_soldier_F"
-];
-
-blufor_squad_mix = [
+	];
+};
+if ( isNil "blufor_squad_mix" ) then { blufor_squad_mix = [] };
+if ( count blufor_squad_mix == 0 ) then { blufor_squad_mix = [
 	"O_Soldier_SL_F",
 	"O_medic_F",
 	"O_soldier_AA_F",
 	"O_soldier_AT_F",
 	"O_soldier_F",
 	"O_soldier_F"
-];
-
-blufor_squad_recon = [
+	];
+};
+if ( isNil "blufor_squad_recon" ) then { blufor_squad_recon = [] };
+if ( count blufor_squad_recon == 0 ) then { blufor_squad_recon = [
 	"O_recon_TL_F",
 	"O_recon_medic_F",
 	"O_recon_F",
 	"O_recon_LAT_F",
 	"O_recon_M_F",
 	"O_recon_F"
-];
+	];
+};
 
 squads = [
 	[blufor_squad_inf_light,10,300,0,GRLIB_perm_max],

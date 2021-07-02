@@ -7,16 +7,16 @@ opfor_grenadier = "rhs_msv_emr_grenadier";
 opfor_squad_leader = "rhs_msv_emr_junior_sergeant";
 opfor_team_leader = "rhs_msv_emr_efreitor";
 opfor_marksman = "rhs_msv_emr_marksman";
-opfor_machinegunner = "rhs_msv_emr_machinegunner";
-opfor_heavygunner = "rhs_msv_emr_arifleman";
+opfor_machinegunner = "rhs_msv_emr_arifleman";
+opfor_heavygunner = "rhs_msv_emr_machinegunner";
 opfor_medic = "rhs_msv_emr_medic";
 opfor_rpg = "rhs_msv_emr_grenadier_rpg";
-opfor_at = "rhs_msv_emr_LAT";
+opfor_at = "rhs_msv_emr_at";
 opfor_aa = "rhs_msv_emr_aa";
 opfor_officer = "rhs_msv_emr_officer_armored";
 opfor_sharpshooter = "rhs_vdv_recon_marksman_vss";
-opfor_sniper = "rhs_vdv_flora_marksman";
-opfor_spotter = "O_spotter_F";
+opfor_sniper = "rhs_msv_emr_marksman";
+opfor_spotter = "rhs_msv_emr_sergeant";
 opfor_engineer = "rhs_msv_emr_engineer";
 opfor_paratrooper = "rhs_vmf_recon_rifleman_lat";
 opfor_mrap = "rhs_tigr_msv";
@@ -178,10 +178,6 @@ opfor_statics = [
 	"O_static_AA_F",
 	"O_static_AT_F",
 	"O_Mortar_01_F"
-];
-
-// Overide Textures
-opfor_texture_overide = [
 ];
 
 opfor_recyclable = [

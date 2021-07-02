@@ -5,7 +5,6 @@ R3F_LOG_CFG_can_tow = R3F_LOG_CFG_can_tow +
 
 R3F_LOG_CFG_can_be_towed = R3F_LOG_CFG_can_be_towed +
 [
-	"Air"
 ];
 
 R3F_LOG_CFG_can_lift = R3F_LOG_CFG_can_lift +
@@ -50,7 +49,7 @@ R3F_LOG_CFG_can_be_moved_by_player = R3F_LOG_CFG_can_be_moved_by_player +
 
 R3F_LOG_CFG_can_tow = R3F_LOG_CFG_can_tow +
 [
-  "gm_gc_civ_p601",
+    "gm_gc_civ_p601",
 	"gm_ge_civ_typ1200",
 	"gm_ge_army_u1300l_container",
 	"gm_ge_army_u1300l_repair",
@@ -77,7 +76,7 @@ R3F_LOG_CFG_can_tow = R3F_LOG_CFG_can_tow +
 
 R3F_LOG_CFG_can_be_towed = R3F_LOG_CFG_can_be_towed +
 [
-	"gm_gc_civ_p601",
+    "gm_gc_civ_p601",
 	"gm_ge_civ_typ1200",
 	"gm_ge_army_u1300l_container",
 	//"gm_ge_army_u1300l_repair",
@@ -108,7 +107,7 @@ R3F_LOG_CFG_can_lift = R3F_LOG_CFG_can_lift +
 
 R3F_LOG_CFG_can_be_lifted = R3F_LOG_CFG_can_be_lifted +
 [
-  "gm_gc_civ_p601",
+    "gm_gc_civ_p601",
 	"gm_ge_civ_typ1200",
 	"gm_ge_army_u1300l_container",
 	"gm_ge_army_u1300l_repair",
@@ -202,8 +201,7 @@ R3F_LOG_CFG_can_transport_cargo = R3F_LOG_CFG_can_transport_cargo +
 R3F_LOG_CFG_can_be_transported_cargo = R3F_LOG_CFG_can_be_transported_cargo +
 [
 	["gm_AmmoBox_wood_02_empty",3],
-  ["gm_AmmoBox_wood_03_empty",3],
-	["Land_CargoBox_V1_F", 20],
+    ["gm_AmmoBox_wood_03_empty",3],
 	["gm_jerrycan", 1],
 	["gm_ge_army_shelteraceII_standard", 50],
 	["gm_ge_army_shelteraceII_medic", 15],
@@ -216,7 +214,7 @@ R3F_LOG_CFG_can_be_moved_by_player = R3F_LOG_CFG_can_be_moved_by_player +
 [
 	"gm_jerrycan",
 	"gm_AmmoBox_wood_02_empty",
- 	"gm_AmmoBox_wood_03_empty",
+  	"gm_AmmoBox_wood_03_empty",
 	"gm_ge_army_shelteraceII_standard",
 	"gm_ge_army_shelteraceII_medic",
 	"gm_ge_army_shelteraceII_repair",
@@ -231,14 +229,20 @@ R3F_LOG_CFG_can_be_lifted = R3F_LOG_CFG_can_be_lifted +
 
 R3F_LOG_CFG_can_be_transported_cargo = R3F_LOG_CFG_can_be_transported_cargo +
 [
+	["B_HMG_01_F",5],
+	["B_HMG_01_high_F",5],
 	["gm_ge_army_mg3_aatripod",10],
-	["gm_ge_army_milan_launcher_tripod",10]
+	["gm_ge_army_milan_launcher_tripod",10],
+	["B_Mortar_01_F",10]
 ];
 
 R3F_LOG_CFG_can_be_moved_by_player = R3F_LOG_CFG_can_be_moved_by_player +
 [
+	"B_HMG_01_F",
+	"B_HMG_01_high_F",
 	"gm_ge_army_mg3_aatripod",
-	"gm_ge_army_milan_launcher_tripod"
+	"gm_ge_army_milan_launcher_tripod",
+	"B_Mortar_01_F"
 ];
 
 //--------------- Camping ---------------

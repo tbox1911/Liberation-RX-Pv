@@ -2,7 +2,7 @@
 // Default classname: scripts\shared\default_classnames.sqf
 // Advanced definition: scripts\shared\classnames.sqf
 
-huron_typename = "B_Heli_Transport_03_unarmed_F";
+//huron_typename = "B_Heli_Transport_03_unarmed_F";  // comment to use value from lobby/server.cfg
 FOB_typename = "Land_Cargo_HQ_V1_F";
 FOB_box_typename = "B_Slingload_01_Cargo_F";
 FOB_truck_typename = "B_Truck_01_box_F" ;
@@ -100,6 +100,9 @@ air_vehicles = [
 	["B_Heli_Transport_03_unarmed_F",10,500,35,GRLIB_perm_tank],
 	["B_Heli_Transport_03_F",10,1500,35,GRLIB_perm_air],
 	["B_Heli_Transport_01_F",10,1500,35,GRLIB_perm_tank],
+	["B_T_VTOL_01_infantry_F",10,1300,40,GRLIB_perm_air],
+	["B_T_VTOL_01_vehicle_F",10,1400,40,GRLIB_perm_air],
+	["B_T_VTOL_01_armed_F",20,2500,40,GRLIB_perm_max],
 	["B_Heli_Attack_01_dynamicLoadout_F",10,2250,30,GRLIB_perm_air],
 	["B_Plane_CAS_01_dynamicLoadout_F",20,3000,50,GRLIB_perm_max],
 	["B_Plane_Fighter_01_F",20,4500,50,GRLIB_perm_max],
@@ -123,81 +126,92 @@ static_vehicles = [
 	["B_static_AA_F",0,50,0,GRLIB_perm_air],
 	["B_static_AT_F",0,50,0,GRLIB_perm_air],
 	["B_Mortar_01_F",0,500,0,GRLIB_perm_max],
-	["B_AAA_System_01_F",10,500,0,GRLIB_perm_max],
-	["B_SAM_System_02_F",10,800,0,GRLIB_perm_max]
+	["B_SAM_System_01_F",10,500,0,GRLIB_perm_tank],
+	["B_SAM_System_02_F",10,150,0,GRLIB_perm_air],
+	["B_AAA_System_01_F",10,500,0,GRLIB_perm_max]
 ];
 
 // *** Static Weapon with AI ***
-static_vehicles_AI_west = [
+static_vehicles_AI = [
+	"B_SAM_System_01_F",
+	"B_SAM_System_02_F",
+	"B_AAA_System_01_F"
 ];
 
-support_vehicles = [
+support_vehicles_west = [
 	["B_G_Offroad_01_repair_F",5,15,5,GRLIB_perm_inf],
 	["B_G_Van_01_fuel_F",5,15,20,GRLIB_perm_inf],
 	["Box_NATO_WpsLaunch_F",0,150,0,GRLIB_perm_tank],
 	["B_APC_Tracked_01_CRV_F",15,2000,50,GRLIB_perm_max]
 ];
 
-buildings = [
+buildings_west = [
 	["Land_Cargo_Tower_V1_F",0,0,0,GRLIB_perm_tank],
 	["Land_Cargo_House_V1_F",0,0,0,GRLIB_perm_inf],
 	["Land_Cargo_Patrol_V1_F",0,0,0,GRLIB_perm_log],
 	["Flag_NATO_F",0,0,0,0]
 ];
 
-blufor_squad_inf_light = [
+if ( isNil "blufor_squad_inf_light" ) then { blufor_squad_inf_light = [] };
+if ( count blufor_squad_inf_light == 0 ) then { blufor_squad_inf_light = [
 	"B_Soldier_SL_F",
 	"B_medic_F",
 	"B_Soldier_GL_F",
 	"B_soldier_AR_F",
 	"B_Soldier_F",
 	"B_Soldier_F"
-];
-
-blufor_squad_inf = [
+	];
+};
+if ( isNil "blufor_squad_inf" ) then { blufor_squad_inf = [] };
+if ( count blufor_squad_inf == 0 ) then { blufor_squad_inf = [
 	"B_Soldier_SL_F",
 	"B_medic_F",
 	"B_soldier_M_F",
 	"B_Soldier_AR_F",
 	"B_HeavyGunner_F",
 	"B_Sharpshooter_F"
-];
-
-blufor_squad_at = [
+	];
+};
+if ( isNil "blufor_squad_at" ) then { blufor_squad_at = [] };
+if ( count blufor_squad_at == 0 ) then { blufor_squad_at = [
 	"B_Soldier_SL_F",
 	"B_medic_F",
 	"B_soldier_AT_F",
 	"B_soldier_AT_F",
 	"B_soldier_F",
 	"B_soldier_F"
-];
-
-blufor_squad_aa = [
+	];
+};
+if ( isNil "blufor_squad_aa" ) then { blufor_squad_aa = [] };
+if ( count blufor_squad_aa == 0 ) then { blufor_squad_aa = [
 	"B_Soldier_SL_F",
 	"B_medic_F",
 	"B_soldier_AA_F",
 	"B_soldier_AA_F",
 	"B_soldier_F",
 	"B_soldier_F"
-];
-
-blufor_squad_mix = [
+	];
+};
+if ( isNil "blufor_squad_mix" ) then { blufor_squad_mix = [] };
+if ( count blufor_squad_mix == 0 ) then { blufor_squad_mix = [
 	"B_Soldier_SL_F",
 	"B_medic_F",
 	"B_soldier_AA_F",
 	"B_soldier_AT_F",
 	"B_soldier_F",
 	"B_soldier_F"
-];
-
-blufor_squad_recon = [
+	];
+};
+if ( isNil "blufor_squad_recon" ) then { blufor_squad_recon = [] };
+if ( count blufor_squad_recon == 0 ) then { blufor_squad_recon = [
 	"B_recon_TL_F",
 	"B_recon_medic_F",
 	"B_Recon_Sharpshooter_F",
 	"B_recon_LAT_F",
 	"B_recon_M_F",
 	"B_recon_F"
-];
+	];
+};
 
 squads = [
 	[blufor_squad_inf_light,10,300,0,GRLIB_perm_max],

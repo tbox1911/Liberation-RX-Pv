@@ -36,6 +36,7 @@ militia_squad = [
 	"I_G_Soldier_SL_F",
 	"I_G_Soldier_A_F",
 	"I_G_Soldier_AR_F",
+	"I_G_Soldier_AR_F",	
 	"I_G_medic_F",
 	"I_G_engineer_F",
 	"I_G_Soldier_exp_F",
@@ -43,6 +44,7 @@ militia_squad = [
 	"I_G_Soldier_M_F",
 	"I_G_Soldier_F",
 	"I_G_Soldier_LAT_F",
+	"I_G_Soldier_LAT_F",	
 	"I_G_Soldier_lite_F",
 	"I_G_Sharpshooter_F",
 	"I_G_Soldier_TL_F",
@@ -158,10 +160,6 @@ opfor_statics = [
 	"I_static_AA_F",
 	"I_static_AT_F",
 	"I_Mortar_01_F"
-];
-
-// Overide Textures
-opfor_texture_overide = [
 ];
 
 opfor_recyclable = [

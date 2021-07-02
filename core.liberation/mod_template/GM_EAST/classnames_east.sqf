@@ -184,10 +184,6 @@ opfor_statics = [
 	"O_Mortar_01_F"
 ];
 
-// Overide Textures
-opfor_texture_overide = [
-];
-
 opfor_recyclable = [
 	["gm_gc_army_pt76b",0,round (20 / GRLIB_recycling_percentage),0],
 	["gm_pl_army_pt76b",0,round (20 / GRLIB_recycling_percentage),0],

@@ -14,29 +14,29 @@ repair_sling_typename = "Land_Pod_Heli_Transport_04_repair_F";
 fuel_sling_typename = "Land_Pod_Heli_Transport_04_fuel_F";
 ammo_sling_typename = "Land_Pod_Heli_Transport_04_ammo_F";
 medic_sling_typename = "Land_Pod_Heli_Transport_04_medevac_F";
-commander_classname = "O_officer_F";
-pilot_classname = "O_Helipilot_F";
-crewman_classname = "O_crew_F";
+commander_classname = "rhs_msv_emr_officer";
+pilot_classname = "rhs_pilot_combat_heli";
+crewman_classname = "rhs_msv_emr_combatcrew";
+A3W_BoxWps = "rhs_weapon_crate";
 
 // [CLASSNAME, MANPOWER, AMMO, FUEL, RANK]
 infantry_units = [
 	["Alsatian_Random_F",0,0,0,GRLIB_perm_max],
 	["Fin_random_F",0,0,0,0],
-	["O_soldier_F",1,0,0,0],
-	["O_medic_F",1,0,0,0],
-	["O_engineer_F",1,0,0,0],
-	["O_soldier_GL_F",1,0,0,GRLIB_perm_inf],
-	["O_soldier_M_F",1,0,0,GRLIB_perm_inf],
-	["O_soldier_LAT_F",1,0,0,0],
-	["O_Sharpshooter_F",1,0,0,GRLIB_perm_inf],
-	["O_HeavyGunner_F",1,0,0,GRLIB_perm_inf],
-	["O_recon_F",1,0,0,GRLIB_perm_log],
-	["O_recon_M_F",1,0,0,GRLIB_perm_log],
-	["O_recon_LAT_F",1,0,0,GRLIB_perm_log],
-	["O_soldier_AA_F",1,0,0,GRLIB_perm_log],
-	["O_soldier_AT_F",1,0,0,GRLIB_perm_log],
-	["O_sniper_F",1,0,0,GRLIB_perm_log],
-	["O_soldier_PG_F",1,0,0,GRLIB_perm_log],
+	["rhs_msv_emr_rifleman",1,0,0,0],
+	["rhs_msv_emr_medic",1,0,0,0],
+	["rhs_msv_emr_engineer",1,0,0,0],
+	["rhs_msv_emr_grenadier",1,0,0,GRLIB_perm_inf],
+	["rhs_msv_emr_marksman",1,0,0,GRLIB_perm_inf],
+	["rhs_msv_emr_LAT",1,0,0,0],
+	["rhs_msv_emr_arifleman",1,0,0,GRLIB_perm_inf],
+	["rhs_msv_emr_machinegunner",1,0,0,GRLIB_perm_inf],
+	["rhs_msv_emr_aa",1,0,0,GRLIB_perm_log],
+	["rhs_msv_emr_at",1,0,0,GRLIB_perm_log],
+	["rhs_vdv_recon_rifleman_ak103",1,0,0,GRLIB_perm_log],
+	["rhs_vdv_recon_arifleman_rpk",1,0,0,GRLIB_perm_log],
+	["rhs_vdv_recon_rifleman_lat",1,0,0,GRLIB_perm_log],
+	["rhs_vdv_recon_marksman",1,0,0,GRLIB_perm_log],
 	[crewman_classname,1,0,0,GRLIB_perm_inf],
 	[pilot_classname,1,0,0,GRLIB_perm_log]
 ];
@@ -131,42 +131,32 @@ static_vehicles = [
 	["RHS_NSV_TriPod_VMF",0,5,0,GRLIB_perm_inf],
 	["rhs_SPG9M_VMF",0,5,0,GRLIB_perm_inf],
 	["RHS_ZU23_VMF",0,50,0,GRLIB_perm_inf],
-	["RHS_M119_WD",10,150,0,GRLIB_perm_log],
-	["B_SAM_System_02_F",10,150,0,GRLIB_perm_log],
-	["B_Ship_Gun_01_F",10,150,0,GRLIB_perm_log],
-	["B_SAM_System_01_F",10,500,0,GRLIB_perm_max],
-	["O_Radar_System_02_F",10,500,0,GRLIB_perm_max],
-	["B_AAA_System_01_F",10,500,0,GRLIB_perm_max],
-	["O_SAM_System_04_F",10,500,0,GRLIB_perm_max]
+	["RHS_M119_WD",10,150,0,GRLIB_perm_log]
 ];
 
 // *** Static Weapon with AI ***
-static_vehicles_AI_west = [
+static_vehicles_AI = [
 ];
 
-support_vehicles = [
+support_vehicles_west = [
 	["rhs_D30_msv",10,150,0,GRLIB_perm_log],
 	["rhs_D30_at_msv",10,150,0,GRLIB_perm_log],
 	["rhs_gaz66_ammo_vv",1,30,1,GRLIB_perm_inf],
 	["rhs_kamaz5350_ammo_vv",1,30,1,GRLIB_perm_inf],
 	["RHS_Ural_Ammo_VV_01",1,30,1,GRLIB_perm_inf],
 	["RHS_Ural_Fuel_VV_01",1,30,1,GRLIB_perm_inf],
-	["RHS_Ural_Repair_VV_01",1,30,1,GRLIB_perm_inf],
-	["rhs_weapon_crate",0,150,0,GRLIB_perm_tank],
-	["rhs_spec_weapons_crate",0,150,0,GRLIB_perm_tank],
-	["rhs_launcher_crate",0,150,0,GRLIB_perm_tank],
-	["rhs_gear_crate",0,150,0,GRLIB_perm_tank],
-	["rhs_mags_crate",0,150,0,GRLIB_perm_tank]
+	["RHS_Ural_Repair_VV_01",1,30,1,GRLIB_perm_inf]
 ];
 
-buildings = [
+buildings_west = [
 	["Land_Cargo_Tower_V3_F",0,0,0,GRLIB_perm_tank],
 	["Land_Cargo_House_V3_F",0,0,0,GRLIB_perm_inf],
 	["Land_Cargo_Patrol_V3_F",0,0,0,GRLIB_perm_log],
 	["Flag_CSAT_F",0,0,0,0]
 ];
 
-blufor_squad_inf_light = [
+if ( isNil "blufor_squad_inf_light" ) then { blufor_squad_inf_light = [] };
+if ( count blufor_squad_inf_light == 0 ) then { blufor_squad_inf_light = [
 	"rhs_vmf_emr_medic",
 	"rhs_vmf_emr_at",
 	"rhs_vmf_emr_efreitor",
@@ -174,9 +164,10 @@ blufor_squad_inf_light = [
 	"rhs_vmf_emr_rifleman",
 	"rhs_vmf_emr_grenadier",
 	"rhs_vmf_emr_machinegunner"
-];
-
-blufor_squad_inf = [
+  ];
+};
+if ( isNil "blufor_squad_inf" ) then { blufor_squad_inf = [] };
+if ( count blufor_squad_inf == 0 ) then { blufor_squad_inf = [
     "rhs_vmf_emr_medic",
     "rhs_vmf_emr_at",
     "rhs_vmf_emr_efreitor",
@@ -187,9 +178,10 @@ blufor_squad_inf = [
     "rhs_vmf_emr_rifleman",
     "rhs_vmf_emr_grenadier",
     "rhs_vmf_emr_machinegunner"
-];
-
-blufor_squad_at = [
+  ];
+};
+if ( isNil "blufor_squad_at" ) then { blufor_squad_at = [] };
+if ( count blufor_squad_at == 0 ) then { blufor_squad_at = [
     "rhs_vmf_emr_medic",
     "rhs_vmf_emr_at",
     "rhs_vmf_emr_medic",
@@ -202,9 +194,10 @@ blufor_squad_at = [
     "rhs_vmf_emr_aa",
     "rhs_vmf_emr_marksman",
     "rhs_vmf_emr_at"
-];
-
-blufor_squad_aa = [
+  ];
+};
+if ( isNil "blufor_squad_aa" ) then { blufor_squad_aa = [] };
+if ( count blufor_squad_aa == 0 ) then { blufor_squad_aa = [
 	"rhs_vmf_emr_medic",
     "rhs_vmf_emr_medic",
     "rhs_vmf_emr_aa",
@@ -216,9 +209,10 @@ blufor_squad_aa = [
     "rhs_vmf_emr_aa",
     "rhs_vmf_emr_marksman",
     "rhs_vmf_emr_aa"
-];
-
-blufor_squad_mix = [
+  ];
+};
+if ( isNil "blufor_squad_mix" ) then { blufor_squad_mix = [] };
+if ( count blufor_squad_mix == 0 ) then { blufor_squad_mix = [
 	"rhs_vmf_emr_medic",
 	"rhs_vmf_emr_medic",
     "rhs_vmf_emr_at",
@@ -236,9 +230,10 @@ blufor_squad_mix = [
     "rhs_vmf_emr_aa",
     "rhs_vmf_emr_marksman",
     "rhs_vmf_emr_aa"
-];
-
-blufor_squad_recon = [
+  ];
+};
+if ( isNil "blufor_squad_recon" ) then { blufor_squad_recon = [] };
+if ( count blufor_squad_recon == 0 ) then { blufor_squad_recon = [
 	"rhs_vmf_emr_medic",
 	"rhs_vmf_emr_medic",
     "rhs_vmf_emr_at",
@@ -259,7 +254,8 @@ blufor_squad_recon = [
     "rhs_vmf_emr_medic",
     "rhs_vmf_emr_aa",
     "rhs_vmf_emr_aa"
-];
+  ];
+};
 
 squads = [
 	[blufor_squad_inf_light,10,300,0,GRLIB_perm_max],
