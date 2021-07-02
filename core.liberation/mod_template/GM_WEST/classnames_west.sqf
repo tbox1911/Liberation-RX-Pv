@@ -118,7 +118,7 @@ static_vehicles_AI = [
 	"O_SAM_System_04_F"
 ];
 
-support_vehicles_west = [
+support_vehicles = [
 	["gm_ge_army_shelteraceII_repair",5,50,5,GRLIB_perm_inf],
 	["gm_gc_army_shelteraceII_medic",5,50,5,GRLIB_perm_inf],
 	["gm_gc_army_shelterlakII_repair",10,100,0,GRLIB_perm_log],

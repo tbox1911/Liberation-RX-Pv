@@ -112,7 +112,7 @@ static_vehicles_AI = [
 	"CUP_WV_B_SS_Launcher"
 ];
 
-support_vehicles_west = [
+support_vehicles = [
 	["B_G_Offroad_01_repair_F",5,15,5,GRLIB_perm_inf],
 	["B_G_Van_01_fuel_F",5,15,20,GRLIB_perm_inf],
 	["Box_NATO_WpsLaunch_F",0,150,0,GRLIB_perm_tank],

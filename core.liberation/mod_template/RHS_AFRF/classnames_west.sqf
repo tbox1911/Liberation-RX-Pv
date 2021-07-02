@@ -138,7 +138,7 @@ static_vehicles = [
 static_vehicles_AI = [
 ];
 
-support_vehicles_west = [
+support_vehicles = [
 	["rhs_D30_msv",10,150,0,GRLIB_perm_log],
 	["rhs_D30_at_msv",10,150,0,GRLIB_perm_log],
 	["rhs_gaz66_ammo_vv",1,30,1,GRLIB_perm_inf],

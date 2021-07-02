@@ -124,7 +124,7 @@ static_vehicles_AI = [
 	"O_SAM_System_04_F"
 ];
 
-support_vehicles_west = [
+support_vehicles = [
 	["O_G_Offroad_01_repair_F",5,15,5,GRLIB_perm_inf],
 	["O_G_Van_01_fuel_F",5,15,20,GRLIB_perm_inf],
 	["Land_Pod_Heli_Transport_04_bench_F",0,50,0,GRLIB_perm_log],
