@@ -119,7 +119,7 @@ static_vehicles = [
 ];
 
 // *** Static Weapon with AI ***
-static_vehicles_AI = [
+static_vehicles_AI_west = [
 	"B_AAA_System_01_F",
 	"O_SAM_System_04_F"
 ];

@@ -106,7 +106,7 @@ static_vehicles = [
 ];
 
 // *** Static Weapon with AI ***
-static_vehicles_AI = [
+static_vehicles_AI_west = [
 	"CUP_WV_B_CRAM",
 	"CUP_WV_B_RAM_Launcher",
 	"CUP_WV_B_SS_Launcher"

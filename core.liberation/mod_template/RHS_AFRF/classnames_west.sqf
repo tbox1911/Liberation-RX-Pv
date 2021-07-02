@@ -135,7 +135,7 @@ static_vehicles = [
 ];
 
 // *** Static Weapon with AI ***
-static_vehicles_AI = [
+static_vehicles_AI_west = [
 ];
 
 support_vehicles = [
