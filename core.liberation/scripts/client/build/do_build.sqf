@@ -94,7 +94,6 @@ while { true } do {
 			_unit setMass 10;
 			_unit setUnitRank "PRIVATE";
 			_unit setSkill 0.6;
-			_grp = group player;
 			_unit setVariable ["PAR_Grp_ID", format["Bros_%1",PAR_Grp_ID], true];
 			_unit enableIRLasers true;
 			_unit enableGunLights "Auto";
