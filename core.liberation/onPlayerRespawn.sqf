@@ -16,8 +16,6 @@ titleText ["Loading...","BLACK FADED", 1000];
 waitUntil {sleep 1; alive player};
 player setPos ((getmarkerpos 'respawn_point') findEmptyPosition [0,20, "B_soldier_F"]);
 GRLIB_player_spawned = false;
-waitUntil {sleep 0.1; !isNil "GRLIB_revive"};
-if (GRLIB_revive == 0) then {[player] call player_EVH}; 	// if PAR is disabled, minimal handler
 
 removeAllWeapons player;
 removeAllItems player;
