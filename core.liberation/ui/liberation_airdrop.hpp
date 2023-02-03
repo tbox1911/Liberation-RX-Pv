@@ -31,7 +31,7 @@ class liberation_airdrop {
     {
       idc = 1610;
       action = "closeDialog 0";
-      text = "Cancel";
+      text = $STR_AIRDROP_CANCEL;
       x = 0.269271 * safezoneW + safezoneX;
       y = 0.71 * safezoneH + safezoneY;
       w = 0.09 * safezoneW;
@@ -57,14 +57,14 @@ class liberation_airdrop {
     h = 0.035;
     w = 0.1;
     text = "";
-    size = "(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1)";
+    size = "(((((safezoneW / safezoneH) min 1) / 1) / 30) * 1)";
     shadow = 2;
   };
   class ButtonTaxi: StdButton
   {
     idc = 1607;
     action = "air_type=8;do_action=1";
-    text = "Taxi"; //--- ToDo: Localize;
+    text = $STR_AIRDROP_TAXI;
     x = 0.206094 * safezoneW + safezoneX;
     y = 0.2186 * safezoneH + safezoneY;
     w = 0.061875 * safezoneW;
@@ -72,18 +72,17 @@ class liberation_airdrop {
   };
   class LabelTaxi: GREUH_RscStructuredText
   {
-    text = "<t size='0.8'>Call Heli Taxi.<br/>Cost: 100 Ammo</t>"; //--- ToDo: Localize;
+    idc = 1628;
     x = 0.283437 * safezoneW + safezoneX;
-    y = 0.2186 * safezoneH + safezoneY;
+    y = 0.2176 * safezoneH + safezoneY;
     w = 0.149531 * safezoneW;
     h = 0.044 * safezoneH;
-    sizeEx = 0.018 * safezoneH * GUI_GRID_H * GUI_GRID_H;
   };
   class ButtonLight: StdButton
   {
     idc = 1600;
     action = "air_type=1;do_action=1";
-    text = "Light"; //--- ToDo: Localize;
+    text = $STR_AIRDROP_LIGHT;
     x = 0.206094 * safezoneW + safezoneX;
     y = 0.2786 * safezoneH + safezoneY;
     w = 0.061875 * safezoneW;
@@ -91,18 +90,17 @@ class liberation_airdrop {
   };
   class LabelLight: GREUH_RscStructuredText
   {
-    text = "<t size='0.8'>Quad, Unarmed Offroad.<br/>Cost:  50 Ammo</t>"; //--- ToDo: Localize;
+    idc = 1621;    
     x = 0.283437 * safezoneW + safezoneX;
-    y = 0.2786 * safezoneH + safezoneY;
+    y = 0.2776 * safezoneH + safezoneY;
     w = 0.149531 * safezoneW;
     h = 0.044 * safezoneH;
-    sizeEx = 0.018 * safezoneH * GUI_GRID_H * GUI_GRID_H;
   };
   class ButtonLight2: StdButton
   {
     idc = 1601;
     action = "air_type=2;do_action=1";
-    text = "Light+"; //--- ToDo: Localize;
+    text = $STR_AIRDROP_LIGHTPLUS;
     x = 0.206094 * safezoneW + safezoneX;
     y = 0.3386 * safezoneH + safezoneY;
     w = 0.061875 * safezoneW;
@@ -110,18 +108,17 @@ class liberation_airdrop {
   };
   class LabelLight2: GREUH_RscStructuredText
   {
-    text = "<t size='0.8'>Armed Offroad.<br/>Cost: 100 Ammo</t>";
+    idc = 1622;
     x = 0.283437 * safezoneW + safezoneX;
-    y = 0.3386 * safezoneH + safezoneY;
+    y = 0.3376 * safezoneH + safezoneY;
     w = 0.149531 * safezoneW;
     h = 0.044 * safezoneH;
-    sizeEx = 0.018 * safezoneH * GUI_GRID_H * GUI_GRID_H;
   };
   class ButtonMed: StdButton
   {
     idc = 1602;
     action = "air_type=3;do_action=1";
-    text = "Armed"; //--- ToDo: Localize;
+    text = $STR_AIRDROP_ARMORED;
     x = 0.206094 * safezoneW + safezoneX;
     y = 0.3986 * safezoneH + safezoneY;
     w = 0.061875 * safezoneW;
@@ -129,18 +126,17 @@ class liberation_airdrop {
   };
   class LabelMed: GREUH_RscStructuredText
   {
-    text = "<t size='0.8'>Armed MRAPs.<br/>Cost: 200 Ammo</t>";
+    idc = 1623;
     x = 0.283437 * safezoneW + safezoneX;
-    y = 0.3986 * safezoneH + safezoneY;
+    y = 0.3976 * safezoneH + safezoneY;
     w = 0.149531 * safezoneW;
     h = 0.044 * safezoneH;
-    sizeEx = 0.018 * safezoneH * GUI_GRID_H * GUI_GRID_H;
   };
   class ButtonSup: StdButton
   {
     idc = 1603;
     action = "air_type=4;do_action=1";
-    text = "Truck"; //--- ToDo: Localize;
+    text = $STR_AIRDROP_TRUCK;
     x = 0.206094 * safezoneW + safezoneX;
     y = 0.4586 * safezoneH + safezoneY;
     w = 0.061875 * safezoneW;
@@ -148,18 +144,17 @@ class liberation_airdrop {
   };
   class LabelSup: GREUH_RscStructuredText
   {
-    text = "<t size='0.8'>Large Trucks.<br/>Cost: 300 Ammo</t>";
+    idc = 1624;
     x = 0.283437 * safezoneW + safezoneX;
-    y = 0.4586 * safezoneH + safezoneY;
+    y = 0.4576 * safezoneH + safezoneY;
     w = 0.149531 * safezoneW;
     h = 0.044 * safezoneH;
-    sizeEx = 0.018 * safezoneH * GUI_GRID_H * GUI_GRID_H;
   };
   class ButtonHeavy: StdButton
   {
     idc = 1604;
     action = "air_type=5;do_action=1";
-    text = "Heavy"; //--- ToDo: Localize;
+    text = $STR_AIRDROP_APC;
     x = 0.206094 * safezoneW + safezoneX;
     y = 0.5186 * safezoneH + safezoneY;
     w = 0.061875 * safezoneW;
@@ -167,19 +162,17 @@ class liberation_airdrop {
   };
   class LabelHeavy: GREUH_RscStructuredText
   {
-    text = "<t size='0.8'>Armored APCs.<br/>Cost: 750 Ammo</t>";
+    idc = 1625;
     x = 0.283437 * safezoneW + safezoneX;
-    y = 0.5186 * safezoneH + safezoneY;
+    y = 0.5176 * safezoneH + safezoneY;
     w = 0.149531 * safezoneW;
     h = 0.044 * safezoneH;
-    sizeEx = 0.018 * safezoneH * GUI_GRID_H * GUI_GRID_H;
   };
-
   class ButtonBoat: StdButton
   {
     idc = 1606;
     action = "air_type=6;do_action=1";
-    text = "Boat"; //--- ToDo: Localize;
+    text = $STR_AIRDROP_BOAT;
     x = 0.206094 * safezoneW + safezoneX;
     y = 0.5786 * safezoneH + safezoneY;
     w = 0.061875 * safezoneW;
@@ -187,18 +180,17 @@ class liberation_airdrop {
   };
   class LabelBoat: GREUH_RscStructuredText
   {
-    text = "<t size='0.8'>Transport Boats.<br/>Cost: 250 Ammo</t>";
+    idc = 1626;
     x = 0.283437 * safezoneW + safezoneX;
-    y = 0.5786 * safezoneH + safezoneY;
+    y = 0.5776 * safezoneH + safezoneY;
     w = 0.149531 * safezoneW;
     h = 0.044 * safezoneH;
-    sizeEx = 0.018 * safezoneH * GUI_GRID_H * GUI_GRID_H;
   };
   class ButtonAir: StdButton
   {
     idc = 1605;
     action = "air_type=7;do_action=1";
-    text = "Air Support"; //--- ToDo: Localize;
+    text = $STR_AIRDROP_AIRSUPREMACY;
     x = 0.206094 * safezoneW + safezoneX;
     y = 0.6386 * safezoneH + safezoneY;
     w = 0.061875 * safezoneW;
@@ -206,12 +198,11 @@ class liberation_airdrop {
   };
   class LabelAir: GREUH_RscStructuredText
   {
-    text = "<t size='0.8'>Air Suppremacy.<br/>Cost: 2000 Ammo</t>";
+    idc = 1627;
     x = 0.283437 * safezoneW + safezoneX;
-    y = 0.6386 * safezoneH + safezoneY;
+    y = 0.6376 * safezoneH + safezoneY;
     w = 0.149531 * safezoneW;
     h = 0.044 * safezoneH;
-    sizeEx = 0.018 * safezoneH * GUI_GRID_H * GUI_GRID_H;
   };
   class OuterBG1: StdBG
   {
@@ -239,7 +230,7 @@ class liberation_airdrop {
   };
   class Header: StdHeader
   {
-    text = "-- Air Support Menu --";
+    text = $STR_AIRDROP_MENU;
     x = 0.1985 * safezoneW + safezoneX;
     y = 0.1444 * safezoneH + safezoneY;
     w = 0.2375 * safezoneW;

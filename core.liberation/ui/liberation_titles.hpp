@@ -6,8 +6,7 @@ class RscTitles
       duration = 4;
       idd = -1;
       movingEnable = false;
-      controls[]=
-      {
+      controls[] = {
          GenericLabelShadow, GenericLabel2
       };
 	  class GenericLabel2 {
@@ -36,8 +35,7 @@ class RscTitles
       duration = 4;
       idd = -1;
       movingEnable = false;
-      controls[]=
-      {
+      controls[] = {
          GenericLabelShadow, GenericLabel2
       };
 	  class GenericLabel2 {
@@ -52,7 +50,7 @@ class RscTitles
 		w = 0.4 * safezoneW;
 		y = 0.65 * safezoneH + safezoneY;
 		h = 0.1 * safezoneH;
-		text = "now, Revived and eXtended to the best,";
+		text = "now, Revived and eXtended to the best...";
 		shadow = 1;
 	  };
 	  class GenericLabelShadow : GenericLabel2{
@@ -65,8 +63,7 @@ class RscTitles
       duration = 4;
       idd = -1;
       movingEnable = false;
-      controls[]=
-      {
+      controls[] = {
          GenericLabelShadow, GenericLabel2
       };
 	  class GenericLabel2 {
@@ -81,7 +78,7 @@ class RscTitles
 		w = 0.4 * safezoneW;
 		y = 0.65 * safezoneH + safezoneY;
 		h = 0.1 * safezoneH;
-		text = "[AKH] is proud to presents:";
+		text = "[AKH pSiKO] is proud to presents:";
 		shadow = 1;
 	  };
 	  class GenericLabelShadow : GenericLabel2{
@@ -95,9 +92,8 @@ class RscTitles
       duration = 7;
       idd = -1;
       movingEnable = false;
-      controls[]=
-      {
-         VersionLabelShadow, Splash, VersionLabel
+      controls[] = {
+         VersionLabelShadow, Splash, VersionLabel, MOTDLabel, MOTDLabelShadow
       };
 	  	class Splash {
 		idc = -1;
@@ -132,6 +128,25 @@ class RscTitles
 		shadow = 2;
 		font = FONTM;
 	  };
+	  class MOTDLabel {
+		idc = -1;
+		type =  CT_STATIC ;
+		style = ST_CENTER;
+		shadow = 1;
+		colorText[] = COLOR_WHITE;
+		colorBackground[] = COLOR_NOALPHA;
+		font = FONTM;
+		sizeEx = 0.025 * safezoneH;
+		x = 0.3 * safezoneW + safezoneX;
+		w = 0.4 * safezoneW;
+		y = 0.70 * safezoneH + safezoneY;
+		h = 0.1 * safezoneH;
+		text = $STR_MISSION_MOTD;
+	  };
+	  class MOTDLabelShadow : MOTDLabel {
+		shadow = 2;
+		font = FONTM;
+	  };
    };
 
    class blank
@@ -141,7 +156,7 @@ class RscTitles
       idd = 6666;
       movingEnable = true;
 	  onLoad = "";
-      controls[]={};
+      controls[] = {};
    };
 
    class fasttravel
@@ -151,8 +166,7 @@ class RscTitles
       idd = -1;
       movingEnable = true;
 
-      controls[]=
-      {
+      controls[] = {
          OuterBackground,GenericLabel111
       };
 	  class OuterBackground {
@@ -188,7 +202,7 @@ class RscTitles
       idd = 6666;
       movingEnable = true;
 	  onLoad = "uiNamespace setVariable ['GUI_OVERLAY', _this select 0];";
-    controls[]= { BGPicture,LabelScore,LabelAmmo,LabelManpower,LabelFuel,LabelCap,PictureAmmoShadow,PictureScoreShadow,PictureManpowerShadow,
+	  controls[] = { BGPicture,LabelScore,LabelAmmo,LabelManpower,LabelFuel,LabelCap,PictureAmmoShadow,PictureScoreShadow,PictureManpowerShadow,
 		BGPictureActiveSectors,PictureFuelShadow,PictureCapShadow,PictureScore,PictureAmmo,PictureManpower,PictureFuel,PictureCap,PictureCombatReadinessShadow,
 		PictureCombatReadiness,PictureIntelShadow,PictureIntel,LabelIntel,BGPictureSector,CaptureFrame_OPFOR,CaptureFrame_BLUFOR,CaptureFrame,LabelPoint,
 	  LabelCombatReadiness,CentralShadow,CentralLabel,ActiveSectors,AlertBGPicture,AlertLabel,AlertTimer };
@@ -264,13 +278,13 @@ class RscTitles
 		y = (0.4 + ( ICONE_SPACY * 1 ) ) * safezoneH + safezoneY;
 		text = "res\ui_ammo.paa";
 	  };
-	 class PictureManpower : GenericPicture69 {
-		y = (0.4 + ( ICONE_SPACY * 2 ) ) * safezoneH + safezoneY;
-		text = "res\ui_manpo.paa";
-	  };
 	  class PictureFuel : GenericPicture69 {
-		y = (0.4 + ( ICONE_SPACY * 3 ) ) * safezoneH + safezoneY;
+		y = (0.4 + ( ICONE_SPACY * 2 ) ) * safezoneH + safezoneY;
 		text = "res\ui_fuel.paa";
+	  };
+	 class PictureManpower : GenericPicture69 {
+		y = (0.4 + ( ICONE_SPACY * 3 ) ) * safezoneH + safezoneY;
+		text = "res\ui_manpo.paa";
 	  };
 	  class PictureCap : GenericPicture69 {
 		y = (0.4 + ( ICONE_SPACY * 4 ) ) * safezoneH + safezoneY;
@@ -297,12 +311,12 @@ class RscTitles
 		x = (0.985 + SHADOW_X) * safezoneW + safezoneX;
 		colorText[] = {0,0,0,0.7};
 	  };
-		class PictureManpowerShadow : PictureManpower {
+	  class PictureFuelShadow : PictureFuel {
 		y = (0.4 + SHADOW_Y + ( ICONE_SPACY * 2 ) ) * safezoneH + safezoneY;
 		x = (0.985 + SHADOW_X) * safezoneW + safezoneX;
 		colorText[] = {0,0,0,0.7};
 	  };
-	  class PictureFuelShadow : PictureFuel {
+	  class PictureManpowerShadow : PictureManpower {
 		y = (0.4 + SHADOW_Y + ( ICONE_SPACY * 3 ) ) * safezoneH + safezoneY;
 		x = (0.985 + SHADOW_X) * safezoneW + safezoneX;
 		colorText[] = {0,0,0,0.7};
@@ -336,17 +350,17 @@ class RscTitles
 		y = (0.39 + ( ICONE_SPACY * 1 ) ) * safezoneH + safezoneY;
 		colorText[] = {0.75, 0, 0, 1};
 	  };
-	  class LabelManpower : GenericLabel69 {
-	  	idc = 101;
-		text = "";
-		y = (0.39 + ( ICONE_SPACY * 2 ) ) * safezoneH + safezoneY;
-		colorText[] = {0, 0.75, 0, 1};
-	  };
 	  class LabelFuel : GenericLabel69 {
 	  	idc = 103;
 		text = "";
-		y = (0.39 + ( ICONE_SPACY * 3 ) ) * safezoneH + safezoneY;
+		y = (0.39 + ( ICONE_SPACY * 2 ) ) * safezoneH + safezoneY;
 		colorText[] = {0.75, 0.75, 0, 1};
+	  };
+	  class LabelManpower : GenericLabel69 {
+	  	idc = 101;
+		text = "";
+		y = (0.39 + ( ICONE_SPACY * 3 ) ) * safezoneH + safezoneY;
+		colorText[] = {0, 0.75, 0, 1};
 	  };
 	  class LabelCap : GenericLabel69 {
 	  	idc = 104;

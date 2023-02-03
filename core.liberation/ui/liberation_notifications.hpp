@@ -43,7 +43,7 @@ class CfgNotifications
         title = $STR_NOTIFICATION_SECTORSAFE_TITLE;
 		description = $STR_NOTIFICATION_SECTORSAFE_TEXT;
         iconPicture = "res\notif\ui_notif_sec_saf.paa";
-		color[] = {0,0.35,1,1};
+		color[] = {0,1,1,1};
 		sound = "taskUpdated";
 		priority = 3;
     };
@@ -52,7 +52,7 @@ class CfgNotifications
 		title = $STR_NOTIFICATION_FOBBUILT_TITLE;
 		description = $STR_NOTIFICATION_FOBBUILT_TEXT;
         iconPicture = "res\notif\ui_notif_fob_new.paa";
-		color[] = {0,0.35,1,1};
+		color[] = {0,1,1,1};
 		sound = "taskUpdated";
     };
 	class lib_fob_safe : lib_default_notification
@@ -60,7 +60,7 @@ class CfgNotifications
 		title = $STR_NOTIFICATION_FOBSAFE_TITLE;
 		description = $STR_NOTIFICATION_FOBSAFE_TEXT;
         iconPicture = "res\notif\ui_notif_fob_sec.paa";
-		color[] = {0,0.35,1,1};
+		color[] = {0,1,1,1};
 		sound = "taskUpdated";
 		priority = 3;
     };
@@ -80,14 +80,6 @@ class CfgNotifications
 		color[] = {1,0,0,1};
 		sound = "taskFailed";
     };
-	class lib_fob_destroyed : lib_default_notification
-    {
-		title = $STR_NOTIFICATION_FOBLOST_TITLE;
-		description = $STR_NOTIFICATION_FOBLOST_TEXT;
-        iconPicture = "res\notif\ui_notif_fob_los.paa";
-		color[] = {0,1,0,1};
-		sound = "taskSucceeded";
-    };
 	class lib_battlegroup : lib_default_notification
     {
 		title = $STR_NOTIFICATION_BATTLEGROUP_TITLE;
@@ -104,7 +96,7 @@ class CfgNotifications
     {
 		title = $STR_NOTIFICATION_INTEL_TITLE;
         iconPicture = "res\notif\ui_notif_int.paa";
-		color[] = {0,0.35,1,1};
+		color[] = {0,1,1,1};
 		sound = "taskUpdated";
     };
 	class lib_intel_prisoner : lib_intel
@@ -137,17 +129,17 @@ class CfgNotifications
     };
 	class lib_secondary_a3w_mission : lib_secondary_fob_destroyed
 	{
-		description = "Side Mission %1 Started.";
+		description = $STR_SIDE_START;
 		color[] = {0,0,1,1};
 	};
 	class lib_secondary_a3w_mission_success : lib_secondary_a3w_mission
 	{
-		description = "Side Mission %1 Success.";
+		description = $STR_SIDE_SUCCESS;
 		color[] = {0,1,0,1};
 	};
 	class lib_secondary_a3w_mission_fail : lib_secondary_a3w_mission
 	{
-		description = "Side Mission %1 Fail.";
+		description = $STR_SIDE_FAILED;
 		color[] = {1,0,0,1};
 	};
 	class lib_reinforcements : lib_default_notification
@@ -161,9 +153,9 @@ class CfgNotifications
 	class lib_reinforcementsblu : lib_default_notification
     {
 		title = $STR_NOTIFICATION_REINFORCEMENTS_TITLE;
-		description = "Air Supremacy is Incoming...";
+		description = $STR_NOTIFICATION_REINFORCEMENTS_TITLE2;
         iconPicture = "res\notif\ui_notif_ref.paa";
-		color[] = {0,0.35,1,1};
+		color[] = {0,1,1,1};
 		sound = "taskUpdated";
     };
     class lib_intel_sar : lib_intel

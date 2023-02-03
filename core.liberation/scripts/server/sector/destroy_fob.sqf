@@ -1,14 +1,27 @@
-params ["_fobpos", "_side"];
+_fobpos = _this select 0;
 
-private _buildingsdestroy = [ (_fobpos nearobjects 150) , { getObjectType _x >= 8 && side _x != _side } ] call BIS_fnc_conditionalSelect;
+GRLIB_all_fobs = GRLIB_all_fobs - [_fobpos];
+publicVariable "GRLIB_all_fobs";
+
+private _classnames_to_destroy = [];
+private _all_buildings_to_destroy = [];
+
+private _near_outpost = (count (_fobpos nearObjects [FOB_outpost, 50]) > 0);
+if (_near_outpost) then {
+	_classnames_to_destroy = [FOB_outpost, FOB_sign];
+} else {
+	_classnames_to_destroy = [FOB_typename, FOB_sign];
+};
+
+{ _classnames_to_destroy pushBack (_x select 0) } foreach buildings;
+
+_all_buildings_to_destroy = [(_fobpos nearobjects 200), { getObjectType _x >= 8 && (typeOf _x) in _classnames_to_destroy }] call BIS_fnc_conditionalSelect;
+_all_buildings_to_destroy = _all_buildings_to_destroy + ([(_fobpos nearobjects 200), { (typeOf _x) in GRLIB_Ammobox_keep && [_x] call is_public }] call BIS_fnc_conditionalSelect);
 
 {
-	[_x] spawn {
-		params ["_unit"];
-		sleep floor(random 2);
-		_unit setdamage 1;
-		sleep floor(random 60);
-		deletevehicle _unit;
-	};
-	sleep 0.1;
-} foreach _buildingsdestroy;
+	sleep 0.2;
+	deleteVehicle _x;
+} foreach _all_buildings_to_destroy;
+
+stats_fobs_lost = stats_fobs_lost + 1;
+sleep 1;
