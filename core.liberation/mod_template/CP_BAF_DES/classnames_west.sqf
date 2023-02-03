@@ -1,18 +1,24 @@
 // *** FRIENDLIES ***
+GRLIB_side_friendly = WEST;
+
 // Default classname: scripts\shared\default_classnames.sqf
 // Advanced definition: scripts\shared\classnames.sqf
 
 huron_typename = "CUP_B_Merlin_HC3_GB";  // comment to use value from lobby/server.cfg
 Respawn_truck_typename = "CUP_B_LR_Ambulance_GB_D";
-ammo_truck_typename = "CUP_B_T810_Reammo_CZ_DES";
-fuel_truck_typename = "CUP_B_T810_Refuel_CZ_DES";
-repair_truck_typename = "CUP_B_T810_Repair_CZ_DES";
+ammo_truck_typename = "CUP_B_MTVR_Ammo_BAF_DES";
+fuel_truck_typename = "CUP_B_MTVR_Refuel_BAF_DES";
+repair_truck_typename = "CUP_B_MTVR_Repair_BAF_DES";
 pilot_classname = "CUP_B_BAF_Soldier_Pilot_DDPM";
 crewman_classname = "CUP_B_BAF_Soldier_Crew_DDPM";
 A3W_BoxWps = "CUP_LocalBasicWeaponsBox";
 
+chimera_vehicle_overide = [
+  ["B_Heli_Transport_01_F", "CUP_B_AW159_Unarmed_RN_Blackcat"]
+];
+
 // [CLASSNAME, MANPOWER, AMMO, FUEL, RANK]
-infantry_units = [
+infantry_units_west = [
 	["Alsatian_Random_F",0,0,0,GRLIB_perm_max],
 	["Fin_random_F",0,0,0,0],
 	["CUP_B_BAF_Soldier_Rifleman_DDPM",1,0,0,0],
@@ -32,6 +38,12 @@ infantry_units = [
 	[crewman_classname,1,0,0,GRLIB_perm_inf],
 	[pilot_classname,1,0,0,GRLIB_perm_log]
 ];
+
+units_loadout_overide = [
+	"CUP_B_BAF_Soldier_RiflemanAT_DDPM",
+	"CUP_B_BAF_Soldier_AA_DDPM",
+	"CUP_B_BAF_Soldier_AT_DDPM"
+];	
 
 light_vehicles = [
 	["CUP_O_TT650_TKA",1,5,1,0],
@@ -80,7 +92,8 @@ air_vehicles = [
 	["CUP_B_AH1_DL_BAF",10,1300,15,GRLIB_perm_air],
 	["CUP_B_CH47F_GB",20,2500,40,GRLIB_perm_max],
 	["CUP_B_GR9_DYN_GB",20,3000,40,GRLIB_perm_max],
-	["CUP_B_F35B_BAF",20,4500,40,GRLIB_perm_max]
+	["CUP_B_F35B_BAF",20,4500,40,GRLIB_perm_max],
+	["CUP_B_C130J_Cargo_GB",20,3000,50,GRLIB_perm_max]
 ];
 
 blufor_air = [
@@ -90,7 +103,7 @@ blufor_air = [
 	"CUP_B_F35B_BAF"
 ];
 
-boats = [
+boats_west = [
   "CUP_B_MK10_GB"
 ];
 
@@ -106,76 +119,72 @@ static_vehicles = [
 ];
 
 // *** Static Weapon with AI ***
-static_vehicles_AI_west = [
+static_vehicles_AI = [
 	"CUP_WV_B_CRAM",
 	"CUP_WV_B_RAM_Launcher",
 	"CUP_WV_B_SS_Launcher"
 ];
 
-support_vehicles = [
-	["B_G_Offroad_01_repair_F",5,15,5,GRLIB_perm_inf],
-	["B_G_Van_01_fuel_F",5,15,20,GRLIB_perm_inf],
-	["Box_NATO_WpsLaunch_F",0,150,0,GRLIB_perm_tank],
+support_vehicles_west = [
+	["CUP_B_nM1038_Repair_USA_DES",5,15,5,GRLIB_perm_inf],
+	["CUP_B_MTVR_Refuel_BAF_DES",5,15,20,GRLIB_perm_inf],
+	["CUP_BOX_GB_WpsLaunch_F",0,150,0,GRLIB_perm_tank],
 	["CUP_B_FV432_Bulldog_GB_D",10,2000,20,GRLIB_perm_max]
 ];
 
-buildings = [
+buildings_west = [
 	["Land_Cargo_Tower_V1_F",0,0,0,GRLIB_perm_tank],
 	["Land_Cargo_House_V1_F",0,0,0,GRLIB_perm_inf],
 	["Land_Cargo_Patrol_V1_F",0,0,0,GRLIB_perm_log],
 	["CUP_FlagCarrierBAF",0,0,0,0]
 ];
 
-if ( isNil "blufor_squad_inf_light" ) then { blufor_squad_inf_light = [] };
-if ( count blufor_squad_inf_light == 0 ) then { blufor_squad_inf_light = [
+blufor_squad_inf_light = [
 	"CUP_B_BAF_Soldier_SquadLeader_DDPM",
 	"CUP_B_BAF_Soldier_Medic_DDPM",
 	"CUP_B_BAF_Soldier_Grenadier_DDPM",
 	"CUP_B_BAF_Soldier_AutoRifleman_DDPM",
+	"CUP_B_BAF_Soldier_AT_DDPM",
+	"CUP_B_BAF_Soldier_Rifleman_DDPM",
 	"CUP_B_BAF_Soldier_Rifleman_DDPM",
 	"CUP_B_BAF_Soldier_Rifleman_DDPM"
-	];
-};
-if ( isNil "blufor_squad_inf" ) then { blufor_squad_inf = [] };
-if ( count blufor_squad_inf == 0 ) then { blufor_squad_inf = [
+];
+blufor_squad_inf = [
 	"CUP_B_BAF_Soldier_SquadLeader_DDPM",
 	"CUP_B_BAF_Soldier_Medic_DDPM",
 	"CUP_B_BAF_Soldier_Marksman_DDPM",
 	"CUP_B_BAF_Soldier_AutoRifleman_DDPM",
 	"CUP_B_BAF_Soldier_HeavyGunner_DDPM",
-	"CUP_B_BAF_Soldier_SharpShooter_DDPM"
-	];
-};
-if ( isNil "blufor_squad_at" ) then { blufor_squad_at = [] };
-if ( count blufor_squad_at == 0 ) then { blufor_squad_at = [
+	"CUP_B_BAF_Soldier_SharpShooter_DDPM",
+	"CUP_B_BAF_Soldier_AT_DDPM",
+	"CUP_B_BAF_Soldier_Rifleman_DDPM",
+	"CUP_B_BAF_Soldier_Rifleman_DDPM",	
+	"CUP_B_BAF_Soldier_Rifleman_DDPM"
+];
+blufor_squad_at = [
 	"CUP_B_BAF_Soldier_SquadLeader_DDPM",
 	"CUP_B_BAF_Soldier_Medic_DDPM",
 	"CUP_B_BAF_Soldier_AT_DDPM",
 	"CUP_B_BAF_Soldier_AT_DDPM",
 	"CUP_B_BAF_Soldier_Rifleman_DDPM",
 	"CUP_B_BAF_Soldier_Rifleman_DDPM"
-	];
-};
-if ( isNil "blufor_squad_aa" ) then { blufor_squad_aa = [] };
-if ( count blufor_squad_aa == 0 ) then { blufor_squad_aa = [
+];
+blufor_squad_aa = [
 	"CUP_B_BAF_Soldier_SquadLeader_DDPM",
 	"CUP_B_BAF_Soldier_Medic_DDPM",
 	"CUP_B_BAF_Soldier_AA_DDPM",
 	"CUP_B_BAF_Soldier_AA_DDPM",
 	"CUP_B_BAF_Soldier_Rifleman_DDPM",
 	"CUP_B_BAF_Soldier_Rifleman_DDPM"
-	];
-};
-if ( isNil "blufor_squad_mix" ) then { blufor_squad_mix = [] };
-if ( count blufor_squad_mix == 0 ) then { blufor_squad_mix = [
+];
+blufor_squad_mix = [
 	"CUP_B_BAF_Soldier_SquadLeader_DDPM",
 	"CUP_B_BAF_Soldier_Medic_DDPM",
 	"CUP_B_BAF_Soldier_AA_DDPM",
 	"CUP_B_BAF_Soldier_AT_DDPM",
 	"CUP_B_BAF_Soldier_Rifleman_DDPM",
 	"CUP_B_BAF_Soldier_Rifleman_DDPM"
-	];
-};
+];
 
 squads = [
 	[blufor_squad_inf_light,10,300,0,GRLIB_perm_max],
@@ -226,12 +235,6 @@ GRLIB_vehicle_blacklist_west = [
 	"CUP_B_L111A1_MiniTripod_BAF_DDPM",
 	"CUP_B_L16A2_BAF_DDPM",
 	"CUP_B_M119_HIL"
-];
-
-box_transport_config_west = [
-	[ "CUP_B_MTVR_BAF_DES", -6.5, [0, -0.4, 0.3], [0, -2.1, 0.3] ],
-	[ "CUP_B_T810_Unarmed_CZ_DES", -5.5, [0, 0.3, 0], [0, -1.25, 0] ],
-	[ "CUP_B_T810_Armed_CZ_DES", -5.5, [0, 0.3, -0.3], [0, -1.25, -0.3] ]
 ];
 
 //GRLIB_AirDrop_1 = [];

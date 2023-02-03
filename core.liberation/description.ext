@@ -11,14 +11,17 @@ respawn = 3;
 respawndelay = 5;
 respawnButton = 0;
 respawnOnStart = 0;
+reviveMode = 0; 
 disabledAI = true;
 enableDebugConsole = 1;
 allowFunctionsLog = 0;
 forceRotorLibSimulation = 2;
 
+saving = 0;
 briefing = 0;
 joinUnassigned = 0;
 LARs_calculateSideGear = 1;
+cba_settings_hasSettingsFile = 1;
 
 class CfgFunctions {
 	#include "addons\LARs\blacklistArsenal\functions\blacklistArsenal.fncs"
@@ -32,18 +35,13 @@ class cfgSounds {
  		sound[] = {"res\c130.ogg", 1, 1};
  		titles[] = {};
  	};
-	class bombershout {
-		name = "bombershout";
-		sound[] = {"res\shout.ogg", 1, 1};
-		titles[] = {};
-	};
 	#include "addons\GRAD\cfgSounds.hpp"
 };
 
 class Header {
 	gameType = CTI;
 	minPlayers = 1;
-	maxPlayers = 23;
+	maxPlayers = 22;
 };
 
 class CfgDebriefing {
@@ -56,19 +54,17 @@ class CfgDebriefing {
 	};
 };
 
-class Repaint {
-	file = "addons\RPT";
-	class repaintMenu {};
-	class repaintColor {};
-	class repaintVehicle {};
-};
-
 #include "GREUH\UI\GREUH_interface.hpp"
 #include "ui\liberation_interface.hpp"
 #include "ui\liberation_notifications.hpp"
 #include "ui\mission_params.hpp"
 #include "R3F_LOG\desc_include.h"
 #include "addons\MGR\MagRepack_Config.hpp"
-#include "addons\RPT\veh_repaint.hpp"
 #include "addons\VIRT\virtual_garage.hpp"
+#include "addons\SHOP\traders_shop.hpp"
+#include "addons\SELL\sell_shop.hpp"
 #include "addons\SDB_DALE\RscLoadout.hpp"
+#include "addons\JKB\JKB_dialog.hpp"
+#include "addons\VAM\defines.hpp"
+#include "addons\VAM\VAM_GUI_controls.hpp"
+#include "addons\VAM\VAM_GUI_classes.hpp"

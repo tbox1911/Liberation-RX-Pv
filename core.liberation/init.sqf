@@ -1,32 +1,32 @@
-diag_log "--- Liberation RX PvP by pSiKO ---";
+titleText ["","BLACK FADED", 100];
+diag_log "--- Liberation RX by pSiKO ---";
 [] call compileFinal preprocessFileLineNUmbers "build_info.sqf";
-if (!isMultiplayer) exitWith { diag_log "Sorry, Liberation RX PvP is a Multiplayer Mission Only..." };
 diag_log "--- Init start ---";
 
+profileNamespace setVariable ["BIS_SupportDevelopment", nil];
 enableSaving [false, false];
 disableMapIndicators [false,true,false,false];
 setGroupIconsVisible [false,false];
+disableRemoteSensors false;
 
 abort_loading = false;
+abort_loading_msg = "Unkwon Error";
 GRLIB_ACE_enabled = false;
 [] call compileFinal preprocessFileLineNUmbers "whitelist.sqf";
 [] call compileFinal preprocessFileLineNUmbers "scripts\shared\liberation_functions.sqf";
 [] call compileFinal preprocessFileLineNUmbers "scripts\shared\fetch_params.sqf";
+[] call compileFinal preprocessFileLineNUmbers "scripts\shared\classnames.sqf";
+
 if (!abort_loading) then {
-	[] call compileFinal preprocessFileLineNUmbers "scripts\shared\classnames.sqf";
 	[] call compileFinal preprocessfilelinenumbers "scripts\shared\init_shared.sqf";
 	[] call compileFinal preprocessFileLineNUmbers "scripts\shared\init_sectors.sqf";
-	if (!GRLIB_ACE_enabled) then {[] execVM "R3F_LOG\init.sqf"};
+	if (!GRLIB_ACE_enabled) then {
+		[] execVM "R3F_LOG\init.sqf";
+	} else {
+		[] call compileFinal preprocessFileLineNUmbers "scripts\shared\init_ace.sqf";
+	};
 
 	if (isServer) then {
-		{
-			_x removeAllMPEventHandlers "MPKilled";
-			_x addMPEventHandler ["MPKilled", {_this spawn kill_manager}];
-			if (isNil {_x getVariable "GRLIB_vehicle_owner"} ) then {
-				_x setVariable ["GRLIB_vehicle_owner", "public", true];
-			};
-		} foreach vehicles;
-
 		[] execVM "scripts\server\init_server.sqf";
 	};
 
@@ -35,16 +35,20 @@ if (!abort_loading) then {
 	};
 } else {
 	GRLIB_init_server = false;
+	publicVariable "GRLIB_init_server";
 	publicVariable "abort_loading";
+	publicVariable "abort_loading_msg";
+	diag_log "--- LRX Startup Error ---";
+	diag_log abort_loading_msg;
 };
 
 if (!isDedicated && hasInterface) then {
-	titleText ["","BLACK FADED", 1000];
+	titleText ["Loading...","BLACK FADED", 100];
 	waitUntil { sleep 1; !isNil "GRLIB_init_server" };
 	[] execVM "scripts\client\init_client.sqf";
-	[] execVM "GREUH\scripts\GREUH_activate.sqf";
 } else {
-	setViewDistance 1600;
+	setViewDistance 2000;
+	setTerrainGrid 25;
 };
 
 diag_log "--- Init stop ---";

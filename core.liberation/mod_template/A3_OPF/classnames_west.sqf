@@ -1,4 +1,6 @@
 // *** FRIENDLIES ***
+GRLIB_side_friendly = EAST;
+
 // Default classname: scripts\shared\default_classnames.sqf
 // Advanced definition: scripts\shared\classnames.sqf
 
@@ -14,12 +16,14 @@ repair_sling_typename = "Land_Pod_Heli_Transport_04_repair_F";
 fuel_sling_typename = "Land_Pod_Heli_Transport_04_fuel_F";
 ammo_sling_typename = "Land_Pod_Heli_Transport_04_ammo_F";
 medic_sling_typename = "Land_Pod_Heli_Transport_04_medevac_F";
-commander_classname = "O_officer_F";
 pilot_classname = "O_Helipilot_F";
 crewman_classname = "O_crew_F";
+chimera_vehicle_overide = [
+  ["B_Heli_Transport_01_F", "O_Heli_Light_02_F"]
+];
 
 // [CLASSNAME, MANPOWER, AMMO, FUEL, RANK]
-infantry_units = [
+infantry_units_west = [
 	["Alsatian_Random_F",0,0,0,GRLIB_perm_max],
 	["Fin_random_F",0,0,0,0],
 	["O_soldier_F",1,0,0,0],
@@ -31,7 +35,7 @@ infantry_units = [
 	["O_Sharpshooter_F",1,0,0,GRLIB_perm_inf],
 	["O_HeavyGunner_F",1,0,0,GRLIB_perm_inf],
 	["O_recon_F",1,0,0,GRLIB_perm_log],
-	["O_recon_M_F",1,0,0,GRLIB_perm_log],
+	["O_diver_F",1,0,0,GRLIB_perm_log],
 	["O_recon_LAT_F",1,0,0,GRLIB_perm_log],
 	["O_soldier_AA_F",1,0,0,GRLIB_perm_log],
 	["O_soldier_AT_F",1,0,0,GRLIB_perm_log],
@@ -40,13 +44,16 @@ infantry_units = [
 	[crewman_classname,1,0,0,GRLIB_perm_inf],
 	[pilot_classname,1,0,0,GRLIB_perm_log]
 ];
+units_loadout_overide = [
+	"O_medic_F"
+];
 
 light_vehicles = [
 	["O_Quadbike_01_F",1,5,1,0],
 	["O_Boat_Transport_01_F",1,25,1,GRLIB_perm_inf],
 	["C_Boat_Transport_02_F",2,25,2,GRLIB_perm_log],
-	["O_T_Boat_Armed_01_hmg_F",5,30,5,GRLIB_perm_log],
-	["B_SDV_01_F",5,30,5,GRLIB_perm_log],
+	["O_Boat_Armed_01_hmg_F",5,30,5,GRLIB_perm_log],
+	["O_SDV_01_F",5,30,5,GRLIB_perm_log],
 	["C_Scooter_Transport_01_F",1,5,1,0],
 	["SUV_01_base_black_F",1,10,1,0],
 	["O_G_Offroad_01_F",1,10,1,0],
@@ -114,96 +121,82 @@ static_vehicles = [
 	["O_static_AA_F",0,50,0,GRLIB_perm_air],
 	["O_static_AT_F",0,50,0,GRLIB_perm_air],
 	["O_Mortar_01_F",0,500,0,GRLIB_perm_max],
-	["B_AAA_System_01_F",10,800,0,GRLIB_perm_air],
-	["O_SAM_System_04_F",10,500,0,GRLIB_perm_max]
+	["B_SAM_System_01_F",10,1500,0,GRLIB_perm_tank],
+	["B_AAA_System_01_F",10,1500,0,GRLIB_perm_air],
+	["O_SAM_System_04_F",10,1500,0,GRLIB_perm_max]
 ];
 
 // *** Static Weapon with AI ***
-static_vehicles_AI_west = [
+static_vehicles_AI = [
+	"B_SAM_System_01_F",
 	"B_AAA_System_01_F",
 	"O_SAM_System_04_F"
 ];
 
-support_vehicles = [
+support_vehicles_west = [
 	["O_G_Offroad_01_repair_F",5,15,5,GRLIB_perm_inf],
 	["O_G_Van_01_fuel_F",5,15,20,GRLIB_perm_inf],
 	["Land_Pod_Heli_Transport_04_bench_F",0,50,0,GRLIB_perm_log],
-	["Land_Pod_Heli_Transport_04_covered_F",0,50,0,GRLIB_perm_log],
-	["Box_NATO_WpsLaunch_F",0,150,0,GRLIB_perm_tank]
+	["Land_Pod_Heli_Transport_04_covered_F",0,50,0,GRLIB_perm_log]
 ];
 
-buildings = [
+buildings_west = [
 	["Land_Cargo_Tower_V3_F",0,0,0,GRLIB_perm_tank],
 	["Land_Cargo_House_V3_F",0,0,0,GRLIB_perm_inf],
 	["Land_Cargo_Patrol_V3_F",0,0,0,GRLIB_perm_log],
 	["Flag_CSAT_F",0,0,0,0]
 ];
 
-if ( isNil "blufor_squad_inf_light" ) then { blufor_squad_inf_light = [] };
-if ( count blufor_squad_inf_light == 0 ) then { blufor_squad_inf_light = [
+blufor_squad_inf_light = [
 	"O_Soldier_SL_F",
 	"O_medic_F",
 	"O_Soldier_GL_F",
 	"O_soldier_AR_F",
-	"O_Soldier_F",
-	"O_Soldier_F"
-	];
-};
-if ( isNil "blufor_squad_inf" ) then { blufor_squad_inf = [] };
-if ( count blufor_squad_inf == 0 ) then { blufor_squad_inf = [
+	"O_soldier_LAT_F",
+	"O_Soldier_lite_F",
+	"O_Soldier_lite_F",
+	"O_Soldier_lite_F"
+];
+blufor_squad_inf = [
 	"O_Soldier_SL_F",
 	"O_medic_F",
 	"O_soldier_M_F",
 	"O_Soldier_AR_F",
+	"O_soldier_LAT_F",
 	"O_HeavyGunner_F",
-	"O_Sharpshooter_F"
-	];
-};
-if ( isNil "blufor_squad_at" ) then { blufor_squad_at = [] };
-if ( count blufor_squad_at == 0 ) then { blufor_squad_at = [
+	"O_Sharpshooter_F",
+	"O_Soldier_F",
+	"O_Soldier_F",
+	"O_Soldier_F"
+];
+blufor_squad_at = [
 	"O_Soldier_SL_F",
 	"O_medic_F",
 	"O_soldier_AT_F",
 	"O_soldier_AT_F",
 	"O_soldier_F",
 	"O_soldier_F"
-	];
-};
-if ( isNil "blufor_squad_aa" ) then { blufor_squad_aa = [] };
-if ( count blufor_squad_aa == 0 ) then { blufor_squad_aa = [
+];
+blufor_squad_aa = [
 	"O_Soldier_SL_F",
 	"O_medic_F",
 	"O_soldier_AA_F",
 	"O_soldier_AA_F",
 	"O_soldier_F",
 	"O_soldier_F"
-	];
-};
-if ( isNil "blufor_squad_mix" ) then { blufor_squad_mix = [] };
-if ( count blufor_squad_mix == 0 ) then { blufor_squad_mix = [
+];
+blufor_squad_mix = [
 	"O_Soldier_SL_F",
 	"O_medic_F",
 	"O_soldier_AA_F",
 	"O_soldier_AT_F",
 	"O_soldier_F",
 	"O_soldier_F"
-	];
-};
-if ( isNil "blufor_squad_recon" ) then { blufor_squad_recon = [] };
-if ( count blufor_squad_recon == 0 ) then { blufor_squad_recon = [
-	"O_recon_TL_F",
-	"O_recon_medic_F",
-	"O_recon_F",
-	"O_recon_LAT_F",
-	"O_recon_M_F",
-	"O_recon_F"
-	];
-};
+];
 
 squads = [
 	[blufor_squad_inf_light,10,300,0,GRLIB_perm_max],
 	[blufor_squad_inf,20,400,0,GRLIB_perm_max],
-	[blufor_squad_recon,25,500,0,GRLIB_perm_max],
 	[blufor_squad_at,25,600,0,GRLIB_perm_max],
 	[blufor_squad_aa,25,600,0,GRLIB_perm_max],
 	[blufor_squad_mix,25,600,0,GRLIB_perm_max]
@@ -241,9 +234,5 @@ GRLIB_vehicle_whitelist_west = [
 ];
 
 GRLIB_vehicle_blacklist_west = [
-
-];
-
-box_transport_config_west = [
 
 ];

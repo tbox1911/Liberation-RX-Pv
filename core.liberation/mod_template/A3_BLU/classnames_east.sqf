@@ -1,4 +1,6 @@
 // *** BADDIES ***
+GRLIB_side_enemy = WEST;
+
 // All class MUST be defined !
 
 opfor_sentry = "B_Soldier_lite_F";
@@ -29,12 +31,16 @@ opfor_ammo_truck = "B_Truck_01_ammo_F";
 opfor_fuel_container = "B_Slingload_01_Fuel_F";
 opfor_ammo_container = "B_Slingload_01_Ammo_F";
 opfor_flag = "Flag_NATO_F";
+opfor_house = "Land_Cargo_House_V1_F";
+opfor_patrol = "Land_Cargo_Patrol_V1_F";
+opfor_hq = "Land_Cargo_HQ_V1_F";
 
+// used as first defenders of sector
 militia_squad = [
 	"B_G_Soldier_SL_F",
 	"B_G_Soldier_A_F",
 	"B_G_Soldier_AR_F",
-	"B_G_Soldier_AR_F",	
+	"B_G_Soldier_AR_F",
 	"B_G_medic_F",
 	"B_G_engineer_F",
 	"B_G_Soldier_exp_F",
@@ -42,7 +48,7 @@ militia_squad = [
 	"B_G_Soldier_M_F",
 	"B_G_Soldier_F",
 	"B_G_Soldier_LAT_F",
-	"B_G_Soldier_LAT_F",	
+	"B_G_Soldier_LAT_F",
 	"B_G_Soldier_lite_F",
 	"B_G_Sharpshooter_F",
 	"B_G_Soldier_TL_F",
@@ -67,8 +73,6 @@ divers_squad = [
 	"B_diver_F",
 	"B_diver_F",
 	"B_diver_F",
-	"B_diver_F",
-	"B_diver_F",
 	"B_diver_F"
 ];
 
@@ -80,10 +84,12 @@ militia_vehicles = [
 	"B_T_LSV_01_AT_F"
 ];
 
-opfor_boat = [
+opfor_boats = [
+	"B_Boat_Armed_01_minigun_F",
 	"B_T_Boat_Armed_01_minigun_F"
 ];
 
+// used when an Opfor sector is attacked
 opfor_vehicles = [
 	"B_APC_Wheeled_03_cannon_F",
 	"B_APC_Wheeled_01_cannon_F",
@@ -106,6 +112,7 @@ opfor_vehicles_low_intensity = [
 	"B_T_LSV_01_AT_F"
 ];
 
+// used when battlegroup is called
 opfor_battlegroup_vehicles = [
 	"B_MRAP_01_hmg_F",
 	"B_MRAP_01_gmg_F",
@@ -115,8 +122,8 @@ opfor_battlegroup_vehicles = [
 	"B_MBT_01_cannon_F",
 	"B_T_APC_Tracked_01_AA_F",
 	"B_Heli_Attack_01_F",
-	"B_Heli_Transport_01_F",
-	"B_Truck_01_transport_F",
+	"B_Heli_Transport_03_F",
+	"B_Truck_01_covered_F",
 	"B_MBT_01_TUSK_F",
 	"B_MBT_01_TUSK_F"
 ];
@@ -127,27 +134,29 @@ opfor_battlegroup_vehicles_low_intensity = [
 	"B_MRAP_01_hmg_F",
 	"B_MRAP_01_gmg_F",
 	"B_Heli_Transport_01_F",
+	"B_CTRG_Heli_Transport_01_sand_F",
 	"B_Truck_01_transport_F",
 	"B_T_LSV_01_armed_F",
 	"B_T_LSV_01_AT_F"
 ];
 
-opfor_troup_transports = [
+// used by opfor_battlegroup as transport
+opfor_troup_transports_truck = [
 	"B_Truck_01_covered_F",
-	"B_Truck_01_transport_F",
-	"B_Heli_Transport_01_F",
-	"B_Heli_Transport_03_F"
+	"B_Truck_01_transport_F"
 ];
 
-opfor_choppers = [
+opfor_troup_transports_heli = [
 	"B_Heli_Transport_01_F",
 	"B_Heli_Transport_03_F",
 	"B_CTRG_Heli_Transport_01_sand_F"
 ];
 
+// used by battlegroup air attack
 opfor_air = [
 	"B_Heli_Light_01_armed_F",
 	"B_Heli_Attack_01_F",
+	"B_T_VTOL_01_infantry_F",
 	"B_Plane_CAS_01_F",
 	"B_Plane_Fighter_01_F"
 ];
@@ -183,16 +192,16 @@ opfor_recyclable = [
 	["B_MBT_01_TUSK_F",15,round (500 / GRLIB_recycling_percentage),15],
 	["B_AFV_Wheeled_01_cannon_F",15,round (1500 / GRLIB_recycling_percentage),15],
 	["B_AFV_Wheeled_01_up_cannon_F",15,round (1500 / GRLIB_recycling_percentage),15],
-	["B_MBT_01_arty_F",15,round (2500 / GRLIB_recycling_percentage),15],
-	["B_Heli_Light_01_F",10,round (50 / GRLIB_recycling_percentage),10],
-	["B_Heli_Light_01_armed_F",10,round (150 / GRLIB_recycling_percentage),10],
-	["B_Heli_Transport_01_F",10,round (100 / GRLIB_recycling_percentage),10],
-	["B_Heli_Transport_03_F",10,round (200 / GRLIB_recycling_percentage),10],
-	["B_CTRG_Heli_Transport_01_sand_F",10,round (200 / GRLIB_recycling_percentage),10],
-	["B_Heli_Attack_01_F",10,round (600 / GRLIB_recycling_percentage),10],
-	["B_T_VTOL_01_infantry_F",10,round (1500 / GRLIB_recycling_percentage),10],
-	["B_T_VTOL_01_vehicle_F",10,round (1500 / GRLIB_recycling_percentage),10],
-	["B_T_VTOL_01_armed_F",10,round (1500 / GRLIB_recycling_percentage),10],
+	["B_MBT_01_arty_F",15,round (2500 / GRLIB_recycling_percentage),20],
+	["B_Heli_Light_01_F",10,round (50 / GRLIB_recycling_percentage),18],
+	["B_Heli_Light_01_armed_F",10,round (150 / GRLIB_recycling_percentage),20],
+	["B_Heli_Transport_01_F",10,round (100 / GRLIB_recycling_percentage),20],
+	["B_Heli_Transport_03_F",10,round (200 / GRLIB_recycling_percentage),20],
+	["B_CTRG_Heli_Transport_01_sand_F",10,round (200 / GRLIB_recycling_percentage),20],
+	["B_Heli_Attack_01_F",10,round (600 / GRLIB_recycling_percentage),20],
+	["B_T_VTOL_01_infantry_F",10,round (1500 / GRLIB_recycling_percentage),25],
+	["B_T_VTOL_01_vehicle_F",10,round (1500 / GRLIB_recycling_percentage),25],
+	["B_T_VTOL_01_armed_F",10,round (1500 / GRLIB_recycling_percentage),25],
 	["B_Plane_CAS_01_dynamicLoadout_F",20,round (1000 / GRLIB_recycling_percentage),30],
 	["B_Plane_CAS_01_F",20,round (1500 / GRLIB_recycling_percentage),30],
 	["B_Plane_Fighter_01_F",20,round (2000 / GRLIB_recycling_percentage),30]

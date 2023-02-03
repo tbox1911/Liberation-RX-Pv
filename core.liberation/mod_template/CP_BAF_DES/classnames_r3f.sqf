@@ -19,7 +19,9 @@ R3F_LOG_CFG_can_lift = R3F_LOG_CFG_can_lift +
 	"CUP_B_AH1_DL_BAF",
 	"CUP_B_CH47F_GB",
 	"CUP_B_GR9_DYN_GB",
-	"CUP_B_F35B_BAF"
+	"CUP_B_F35B_BAF",
+	"CUP_B_AW159_Unarmed_RN_Blackcat",
+	"CUP_B_C130J_Cargo_GB"
 ];
 
 R3F_LOG_CFG_can_be_lifted = R3F_LOG_CFG_can_be_lifted +
@@ -36,9 +38,11 @@ R3F_LOG_CFG_can_transport_cargo = R3F_LOG_CFG_can_transport_cargo +
 	["CUP_B_Merlin_HC3_Armed_GB", 150],
 	["CUP_B_Merlin_HC4_GB", 150],
 	["CUP_B_AH1_DL_BAF", 50],
-	["CUP_B_CH47F_GB", 50],
+	["CUP_B_CH47F_GB", 150],
 	["CUP_B_GR9_DYN_GB", 50],
-	["CUP_B_F35B_BAF", 50]
+	["CUP_B_F35B_BAF", 50],
+	["CUP_B_AW159_Unarmed_RN_Blackcat", 50],
+	["CUP_B_C130J_Cargo_GB", 200]
 ];
 
 R3F_LOG_CFG_can_be_transported_cargo = R3F_LOG_CFG_can_be_transported_cargo +
@@ -57,7 +61,8 @@ R3F_LOG_CFG_can_tow = R3F_LOG_CFG_can_tow +
 	"CUP_MTVR_Base",
 	"CUP_LR_Base",
 	"CUP_BAF_Jackal2_BASE_D",
-	"CUP_BAF_Coyote_BASE_D"
+	"CUP_BAF_Coyote_BASE_D",
+	"CUP_Wolfhound_Base"
 ];
 
 R3F_LOG_CFG_can_be_towed = R3F_LOG_CFG_can_be_towed +
@@ -66,7 +71,8 @@ R3F_LOG_CFG_can_be_towed = R3F_LOG_CFG_can_be_towed +
 	"CUP_MTVR_Base",
 	"CUP_LR_Base",
 	"CUP_BAF_Jackal2_BASE_D",
-	"CUP_BAF_Coyote_BASE_D"
+	"CUP_BAF_Coyote_BASE_D",
+	"CUP_Wolfhound_Base"
 ];
 
 R3F_LOG_CFG_can_lift = R3F_LOG_CFG_can_lift +
@@ -79,7 +85,8 @@ R3F_LOG_CFG_can_be_lifted = R3F_LOG_CFG_can_be_lifted +
 	"CUP_MTVR_Base",
 	"CUP_LR_Base",
 	"CUP_BAF_Jackal2_BASE_D",
-	"CUP_BAF_Coyote_BASE_D"
+	"CUP_BAF_Coyote_BASE_D",
+	"CUP_Wolfhound_Base"
 ];
 
 R3F_LOG_CFG_can_transport_cargo = R3F_LOG_CFG_can_transport_cargo +
@@ -88,7 +95,8 @@ R3F_LOG_CFG_can_transport_cargo = R3F_LOG_CFG_can_transport_cargo +
 	["CUP_MTVR_Base", 150],
 	["CUP_LR_Base", 20],
 	["CUP_BAF_Jackal2_BASE_D", 30],
-	["CUP_BAF_Coyote_BASE_D", 30]
+	["CUP_BAF_Coyote_BASE_D", 30],
+	["CUP_Wolfhound_Base", 25]
 ];
 
 R3F_LOG_CFG_can_be_transported_cargo = R3F_LOG_CFG_can_be_transported_cargo +
@@ -157,7 +165,7 @@ R3F_LOG_CFG_can_be_transported_cargo = R3F_LOG_CFG_can_be_transported_cargo +
 
 R3F_LOG_CFG_can_be_moved_by_player = R3F_LOG_CFG_can_be_moved_by_player +
 [
-
+	"CUP_B_M119_HIL"
 ];
 
 R3F_LOG_CFG_can_be_towed = R3F_LOG_CFG_can_be_towed +

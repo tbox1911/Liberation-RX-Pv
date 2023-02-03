@@ -1,43 +1,46 @@
 // Add OPTRE Weapons
-if ( GRLIB_OPTRE_enabled ) then {
-	 GRLIB_OPTRE_Blacklist = [
-	];
-	// Weapons
-	(
-		"
-		getText (_x >> 'dlc') == 'OPTRE' &&
-		toLower (configName _x) find '_coyote' < 0 &&
-		!((configName _x) in GRLIB_OPTRE_Blacklist)
-		"
-		configClasses (configfile >> "CfgWeapons" )
-	) apply { GRLIB_whitelisted_from_arsenal pushback (configName _x) } ;
+GRLIB_MOD_signature = GRLIB_MOD_signature + ["optre_"];
 
-	// Others object (bagpack, etc..)
-	(
-		"
-		getText (_x >> 'dlc') == 'OPTRE' &&
-		!((configName _x) in GRLIB_OPTRE_Blacklist)
-		"
-		configClasses (configfile >> "CfgVehicles" )
-	) apply { GRLIB_whitelisted_from_arsenal pushback (configName _x) } ;
+// Weapons
+private _OPTRE_Items = [
+	"OPTRE_Ins","OPTRE_HMG38","OPTRE_UNSC_","OPTRE_MA3","OPTRE_MA5","OPTRE_Commando","OPTRE_BR","OPTRE_BM","OPTRE_SR","OPTRE_h",
+	"OPTRE_M2","OPTRE_M3","OPTRE_M4","OPTRE_M5","OPTRE_M6","OPTRE_M7"
+];
 
-	// Glasses
-	(
-		"
-		getText (_x >> 'dlc') == 'OPTRE' &&
-		!((configName _x) in GRLIB_OPTRE_Blacklist)
-		"
-		configClasses (configfile >> "CfgGlasses" )
-	) apply { GRLIB_whitelisted_from_arsenal pushback (configName _x) } ;
+(
+	"
+	tolower (getText (_x >> 'dlc')) == 'optre' &&
+	getNumber (_x >> 'scope') > 1 &&
+	([(configName _x)] call is_allowed_item) &&
+	([(configName _x), _OPTRE_Items] call F_startsWithMultiple)
+	"
+	configClasses (configfile >> "CfgWeapons" )
+) apply { GRLIB_whitelisted_from_arsenal pushback (configName _x) } ;
 
-	(
-		"
-		((configName _x) select [0,6]) == 'OPTRE_' &&
-		(configName _x) find '_Tracer' < 0 &&
-		!((configName _x) in GRLIB_OPTRE_Blacklist)
-		"
-    	configClasses (configfile >> "CfgMagazines")
-	) apply { GRLIB_whitelisted_from_arsenal pushback (configName _x)} ;
+// Others object (bagpack, etc..)
+(
+	"
+	tolower (getText (_x >> 'dlc')) == 'optre' &&
+	([(configName _x)] call is_allowed_item) &&
+	((configName _x) iskindof 'Bag_Base') 
+	"
+	configClasses (configfile >> "CfgVehicles" )
+) apply { GRLIB_whitelisted_from_arsenal pushback (configName _x) } ;
 
-    GRLIB_mod_enabled = true;
-};
+// Glasses
+(
+	"
+	tolower (getText (_x >> 'dlc')) == 'optre' &&
+	([(configName _x)] call is_allowed_item)
+	"
+	configClasses (configfile >> "CfgGlasses" )
+) apply { GRLIB_whitelisted_from_arsenal pushback (configName _x) } ;
+
+(
+	"
+	tolower ((configName _x) select [0,6]) == 'optre_' &&
+	([(configName _x)] call is_allowed_item) &&
+	tolower (configName _x) find '_tracer' < 0
+	"
+	configClasses (configfile >> "CfgMagazines")
+) apply { GRLIB_whitelisted_from_arsenal pushback (configName _x)} ;

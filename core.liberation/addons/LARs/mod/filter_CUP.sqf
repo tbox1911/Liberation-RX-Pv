@@ -1,73 +1,54 @@
 // Add CUP Weapons
-if ( GRLIB_CUPW_enabled ) then {
-	// CUPS blacklisted
-	GRLIB_CUPW_Blacklist = [
-		"CUP_optic_AN_PAS_13c1",
-		"CUP_optic_AN_PAS_13c2",
-		"CUP_optic_GOSHAWK",
-		"CUP_optic_GOSHAWK_RIS"
-	];
-	// CUP whitelisted
-	GRLIB_whitelisted_from_arsenal = GRLIB_whitelisted_from_arsenal + [
-		"Medikit",
-		"FirstAidKit",
-		"ToolKit",
-		"ItemGPS",
-		"Laserdesignator",
-		"Binocular",
-		"MineDetector",
-		"Rangefinder"
-	];
+GRLIB_MOD_signature = GRLIB_MOD_signature + ["CUP_"];
 
-	// Weapons
-	(
-		"
-		(getText (_x >> 'DLC') == 'CUP_Weapons' || getText (_x >> 'DLC') == 'CUP_Units') &&
-		getNumber (_x >> 'scope') > 1 &&
-		toLower (configName _x) find '_coyote' < 0 &&
-		tolower (configName _x) find '_od' < 0 &&
-		!((configName _x) in GRLIB_CUPW_Blacklist)
-		"
-		configClasses (configfile >> "CfgWeapons" )
-	) apply { GRLIB_whitelisted_from_arsenal pushback (configName _x) } ;
+private _exclude = [
+	"CUP_RUS","CUP_G_RUS","CUP_H_RUS","CUP_V_RUS","CUP_O_","CUP_V_O","CUP_U_O_","CUP_I_B_","CUP_Vest_RUS",
+	"CUP_H_TKI","CUP_B_TKI","CUP_Vest_TKI"
+];
 
-	// Equipements (uniforme, etc..)
-	(
-		"
-		(getText (_x >> 'DLC') == 'CUP_Weapons' || getText (_x >> 'DLC') == 'CUP_Units') &&
-		!((configName _x) in GRLIB_CUPW_Blacklist)
-		"
-		configClasses (configfile >> "CfgWeapons" )
-	) apply { GRLIB_whitelisted_from_arsenal pushback (configName _x) } ;
+//as exemple
+if (GRLIB_mod_west == "CP_AFRF") then { _exclude = ["CUP_B"] };
+if (GRLIB_mod_west == "CWR3_SOV") then { _exclude = ["CUP_B"] };
 
-	// Others object (bagpack, etc..)
-	(
-		"
-		(getText (_x >> 'DLC') == 'CUP_Weapons' || getText (_x >> 'DLC') == 'CUP_Units') &&
-		!((configName _x) in GRLIB_CUPW_Blacklist) &&
-		( (configName _x) find '_Bag' == -1 )
-		"
-		configClasses (configfile >> "CfgVehicles" )
-	) apply { GRLIB_whitelisted_from_arsenal pushback (configName _x) } ;
+// Weapons + Equipements (uniforms, etc..)
+(
+	"
+	(tolower (getText (_x >> 'DLC')) == 'cup_weapons' || tolower (getText (_x >> 'DLC')) == 'cup_units') &&
+	getNumber (_x >> 'scope') > 0 &&
+	!([(configName _x), _exclude] call F_startsWithMultiple) &&
+	([(configName _x)] call is_allowed_item)
+	"
+	configClasses (configfile >> "CfgWeapons" )
+) apply { GRLIB_whitelisted_from_arsenal pushback (configName _x) } ;
 
-	// Glasses
-	(
-		"
-		(getText (_x >> 'DLC') == 'CUP_Weapons' || getText (_x >> 'DLC') == 'CUP_Units') &&
-		!((configName _x) in GRLIB_CUPW_Blacklist)
-		"
-		configClasses (configfile >> "CfgGlasses" )
-	) apply { GRLIB_whitelisted_from_arsenal pushback (configName _x) } ;
+// Others object (backpack, etc..)
+(
+	"
+	(tolower (getText (_x >> 'DLC')) == 'cup_weapons' || tolower (getText (_x >> 'DLC')) == 'cup_units') &&
+	!([(configName _x), _exclude] call F_startsWithMultiple) &&
+	([(configName _x)] call is_allowed_item) &&
+	( (configName _x) find '_Bag' == -1 ) &&
+	((configName _x) iskindof 'Bag_Base') 
+	"
+	configClasses (configfile >> "CfgVehicles" )
+) apply { GRLIB_whitelisted_from_arsenal pushback (configName _x) } ;
 
-	// Magazines
-	(
-		"
-		((configName _x) select [0,4]) == 'CUP_' &&
-		(configName _x) find '_Tracer' < 0 &&
-		!((configName _x) in GRLIB_CUPW_Blacklist)
-		"
-    	configClasses (configfile >> "CfgMagazines")
-	) apply { GRLIB_whitelisted_from_arsenal pushback (configName _x)} ;
+// Glasses
+(
+	"
+	(tolower (getText (_x >> 'DLC')) == 'cup_weapons' || tolower (getText (_x >> 'DLC')) == 'cup_units') &&
+	!([(configName _x), _exclude] call F_startsWithMultiple) &&
+	([(configName _x)] call is_allowed_item)
+	"
+	configClasses (configfile >> "CfgGlasses" )
+) apply { GRLIB_whitelisted_from_arsenal pushback (configName _x) } ;
 
-    GRLIB_mod_enabled = true;
-};
+// Magazines
+(
+	"
+	tolower ((configName _x) select [0,4]) == 'cup_' &&
+	tolower (configName _x) find '_tracer' < 0 &&
+	([(configName _x)] call is_allowed_item)
+	"
+	configClasses (configfile >> "CfgMagazines")
+) apply { GRLIB_whitelisted_from_arsenal pushback (configName _x)} ;

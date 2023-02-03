@@ -14,16 +14,14 @@ Instructions:
 
 	ExecVM from initclient.sqf or init.sqf in your mission directory.
 
-Based on: AI REVIVE HEAL SCRIPT SP/MP by Pierre MGI
-
+Based on: 
+  AI REVIVE HEAL SCRIPT SP/MP by Pierre MGI
   at : https://forums.bohemia.net/forums/topic/207522-ai-revive-heal-script-spmp/
 
+  Farooq's Revive by farooqaaa
+  at : https://forums.bohemia.net/forums/topic/146926-farooqs-revive/
 _________________________________________________________________________*/
 if (isDedicated) exitWith {};
-
-PAR_isDragging = false;
-PAR_deathMessage = [];
-PAR_tkMessage = [];
 
 call compile preprocessFile "addons\TKP\tk_init.sqf";
 call compile preprocessFile "addons\PAR\PAR_global_functions.sqf";
@@ -34,7 +32,7 @@ PAR_BleedOutExtra = 60;
 
 // Enable info killer message
 PAR_EnableDeathMessages = true;
-PAR_ReviveMode = ( GRLIB_revive - 1 );
+
 //------------------------------------------//
 PAR_BloodSplat = [
   "BloodPool_01_Large_New_F",
@@ -49,18 +47,25 @@ PAR_MedGarbage = [
   "MedicalGarbage_01_3x3_v2_F"
 ];
 
-waituntil {sleep 0.5;!isNull player && GRLIB_player_spawned};
-waituntil {sleep 0.5;!isNil {player getVariable ["GRLIB_Rank", nil]}};
+waituntil {sleep 1; GRLIB_player_spawned};
+waituntil {sleep 1; !isNil {player getVariable ["GRLIB_Rank", nil]}};
 
-[] spawn PAR_AI_Manager;
-[] spawn PAR_Player_Init;
+// Init player
+[] call PAR_Player_Init;
 
-// Public event handlers
-"PAR_deathMessage" addPublicVariableEventHandler PAR_public_EH;
-"PAR_tkMessage" addPublicVariableEventHandler PAR_public_EH;
+// Player respawn EH
+player removeAllEventHandlers "Respawn";
+player addEventHandler ["Respawn", { [] spawn PAR_Player_Init }];
 
-// Event Handlers
-player addEventHandler ["Respawn", {[] spawn PAR_Player_Init}];
+// Init player EH
+[player] call PAR_EventHandler;
+
+// Handle Damage EH
+if (GRLIB_revive != 0) then {
+  player removeAllEventHandlers "HandleDamage";
+  player addEventHandler ["HandleDamage", { _this call PAR_HandleDamage_EH }];
+  [] spawn PAR_AI_Manager;
+};
 
 waitUntil {!(isNull (findDisplay 46))};
 systemChat "-------- pSiKo AI Revive Initialized --------";

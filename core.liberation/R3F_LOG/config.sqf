@@ -2,7 +2,7 @@
  * MAIN CONFIGURATION FILE
  *
  * English and French comments
- * Commentaires anglais et fran�ais
+ * Commentaires anglais et français
  *
  * (EN)
  * This file contains the configuration variables of the logistics system.
@@ -146,6 +146,7 @@ R3F_LOG_CFG_string_condition_allow_creation_factory_on_this_client = "false";
  */
 R3F_LOG_CFG_can_tow = R3F_LOG_CFG_can_tow +
 [
+
 ];
 
 /**

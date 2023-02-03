@@ -1,4 +1,6 @@
 // *** FRIENDLIES ***
+GRLIB_side_friendly = WEST;
+
 // Default classname: scripts\shared\default_classnames.sqf
 // Advanced definition: scripts\shared\classnames.sqf
 
@@ -14,24 +16,23 @@ repair_sling_typename = "B_Slingload_01_Repair_F";
 fuel_sling_typename = "B_Slingload_01_Fuel_F";
 ammo_sling_typename = "B_Slingload_01_Ammo_F";
 medic_sling_typename = "B_Slingload_01_Medevac_F";
-commander_classname = "B_officer_F";
 pilot_classname = "B_Helipilot_F";
 crewman_classname = "B_crew_F";
 
 // [CLASSNAME, MANPOWER, AMMO, FUEL, RANK]
-infantry_units = [
+infantry_units_west = [
 	["Alsatian_Random_F",0,0,0,GRLIB_perm_max],
 	["Fin_random_F",0,0,0,0],
-	["B_soldier_F",1,0,0,0],
+	["B_Soldier_F",1,0,0,0],
 	["B_medic_F",1,0,0,0],
 	["B_engineer_F",1,0,0,0],
-	["B_soldier_GL_F",1,0,0,GRLIB_perm_inf],
+	["B_Soldier_GL_F",1,0,0,GRLIB_perm_inf],
 	["B_soldier_M_F",1,0,0,GRLIB_perm_inf],
 	["B_soldier_LAT_F",1,0,0,0],
 	["B_Sharpshooter_F",1,0,0,GRLIB_perm_inf],
 	["B_HeavyGunner_F",1,0,0,GRLIB_perm_inf],
 	["B_recon_F",1,0,0,GRLIB_perm_log],
-	["B_recon_M_F",1,0,0,GRLIB_perm_log],
+	["B_diver_F",1,0,0,GRLIB_perm_log],
 	["B_Recon_Sharpshooter_F",1,0,0,GRLIB_perm_log],
 	["B_soldier_AA_F",1,0,0,GRLIB_perm_log],
 	["B_soldier_AT_F",1,0,0,GRLIB_perm_log],
@@ -39,6 +40,10 @@ infantry_units = [
 	["B_soldier_PG_F",1,0,0,GRLIB_perm_log],
 	[crewman_classname,1,0,0,GRLIB_perm_inf],
 	[pilot_classname,1,0,0,GRLIB_perm_log]
+];
+
+units_loadout_overide = [
+	"B_medic_F"
 ];
 
 light_vehicles = [
@@ -75,7 +80,7 @@ heavy_vehicles = [
 	["B_APC_Wheeled_01_cannon_F",10,500,20,GRLIB_perm_log],
 	["B_APC_Tracked_01_AA_F",10,500,20,GRLIB_perm_tank],
 	["I_APC_Wheeled_03_cannon_F",10,500,20,GRLIB_perm_tank],
-	["I_APC_tracked_03_cannon_F",10,500,20,GRLIB_perm_tank],
+	//["I_APC_tracked_03_cannon_F",10,500,20,GRLIB_perm_tank],
 	//["I_MBT_03_cannon_F",15,4500,15,GRLIB_perm_max],
 	//["I_E_Truck_02_MRL_F",15,3500,15,GRLIB_perm_max],
 	["B_MBT_01_cannon_F",15,1000,35,GRLIB_perm_tank],
@@ -93,13 +98,13 @@ air_vehicles = [
 	["B_UAV_05_F",5,2000,15,GRLIB_perm_max],
 	["C_Plane_Civil_01_F",1,50,5,GRLIB_perm_air],
 	["B_Heli_Light_01_F",1,50,15,GRLIB_perm_log],
+	["B_Heli_Light_01_dynamicLoadout_F",1,150,15,GRLIB_perm_tank],
 	["I_Heli_light_03_unarmed_F",1,50,5,GRLIB_perm_tank],
-	//["I_Heli_light_03_dynamicLoadout_F",10,1500,20,GRLIB_perm_air],
+	["I_Heli_light_03_dynamicLoadout_F",10,500,20,GRLIB_perm_air],
 	//["I_Plane_Fighter_03_dynamicLoadout_F", 10,3500,20,GRLIB_perm_max],
-	["B_Heli_Light_01_dynamicLoadout_F",5,200,20,GRLIB_perm_air],
-	["B_Heli_Transport_03_unarmed_F",10,500,35,GRLIB_perm_tank],
-	["B_Heli_Transport_03_F",10,1500,35,GRLIB_perm_air],
-	["B_Heli_Transport_01_F",10,1500,35,GRLIB_perm_tank],
+	["B_Heli_Transport_03_unarmed_F",10,1500,35,GRLIB_perm_tank],
+	["B_Heli_Transport_03_F",10,1700,35,GRLIB_perm_air],
+	["B_Heli_Transport_01_F",10,2000,35,GRLIB_perm_tank],
 	["B_T_VTOL_01_infantry_F",10,1300,40,GRLIB_perm_air],
 	["B_T_VTOL_01_vehicle_F",10,1400,40,GRLIB_perm_air],
 	["B_T_VTOL_01_armed_F",20,2500,40,GRLIB_perm_max],
@@ -117,8 +122,6 @@ blufor_air = [
 ];
 
 static_vehicles = [
-	["B_UGV_02_Demining_F",0,5,0,GRLIB_perm_inf],
-	["B_Static_Designator_01_F",0,5,0,GRLIB_perm_inf],
 	["B_HMG_01_F",0,10,0,GRLIB_perm_log],
 	["B_HMG_01_high_F",0,10,0,GRLIB_perm_tank],
 	["B_GMG_01_F",0,20,0,GRLIB_perm_log],
@@ -126,97 +129,77 @@ static_vehicles = [
 	["B_static_AA_F",0,50,0,GRLIB_perm_air],
 	["B_static_AT_F",0,50,0,GRLIB_perm_air],
 	["B_Mortar_01_F",0,500,0,GRLIB_perm_max],
-	["B_SAM_System_01_F",10,500,0,GRLIB_perm_tank],
-	["B_SAM_System_02_F",10,150,0,GRLIB_perm_air],
-	["B_AAA_System_01_F",10,500,0,GRLIB_perm_max]
+	["B_SAM_System_01_F",10,1500,0,GRLIB_perm_tank],
+	["B_SAM_System_02_F",10,1500,0,GRLIB_perm_air],
+	["B_AAA_System_01_F",10,1500,0,GRLIB_perm_max]
 ];
 
 // *** Static Weapon with AI ***
-static_vehicles_AI_west = [
+static_vehicles_AI = [
 	"B_SAM_System_01_F",
 	"B_SAM_System_02_F",
 	"B_AAA_System_01_F"
 ];
 
-support_vehicles = [
+support_vehicles_west = [
 	["B_G_Offroad_01_repair_F",5,15,5,GRLIB_perm_inf],
 	["B_G_Van_01_fuel_F",5,15,20,GRLIB_perm_inf],
-	["Box_NATO_WpsLaunch_F",0,150,0,GRLIB_perm_tank],
 	["B_APC_Tracked_01_CRV_F",15,2000,50,GRLIB_perm_max]
 ];
 
-buildings = [
+//buildings_west_overide = true;
+buildings_west = [
 	["Land_Cargo_Tower_V1_F",0,0,0,GRLIB_perm_tank],
 	["Land_Cargo_House_V1_F",0,0,0,GRLIB_perm_inf],
 	["Land_Cargo_Patrol_V1_F",0,0,0,GRLIB_perm_log],
 	["Flag_NATO_F",0,0,0,0]
 ];
 
-if ( isNil "blufor_squad_inf_light" ) then { blufor_squad_inf_light = [] };
-if ( count blufor_squad_inf_light == 0 ) then { blufor_squad_inf_light = [
+blufor_squad_inf_light = [
 	"B_Soldier_SL_F",
 	"B_medic_F",
 	"B_Soldier_GL_F",
 	"B_soldier_AR_F",
-	"B_Soldier_F",
-	"B_Soldier_F"
-	];
-};
-if ( isNil "blufor_squad_inf" ) then { blufor_squad_inf = [] };
-if ( count blufor_squad_inf == 0 ) then { blufor_squad_inf = [
+	"B_Soldier_lite_F",
+	"B_Soldier_lite_F"
+];
+blufor_squad_inf = [
 	"B_Soldier_SL_F",
 	"B_medic_F",
 	"B_soldier_M_F",
 	"B_Soldier_AR_F",
 	"B_HeavyGunner_F",
-	"B_Sharpshooter_F"
-	];
-};
-if ( isNil "blufor_squad_at" ) then { blufor_squad_at = [] };
-if ( count blufor_squad_at == 0 ) then { blufor_squad_at = [
+	"B_Soldier_F"
+];
+blufor_squad_at = [
 	"B_Soldier_SL_F",
 	"B_medic_F",
 	"B_soldier_AT_F",
 	"B_soldier_AT_F",
-	"B_soldier_F",
-	"B_soldier_F"
-	];
-};
-if ( isNil "blufor_squad_aa" ) then { blufor_squad_aa = [] };
-if ( count blufor_squad_aa == 0 ) then { blufor_squad_aa = [
+	"B_Soldier_F",
+	"B_Soldier_F"
+];
+
+blufor_squad_aa = [
 	"B_Soldier_SL_F",
 	"B_medic_F",
 	"B_soldier_AA_F",
 	"B_soldier_AA_F",
-	"B_soldier_F",
-	"B_soldier_F"
-	];
-};
-if ( isNil "blufor_squad_mix" ) then { blufor_squad_mix = [] };
-if ( count blufor_squad_mix == 0 ) then { blufor_squad_mix = [
+	"B_Soldier_F",
+	"B_Soldier_F"
+];
+blufor_squad_mix = [
 	"B_Soldier_SL_F",
 	"B_medic_F",
 	"B_soldier_AA_F",
 	"B_soldier_AT_F",
-	"B_soldier_F",
-	"B_soldier_F"
-	];
-};
-if ( isNil "blufor_squad_recon" ) then { blufor_squad_recon = [] };
-if ( count blufor_squad_recon == 0 ) then { blufor_squad_recon = [
-	"B_recon_TL_F",
-	"B_recon_medic_F",
-	"B_Recon_Sharpshooter_F",
-	"B_recon_LAT_F",
-	"B_recon_M_F",
-	"B_recon_F"
-	];
-};
+	"B_Soldier_F",
+	"B_Soldier_F"
+];
 
 squads = [
 	[blufor_squad_inf_light,10,300,0,GRLIB_perm_max],
 	[blufor_squad_inf,20,400,0,GRLIB_perm_max],
-	[blufor_squad_recon,25,500,0,GRLIB_perm_max],
 	[blufor_squad_at,25,600,0,GRLIB_perm_max],
 	[blufor_squad_aa,25,600,0,GRLIB_perm_max],
 	[blufor_squad_mix,25,600,0,GRLIB_perm_max]
@@ -250,17 +233,10 @@ vehicle_rearm_sources_west = [
 ];
 
 vehicle_big_units_west = [
-
 ];
 
 GRLIB_vehicle_whitelist_west = [
-
 ];
 
 GRLIB_vehicle_blacklist_west = [
-
-];
-
-box_transport_config_west = [
-
 ];

@@ -34,7 +34,7 @@ waitUntil {sleep 0.5;!(isNull (findDisplay 46))};
 		} else {
 			showHUD [true,true,true,true,true,true,true,true,true,true];
 		};
-		gamelogic globalChat (format ["HUD Toggle %1.", _state]);
+		gamelogic globalChat format ["HUD Toggle %1.", _state];
 	};
 }];
 
@@ -43,10 +43,11 @@ waitUntil {sleep 0.5;!(isNull (findDisplay 46))};
 	if (_this select 1 == (actionKeys 'User14') select 0) then {
 		_name = format ["%1_%2_%3-%4_%5.png", name player, worldname, date select 3, date select 4, round(time)];
 		screenshot _name;
-		gamelogic globalChat (format ["Take screenshot: %1.", _name]);
+		gamelogic globalChat format ["Take screenshot: %1.", _name];
 	};
 }];
 
+// LRX Diag
 if ((getPlayerUID player) in GRLIB_whitelisted_steamids) then {
 	(findDisplay 46) displayAddEventHandler ["KeyDown", {
 		if (_this select 1 == (actionKeys 'User20') select 0) then {

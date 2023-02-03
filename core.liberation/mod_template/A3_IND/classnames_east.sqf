@@ -1,4 +1,6 @@
 // *** BADDIES ***
+GRLIB_side_enemy = INDEPENDENT;
+
 // All class MUST be defined !
 
 opfor_sentry = "I_Soldier_lite_F";
@@ -25,18 +27,21 @@ opfor_mrap = "I_MRAP_02_F";
 opfor_mrap_hmg = "I_MRAP_02_hmg_F";
 opfor_mrap_gmg = "I_MRAP_02_gmg_F";
 opfor_transport_helo = "I_Heli_Transport_04_bench_F";
-opfor_transport_truck = "I_Truck_03_covered_F";
-opfor_fuel_truck = "I_Truck_03_fuel_F";
-opfor_ammo_truck = "I_Truck_03_ammo_F";
+opfor_transport_truck = "I_Truck_02_covered_F";
+opfor_fuel_truck = "I_Truck_02_fuel_F";
+opfor_ammo_truck = "I_Truck_02_ammo_F";
 opfor_fuel_container = "Land_Pod_Heli_Transport_04_fuel_F";
 opfor_ammo_container = "Land_Pod_Heli_Transport_04_ammo_F";
 opfor_flag = "Flag_FIA_F";
+opfor_house = "Land_Cargo_House_V2_F";
+opfor_patrol = "Land_Cargo_Patrol_V2_F";
+opfor_hq = "Land_Cargo_HQ_V2_F";
 
 militia_squad = [
 	"I_G_Soldier_SL_F",
 	"I_G_Soldier_A_F",
 	"I_G_Soldier_AR_F",
-	"I_G_Soldier_AR_F",	
+	"I_G_Soldier_AR_F",
 	"I_G_medic_F",
 	"I_G_engineer_F",
 	"I_G_Soldier_exp_F",
@@ -44,7 +49,7 @@ militia_squad = [
 	"I_G_Soldier_M_F",
 	"I_G_Soldier_F",
 	"I_G_Soldier_LAT_F",
-	"I_G_Soldier_LAT_F",	
+	"I_G_Soldier_LAT_F",
 	"I_G_Soldier_lite_F",
 	"I_G_Sharpshooter_F",
 	"I_G_Soldier_TL_F",
@@ -69,8 +74,6 @@ divers_squad = [
 	"I_diver_F",
 	"I_diver_F",
 	"I_diver_F",
-	"I_diver_F",
-	"I_diver_F",
 	"I_diver_F"
 ];
 
@@ -81,7 +84,7 @@ militia_vehicles = [
 	"I_C_Offroad_02_LMG_F"
 ];
 
-opfor_boat = [
+opfor_boats = [
 	"I_Boat_Armed_01_minigun_F"
 ];
 
@@ -132,17 +135,16 @@ opfor_battlegroup_vehicles_low_intensity = [
 	"I_APC_Wheeled_03_cannon_F",
 	"I_MRAP_03_hmg_F",
 	"I_MRAP_03_gmg_F",
-	"I_Heli_Transport_02_F",
-	"I_Truck_02_covered_F"
+	"I_Heli_light_03_unarmed_F",
+	"I_Truck_02_transport_F"
 ];
 
-opfor_troup_transports = [
-	"I_Heli_Transport_02_F",
+opfor_troup_transports_truck = [
 	"I_Truck_02_covered_F",
 	"I_Truck_02_transport_F"
 ];
 
-opfor_choppers = [
+opfor_troup_transports_heli = [
 	"I_Heli_Transport_02_F",
 	"I_Heli_light_03_unarmed_F"
 ];
@@ -150,8 +152,7 @@ opfor_choppers = [
 opfor_air = [
 	"I_Plane_Fighter_03_CAS_F",
 	"I_Plane_Fighter_04_F",
-	"I_Heli_light_03_F",
-	"I_Heli_light_03_F"			
+	"I_Heli_light_03_dynamicLoadout_F"
 ];
 
 opfor_statics = [
@@ -184,7 +185,7 @@ opfor_recyclable = [
 	["I_APC_Wheeled_03_cannon_F",15,round (400 / GRLIB_recycling_percentage),15],
 	["I_APC_tracked_03_cannon_F",15,round (500 / GRLIB_recycling_percentage),15],
 	["I_MBT_03_cannon_F",15,round (800 / GRLIB_recycling_percentage),15],
-	["I_Heli_light_03_F",10,round (700 / GRLIB_recycling_percentage),15],
+	["I_Heli_light_03_dynamicLoadout_F",10,round (150 / GRLIB_recycling_percentage),15],
 	["I_Heli_Transport_02_F",10,round (500 / GRLIB_recycling_percentage),10],
 	["I_Plane_Fighter_03_CAS_F",20,round (1000 / GRLIB_recycling_percentage),30],
 	["I_Plane_Fighter_04_F",20,round (1000 / GRLIB_recycling_percentage),30]
