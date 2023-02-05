@@ -4,7 +4,7 @@
 // Following entries: attachTo position for each box, the number of boxes that can be loaded is derived from the number of entries
 
 box_transport_config = box_transport_config + [
-    // the 'opfor_transport_truck' MUST be declared here
+    [ "I_G_Offroad_01_F", -5, [0, -1.55, 0.2] ],
 	[ "I_Heli_Transport_02_F", -6.5, [0, 4.2, -1.45], [0, 2.5, -1.45], [0, 0.8, -1.45], [0, -0.9, -1.45] ],
 	[ "I_Truck_02_transport_F", -5.5, [0, 0.3, 0], [0, -1.25, 0], [0, -2.8, 0] ],
 	[ "I_Truck_02_covered_F", -5.5, [0, 0.3, 0], [0, -1.25, 0], [0, -2.8, 0] ]

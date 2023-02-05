@@ -1,15 +1,13 @@
 GRLIB_save_key = "GREUH_LIBERATION_ALTIS_SAVEGAME_PSK_PVP";
-
 GRLIB_side_west = WEST;
 GRLIB_side_east = EAST;
-GRLIB_side_enemy = RESISTANCE;
+GRLIB_side_enemy = INDEPENDENT;
 GRLIB_side_civilian = CIVILIAN;
 GRLIB_color_west = "ColorWEST";
 GRLIB_color_east = "ColorEAST";
 GRLIB_color_guer = "ColorGUER";
 GRLIB_color_enemy = "ColorGUER";
 GRLIB_color_enemy_bright = "ColorGREEN";
-
 GRLIB_sector_size = 700;
 GRLIB_capture_size = 175;
 GRLIB_radiotower_size = 2500;
@@ -45,9 +43,8 @@ GRLIB_date_day = 6;
 GRLIB_nights_start = 20;
 GRLIB_nights_stop = 5;
 GREUH_start_ammo = 400;
-
+GREUH_start_fuel = 25;
 if ( GRLIB_blufor_cap > 100 ) then { GRLIB_blufor_cap = 100 }; // Don't forget that the human commander manages those, not the server
 GRLIB_offload_diag = false;
-
 //NRE_Key = 199;
 MGR_Key = 19;

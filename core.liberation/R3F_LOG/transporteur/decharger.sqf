@@ -50,15 +50,14 @@ else
 			};
 		} forEach _objets_charges;
 
+		// On m�morise sur le r�seau le nouveau contenu du transporteur (c�d avec cet objet en moins)
+		_objets_charges = _transporteur getVariable ["R3F_LOG_objets_charges", []];
+		_objets_charges = _objets_charges - [_objet_a_decharger];
+		_transporteur setVariable ["R3F_LOG_objets_charges", _objets_charges, true];
+		
 		if !(isNull _objet_a_decharger) then
 		{
 			[_objet_a_decharger, player] call R3F_LOG_FNCT_definir_proprietaire_verrou;
-
-			// On m�morise sur le r�seau le nouveau contenu du transporteur (c�d avec cet objet en moins)
-			_objets_charges = _transporteur getVariable ["R3F_LOG_objets_charges", []];
-			_objets_charges = _objets_charges - [_objet_a_decharger];
-			_transporteur setVariable ["R3F_LOG_objets_charges", _objets_charges, true];
-
 			_objet_a_decharger setVariable ["R3F_LOG_est_transporte_par", objNull, true];
 
 			// Prise en compte de l'objet dans l'environnement du joueur (acc�l�rer le retour des addActions)
@@ -109,13 +108,13 @@ else
 					if (_objet_a_decharger distance _transporteur > 40) then
 					{
 						systemChat format [STR_R3F_LOG_action_decharger_fait + " (%2)",
-							getText (configFile >> "CfgVehicles" >> (typeOf _objet_a_decharger) >> "displayName"),
+							getText (configOf _objet_a_decharger >> "displayName"),
 							format ["%1m %2deg", round (_objet_a_decharger distance _transporteur), round ([_transporteur, _objet_a_decharger] call BIS_fnc_dirTo)]
 						];
 					}
 					else
 					{
-						systemChat format [STR_R3F_LOG_action_decharger_fait, getText (configFile >> "CfgVehicles" >> (typeOf _objet_a_decharger) >> "displayName")];
+						systemChat format [STR_R3F_LOG_action_decharger_fait, getText (configOf _objet_a_decharger >> "displayName")];
 					};
 					R3F_LOG_mutex_local_verrou = false;
 				}

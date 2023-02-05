@@ -11,9 +11,7 @@ R3F_LOG_CFG_can_be_towed = R3F_LOG_CFG_can_be_towed +
 R3F_LOG_CFG_can_lift = R3F_LOG_CFG_can_lift +
 [
 	huron_typename_west,
-	huron_typename_east,
-	"B_Heli_Transport_01_F",
-	"B_Heli_Transport_01_camo_F"
+	huron_typename_east
 ];
 
 R3F_LOG_CFG_can_be_lifted = R3F_LOG_CFG_can_be_lifted +
@@ -26,8 +24,7 @@ R3F_LOG_CFG_can_transport_cargo = R3F_LOG_CFG_can_transport_cargo +
 [
 	[huron_typename_west, 200],
 	[huron_typename_east, 200],
-	["B_Heli_Transport_01_F", 50],
-	["B_Heli_Transport_01_camo_F", 50]
+	["Heli_Light_01_base_F", 10]
 ];
 
 R3F_LOG_CFG_can_be_transported_cargo = R3F_LOG_CFG_can_be_transported_cargo +
@@ -36,7 +33,6 @@ R3F_LOG_CFG_can_be_transported_cargo = R3F_LOG_CFG_can_be_transported_cargo +
 
 R3F_LOG_CFG_can_be_moved_by_player = R3F_LOG_CFG_can_be_moved_by_player +
 [
-
 ];
 
 //--------------- Ground ---------------
@@ -46,6 +42,7 @@ R3F_LOG_CFG_can_tow = R3F_LOG_CFG_can_tow +
 	"Tank_F",
 	"Truck_F",
 	"Hatchback_01_base_F",
+	"SUV_01_base_F",
 	"Offroad_01_base_F",
 	"Offroad_02_base_F",
 	"MRAP_01_base_F",
@@ -181,6 +178,7 @@ R3F_LOG_CFG_can_transport_cargo = R3F_LOG_CFG_can_transport_cargo +
 	[FOB_box_typename_west, 0],
 	[FOB_box_typename_east, 0],
 	[FOB_box_outpost, 0],
+	[playerbox_typename, 0],
     [FOB_truck_typename_west, 0],
     [FOB_truck_typename_east, 0],
 	[ammo_truck_typename_west, 0],
@@ -214,9 +212,13 @@ R3F_LOG_CFG_can_be_transported_cargo = R3F_LOG_CFG_can_be_transported_cargo +
 	[ammo_sling_typename_east, 25],
 	[medic_sling_typename_east, 25],
 	[A3W_BoxWps, 7],
-	[canisterFuel, 1],
-	["Land_PierLadder_F", 2],
-	["Land_CargoBox_V1_F", 20]
+	["ReammoBox_F", 10],
+	["Box_NATO_Wps_F", 5],
+	["Box_NATO_Ammo_F", 5],
+	["Box_NATO_Support_F", 6],
+	[canister_fuel_typename, 1],
+	["Land_TentLamp_01_suspended_F", 1],
+    ["Land_TentLamp_01_suspended_red_F", 1]
 ];
 
 R3F_LOG_CFG_can_be_moved_by_player = R3F_LOG_CFG_can_be_moved_by_player +
@@ -226,6 +228,7 @@ R3F_LOG_CFG_can_be_moved_by_player = R3F_LOG_CFG_can_be_moved_by_player +
 	FOB_box_typename_west,
 	FOB_box_typename_east,
 	FOB_box_outpost,
+	playerbox_typename,
 	ammobox_b_typename,
 	ammobox_o_typename,
 	ammobox_i_typename,
@@ -233,6 +236,7 @@ R3F_LOG_CFG_can_be_moved_by_player = R3F_LOG_CFG_can_be_moved_by_player +
 	fuelbarrel_typename,
 	foodbarrel_typename,
 	medicalbox_typename,
+	fireworks_typename,
 	repair_sling_typename_west,
 	fuel_sling_typename_west,
 	ammo_sling_typename_west,
@@ -242,33 +246,33 @@ R3F_LOG_CFG_can_be_moved_by_player = R3F_LOG_CFG_can_be_moved_by_player +
 	ammo_sling_typename_east,
 	medic_sling_typename_east,
 	A3W_BoxWps,
-	canisterFuel,
+	"ReammoBox_F",
+	canister_fuel_typename,
+	"Land_RepairDepot_01_civ_F",
+	"Land_TentLamp_01_suspended_F",
+    "Land_TentLamp_01_suspended_red_F",
 	"Land_Pod_Heli_Transport_04_bench_F",
 	"Land_Pod_Heli_Transport_04_covered_F",
 	"Land_PierLadder_F",
-    "Box_NATO_WpsLaunch_F",
-	"Land_CargoBox_V1_F",
-	"Land_Cargo_House_V1_F",
-	"Land_Cargo_Patrol_V1_F",
-	"Land_Cargo_House_V2_F",
-	"Land_Cargo_Patrol_V2_F",
-	"Land_Cargo_House_V3_F",
-	"Land_Cargo_Patrol_V3_F",
+	"Cargo_House_base_F",
+	"Cargo_Patrol_base_F",
+	//"Cargo_Tower_base_F",
 	"Land_BagBunker_Large_F",
 	"Land_BagBunker_Small_F",
 	//"Land_BagBunker_Tower_F",
 	"CamoNet_BLUFOR_open_F",
-	"CamoNet_BLUFOR_big_F",
-	"Land_CncShelter_F"	
+	"CamoNet_BLUFOR_big_F"
 ];
 
 R3F_LOG_CFG_can_be_lifted = R3F_LOG_CFG_can_be_lifted +
 [
 	Arsenal_typename,
 	FOB_box_typename,
-	FOB_box_outpost
+	FOB_box_outpost,
+	ammobox_b_typename,
+	ammobox_o_typename,
+	ammobox_i_typename
 ];
-
 //--------------- Static ---------------
 
 R3F_LOG_CFG_can_be_moved_by_player = R3F_LOG_CFG_can_be_moved_by_player +
@@ -278,22 +282,28 @@ R3F_LOG_CFG_can_be_moved_by_player = R3F_LOG_CFG_can_be_moved_by_player +
 	"StaticMortar",
 	"Land_CzechHedgehog_01_new_F"
 ];
+
 R3F_LOG_CFG_can_be_transported_cargo = R3F_LOG_CFG_can_be_transported_cargo +
 [
 	//["StaticMGWeapon", 10],
+	["B_Static_Designator_01_F",3],
+	["B_HMG_01_F",5],
+	["B_HMG_01_high_F",5],
+	["B_GMG_01_F",5],
+	["B_GMG_01_high_F",5],
+	["B_static_AA_F",10],
+	["B_static_AT_F",10],
+	["B_Mortar_01_F",10],
+	["O_HMG_01_F",5],
+	["O_HMG_01_high_F",5],
+	["O_GMG_01_F",5],
+	["O_GMG_01_high_F",5],
+	["O_static_AA_F",10],
+	["O_static_AT_F",10],
+	["O_Mortar_01_F",10],	
 	["Land_CzechHedgehog_01_new_F", 5],
-	["B_HMG_01_F", 10],
-	["B_HMG_01_high_F", 10],
-	["I_HMG_01_F", 10],
-	["I_HMG_01_high_F", 10],
-	["O_HMG_01_F", 10],
-	["O_HMG_01_high_F", 10],
-	["O_static_AA_F", 10],
-	["O_static_AT_F", 10],
-	["O_Mortar_01_F", 10],
 	["StaticGrenadeLauncher", 10],
-	["StaticMortar", 10],
-	["Land_CzechHedgehog_01_new_F", 10]
+	["StaticMortar", 15]
 ];
 //--------------- Camping ---------------
 
@@ -307,6 +317,7 @@ R3F_LOG_CFG_can_be_moved_by_player = R3F_LOG_CFG_can_be_moved_by_player +
 	"Land_BagFence_Short_F",
 	"Land_BagFence_Corner_F",
 	"Land_CncShelter_F",
+	"HBarrier_base_F",
 	"Land_Cargo_House_V1_F",
 	"Land_Cargo_Patrol_V1_F",
 	"Land_Cargo_House_V2_F",
@@ -331,11 +342,10 @@ R3F_LOG_CFG_can_be_moved_by_player = R3F_LOG_CFG_can_be_moved_by_player +
 	"Land_CampingChair_V2_F",
 	"Land_CampingTable_F",
 	"Land_Metal_rack_Tall_F",
-	"PortableHelipadLight_01_blue_F",
+	"Land_PortableHelipadLight_01_F",
 	"Land_DieselGroundPowerUnit_01_F",
 	"Land_Pallet_MilBoxes_F",
-	"Land_PaperBox_open_full_F",
-	"Land_ClutterCutter_large_F"
+	"Land_PaperBox_open_full_F"
 ];
 
 R3F_LOG_CFG_can_be_transported_cargo = R3F_LOG_CFG_can_be_transported_cargo +
@@ -348,6 +358,7 @@ R3F_LOG_CFG_can_be_transported_cargo = R3F_LOG_CFG_can_be_transported_cargo +
 	["Land_BagFence_Short_F", 5],
 	["Land_BagFence_Corner_F", 5],
 	["Land_CncShelter_F", 5],
+	["HBarrier_base_F", 5],
 	["Land_Cargo_House_V1_F", 5],
 	["Land_Cargo_Patrol_V1_F", 5],
 	["Land_Cargo_House_V2_F", 5],
@@ -372,9 +383,8 @@ R3F_LOG_CFG_can_be_transported_cargo = R3F_LOG_CFG_can_be_transported_cargo +
 	["Land_CampingChair_V2_F", 5],
 	["Land_CampingTable_F", 5],
 	["Land_Metal_rack_Tall_F", 5],
-	["PortableHelipadLight_01_blue_F", 5],
+	["Land_PortableHelipadLight_01_F", 1],
 	["Land_DieselGroundPowerUnit_01_F", 5],
 	["Land_Pallet_MilBoxes_F", 5],
-	["Land_PaperBox_open_full_F", 5],
-	["Land_ClutterCutter_large_F", 5]
+	["Land_PaperBox_open_full_F", 5]
 ];

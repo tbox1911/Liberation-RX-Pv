@@ -3,14 +3,11 @@
 // ******************************************************************************************
 //	@file Name: createMissionMarker.sqf
 //	@file Author: AgentRev
+//	LRX Integration: pSiKO
 
-private ["_text", "_pos", "_marker"];
+params ["_text", "_pos"];
 
-_text = _this select 0;
-_pos = _this select 1;
-
-_marker = format ["side_mission_%1", _text];
-_marker = createMarker [_marker, _pos];
+private _marker = createMarker [format ["side_mission_%1", _text], _pos];
 _marker setMarkerType "mil_destroy";
 _marker setMarkerSize [1.25, 1.25];
 _marker setMarkerColor "ColorRed";

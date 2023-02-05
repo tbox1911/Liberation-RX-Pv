@@ -5,5 +5,5 @@ if (!isNull _p1) then {
     _p1 setVariable ["GREUH_pvp_side", _side, true];
 };
 {
-    if ( (_x select 0) == _uid) exitWith {_x set [4, _side]};
+    if ( (_x select 0) == _uid) exitWith {_x set [5, _side]};
 } forEach GRLIB_player_scores;

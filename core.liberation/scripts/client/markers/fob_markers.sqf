@@ -1,9 +1,8 @@
-private [ "_markers", "_markers_mobilespawns", "_marker", "_idx", "_respawn_trucks", "_markers_mobilespawns" ];
+private [ "_marker", "_idx", "_respawn_trucks", "_markers_mobilespawns" ];
+private _markers = [];
+private _markers_mobilespawns = [];
 
-_markers = [];
-_markers_mobilespawns = [];
-
-uiSleep 3;
+waitUntil {sleep 1; !isNil "GRLIB_init_server"};
 
 while { true } do {
 	private _myfobs = ([] call get_myFobs);
@@ -12,7 +11,7 @@ while { true } do {
 		_markers = [];
 		for [ {_idx=0},{_idx < count _myfobs},{_idx=_idx+1}] do {
 			_fobpos = _myfobs select _idx;
-			_near_outpost = (count (_fobpos nearObjects [FOB_outpost, 100]) > 0);
+			_near_outpost = (count (_fobpos nearObjects [FOB_outpost, 50]) > 0);
 
 			_marker = createMarkerLocal [format ["fobmarker%1",_idx], markers_reset];			
 			if (_near_outpost) then {
@@ -31,7 +30,7 @@ while { true } do {
 		};
 	};
 
-	_respawn_trucks = call F_getMobileRespawns;
+	_respawn_trucks = [] call F_getMobileRespawns;
 	if ( count _markers_mobilespawns != count _respawn_trucks ) then {
 		{ deleteMarkerLocal _x; } foreach _markers_mobilespawns;
 		_markers_mobilespawns = [];

@@ -4,30 +4,49 @@ respawn_loadout = 0;
 load_from_player = -1;
 exit_on_load = 0;
 
-GRLIB_backup_loadout = [player] call F_getLoadout;
+GRLIB_backup_loadout = getUnitLoadout player;
 player setVariable ["GREUH_stuff_price", ([player] call F_loadoutPrice)];
 
 private _ammo_collected = player getVariable ["GREUH_ammo_count",0];
-private _saved_loadouts = profileNamespace getVariable "bis_fnc_saveInventory_data";
+private _saved_loadouts = profileNamespace getVariable ["bis_fnc_saveInventory_data", []];
+private _saved_loadouts_ace = profileNamespace getVariable ["ace_arsenal_saved_loadouts", []];
 private _loadouts_data = [];
+private _loadout_loaded = [];
 private _counter = 0;
+private _price = 0;
+private _name = "";
 
-if ( !isNil "_saved_loadouts" ) then {
-	private _grp = createGroup [GRLIB_side_friendly, true];
-	private _unit = _grp createUnit ["B_Survivor_F", [0,0,0], [], 0, "NONE"];
-	private _max_loadout = 24;
-	{
-		if ( _counter % 2 == 0 && _max_loadout > 0) then {
-			[_unit, [profileNamespace, _x]] call bis_fnc_loadInventory;
-			_price = [_unit] call F_loadoutPrice;
-			_loadouts_data pushback [_x, _price];
-			_max_loadout = _max_loadout - 1;
-		};
-		_counter = _counter + 1;
-	} foreach _saved_loadouts;
-	deleteVehicle _unit;
+if (GRLIB_ACE_enabled) then {
+	if ( !isNil "_saved_loadouts_ace" ) then {
+		private _unit = "B_Soldier_VR_F" createVehicleLocal zeropos;
+		_unit allowDamage false;
+		{
+			if ( _counter % 1 == 0 && _counter < 40) then {
+				_name = _x select 0;
+				_loadout_loaded = _x select 1; 			// Pushes the loadouts array to _loadouts_data for CBA_fnc_setLoadout
+				[_unit, _loadout_loaded] call CBA_fnc_setLoadout;
+				_price = [_unit] call F_loadoutPrice;
+				_loadouts_data pushback [_name, _price, _loadout_loaded];
+			};
+			_counter = _counter + 1;
+		} foreach _saved_loadouts_ace;
+		deleteVehicle _unit;
+	};
+} else {
+	if ( !isNil "_saved_loadouts" ) then {
+		private _unit = "B_Soldier_VR_F" createVehicleLocal zeropos;
+		_unit allowDamage false;
+		{
+			if ( _counter % 2 == 0 && _counter < 40) then {
+				[_unit, [profileNamespace, _x]] call bis_fnc_loadInventory;
+				_price = [_unit] call F_loadoutPrice;
+				_loadouts_data pushback [_x, _price];
+			};
+			_counter = _counter + 1;
+		} foreach _saved_loadouts;
+		deleteVehicle _unit;
+	};
 };
-
 createDialog "liberation_arsenal";
 waitUntil { dialog };
 ctrlEnable [ 202, false ];
@@ -64,13 +83,8 @@ private _loadplayers = [];
 if ( count _loadplayers > 0 ) then {
 	{
 		private _nextplayer = _x select 1;
-		private _namestr = "";
-		if(count (squadParams _nextplayer) != 0) then {
-			_namestr = "[" + ((squadParams _nextplayer select 0) select 0) + "] ";
-		};
-		_namestr = _namestr + name _nextplayer;
-
-		lbAdd [ 203, _namestr ];
+		private _playername = [_nextplayer] call get_player_name;
+		lbAdd [ 203, _playername ];
 		lbSetCurSel [ 203, 0 ];
 	} foreach _loadplayers;
 	ctrlEnable [ 203, true ];
@@ -94,7 +108,12 @@ while { dialog && (alive player) && edit_loadout == 0 } do {
 	if ( load_loadout > 0 ) then {
 		private _selected_loadout = _loadouts_data select _cur_sel;
 		private _loaded_loadout = (_selected_loadout select 0);
-		[player, [profileNamespace, _loaded_loadout]] call bis_fnc_loadInventory;
+		private _ace_loaded_loadout = (_selected_loadout select 2);
+		if (GRLIB_ACE_enabled) then {
+			[player, _ace_loaded_loadout] call CBA_fnc_setLoadout;
+		} else {
+			[player, [profileNamespace, _loaded_loadout]] call bis_fnc_loadInventory;
+		};
 		hint format [ localize "STR_HINT_LOADOUT_LOADED", _loaded_loadout];
 		if ( exit_on_load == 1 ) then {
 			closeDialog 0;
@@ -103,7 +122,7 @@ while { dialog && (alive player) && edit_loadout == 0 } do {
 	};
 
 	if ( respawn_loadout > 0 ) then {
-		GRLIB_respawn_loadout = [ player, ["repetitive"] ] call F_getLoadout;
+		GRLIB_respawn_loadout = getUnitLoadout player;
 		hint localize "STR_MAKE_RESPAWN_LOADOUT_HINT";
 		respawn_loadout = 0;
 	};
@@ -111,7 +130,7 @@ while { dialog && (alive player) && edit_loadout == 0 } do {
 	if ( load_from_player >= 0 ) then {
 		private _playerselected = ( _loadplayers select load_from_player ) select 1;
 		if ( alive _playerselected ) then {
-      		[player, [_playerselected, ["repetitive"]] call F_getLoadout] call F_setLoadout;
+    		player setUnitLoadout (getUnitLoadout _playerselected);
 			hint format [ localize "STR_LOAD_PLAYER_LOADOUT_HINT", name _playerselected ];
 		};
 		load_from_player = -1;
@@ -126,12 +145,14 @@ if ( edit_loadout > 0 ) then {
 	if (side player == east) then {
 		_box = missionNamespace getVariable ["LARsBox_east", objNull];
 	};
-
 	if (GRLIB_ACE_enabled) then {
-		[_box, true] call ace_arsenal_fnc_initBox;
-		[_box, player, true] call ace_arsenal_fnc_openBox;
+		// Open Arsenal
+		[_box, player] call ace_arsenal_fnc_openBox;
 	} else {
-		if (GRLIB_limited_arsenal) then {
+		// Filters disabled 
+		if (GRLIB_filter_arsenal == 0) then {
+			["Open", [true]] call BIS_fnc_arsenal;
+		} else {
 			_savedCargo = _box getVariable [ "bis_addVirtualWeaponCargo_cargo", [] ];
 			_savedMissionCargo = missionNamespace getVariable [ "bis_addVirtualWeaponCargo_cargo", [] ];
 			waitUntil {!isNil {_box getVariable "LARs_arsenal_Liberation_cargo"} };
@@ -141,18 +162,18 @@ if ( edit_loadout > 0 ) then {
 
 			['Open',[nil,_box]] call BIS_fnc_arsenal;
 
-			_box setVariable [ "LARs_arsenalClosedID", [ missionNamespace, "arsenalClosed", compile format[ "
+			_box setVariable [ "LARs_arsenalClosedID", [ missionNamespace, "arsenalClosed", compile format ["
 				%1 setVariable [ 'bis_addvirtualWeaponCargo_cargo', %2 ];
 				missionNamespace setVariable [ 'bis_addvirtualWeaponCargo_cargo', %3 ];
 				[ missionNamespace, 'arsenalClosed', %1 getVariable 'LARs_arsenalClosedID' ] call BIS_fnc_removeScriptedEventHandler;
 				%1 setVariable [ 'LARs_arsenalClosedID', nil ];
-			", _box, _savedCargo, _savedMissionCargo ] ]call BIS_fnc_addScriptedEventHandler ];
-		} else {
-			["Open", [true]] call BIS_fnc_arsenal;
+				[player] call F_filterLoadout;
+				[player] spawn F_payLoadout;
+			", _box, _savedCargo, _savedMissionCargo ] ] call BIS_fnc_addScriptedEventHandler ];
 		};
 	};
+} else {
+	// Filter and Pay loadout
+	[player] call F_filterLoadout;
+	[player] call F_payLoadout;
 };
-
-//filter and pay loadout
-[player] call F_filterLoadout;
-[player] call F_payLoadout;

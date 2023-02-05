@@ -3,38 +3,37 @@
 // ******************************************************************************************
 //	@file Version: 1.0
 //	@file Name: mission_AirWreck.sqf
-//	@file Author: [404] Deadbeat, [404] Costlyy, AgentRev
-//	@file Created: 08/12/2012 15:19
 
 if (!isServer) exitwith {};
 #include "sideMissionDefines.sqf"
 
-private ["_nbUnits", "_wreckPos", "_wreck", "_box1", "_box2", "_box3"];
+private ["_nbUnits", "_wreckPos", "_box1", "_box2", "_box3"];
 
 _setupVars =
 {
-	_missionType = "Aircraft Wreck";
-	_locationsArray = SpawnMissionMarkers;
+	_missionType = localize "STR_AIRWRECK";
+	_locationsArray = [SpawnMissionMarkers] call checkSpawn;
 	_nbUnits = [] call getNbUnits;
 };
 
 _setupObjects =
 {
 	_missionPos = markerPos _missionLocation;
-	_wreckPos = _missionPos vectorAdd ([[25 + floor(random 20), 0, 0], random 360] call BIS_fnc_rotateVector2D);
-
-	// Class, Position, Fuel, Ammo, Damage, Special
-	_wreck = createVehicle [GRLIB_sar_wreck, _wreckPos, [], 0, "NONE"];
+	_wreckPos = _missionPos vectorAdd ([[5 + floor(random 20), 0, 0], random 360] call BIS_fnc_rotateVector2D);
+	_vehicle = createVehicle [GRLIB_sar_wreck, _wreckPos, [], 0, "NONE"];
+	_vehicle setpos (getpos _vehicle);
 	_box1 = [ammobox_b_typename, _missionPos, true] call boxSetup;
-	_box2 = [A3W_BoxWps, _missionPos, true] call boxSetup;
-	_box3 = [ammobox_b_typename, _missionPos, true] call boxSetup;
+	_box2 = [ammobox_b_typename, _missionPos, true] call boxSetup;
+	_box3 = [A3W_BoxWps, _missionPos, true] call boxSetup;
 
+	[_missionPos, 30] call createlandmines;
 	_aiGroup = createGroup [GRLIB_side_enemy, true];
 	[_aiGroup, _missionPos, _nbUnits, "infantry"] call createCustomGroup;
 
-	[_missionPos, 25] call createlandmines;
 	_missionPicture = "\A3\Air_F\Heli_Light_02\Data\UI\Heli_Light_02_CA.paa";
-	_missionHintText = "A helicopter has come down under enemy fire!";
+	_missionHintText = localize "STR_AIRWRECK_MESSAGE1";
+	A3W_sectors_in_use = A3W_sectors_in_use + [_missionLocation];
+	true;
 };
 
 _waitUntilMarkerPos = nil;
@@ -43,8 +42,9 @@ _waitUntilCondition = nil;
 
 _failedExec = {
 	// Mission failed
-	{ deleteVehicle _x } forEach [_box1, _box2, _box3, _wreck];
+	{ deleteVehicle _x } forEach [_box1, _box2, _box3];
 	[_missionPos] call clearlandmines;
+	A3W_sectors_in_use = A3W_sectors_in_use - [_missionLocation];
 };
 
 _successExec = {
@@ -53,9 +53,10 @@ _successExec = {
 		_x setVariable ["R3F_LOG_disabled", false, true];
 		_x setVariable ["GRLIB_vehicle_owner", nil, true];
 	} forEach [_box1, _box2, _box3];
-	deleteVehicle _wreck;
-	_successHintMessage = "The airwreck supplies have been collected, well done.";
+
+	_successHintMessage = localize "STR_AIRWRECK_MESSAGE2";
 	[_missionPos] call showlandmines;
+	A3W_sectors_in_use = A3W_sectors_in_use - [_missionLocation];
 };
 
 _this call sideMissionProcessor;

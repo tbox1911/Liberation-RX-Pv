@@ -1,5 +1,5 @@
 titleText ["","BLACK FADED", 100];
-diag_log "--- Liberation RX by pSiKO ---";
+diag_log "--- Liberation RX - PvP by pSiKO ---";
 [] call compileFinal preprocessFileLineNUmbers "build_info.sqf";
 diag_log "--- Init start ---";
 

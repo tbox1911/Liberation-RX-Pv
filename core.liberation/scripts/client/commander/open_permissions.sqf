@@ -1,6 +1,6 @@
 waitUntil { !isNil "GRLIB_permissions" };
 
-private [ "_nextplayer", "_players_array", "_displayname", "_idx", "_control", "_player_uid", "_player_idx", "_player_uids", "_player_permissions", "_modify_permissions" ];
+private [ "_nextplayer", "_players_array", "_playername", "_idx", "_control", "_player_uid", "_player_idx", "_player_uids", "_player_permissions", "_modify_permissions" ];
 
 _players_array = [];
 createDialog "liberation_permissions";
@@ -48,15 +48,8 @@ _idx = 2;
 {
 	if ( !( (name _x) in [ "HC1", "HC2", "HC3" ] ) ) then {
 		_nextplayer = _x;
-
-		_displayname = "";
-		if(count (squadParams _nextplayer) != 0) then {
-			_displayname = "[" + ((squadParams _nextplayer select 0) select 0) + "] ";
-		};
-		_displayname = _displayname + name _nextplayer;
-
-		_players_array pushback [ getPlayerUID _nextplayer, _displayname, _idx ];
-
+		_playername = [_nextplayer] call get_player_name;
+		_players_array pushback [ getPlayerUID _nextplayer, _playername, _idx ];
 		_idx = _idx + 1;
 	};
 } foreach allPlayers;
@@ -192,6 +185,7 @@ while { dialog && alive player } do {
 		GRLIB_permissions = _modify_permissions;
 		publicVariable "GRLIB_permissions";
 		closeDialog 0;
+		[] remoteExec ["save_game_mp", 2];
 	};
 
 	waitUntil {sleep 0.5; !dialog || !(alive player) || permission_playerid != -1 || permission_toset != -1 || save_changes != 0 };

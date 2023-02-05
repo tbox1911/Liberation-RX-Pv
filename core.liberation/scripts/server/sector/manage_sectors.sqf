@@ -1,7 +1,5 @@
-waitUntil {sleep 1; !isNil "west_sectors" };
 waitUntil {sleep 1; !isNil "sectors_allSectors" };
 active_sectors = [];
-sleep 5;
 
 while { GRLIB_endgame == 0 } do {
 
@@ -12,15 +10,16 @@ while { GRLIB_endgame == 0 } do {
 		_opforcount =  [] call F_opforCap;
 
 		if ( _opforcount < GRLIB_sector_cap ) then {
-			_west_units = [getmarkerpos _nextsector , [ _opforcount ] call F_getCorrectedSectorRange , GRLIB_side_west] call F_getUnitsCount;
-			_east_units = [getmarkerpos _nextsector , [ _opforcount ] call F_getCorrectedSectorRange , GRLIB_side_east] call F_getUnitsCount;
+			_west_units = [getmarkerpos _nextsector, GRLIB_sector_size, GRLIB_side_west] call F_getUnitsCount;
+			_east_units = [getmarkerpos _nextsector, GRLIB_sector_size, GRLIB_side_east] call F_getUnitsCount;
 
 			if ( (_west_units > 0 || _east_units > 0) && !( _nextsector in active_sectors ) ) then {
 				_hc = [] call F_lessLoadedHC;
 				if ( isNull _hc ) then {
 					[ _nextsector ] spawn manage_one_sector;
 				} else {
-					[ _nextsector ] remoteExec ["manage_one_sector", _hc];
+					diag_log format [ "Sector: %1 spawned on %2", _nextsector, _hc ];
+					[_nextsector] remoteExec ["manage_one_sector", _hc];
 				};
 				if ( _nextsector in sectors_military ) then {
 					[ _nextsector ] call manage_ammoboxes;

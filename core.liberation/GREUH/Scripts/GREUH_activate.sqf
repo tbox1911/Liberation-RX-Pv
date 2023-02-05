@@ -1,7 +1,3 @@
-if (isDedicated) exitWith {};
-if (abort_loading) exitWith {};
-waitUntil {sleep 1; alive player };
-
 desiredviewdistance_inf = viewDistance;
 desiredviewdistance_veh = viewDistance;
 desiredviewdistance_obj = 75;
@@ -9,7 +5,7 @@ desired_fps = 0;
 show_teammates = false;
 show_nametags = false;
 show_platoon = false;
-desired_vehvolume = 100;
+desired_vehvolume = 35;
 
 greuh_options_profile = profileNamespace getVariable "GREUH_OPTIONS_PROFILE";
 if ( !isNil "greuh_options_profile" ) then {

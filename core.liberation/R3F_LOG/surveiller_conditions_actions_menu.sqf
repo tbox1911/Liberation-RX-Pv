@@ -46,7 +46,7 @@ while {true} do
 		_objet_pas_en_cours_de_deplacement = (isNull (_objet_pointe getVariable ["R3F_LOG_est_deplace_par", objNull]) ||
 			{(!alive (_objet_pointe getVariable "R3F_LOG_est_deplace_par")) || (!isPlayer (_objet_pointe getVariable "R3F_LOG_est_deplace_par"))});
 
-		_isUav =  (getNumber (configFile >> "CfgVehicles" >> (typeOf _objet_pointe) >> "isUav") == 1);
+		_isUav =  (getNumber (configOf _objet_pointe >> "isUav") == 1);
 
 		_usine_autorisee_client = call compile R3F_LOG_CFG_string_condition_allow_creation_factory_on_this_client;
 
@@ -68,7 +68,8 @@ while {true} do
 			// Condition action deplacer_objet
 			R3F_LOG_action_deplacer_objet_valide = (count crew _objet_pointe == 0 || _isUav || typeOf _objet_pointe in static_vehicles_AI) && (isNull R3F_LOG_joueur_deplace_objet) &&
 				_objet_pas_en_cours_de_deplacement && isNull (_objet_pointe getVariable "R3F_LOG_est_transporte_par") &&
-				_objet_deverrouille && !(_objet_pointe getVariable "R3F_LOG_disabled");
+				_objet_deverrouille && !(_objet_pointe getVariable "R3F_LOG_disabled") &&
+				(([_joueur, _objet_pointe] call is_owner) || ([_objet_pointe] call is_public));
 
 			// Condition action revendre_usine_deplace
 			R3F_LOG_action_revendre_usine_deplace_valide = _usine_autorisee_client && R3F_LOG_CFG_CF_sell_back_bargain_rate != -1 &&
@@ -132,7 +133,7 @@ while {true} do
 							// L'arri�re du remorqueur est proche de l'avant de l'objet point�
 							abs (_delta_pos select 0) < 3 && abs (_delta_pos select 1) < 5
 						}
-					} count (nearestObjects [_objet_pointe, ["All"], 30]) != 0
+					} count (_objet_pointe nearEntities [["All"], 30]) != 0
 				};
 
 			// Condition action detacher
@@ -160,14 +161,15 @@ while {true} do
 			// Condition action selectionner_objet_charge
 			R3F_LOG_action_selectionner_objet_charge_valide = (count crew _objet_pointe == 0 || _isUav) && isNull R3F_LOG_joueur_deplace_objet &&
 				isNull (_objet_pointe getVariable "R3F_LOG_est_transporte_par") &&
-				_objet_pas_en_cours_de_deplacement && _objet_deverrouille && !(_objet_pointe getVariable "R3F_LOG_disabled");
+				_objet_pas_en_cours_de_deplacement && _objet_deverrouille && !(_objet_pointe getVariable "R3F_LOG_disabled") &&
+				(([_joueur, _objet_pointe] call is_owner) || ([_objet_pointe] call is_public));
 		};
 
 		// Si l'objet est un v�hicule remorqueur
-		if (_fonctionnalites select __can_tow) then
+		if (_fonctionnalites select __can_tow && !isNull R3F_LOG_joueur_deplace_objet) then
 		{
 			// Condition action remorquer_deplace
-			R3F_LOG_action_remorquer_deplace_valide = (alive _objet_pointe) && (!isNull R3F_LOG_joueur_deplace_objet) &&
+			R3F_LOG_action_remorquer_deplace_valide = alive _objet_pointe &&
 				!(R3F_LOG_joueur_deplace_objet getVariable "R3F_LOG_disabled") && (R3F_LOG_joueur_deplace_objet != _objet_pointe) &&
 				(R3F_LOG_joueur_deplace_objet getVariable ["R3F_LOG_fonctionnalites", R3F_LOG_CST_zero_log] select __can_be_towed) &&
 				isNull (_objet_pointe getVariable "R3F_LOG_est_transporte_par") &&
@@ -178,52 +180,30 @@ while {true} do
 		// Si l'objet est un v�hicule transporteur
 		if (_fonctionnalites select __can_transport_cargo) then
 		{
-			// Condition action charger_deplace
-			R3F_LOG_action_charger_deplace_valide = alive _objet_pointe && (!isNull R3F_LOG_joueur_deplace_objet) &&
-				!(R3F_LOG_joueur_deplace_objet getVariable "R3F_LOG_disabled") && (R3F_LOG_joueur_deplace_objet != _objet_pointe) &&
-				(R3F_LOG_joueur_deplace_objet getVariable ["R3F_LOG_fonctionnalites", R3F_LOG_CST_zero_log] select __can_be_transported_cargo) &&
-				(vectorMagnitude velocity _objet_pointe < 6) && _objet_deverrouille && !(_objet_pointe getVariable "R3F_LOG_disabled");
-
-			// Condition action charger_selection
-			R3F_LOG_action_charger_selection_valide = alive _objet_pointe && (isNull R3F_LOG_joueur_deplace_objet) &&
-				(!isNull R3F_LOG_objet_selectionne) && (R3F_LOG_objet_selectionne != _objet_pointe) &&
-				!(R3F_LOG_objet_selectionne getVariable "R3F_LOG_disabled") &&
-				(R3F_LOG_objet_selectionne getVariable ["R3F_LOG_fonctionnalites", R3F_LOG_CST_zero_log] select __can_be_transported_cargo) &&
-				(vectorMagnitude velocity _objet_pointe < 6) && _objet_deverrouille && !(_objet_pointe getVariable "R3F_LOG_disabled");
-
-			// Condition action contenu_vehicule
-			R3F_LOG_action_contenu_vehicule_valide = alive _objet_pointe && (isNull R3F_LOG_joueur_deplace_objet) &&
-				(vectorMagnitude velocity _objet_pointe < 6) && _objet_deverrouille && !(_objet_pointe getVariable "R3F_LOG_disabled");
-		};
-
-		// Condition action ouvrir_usine
-		R3F_LOG_action_ouvrir_usine_valide = _usine_autorisee_client && isNull R3F_LOG_joueur_deplace_objet &&
-			!(_objet_pointe getVariable "R3F_LOG_CF_disabled") && alive _objet_pointe &&
-			_objet_pointe getVariable ["R3F_LOG_CF_side_addAction", side group _joueur] == side group _joueur;
-
-		// Condition action revendre_usine_deplace
-		R3F_LOG_action_revendre_usine_deplace_valide = _usine_autorisee_client && R3F_LOG_CFG_CF_sell_back_bargain_rate != -1 && alive _objet_pointe &&
-			(!isNull R3F_LOG_joueur_deplace_objet) && R3F_LOG_joueur_deplace_objet getVariable ["R3F_LOG_CF_depuis_usine", false] &&
-			!(R3F_LOG_joueur_deplace_objet getVariable "R3F_LOG_disabled") && (R3F_LOG_joueur_deplace_objet != _objet_pointe) &&
-			(vectorMagnitude velocity _objet_pointe < 6) && !(_objet_pointe getVariable "R3F_LOG_CF_disabled") &&
-			_objet_pointe getVariable ["R3F_LOG_CF_side_addAction", side group _joueur] == side group _joueur;
-
-		// Condition action revendre_usine_selection
-		R3F_LOG_action_revendre_usine_selection_valide = _usine_autorisee_client && R3F_LOG_CFG_CF_sell_back_bargain_rate != -1 && alive _objet_pointe &&
-			(isNull R3F_LOG_joueur_deplace_objet) && R3F_LOG_objet_selectionne getVariable ["R3F_LOG_CF_depuis_usine", false] &&
-			(!isNull R3F_LOG_objet_selectionne) && (R3F_LOG_objet_selectionne != _objet_pointe) && !(R3F_LOG_objet_selectionne getVariable "R3F_LOG_disabled") &&
-			(vectorMagnitude velocity _objet_pointe < 6) && !(_objet_pointe getVariable "R3F_LOG_CF_disabled") &&
-			_objet_pointe getVariable ["R3F_LOG_CF_side_addAction", side group _joueur] == side group _joueur;
-
-		// Condition action revendre_usine_direct
-		R3F_LOG_action_revendre_usine_direct_valide = _usine_autorisee_client && R3F_LOG_CFG_CF_sell_back_bargain_rate != -1 &&
-			_objet_pointe getVariable ["R3F_LOG_CF_depuis_usine", false] && (count crew _objet_pointe == 0 || _isUav) &&
-			isNull R3F_LOG_joueur_deplace_objet && isNull (_objet_pointe getVariable ["R3F_LOG_est_transporte_par", objNull]) &&
-			_objet_pas_en_cours_de_deplacement &&
+			if (!isNull R3F_LOG_joueur_deplace_objet) then 
 			{
-				_objet_pointe distance _x < 20 && !(_x getVariable "R3F_LOG_CF_disabled") &&
-				_x getVariable ["R3F_LOG_CF_side_addAction", side group _joueur] == side group _joueur
-			} count R3F_LOG_CF_liste_usines != 0;
+				// Condition action charger_deplace
+				R3F_LOG_action_charger_deplace_valide = alive _objet_pointe && 
+					!(R3F_LOG_joueur_deplace_objet getVariable "R3F_LOG_disabled") && (R3F_LOG_joueur_deplace_objet != _objet_pointe) &&
+					(R3F_LOG_joueur_deplace_objet getVariable ["R3F_LOG_fonctionnalites", R3F_LOG_CST_zero_log] select __can_be_transported_cargo) &&
+					(vectorMagnitude velocity _objet_pointe < 6) && _objet_deverrouille && !(_objet_pointe getVariable "R3F_LOG_disabled");
+			} 
+			else 
+			{
+				if (!isNull R3F_LOG_objet_selectionne) then
+				{
+					// Condition action charger_selection
+					R3F_LOG_action_charger_selection_valide = alive _objet_pointe &&
+						(R3F_LOG_objet_selectionne != _objet_pointe) &&
+						!(R3F_LOG_objet_selectionne getVariable "R3F_LOG_disabled") &&
+						(R3F_LOG_objet_selectionne getVariable ["R3F_LOG_fonctionnalites", R3F_LOG_CST_zero_log] select __can_be_transported_cargo) &&
+						(vectorMagnitude velocity _objet_pointe < 6) && _objet_deverrouille && !(_objet_pointe getVariable "R3F_LOG_disabled");
+				};
+				// Condition action contenu_vehicule
+				R3F_LOG_action_contenu_vehicule_valide = alive _objet_pointe &&
+					(vectorMagnitude velocity _objet_pointe < 6) && _objet_deverrouille && !(_objet_pointe getVariable "R3F_LOG_disabled");
+			};
+		};
 
 		// Condition d�verrouiller objet
 		R3F_LOG_action_deverrouiller_valide = _objet_pas_en_cours_de_deplacement && !_objet_deverrouille && !(_objet_pointe getVariable "R3F_LOG_disabled");
@@ -274,7 +254,7 @@ while {true} do
 					(_x getVariable ["R3F_LOG_fonctionnalites", R3F_LOG_CST_zero_log] select __can_be_lifted) &&
 					_x != _vehicule_joueur && !(_x getVariable "R3F_LOG_disabled") &&
 					((getPosASL _vehicule_joueur select 2) - (getPosASL _x select 2) > 2 && (getPosASL _vehicule_joueur select 2) - (getPosASL _x select 2) < 15)
-				} count (nearestObjects [_vehicule_joueur, ["All"], 15]) != 0
+				} count (_vehicule_joueur nearEntities [["All"], 20]) != 0
 			};
 
 		// Condition action heliport_larguer
@@ -292,5 +272,5 @@ while {true} do
 		R3F_LOG_action_heliport_paradrop_valide = false;
 	};
 
-	sleep 0.4;
+	sleep 0.5;
 };

@@ -1,28 +1,34 @@
 if (!isServer && hasInterface) exitWith {};
-params [ "_unit", "_veh", "_cmd" ];
+params [ "_veh", "_cmd", "_owner" ];
 
-if (!isNil "garage_in_use") exitWith {["Garage is busy !!\nPlease wait..."] remoteExec ["hintSilent", owner _unit]};
-garage_in_use = true;
+if (isNil "_veh") exitWith {};
+if (!isNil "GRLIB_garage_in_use") then { waitUntil {sleep 0.1; isNil "GRLIB_garage_in_use"} };
+GRLIB_garage_in_use = true;
+publicVariable "GRLIB_garage_in_use";
 
+// Load
 if (_cmd == 1) then {
-	_owner = _veh getVariable ["GRLIB_vehicle_owner", ""];
-	_color = _veh getVariable ["GRLIB_vehicle_color", ""];
-	_ammo = [_veh] call F_getVehicleAmmoDef;
-	_lst_a3 = weaponsItemsCargo _veh;
-	_lst_r3f = [];
+	private _color = _veh getVariable ["GRLIB_vehicle_color", ""];
+	private _compo = _veh getVariable ["GRLIB_vehicle_composant", []];
+	private _ammo = [_veh] call F_getVehicleAmmoDef;
+	private _lst_a3 = [_veh] call F_getCargo;
+	private _lst_r3f = [];
 	{ _lst_r3f pushback (typeOf _x)} forEach (_veh getVariable ["R3F_LOG_objets_charges", []]);
-	GRLIB_garage append [[typeOf _veh, _color, _ammo, _owner, _lst_a3, _lst_r3f]];
+	GRLIB_garage append [[typeOf _veh, _color, _ammo, _owner, _lst_a3, _lst_r3f, _compo]];
 	[_veh] call clean_vehicle;
 	deleteVehicle _veh;
 };
 
+// Unload
 if (_cmd == 2) then {
-	_veh_info = GRLIB_garage select _veh;
-	[_veh_info] remoteExec ["remote_call_garage", owner _unit];
-	GRLIB_garage deleteAt _veh;
+	private _veh_lst = [];
+	{
+		if ( (_x select 3) == _owner ) then { _veh_lst pushback _foreachIndex };
+	} foreach GRLIB_garage;
+	GRLIB_garage deleteAt (_veh_lst select _veh);
 };
 
 publicVariable "GRLIB_garage";
-trigger_server_save = true;
-sleep 3;
-garage_in_use = nil;
+sleep 1;
+GRLIB_garage_in_use = nil;
+publicVariable "GRLIB_garage_in_use";

@@ -1,9 +1,8 @@
 params [ "_startpos" ];
-private [ "_currentnearest", "_refdistance", "_tpositions"];
 
-_currentnearest = [];
-_refdistance = 99999;
-_tpositions = [];
+private _currentnearest = [];
+private _refdistance = 99999;
+private _tpositions = [];
 
 if ( count GRLIB_fobs_west != 0 || count west_sectors != 0 || count GRLIB_fobs_east != 0 || count east_sectors != 0) then {
 	private _west_units = count(allPlayers select {side _x == GRLIB_side_west});
@@ -20,13 +19,14 @@ if ( count GRLIB_fobs_west != 0 || count west_sectors != 0 || count GRLIB_fobs_e
 
 	{
 		if ( _startpos distance2D _x < _refdistance ) then {
-			_refdistance = (_startpos distance2D _x);
-			_currentnearest = [_x,_refdistance];
+			_refdistance = round (_startpos distance2D _x);
+			_currentnearest = [_x, _refdistance];
 		};
 	} foreach _tpositions;
 
-	if ( _refdistance > 4000 ) then {
-		private _sectors_list = (west_sectors + east_sectors);
+	// if nearset FOB too far, search sectors
+	if ( _refdistance > (GRLIB_sector_size * 3) ) then {
+				private _sectors_list = (west_sectors + east_sectors);
 		if (_west_units > _east_units) then {
 			_sectors_list = west_sectors;
 		};
@@ -39,13 +39,13 @@ if ( count GRLIB_fobs_west != 0 || count west_sectors != 0 || count GRLIB_fobs_e
 
 		{
 			if ( _startpos distance2D _x < _refdistance ) then {
-				_refdistance = (_startpos distance2D _x);
-				_currentnearest = [_x,_refdistance];
+				_refdistance = round (_startpos distance2D _x);
+				_currentnearest = [_x, _refdistance];
 			};
 		} foreach _tpositions;
 	};
 } else {
-	_currentnearest = _startpos;
+	_currentnearest = [_startpos, _refdistance];
 };
 
 _currentnearest

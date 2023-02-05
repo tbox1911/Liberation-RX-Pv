@@ -1,4 +1,4 @@
-private [ "_oldbuildtype", "_cfg", "_initindex", "_iscommandant", "_squadname", "_buildpages", "_build_list", "_classnamevar", "_entrytext", "_icon", "_affordable", "_affordable_crew", "_selected_item", "_linked", "_linked_unlocked", "_base_link", "_link_color", "_link_str" ];
+private ["_build_list", "_entrytext", "_icon", "_affordable", "_affordable_crew", "_selected_item", "_linked", "_linked_unlocked", "_base_link", "_link_color", "_link_str" ];
 
 if ( ( [ getpos player , 500 , GRLIB_side_enemy ] call F_getUnitsCount ) > 4 ) exitWith { hint localize "STR_BUILD_ENEMIES_NEARBY"; };
 
@@ -6,41 +6,41 @@ if ( isNil "buildtype" ) then { buildtype = 1 };
 if ( buildtype > 8 ) then { buildtype = 1 };
 if ( isNil "buildindex" ) then { buildindex = -1 };
 dobuild = 0;
-_oldbuildtype = -1;
-_cfg = configFile >> "cfgVehicles";
-_initindex = buildindex;
+private _oldbuildtype = -1;
+private _refresh = true;
+private _cfg = configFile >> "cfgVehicles";
+private _initindex = buildindex;
 
 createDialog "liberation_build";
 waitUntil { dialog };
 
-_title = localize "STR_BUILD_TITLE";
+private _title = localize "STR_BUILD_TITLE";
 private _msg = "";
-private _score = score player;
+private _score = [player] call F_getScore;
 private _rank = player getVariable ["GRLIB_Rank", "Private"];
-
 private _iscommandant = false;
-if ( _rank == "Colonel" ) then {
-	_iscommandant = true;
-};
+if ( _rank in ["Colonel", "Super Colonel"] ) then {	_iscommandant = true };
 private _iscommander = false;
-if ( player == [] call F_getCommander ) then {
-	_iscommander = true;
-};
-private _near_outpost = (count (player nearObjects [FOB_outpost, 100]) > 0);
+if ( player == ([] call F_getCommander) ) then { _iscommander = true };
 ctrlSetText [1011, format ["%1 - %2", _title, _rank]];
 ctrlShow [ 108, _iscommandant ];
 ctrlShow [ 1085, _iscommandant ];
 
-_squadname = "";
-_buildpages = [
-localize "STR_BUILD1",
-localize "STR_BUILD2",
-localize "STR_BUILD3",
-localize "STR_BUILD4",
-localize "STR_BUILD5",
-localize "STR_BUILD6",
-localize "STR_BUILD7",
-localize "STR_BUILD8"
+private _near_outpost = (count (player nearObjects [FOB_outpost, 100]) > 0);
+private _has_box = false;
+{ if ((_x select 0) == playerbox_typename && (_x select 3) == getPlayerUID player) exitWith {_has_box = true} } foreach GRLIB_garage;
+if (count ([entities playerbox_typename, {[player, _x] call is_owner}] call BIS_fnc_conditionalSelect) > 0) then {_has_box = true};
+
+private _squadname = "";
+private _buildpages = [
+	localize "STR_BUILD1",
+	localize "STR_BUILD2",
+	localize "STR_BUILD3",
+	localize "STR_BUILD4",
+	localize "STR_BUILD5",
+	localize "STR_BUILD6",
+	localize "STR_BUILD7",
+	localize "STR_BUILD8"
 ];
 
 while { dialog && alive player && (dobuild == 0 || buildtype == 1)} do {
@@ -54,15 +54,15 @@ while { dialog && alive player && (dobuild == 0 || buildtype == 1)} do {
 		};
 	} forEach (build_lists select buildtype);
 
-	if (_oldbuildtype != buildtype || synchro_done ) then {
-		synchro_done = false;
+	if (_oldbuildtype != buildtype || _refresh) then {
+		_refresh = false;
 		_oldbuildtype = buildtype;
 
 		lbClear 110;
 		{
 			ctrlSetText [ 151, _buildpages select ( buildtype - 1) ];
 			if ( buildtype != 8 ) then {
-				_entrytext = [(_x select 0)] call get_lrx_name;
+				_entrytext = [(_x select 0)] call F_getLRXName;
 				((findDisplay 5501) displayCtrl (110)) lnbAddRow [ _entrytext, format [ "%1" ,_x select 1], format [ "%1" ,_x select 2], format [ "%1" ,_x select 3]];
 
 				_icon = getText ( _cfg >> (_x select 0) >> "icon");
@@ -83,12 +83,40 @@ while { dialog && alive player && (dobuild == 0 || buildtype == 1)} do {
 
 			_affordable = true;
 			_ammo_collected = player getVariable ["GREUH_ammo_count",0];
-			if(
+			_fuel_collected = player getVariable ["GREUH_fuel_count",0];
+			if (
 				((_x select 1 > 0) && ((_x select 1) > (infantry_cap - resources_infantry))) ||
 				((_x select 2 > 0) && ((_x select 2) > _ammo_collected)) ||
-				((_x select 3 > 0) && ((_x select 3) > (fuel_cap - resources_fuel)))
+				((_x select 3 > 0) && ((_x select 3) > _fuel_collected))
 				) then {
 				_affordable = false;
+			};
+
+			if ( buildtype == 1 ) then {
+				if (_x select 0 in ["Alsatian_Random_F","Fin_random_F"] ) then {
+					if (!(isNil {player getVariable ["my_dog", nil]})) then {
+						_affordable = false;
+					};
+				};
+			};
+
+			if ( buildtype == 7 ) then {
+				if (_x select 0 == mobile_respawn) then {
+					if (([getPlayerUID player] call F_getMobileRespawnsPlayer) select 1) then {
+						_affordable = false;
+					};
+				};
+				if (_x select 0 == playerbox_typename) then {
+					if (_has_box) then {
+						_affordable = false;
+					};
+				};
+			};
+
+			if ( buildtype == 8 ) then {
+				if (!(isNil {player getVariable ["my_squad", nil]})) then {
+					_affordable = false;
+				};
 			};
 
 			if ( _affordable ) then {
@@ -107,7 +135,7 @@ while { dialog && alive player && (dobuild == 0 || buildtype == 1)} do {
 
 		if (_near_outpost && count (_build_list) == 0) then {
 			((findDisplay 5501) displayCtrl (110)) lnbAddRow [ "       Unavailable at Outpost.","-","-","-"];
-		};		
+		};
 	};
 
 	if(_initindex != -1) then {
@@ -119,6 +147,7 @@ while { dialog && alive player && (dobuild == 0 || buildtype == 1)} do {
 	_affordable = false;
 	_squad_full = false;
 	_ammo_collected = player getVariable ["GREUH_ammo_count",0];
+	_fuel_collected = player getVariable ["GREUH_fuel_count",0];
 	_bros = allUnits select {(_x getVariable ["PAR_Grp_ID","0"]) == format["Bros_%1",PAR_Grp_ID]};
 	_linked = false;
 	_linked_unlocked = true;
@@ -128,9 +157,40 @@ while { dialog && alive player && (dobuild == 0 || buildtype == 1)} do {
 		if (
 				((_build_item select 1 == 0 ) || ((_build_item select 1) <= (infantry_cap - resources_infantry))) &&
 				((_build_item select 2 == 0 ) || ((_build_item select 2) <= _ammo_collected)) &&
-				((_build_item select 3 == 0 ) || ((_build_item select 3) <= (fuel_cap - resources_fuel)))
+				((_build_item select 3 == 0 ) || ((_build_item select 3) <= _fuel_collected))
 		) then {
 			_affordable = true;
+		};
+
+		if ( buildtype == 1 ) then {
+			if (_build_item select 0 in ["Alsatian_Random_F","Fin_random_F"] ) then {
+				if (!(isNil {player getVariable ["my_dog", nil]})) then {
+					_affordable = false;
+					_refresh = true;
+				};
+			};
+		};
+
+		if ( buildtype == 7 ) then {
+			if (_build_item select 0 == mobile_respawn) then {
+				if (([getPlayerUID player] call F_getMobileRespawnsPlayer) select 1) then {
+					_affordable = false;
+					_refresh = true;
+				};
+			};
+			if (_build_item select 0 == playerbox_typename) then {
+				if (_has_box) then {
+					_affordable = false;
+					_refresh = true;
+				};
+			};
+		};
+
+		if ( buildtype == 8 ) then {
+			if (!(isNil {player getVariable ["my_squad", nil]})) then {
+				_affordable = false;
+				_refresh = true;
+			};
 		};
 
 		if ( buildtype != 8 ) then {
@@ -158,10 +218,10 @@ while { dialog && alive player && (dobuild == 0 || buildtype == 1)} do {
 	ctrlShow [ 121, _iscommander && buildtype in [2,3,4,5]];
 	ctrlEnable [ 121, _affordable_crew && _linked_unlocked];
 
-	ctrlSetText [131, format [ "%1 : %2/%3" , localize "STR_MANPOWER" , (floor resources_infantry), infantry_cap]] ;
-	ctrlSetText [132, format [ "%1 : %2" , localize "STR_AMMO" , (floor  (player getVariable ["GREUH_ammo_count",0]))] ];
-	ctrlSetText [133, format [ "%1 : %2/%3" , localize "STR_FUEL" , (floor resources_fuel), fuel_cap] ];
-	ctrlSetText [134, format [ "%1 : %2/%3" , localize "STR_UNITCAP" , unitcap, ([] call F_localCap)] ];
+	ctrlSetText [131, format [ "%1 : %2/%3", localize "STR_MANPOWER", resources_infantry, infantry_cap] ];
+	ctrlSetText [132, format [ "%1 : %2", localize "STR_AMMO", (player getVariable ["GREUH_ammo_count",0])] ];
+	ctrlSetText [133, format [ "%1 : %2", localize "STR_FUEL", (player getVariable ["GREUH_fuel_count",0])] ];
+	ctrlSetText [134, format [ "%1 : %2/%3", localize "STR_UNITCAP", unitcap, ([] call F_localCap)] ];
 
 	_link_color = "#0040e0";
 	_link_str = localize "STR_VEHICLE_UNLOCKED";
@@ -177,8 +237,8 @@ while { dialog && alive player && (dobuild == 0 || buildtype == 1)} do {
 	if(buildtype == 1 && dobuild != 0) then {
 		ctrlEnable [120, false];
 		ctrlEnable [121, false];
-		sleep 1;
-		dobuild = 0;
+		waitUntil {sleep 0.3; dobuild == 0};
+		_refresh = true;
 	};
 
 	sleep 0.1;

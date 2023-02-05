@@ -1,7 +1,4 @@
-_fobpos = _this select 0;
-
-GRLIB_all_fobs = GRLIB_all_fobs - [_fobpos];
-publicVariable "GRLIB_all_fobs";
+params ["_fobpos", "_side"];
 
 private _classnames_to_destroy = [];
 private _all_buildings_to_destroy = [];

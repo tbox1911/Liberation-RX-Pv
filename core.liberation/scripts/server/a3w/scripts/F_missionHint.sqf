@@ -4,7 +4,7 @@
 //	@file Version: 1.0
 //	@file Name: missionHint.sqf
 //	@file Author: AgentRev
-//	@file Created: 09/01/2014 20:30
+//	LRX Integration: pSiKO
 
 private ["_title", "_subTitle", "_picture", "_text", "_titleColor", "_info"];
 
@@ -27,7 +27,7 @@ if (GRLIB_fancy_info == 2) then {
 		_text,
 		_titleColor
 	];
-	_info = [_msg, 0, 0, 5, 0, -1, 90];
+	_info = [_msg, 0, 0, 6, 0, -1, 90];
 } else {
 	_info = [
 		format ["%1", _title],

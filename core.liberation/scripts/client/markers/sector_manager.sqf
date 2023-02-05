@@ -1,11 +1,9 @@
-private [ "_sector_count", "_vehicle_unlock_markers", "_marker", "_nextbase", "_nextvehicle", "_cfg", "_nextmarker" ];
+private [ "_marker", "_nextbase", "_nextvehicle", "_nextmarker", "_sector_pos", "_nearest_sector", "_near_fob" ];
 
-waitUntil {sleep 1; !isNil "sectors_allSectors" };
-waitUntil {sleep 1; !isNil "save_is_loaded" };
-waitUntil {sleep 1; !isNil "west_sectors" };
-waitUntil {sleep 1; !isNil "east_sectors" };
+waitUntil {sleep 1; !isNil "GRLIB_init_server"};
+waitUntil {sleep 1;	!isNil "west_sectors" && !isNil "east_sectors"};
 
-_getMarkerType = {
+private _getMarkerType = {
 	params ["_marker"];
 	private _type = "n_art";
 	if (_marker in sectors_bigtown) then { _type = "n_service"};
@@ -15,31 +13,40 @@ _getMarkerType = {
 	_type;
 };
 
-_vehicle_unlock_markers = [];
-_cfg = configFile >> "cfgVehicles";
+private _vehicle_unlock_markers = [];
+private _cfg = configFile >> "cfgVehicles";
+if (!GRLIB_hide_opfor) then {
+	{
+		_nextvehicle = _x select 0;
+		_nextbase = _x select 1;
+		_marker = createMarkerLocal [format ["vehicleunlockmarker%1",_nextbase], [ markerpos _nextbase select 0, (markerpos _nextbase select 1) + 125]];
+		_marker setMarkerTextLocal ( getText (_cfg >> _nextvehicle >> "displayName") );
+		_marker setMarkerColorLocal GRLIB_color_enemy;
+		_marker setMarkerTypeLocal "mil_pickup";
+		_vehicle_unlock_markers pushback [ _marker, _nextbase ];
+	} foreach GRLIB_vehicle_to_military_base_links;
+};
 
-{
-	_nextvehicle = _x select 0;
-	_nextbase = _x select 1;
-	_marker = createMarkerLocal [format ["vehicleunlockmarker%1",_nextbase], [ markerpos _nextbase select 0, (markerpos _nextbase select 1) + 125]];
-	_marker setMarkerTextLocal ( getText (_cfg >> _nextvehicle >> "displayName") );
-	_marker setMarkerColorLocal GRLIB_color_enemy;
-	_marker setMarkerTypeLocal "mil_pickup";
-	_vehicle_unlock_markers pushback [ _marker, _nextbase ];
-} foreach GRLIB_vehicle_to_military_base_links;
-
-_sector_count_west = -1;
-_sector_count_east = -1;
-
+private _sector_count_west = -1;
+private _sector_count_east = -1;
+private _fob_count_west = -1;
+private _fob_count_east = -1;
 uiSleep 1;
 
 while { true } do {
-	waitUntil {sleep 1;(count west_sectors != _sector_count_west || count east_sectors != _sector_count_east) };
+	waitUntil {sleep 1; (count west_sectors != _sector_count_west || count east_sectors != _sector_count_east || count GRLIB_fobs_west != _fob_count_west || count GRLIB_fobs_east != _fob_count_east) };
 
 	if (GRLIB_hide_opfor) then {
-		{
-			_x setMarkerColorLocal GRLIB_color_enemy;
-			_x setMarkerTypeLocal "Empty";
+		{ 
+			_sector_pos = markerPos _x;
+			_nearest_sector = [(GRLIB_sector_size * 3), _sector_pos, ([] call get_mySectors)] call F_getNearestSector;
+			_near_fob = (([_sector_pos] call F_getNearestFob) distance2D _sector_pos < (GRLIB_sector_size * 3));
+			if ( _nearest_sector != "" || _near_fob ) then {
+				_x setMarkerColorLocal GRLIB_color_enemy;
+				_x setMarkerTypeLocal ([_x] call _getMarkerType);
+			} else {
+				_x setMarkerTypeLocal "Empty";
+			};
 		} foreach (sectors_allSectors - west_sectors - east_sectors);
 		{
 			_x setMarkerColorLocal GRLIB_color_west;
@@ -69,5 +76,7 @@ while { true } do {
 
 	_sector_count_west = count west_sectors;
 	_sector_count_east = count east_sectors;
+	_fob_count_west = count GRLIB_fobs_west;
+	_fob_count_east = count GRLIB_fobs_east;
 
 };

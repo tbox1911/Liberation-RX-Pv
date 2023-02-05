@@ -6,7 +6,7 @@ while {	(player getVariable ["GRLIB_score_set", 0] == 0) } do {
 };
 
 if (!([] call is_admin)) then {
-	if ((player getvariable ["GREUH_pvp_side", sideUnknown]) != GRLIB_side_friendly) exitWith {
+	if ((player getvariable ["GREUH_pvp_side", str sideUnknown]) != str GRLIB_side_friendly) exitWith {
 		titleText ["Wrong side selected...","BLACK FADED", 1000];
 		uisleep 10;
 		endMission "LOSER";
@@ -14,7 +14,6 @@ if (!([] call is_admin)) then {
 };
 
 if ( isNil "cinematic_camera_started" ) then { cinematic_camera_started = false };
-waituntil {(time > 2) && (getClientStateNumber >= 10) && (getClientState == "BRIEFING READ")};
 
 [] spawn cinematic_camera;
 
@@ -34,27 +33,36 @@ if ( GRLIB_introduction ) then {
 	uisleep 8.5;
 };
 
-disableUserInput false;
-disableUserInput true;
-disableUserInput false;
-
 showcaminfo = true;
 dostartgame = 0;
 howtoplay = 0;
 
-closeDialog 0;
-uisleep 1;
+disableUserInput false;
+disableUserInput true;
+disableUserInput false;
+
+waitUntil {
+	sleep 0.1;
+	( vehicle player == player && alive player && !dialog )
+};
 
 createDialog "liberation_menu";
 waitUntil { dialog };
-_noesckey = (findDisplay 5651) displayAddEventHandler ["KeyDown", "if ((_this select 1) == 1) then { true }"];
 
+_noesckey = (findDisplay 5651) displayAddEventHandler ["KeyDown", "if ((_this select 1) == 1) then { true }"];
 waitUntil { dostartgame == 1 || howtoplay == 1 || !dialog };
-//disableUserInput true;
+disableUserInput true;
 (findDisplay 5651) displayRemoveEventHandler ["KeyDown", _noesckey];
 closeDialog 0;
 
 if ( howtoplay == 1 ) then {
 	[] call compileFinal preprocessFileLineNUmbers "scripts\client\ui\tutorial_manager.sqf";
-	dostartgame = 1;
 };
+
+cinematic_camera_started = false;
+introDone = true;
+dostartgame = 1;
+
+// Load Player Context
+waitUntil {sleep 1; GRLIB_player_spawned};
+[player] remoteExec ["load_context_remote_call", 2];

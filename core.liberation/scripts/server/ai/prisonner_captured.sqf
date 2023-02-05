@@ -1,26 +1,32 @@
 params [ "_unit", "_unit_owner" ];
-private _resistance_prisonner_intel_yield = 3;
-private _csat_prisonner_intel_yield = 6;
 
-private _yield = _csat_prisonner_intel_yield;
-if ( ( typeof _unit ) in all_resistance_troops ) then {
-	_yield = _resistance_prisonner_intel_yield;
-};
+private _yield = 6;
+if ( (typeof _unit) in all_resistance_troops ) then { _yield = 3 };
+if ( (typeof _unit) == pilot_classname ) then { _yield = 30 };
+if ( rank _unit == "COLONEL") then { _yield = 50 };
+_yield = _yield + (round (random _yield));
 
 _side = [getPlayerUID _unit_owner] call F_getPlayerSide;
-if (_side == GRLIB_side_west) then {
+if (_side == str GRLIB_side_west) then {
 	resources_intel_west = resources_intel_west + ( _yield + (round (random _yield)));
+	publicVariable "resources_intel_west";
 } else {
 	resources_intel_east = resources_intel_east + ( _yield + (round (random _yield)));
+	publicVariable "resources_intel_east";
 };
+
 stats_prisonners_captured = stats_prisonners_captured + 1;
+publicVariable "stats_prisonners_captured";
 
 [ 0 ] remoteExec ["remote_call_intel", 0];
 
 if (isPlayer _unit_owner) then {
-	private _bonus = 5;
-	if ( score _unit_owner <= GRLIB_perm_log) then { _bonus = 10 };
-	[_unit_owner, _bonus] remoteExec ["addScore", 2];
-	private _msg = format ["%1\nBonus Score + %2 Pts!", name _unit_owner, _bonus];
+	private _bonus = 10;
+	if ( [_unit_owner] call F_getScore > GRLIB_perm_log) then { _bonus = 5 };
+	if ( (typeof _unit) == pilot_classname ) then { _bonus = 20 };
+	if ( rank _unit == "COLONEL") then { _bonus = 50 };
+	_bonus = _bonus + (round (random _bonus));
+	[_unit_owner, _bonus] call F_addScore;
+	private _msg = format ["Well done %1!\n\nIntel Stars + %2\nBonus Score + %3 XP", name _unit_owner, _yield, _bonus];
 	[_msg] remoteExec ["hint", owner _unit_owner];
 };

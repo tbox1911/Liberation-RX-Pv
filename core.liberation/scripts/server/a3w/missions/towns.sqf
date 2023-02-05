@@ -3,6 +3,7 @@
 // ******************************************************************************************
 //	@file Name: towns.sqf
 //	@file Author: AgentRev, JoSchaap
+//	LRX Integration: pSiKO
 /*
 private _towns =
 [
@@ -18,14 +19,5 @@ private _towns =
 */
 
 private _towns = ((allMapMarkers select {_x select [0,7] == "bigtown"}) apply {[_x, -1, markerText _x]});
-{
-	_x params ["_marker"];
-
-	if (markerShape _marker == "ELLIPSE") then
-	{
-		private _size = markerSize _marker;
-		_x set [1, (_size select 0) min (_size select 1)];
-	};
-} forEach _towns;
 
 _towns

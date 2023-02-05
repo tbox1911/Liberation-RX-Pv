@@ -1,17 +1,18 @@
-private [ "_maxdist", "_truepos", "_built_object_remote", "_unit", "_pos", "_grp", "_classname", "_idx", "_unitrank", "_posfob", "_ghost_spot", "_vehicle", "_dist", "_actualdir", "_near_objects", "_near_objects_25", "_debug_colisions" ];
+private [  "_built_object_remote", "_unit", "_pos", "_grp", "_classname", "_idx", "_unitrank", "_posfob", "_ghost_spot", "_vehicle", "_dist", "_actualdir", "_near_objects", "_near_objects_25"];
 
 build_confirmed = 0;
-_maxdist = GRLIB_fob_range;
-_truepos = [];
-_debug_colisions = false;
-_price = 0;
-_color = [];
-_ammo = 0;
-_lst_a3 = [];
-_lst_r3f = [];
 build_unit = [];
-_list_static = [] + opfor_statics;
-{_list_static pushBack ( _x select 0 )} foreach (static_vehicles);
+
+private _maxdist = GRLIB_fob_range;
+private _truepos = [];
+private _debug_colisions = false;
+private _price = 0;
+private _price_fuel = 0;
+private _color = [];
+private _compo = [];
+private _ammo = 0;
+private _lst_a3 = [];
+private _lst_r3f = [];
 
 GRLIB_preview_spheres = [];
 while { count GRLIB_preview_spheres < 36 } do {
@@ -26,7 +27,6 @@ if (isNil "repeatbuild" ) then { repeatbuild = false };
 if (isNil "build_rotation" ) then { build_rotation = 0 };
 if (isNil "build_altitude" ) then { build_altitude = 0 };
 if (isNil "building_altitude" ) then { building_altitude = 0 };
-
 waitUntil { sleep 0.2; !isNil "dobuild" };
 
 while { true } do {
@@ -35,31 +35,35 @@ while { true } do {
 	build_confirmed = 1;
 	build_invalid = 0;
 	_classname = "";
-	
+
 	if ( buildtype == 6 ) then { build_altitude = building_altitude } else { build_altitude = 0.2 };
 
 	if ( buildtype == 99 ) then {
 		_classname = FOB_typename;
 		_price = 0;
+		_price_fuel = 0;
 	};
-	
+
 	if ( buildtype == 98 ) then {
 		_classname = FOB_outpost;
 		_price = 0;
+		_price_fuel = 0;
 		buildtype = 99;
 	};
 
-	if (buildtype == 9 ) then {
+	if ( buildtype in [9,10] ) then {
 		_price = 0;
+		_price_fuel = 0;
 		_classname = build_unit select 0;
 		_color = build_unit select 1;
 		_ammo = build_unit select 2;
 		_lst_a3 = build_unit select 3;
 		_lst_r3f = build_unit select 4;
+		_compo = build_unit select 5;
 	};
-	
-	if (buildtype in [1,2,3,4,5,6,7,8]) then {
-		_score = score player;
+
+	if ( buildtype in [1,2,3,4,5,6,7,8] ) then {
+		_score = [player] call F_getScore;
 		_build_list = [];
 		{
 			if ( _score >= (_x select 4) ) then {_build_list pushback _x};
@@ -67,7 +71,9 @@ while { true } do {
 
 		_classname = (_build_list select buildindex) select 0;
 		_price = (_build_list select buildindex) select 2;
+		_price_fuel = (_build_list select buildindex) select 3;
 		_color = [];
+		_compo = [];
 		_ammo = 0;
 	};
 
@@ -75,73 +81,68 @@ while { true } do {
 		_pos = [(getpos player select 0) + 1,(getpos player select 1) + 1, 0];
 
 		if (_classname isKindOf "Dog_Base_F") then {
-			if (isNil {player getVariable ["my_dog", nil]} ) then {
-				_unit = createAgent [_classname, _pos, [], 5, "CAN_COLLIDE"];
-				_unit setVariable ["BIS_fnc_animalBehaviour_disable", true];
-				_unit allowDamage false;
-				player setVariable ["my_dog", _unit, true];
-				playSound3D ["a3\sounds_f\ambient\animals\dog1.wss", _unit, false, getPosASL _unit, 2, 0.8, 0];
-				_unit setDir (_unit getDir player);
-				_unit playMoveNow "Dog_Idle_Bark";
-			} else {
-				hint "Only One Dog Allowed !!";
-				sleep 3;
-			};
+			_unit = createAgent [_classname, _pos, [], 5, "CAN_COLLIDE"];
+			_unit setVariable ["BIS_fnc_animalBehaviour_disable", true];
+			_unit allowDamage false;
+			player setVariable ["my_dog", _unit, true];
+			playSound3D ["a3\sounds_f\ambient\animals\dog1.wss", _unit, false, getPosASL _unit, 2, 0.8, 0];
+			_unit setDir (_unit getDir player);
+			_unit playMoveNow "Dog_Idle_Bark";
 		} else {
+			if (!([_price] call F_pay)) exitWith {};
 			_grp = group player;
 			_unit = _grp createUnit [_classname, _pos, [], 5, "NONE"];
-			_unit forceAddUniform (uniform player);
-			_unit setMass 10;
-			_unit setUnitRank "PRIVATE";
-			_unit setSkill 0.6;
-			_unit setVariable ["PAR_Grp_ID", format["Bros_%1",PAR_Grp_ID], true];
+			[_unit] joinSilent _grp;
+			_unit setVariable ["PAR_Grp_ID", format["Bros_%1", PAR_Grp_ID], true];
+			[_unit] call PAR_fn_AI_Damage_EH;
 			_unit enableIRLasers true;
 			_unit enableGunLights "Auto";
-			if (GRLIB_opfor_english && GRLIB_side_friendly == GRLIB_side_east) then {
+			_unit setUnitRank "PRIVATE";
+			_unit setSkill 0.6;
+
+			if (GRLIB_opfor_english) then {
 				//[_unit, _spk] remoteExec ["setSpeaker", 0];
 				_unit setSpeaker (format ["Male0%1ENG",selectRandom [2,3,4,5,6,7,8,9]]);
 			};
-			if (typeOf _unit in units_loadout_overide) then {
-				_loadouts_folder = format ["scripts\loadouts\forced\%1.sqf", typeOf _unit];
+
+			[_unit, configOf _unit] call BIS_fnc_loadInventory;
+			if (_classname in units_loadout_overide) then {
+				_loadouts_folder = format ["mod_template\%1\loadout\%2.sqf", GRLIB_mod_west, toLower _classname];
 				[_unit] call compileFinal preprocessFileLineNUmbers _loadouts_folder;
 			};
 
 			stats_blufor_soldiers_recruited = stats_blufor_soldiers_recruited + 1; publicVariable "stats_blufor_soldiers_recruited";
 		};
-		if (!([_price] call F_pay)) exitWith {};
 		build_confirmed = 0;
 	} else {
 		if ( buildtype == 8 ) then {
-			if (isNil {player getVariable ["my_squad", nil]} ) then {
-				_pos = [(getpos player select 0) + 1,(getpos player select 1) + 1, 0];
-				_grp = createGroup [GRLIB_side_friendly, true];
-				player setVariable ["my_squad", _grp, true];
-				_grp setGroupId [format ["%1 %2",squads_names select buildindex, groupId _grp]];
-				_idx = 0;
-				{
-					_unitrank = "PRIVATE";
-					if(_idx == 0) then { _unitrank = "SERGEANT"; };
-					if(_idx == 1) then { _unitrank = "CORPORAL"; };
-					_unit = _grp createUnit [_x, _pos, [], 5, "NONE"];
-					_unit setUnitRank _unitrank;
-					_unit setSkill 0.6;
-					_unit enableIRLasers true;
-					_unit enableGunLights "Auto";
-					_unit setVariable ["PAR_Grp_ID", format["AI_%1",PAR_Grp_ID], true];
-					_unit addUniform uniform player;
-					[_unit] call PAR_fn_AI_Damage_EH;
-					_idx = _idx + 1;
-				} foreach _classname;
-				_grp setCombatMode "GREEN";
-				_grp setBehaviour "AWARE";
+			if (!([_price] call F_pay)) exitWith {};
+			_pos = [(getpos player select 0) + 1,(getpos player select 1) + 1, 0];
+			_grp = createGroup [GRLIB_side_friendly, true];
+			player setVariable ["my_squad", _grp, true];
+			_grp setGroupId [format ["%1 %2",squads_names select buildindex, groupId _grp]];
+			_idx = 0;
+			{
+				_unitrank = "PRIVATE";
+				if(_idx == 0) then { _unitrank = "SERGEANT"; };
+				if(_idx == 1) then { _unitrank = "CORPORAL"; };
+				_unit = _grp createUnit [_x, _pos, [], 5, "NONE"];
+				[_unit] joinSilent _grp;
+				_unit setUnitRank _unitrank;
+				_unit setSkill 0.6;
+				_unit enableIRLasers true;
+				_unit enableGunLights "Auto";
+				_unit setVariable ["PAR_Grp_ID", format["AI_%1",PAR_Grp_ID], true];
+				//_unit forceAddUniform (uniform player);
+				[_unit] call PAR_fn_AI_Damage_EH;
+				_idx = _idx + 1;
+				sleep 0.1;
+			} foreach _classname;
+			_grp setCombatMode "GREEN";
+			_grp setBehaviour "AWARE";
 
-				if (!([_price] call F_pay)) exitWith {};
-				stats_blufor_soldiers_recruited = stats_blufor_soldiers_recruited + count (units _grp); publicVariable "stats_blufor_soldiers_recruited";
-				player hcSetGroup [_grp];
-			} else {
-				hint "Only One Squad Allowed !!";
-				sleep 3;
-			};
+			stats_blufor_soldiers_recruited = stats_blufor_soldiers_recruited + count (units _grp); publicVariable "stats_blufor_soldiers_recruited";
+			player hcSetGroup [_grp];
 			build_confirmed = 0;
 		} else {
 			_posfob = getpos player;
@@ -150,12 +151,14 @@ while { true } do {
 			};
 
 			_idactcancel = -1;
+			_idactview = -1;
 			_idactsnap = -1;
 			_idactupper = -1;
 			_idactlower = -1;
 			_idactplacebis = -1;
 
 			if (buildtype == 6 ) then {
+				_idactview = player addAction ["<t color='#B0FF00'>" + "-- Build view" + "</t>","scripts\client\build\build_view.sqf","",-755,false,false,"","build_confirmed == 1"];
 				_idactplacebis = player addAction ["<t color='#B0FF00'>" + localize "STR_PLACEMENT_BIS" + "</t> <img size='1' image='res\ui_confirm.paa'/>","scripts\client\build\build_place_bis.sqf","",-752,false,false,"","build_invalid == 0 && build_confirmed == 1"];
 			};
 			if (buildtype == 6 || buildtype == 99) then {
@@ -165,18 +168,23 @@ while { true } do {
 			};
 			_idactplace = player addAction ["<t color='#B0FF00'>" + localize "STR_PLACEMENT" + "</t> <img size='1' image='res\ui_confirm.paa'/>","scripts\client\build\build_place.sqf","",-750,false,true,"","build_invalid == 0 && build_confirmed == 1"];
 			_idactrotate = player addAction ["<t color='#B0FF00'>" + localize "STR_ROTATION" + "</t> <img size='1' image='res\ui_rotation.paa'/>","scripts\client\build\build_rotate.sqf","",-756,false,false,"","build_confirmed == 1"];
-			_idactcancel = player addAction ["<t color='#B0FF00'>" + localize "STR_CANCEL" + "</t> <img size='1' image='res\ui_cancel.paa'/>","scripts\client\build\build_cancel.sqf","",-760,false,true,"","build_confirmed == 1 && buildtype != 9"];
-			_ghost_spot = (getmarkerpos "ghost_spot") findEmptyPosition [1,250,_classname];
+			_idactcancel = player addAction ["<t color='#B0FF00'>" + localize "STR_CANCEL" + "</t> <img size='1' image='res\ui_cancel.paa'/>","scripts\client\build\build_cancel.sqf","",-760,false,true,"","build_confirmed == 1"];
+			_ghost_spot = (markerPos "ghost_spot") findEmptyPosition [1,150,"B_Heli_Transport_03_unarmed_F"];
+			_ghost_spot = _ghost_spot vectorAdd [0, 0, build_altitude];
 
 			_vehicle = _classname createVehicleLocal _ghost_spot;
 			_vehicle allowdamage false;
 			_vehicle setVehicleLock "LOCKED";
 			_vehicle enableSimulationGlobal false;
 			_vehicle setVariable ["R3F_LOG_disabled", true];
+			clearWeaponCargoGlobal _vehicle;
+			clearMagazineCargoGlobal _vehicle;
+			clearItemCargoGlobal _vehicle;
+			clearBackpackCargoGlobal _vehicle;
 
-			_dist = 0.6 * (sizeOf _classname);
+			_dist = 0.5 * (sizeOf _classname);
 			if (_dist < 3.5) then { _dist = 3.5 };
-			_dist = _dist + 0.5;
+			_dist = _dist + 1.5;
 
 			for [{_i=0}, {_i<5}, {_i=_i+1}] do {
 				_vehicle setObjectTextureGlobal [_i, '#(rgb,8,8,3)color(0,1,0,0.8)'];
@@ -188,7 +196,7 @@ while { true } do {
 				_truedir = 90 - (getdir player);
 				_truepos = [((getpos player) select 0) + (_dist * (cos _truedir)), ((getpos player) select 1) + (_dist * (sin _truedir)), build_altitude];
 				_actualdir = ((getdir player) + build_rotation);
-				if ( _classname == "Land_Cargo_Patrol_V1_F" || _classname == "Land_PortableLight_single_F" ) then { _actualdir = _actualdir + 180 };
+				if ( _classname == "Land_Cargo_Patrol_V1_F" ) then { _actualdir = _actualdir + 180 };
 				if ( _classname == FOB_typename ) then { _actualdir = _actualdir + 270 };
 
 				while { _actualdir > 360 } do { _actualdir = _actualdir - 360 };
@@ -210,15 +218,13 @@ while { true } do {
 					_sphere_idx = _sphere_idx + 1;
 				} foreach GRLIB_preview_spheres;
 
-				_vehicle setdir _actualdir;
-
 				_near_objects = (_truepos nearobjects ["AllVehicles", _dist]) ;
 				_near_objects = _near_objects + (_truepos nearobjects [FOB_box_typename, _dist]);
-				_near_objects = _near_objects + (_truepos nearobjects [Arsenal_typename, _dist]);
+				_near_objects = _near_objects + (_truepos nearobjects [FOB_box_outpost, _dist]);
 
 				_near_objects_25 = (_truepos nearobjects ["AllVehicles", 50]) ;
 				_near_objects_25 = _near_objects_25 + (_truepos nearobjects [FOB_box_typename, 50]);
-				_near_objects_25 = _near_objects_25 + (_truepos nearobjects [Arsenal_typename, 50]);
+				_near_objects_25 = _near_objects_25 + (_truepos nearobjects [FOB_box_outpost, 50]);
 
 				if(	buildtype != 6 ) then {
 					_near_objects = _near_objects + (_truepos nearobjects ["Static", _dist]);
@@ -244,7 +250,7 @@ while { true } do {
 
 				if ( count _near_objects == 0 ) then {
 					{
-						_dist22 = 0.6 * (sizeOf (typeof _x));
+						_dist22 = 0.5 * (sizeOf (typeof _x));
 						if ( _dist22 < 1 ) then { _dist22 = 1 };
 						if (_truepos distance _x < _dist22) then {
 							_near_objects pushback _x;
@@ -258,11 +264,15 @@ while { true } do {
 					GRLIB_conflicting_objects = [];
 				};
 
-				if (count _near_objects == 0 && ((_truepos distance _posfob) < _maxdist || buildtype == 9) && (  ((!surfaceIsWater _truepos) && (!surfaceIsWater getpos player)) || (_classname in boats_names) ) ) then {
+				if ( count _near_objects == 0 && ((_truepos distance _posfob) < _maxdist || buildtype == 9) && (((!surfaceIsWater _truepos) && (!surfaceIsWater getpos player)) || (_classname in boats_names)) ) then {
+					if ( _classname isKindOf "Ship" && surfaceIsWater _truepos ) then {
+						_vehicle setposASL _truepos;
+					} else {
+						_vehicle setposATL _truepos;
+					};
+					_vehicle setVectorDirAndUp [[-cos _actualdir, sin _actualdir, 0] vectorCrossProduct surfaceNormal _truepos, surfaceNormal _truepos];
 
-					_vehicle setpos (_truepos vectorAdd [0, 0, build_altitude]);
-
-					if(build_invalid == 1) then {
+					if ( build_invalid == 1 ) then {
 						GRLIB_ui_notif = "";
 						{ _x setObjectTexture [0, "#(rgb,8,8,3)color(0,1,0,1)"]; } foreach GRLIB_preview_spheres;
 					};
@@ -272,7 +282,7 @@ while { true } do {
 					if ( build_invalid == 0 ) then {
 						{ _x setObjectTexture [0, "#(rgb,8,8,3)color(1,0,0,1)"]; } foreach GRLIB_preview_spheres;
 					};
-					_vehicle setpos _ghost_spot;
+					_vehicle setposATL _ghost_spot;
 					build_invalid = 1;
 					if(count _near_objects > 0) then {
 						GRLIB_ui_notif = format [localize "STR_PLACEMENT_IMPOSSIBLE",count _near_objects, round _dist];
@@ -302,109 +312,172 @@ while { true } do {
 			if ( !alive player || build_confirmed == 3 ) then {
 				deleteVehicle _vehicle;
 				buildtype = 1;
+				dobuild = 0;
+				sleep 2;	// time to trap build canceled
 			};
 
 			if ( build_confirmed == 2 ) then {
+				if (!([_price, _price_fuel] call F_pay)) exitWith {deleteVehicle _vehicle};
 				_vehdir = getdir _vehicle;
 				deleteVehicle _vehicle;
 				sleep 0.1;
-				_vehicle = _classname createVehicle _truepos;
-				_vehicle allowDamage false;
-				_vehicle setdir _vehdir;
-				_vehicle setpos (_truepos vectorAdd [0, 0, build_altitude]);
 
-				// Ammo Box clean inventory
-				if (!(_classname in  GRLIB_Ammobox_keep)) then {
-					clearWeaponCargoGlobal _vehicle;
-					clearMagazineCargoGlobal _vehicle;
-					clearItemCargoGlobal _vehicle;
-					clearBackpackCargoGlobal _vehicle;
-				};
-
-				// Vehicle owner
-				if(buildtype in [2,3,4,5,7,9]) then {
-					if (!([typeOf _vehicle, GRLIB_vehicle_blacklist] call F_itemIsInClass)) then {
-						_vehicle setVariable ["GRLIB_vehicle_owner", getPlayerUID player, true];
-						_vehicle allowCrewInImmobile true;
-						_vehicle setUnloadInCombat [true, false];
+				if ([_classname, simple_objects] call F_itemIsInClass) then {
+					 createSimpleObject [_classname, AGLtoASL _truepos];
+				} else {
+					_vehicle = _classname createVehicle _truepos;
+					_vehicle allowDamage false;
+					if ( _classname isKindOf "Ship" && surfaceIsWater _truepos ) then {
+						_vehicle setposASL _truepos;
+					} else {
+						_vehicle setposATL _truepos;
 					};
-				};
+					_vehicle setVectorDirAndUp [[-cos _vehdir, sin _vehdir, 0] vectorCrossProduct surfaceNormal _truepos, surfaceNormal _truepos];
 
-				// Crewed vehicle
-				if ( (_classname in uavs) || manned ) then {
-					[ _vehicle, GRLIB_side_friendly] call F_forceSideCrew;
-					_vehicle setVariable ["GRLIB_vehicle_manned", true, true];
-					player hcSetGroup [group _vehicle];
-				};
+					// Ammo Box clean inventory
+					if ( !(_classname in GRLIB_Ammobox_keep) ) then {
+						clearWeaponCargoGlobal _vehicle;
+						clearMagazineCargoGlobal _vehicle;
+						clearItemCargoGlobal _vehicle;
+						clearBackpackCargoGlobal _vehicle;
+					};
 
-				// Default Paint
-				if ( _classname in ["I_E_Truck_02_MRL_F"] ) then {
-					[_vehicle, ["EAF",1], true ] call BIS_fnc_initVehicle;
-				};
+					// Vehicle owner
+					if ( buildtype in [2,3,4,5,7,9,10] ) then {
+						if (!([typeOf _vehicle, GRLIB_vehicle_blacklist] call F_itemIsInClass)) then {
+							_vehicle setVariable ["GRLIB_vehicle_owner", getPlayerUID player, true];
+							_vehicle allowCrewInImmobile [true, false];
+							_vehicle setUnloadInCombat [true, false];
+						};
+					};
 
-				// Color
-				if (count _color > 0) then {
-					[_vehicle, _color, "N/A", []] call RPT_fnc_TextureVehicle;
-				};
+					// Crewed vehicle
+					if ( (_classname in uavs) || manned ) then {
+						[ _vehicle ] call F_forceBluforCrew;
+						_vehicle setVariable ["GRLIB_vehicle_manned", true, true];
+						player hcSetGroup [group _vehicle];
+						player linkItem "B_UavTerminal";
+					};
 
-				// Remaining Ammo
-				if (_ammo > 0) then {
-					_vehicle setVehicleAmmoDef _ammo;
-				};
+					// Default Paint
+					if ( _classname in ["I_E_Truck_02_MRL_F"] ) then {
+						[_vehicle, ["EAF",1], true ] call BIS_fnc_initVehicle;
+					};
 
-				// Automatic ReAmmo
-				if (_classname in vehicle_rearm_sources) then {
-					_vehicle setAmmoCargo 0;
-				};
+					// CUP remove tank panel
+					if (GRLIB_CUPV_enabled && _classname isKindOf "Tank") then {
+						[_vehicle, false, ["hide_front_ti_panels",1,"hide_cip_panel_rear",1,"hide_cip_panel_bustle",1]] call BIS_fnc_initVehicle;
+					};
 
-				// Give real truck horn to APC,Truck,Tank
-				if ( _vehicle isKindOf "Wheeled_APC_F" || _vehicle isKindOf "Tank_F" || _vehicle isKindOf "Truck_F" ) then {
-					_vehicle removeWeaponTurret ["TruckHorn", [-1]];
-					_vehicle removeWeaponTurret ["TruckHorn2", [-1]];
-					_vehicle addWeaponTurret ["TruckHorn3", [-1]];
-				};
+					// Color
+					if ( count _color > 0 ) then {
+						[_vehicle, _color, "N/A"] call RPT_fnc_TextureVehicle;
+					};
 
-				// Mobile respawn
-				if (_classname == mobile_respawn) then {
-					[_vehicle, "add", GRLIB_side_friendly] remoteExec ["addel_beacon_remote_call", 2];
-				};
+					// Composant
+					if ( count _compo > 0 ) then {
+						[_vehicle, _compo] call RPT_fnc_CompoVehicle;
+					};
 
-				// A3 / R3F Inventory
-				if (buildtype == 9 && !(_classname in GRLIB_vehicle_whitelist) ) then {
-					{_vehicle addWeaponWithAttachmentsCargoGlobal [ _x, 1] } forEach _lst_a3;
-					[_vehicle, _lst_r3f] call R3F_LOG_FNCT_transporteur_charger_auto;
-				};
+					// Remaining Ammo
+					if ( _ammo > 0 ) then {
+						_vehicle setVehicleAmmo _ammo;
+					};
 
-				// Static Weapon
-				if (_classname in _list_static) then {
-					[_vehicle] spawn protect_static;
+					// Automatic ReAmmo
+					if ( _classname in vehicle_rearm_sources ) then {
+						_vehicle setAmmoCargo 0;
+					};
+
+					// Give real truck horn to APC,Truck,Tank
+					if ( _vehicle isKindOf "Wheeled_APC_F" || _vehicle isKindOf "Tank_F" || _vehicle isKindOf "Truck_F" ) then {
+						_vehicle removeWeaponTurret ["TruckHorn", [-1]];
+						_vehicle removeWeaponTurret ["TruckHorn2", [-1]];
+						_vehicle addWeaponTurret ["TruckHorn3", [-1]];
+					};
+
+					// Mobile respawn
+					if ( _classname == mobile_respawn ) then {
+						[_vehicle, "add"] remoteExec ["addel_beacon_remote_call", 2];
+					};
+
+					// A3 / R3F Inventory
+					if ( buildtype == 10 && !(_classname in GRLIB_vehicle_whitelist) ) then {
+						[_vehicle, _lst_a3] call F_setCargo;
+						if (!GRLIB_ACE_enabled) then {
+							[_vehicle, _lst_r3f] call R3F_LOG_FNCT_transporteur_charger_auto;
+						};
+					};
+
+					// Personal Box
+					if ( _classname == playerbox_typename ) then {
+						_vehicle allowDamage false;
+						_vehicle setMaxLoad playerbox_cargospace;
+					};
+
+					// Ammobox (add Charge)
+					if ( _classname == Box_Ammo_typename ) then {
+						_vehicle addItemCargoGlobal ["SatchelCharge_Remote_Mag", 2];
+					};
+
+					// Static Weapon
 					if (_classname in static_vehicles_AI) then {
 						_vehicle setMass 5000;
-						[ _vehicle, GRLIB_side_friendly] call F_forceSideCrew;
+						[ _vehicle ] call F_forceBluforCrew;
 						_vehicle setVariable ["GRLIB_vehicle_manned", true, true];
 						_vehicle setVehicleLock "LOCKEDPLAYER";
-						_vehicle addEventHandler ["Fired", { (_this select 0) setVehicleAmmo 1}];
+						_vehicle addEventHandler ["Fired", { (_this select 0) setVehicleAmmo 1 }];
+						_vehicle addEventHandler ["HandleDamage", { _this call damage_manager_static }];
+					};
+
+					// FOB
+					if(buildtype == 99) then {
+						_vehicle addEventHandler ["HandleDamage", {0}];
+						_vehicle allowDamage false;
+						[(getpos _vehicle), GRLIB_side_friendly] remoteExec ["build_fob_remote_call", 0];
+
+						// Add owner sign
+						private _fobdir = getDir _vehicle;
+						private _offset = [[-6, -5, -0.2], -_fobdir];
+						if (_classname == FOB_outpost ) then { _offset = [[5, -3, -0.2], -_fobdir] };
+						private _sign_pos = (getposATL _vehicle) vectorAdd (_offset call BIS_fnc_rotateVector2D);
+						private _sign = createVehicle [FOB_sign, _sign_pos, [], 0, "CAN_COLLIDE"];
+						_sign allowDamage false;
+						if (_classname == FOB_outpost ) then {
+							_sign setDir (_fobdir - 90);
+						} else {
+							_sign setDir (_fobdir + 90);
+						};
+						_sign setObjectTextureGlobal [0, getMissionPath "res\splash_libe2.paa"];
+						if (count ([] call get_myFobs) == 0) then {
+							_sign setVariable ["GRLIB_vehicle_owner", "public", true];
+						} else {
+							_sign setVariable ["GRLIB_vehicle_owner", getPlayerUID player, true];
+						};
+						if (!GRLIB_enable_arsenal) then {
+							sleep 1;
+							private _ammo_pos = (getposATL _sign) vectorAdd ([[10, 0, 0], -(getDir _sign) - 90] call BIS_fnc_rotateVector2D);
+							{
+								_ammo1 = createVehicle [_x, _ammo_pos, [], 1, "NONE"];
+								_ammo1 allowDamage false;
+								_ammo1 setVariable ["GRLIB_vehicle_owner", "public", true];
+								_ammo1 setVariable ["R3F_LOG_disabled", true, true];
+								if (_x == Arsenal_typename) then { _ammo1 addItemCargoGlobal ["SatchelCharge_Remote_Mag", 2] };
+								sleep 0.5;
+							} forEach [Arsenal_typename, Box_Weapon_typename];
+						};
+					} else {
+						sleep 0.3;
+						_vehicle allowDamage true;
+						_vehicle setDamage 0;
 					};
 				};
-
-				sleep 0.3;
-				_vehicle allowDamage true;
-				_vehicle setDamage 0;
 
 				if(buildtype != 6) then {
 					_vehicle addMPEventHandler ["MPKilled", { _this spawn kill_manager }];
 				};
 
-				if (!([_price] call F_pay)) exitWith {};
 				stats_blufor_vehicles_built = stats_blufor_vehicles_built + 1; publicVariable "stats_blufor_vehicles_built";
-			};
-
-			// FOB
-			if(buildtype == 99 && build_confirmed != 3) then {
-				[_vehicle, false] remoteExec ["allowDamage", 0];
-				_vehicle addEventHandler ["HandleDamage", { 0 }];
-				[(getpos _vehicle), GRLIB_side_friendly] remoteExec ["build_fob_remote_call", 0];
-				buildtype = 1;
 			};
 
 			if ( _idactcancel != -1 ) then {
@@ -412,6 +485,9 @@ while { true } do {
 			};
 			if ( _idactsnap != -1 ) then {
 				player removeAction _idactsnap;
+			};
+			if ( _idactview != -1 ) then {
+				player removeAction _idactview;
 			};
 			if ( _idactplacebis != -1 ) then {
 				player removeAction _idactplacebis;

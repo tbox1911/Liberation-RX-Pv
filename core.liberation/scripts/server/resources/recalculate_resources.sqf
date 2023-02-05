@@ -28,7 +28,7 @@ while { true } do {
 
 		{
 			if (
-				(([_x getVariable ["GRLIB_vehicle_owner", ""]] call F_getPlayerSide) == GRLIB_side_west) &&
+				(([_x getVariable ["GRLIB_vehicle_owner", ""]] call F_getPlayerSide) == str GRLIB_side_west) &&
 				(_x distance lhd_west > GRLIB_sector_size) &&
 				!(_x getVariable ['R3F_LOG_disabled', false]) &&
 				isNull (_x getVariable ["R3F_LOG_est_transporte_par", objNull]) &&
@@ -68,7 +68,7 @@ while { true } do {
 
 		{
 			if (
-				(([_x getVariable ["GRLIB_vehicle_owner", ""]] call F_getPlayerSide) == GRLIB_side_east) &&
+				(([_x getVariable ["GRLIB_vehicle_owner", ""]] call F_getPlayerSide) == str GRLIB_side_east) &&
 				(_x distance lhd_east > GRLIB_sector_size) &&
 				!(_x getVariable ['R3F_LOG_disabled', false]) &&
 				isNull (_x getVariable ["R3F_LOG_est_transporte_par", objNull]) &&

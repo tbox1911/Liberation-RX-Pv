@@ -1,7 +1,7 @@
 /**
- * Sélectionne un objet à charger dans un transporteur
+ * Sï¿½lectionne un objet ï¿½ charger dans un transporteur
  * 
- * @param 0 l'objet à sélectionner
+ * @param 0 l'objet ï¿½ sï¿½lectionner
  */
 
 if (R3F_LOG_mutex_local_verrou) then
@@ -13,11 +13,11 @@ else
 	R3F_LOG_mutex_local_verrou = true;
 	
 	R3F_LOG_objet_selectionne = _this select 0;
-	systemChat format [STR_R3F_LOG_action_selectionner_objet_fait, getText (configFile >> "CfgVehicles" >> (typeOf R3F_LOG_objet_selectionne) >> "displayName")];
+	systemChat format [STR_R3F_LOG_action_selectionner_objet_fait, getText (configOf R3F_LOG_objet_selectionne >> "displayName")];
 	
 	[R3F_LOG_objet_selectionne, player] call R3F_LOG_FNCT_definir_proprietaire_verrou;
 	
-	// Déselectionner l'objet si le joueur n'en fait rien
+	// Dï¿½selectionner l'objet si le joueur n'en fait rien
 	[] spawn
 	{
 		while {!isNull R3F_LOG_objet_selectionne} do
@@ -28,7 +28,7 @@ else
 			}
 			else
 			{
-				if (vehicle player != player || (player distance R3F_LOG_objet_selectionne > 40) || !isNull R3F_LOG_joueur_deplace_objet) then
+				if (!isNull objectParent player || (player distance R3F_LOG_objet_selectionne > 40) || !isNull R3F_LOG_joueur_deplace_objet) then
 				{
 					R3F_LOG_objet_selectionne = objNull;
 				};

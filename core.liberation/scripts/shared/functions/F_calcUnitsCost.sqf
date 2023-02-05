@@ -1,14 +1,22 @@
 params ["_list", "_side"];
-private _grp = createGroup [_side, true];
+private ["_unit", "_unit_class", "_unit_mp", "_unit_cost", "_unit_rank"];
+
 {
 	_unit_class = _x select 0;
 	_unit_mp = _x select 1;
+	_unit_cost = _x select 2;
 	_unit_rank = _x select 4;
-	_unit = _grp createUnit [_unit_class, [0,0,0], [], 0, "NONE"];
-	if (typeOf _unit in units_loadout_overide) then {
-		[_unit] call compileFinal preprocessFileLineNUmbers format ["scripts\loadouts\forced\%1.sqf", typeOf _unit];
+	if (_unit_cost == 0) then {
+		_unit = _unit_class createVehicle zeropos;
+		_unit allowDamage false;
+		[_unit, configOf _unit] call BIS_fnc_loadInventory;
+		if (_unit_class in units_loadout_overide) then {
+			_loadouts_folder = format ["mod_template\%1\loadout\%2.sqf", _side, toLower _unit_class];
+			[_unit] call compileFinal preprocessFileLineNUmbers _loadouts_folder;
+		};
+		_unit_cost = [_unit] call F_loadoutPrice;
+		deleteVehicle _unit;
+		sleep 0.1;
 	};
-	_price = [_unit] call F_loadoutPrice;
-	_list set [_forEachIndex, [_unit_class, _unit_mp, _price, 0,_unit_rank]];
-	deleteVehicle _unit;
+	_list set [_forEachIndex, [_unit_class, _unit_mp, _unit_cost, 0,_unit_rank]];
 } foreach _list;

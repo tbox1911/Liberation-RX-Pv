@@ -33,7 +33,7 @@ if ( GRLIB_city_defenders ) then {
 		_unit setSkill 0.65;
 		_unit setSkill ["courage", 1];
 		_unit allowFleeing 0;
- 	} foreach _squad_type;
+ 	};
 
 	_grp setCombatMode "GREEN";
 	_grp setBehaviour "COMBAT";

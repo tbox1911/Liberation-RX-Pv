@@ -14,7 +14,7 @@ if (_side == GRLIB_side_west) then {
 
 if (isPlayer _unit_owner) then {
 	private _bonus = 5;
-	[_unit_owner, _bonus] remoteExec ["addScore", 2];
+	[_unit_owner, _bonus] call F_addScore;
 	private _msg = format ["%1\nBonus Score + %2 Pts!", name _unit_owner, _bonus];
 	[_msg] remoteExec ["hint", owner _unit_owner];
 };

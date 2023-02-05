@@ -20,7 +20,7 @@ pilot_classname = "I_Helipilot_F";
 crewman_classname = "I_crew_F";
 
 // [CLASSNAME, MANPOWER, AMMO, FUEL, RANK]
-infantry_units_west = [
+infantry_units = [
 	["Alsatian_Random_F",0,0,0,GRLIB_perm_max],
 	["Fin_random_F",0,0,0,0],
 	["I_soldier_F",1,0,0,0],
@@ -117,17 +117,17 @@ static_vehicles = [
 ];
 
 // *** Static Weapon with AI ***
-static_vehicles_AI = [
+static_vehicles_AI_west = [
 	"B_AAA_System_01_F",
 	"I_E_SAM_System_03_F"
 ];
 
-support_vehicles_west = [
+support_vehicles = [
 	["I_G_Offroad_01_repair_F",5,15,5,GRLIB_perm_inf],
 	["I_G_Van_01_fuel_F",5,15,20,GRLIB_perm_inf]
 ];
 
-buildings_west = [
+buildings = [
 	["Land_Cargo_Tower_V2_F",0,0,0,GRLIB_perm_tank],
 	["Land_Cargo_House_V2_F",0,0,0,GRLIB_perm_inf],
 	["Land_Cargo_Patrol_V2_F",0,0,0,GRLIB_perm_log],
@@ -208,6 +208,9 @@ ai_healing_sources_west = [
 
 vehicle_rearm_sources_west = [
 	"I_Truck_02_ammo_F"
+];
+
+vehicle_repair_sources_west = [
 ];
 
 vehicle_big_units_west = [

@@ -7,7 +7,7 @@ _move_is_disabled = true;
 _resume_movement = false;
 
 while { _move_is_disabled && local _unit && alive _unit && !(captive _unit) } do {
-	_hostilecount = { alive _x && side _x in [ GRLIB_side_west, GRLIB_side_east ] } count ( (getpos _unit) nearEntities [ ["Man"], 50 ] );
+	_hostilecount = { alive _x && side _x in [GRLIB_side_west, GRLIB_side_east] } count ( (getpos _unit) nearEntities [ ["Man"], 50 ] );
 
 	if ( _hostilecount > 0 || ( damage _unit > 0.25 ) ) then {
 		_resume_movement = true;
@@ -16,7 +16,7 @@ while { _move_is_disabled && local _unit && alive _unit && !(captive _unit) } do
 	if ( _sector != "" ) then {
 		_hostile_sectors = west_sectors;
 		if (side _unit != GRLIB_side_enemy) then {
-			_hostile_sectors = sectors_allSectors - west_sectors;
+			_hostile_sectors = east_sectors;
 		};
 		if ( _sector in _hostile_sectors ) then {
 			_resume_movement = true;
@@ -28,6 +28,10 @@ while { _move_is_disabled && local _unit && alive _unit && !(captive _unit) } do
 			_move_is_disabled = false;
 			_unit enableAI "MOVE";
 			_unit setUnitPos "AUTO";
+			_unit switchMove "amovpknlmstpsraswrfldnon";
+			_unit playMoveNow "amovpknlmstpsraswrfldnon";
+			(group _unit) setCombatMode "RED";
+			(group _unit) setCombatBehaviour "COMBAT";
 		};
 	};
 
@@ -42,5 +46,4 @@ while { _move_is_disabled && local _unit && alive _unit && !(captive _unit) } do
 	};
 
 	sleep 3;
-
 };

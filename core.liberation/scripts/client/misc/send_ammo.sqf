@@ -1,5 +1,6 @@
 private ["_src", "_src_ammo", "_dst_id", "_ammo", "_display", "_player_combo", "_ammo_combo" ];
 
+if ([player] call F_getScore < GRLIB_min_score_player) exitWith { hintSilent "The ATM is closed!\nYour score is too LOW..." };
 _src = player;
 _src_ammo = _src getVariable ["GREUH_ammo_count",0];
 send_ammo = 0;
@@ -20,7 +21,7 @@ if(!isNull (findDisplay 2337)) then {
 		_player_combo lbAdd format["%1", name _x];
 		_player_combo lbSetData [_i, getPlayerUID _x];
 		_i = _i + 1;
-	} foreach AllPlayers;
+	} foreach (AllPlayers - (entities "HeadlessClient_F"));
 
 	_i = 0;
 	{
@@ -34,16 +35,15 @@ if(!isNull (findDisplay 2337)) then {
 	_player_combo lbSetCurSel 0;
 	_ammo_combo lbSetCurSel 0;
 
-	while { dialog && (alive player) && send_ammo == 0 } do {
-		sleep 0.1;
-	};
-	closeDialog 0;
-
-	if (send_ammo == 1) then {
-		_dst_id = _player_combo lbData (lbCurSel _player_combo);
-		if (_dst_id != getPlayerUID _src) then {
-			_ammo = _ammo_combo lbValue (lbCurSel _ammo_combo);
-			[_src, _dst_id, _ammo] remoteExec ["sendammo_remote_call", 2];
+	while { dialog && (alive player) } do {
+		if (send_ammo == 1) then {
+			_dst_id = _player_combo lbData (lbCurSel _player_combo);
+			if (_dst_id != getPlayerUID _src) then {
+				_ammo = _ammo_combo lbValue (lbCurSel _ammo_combo);
+				[_src, _dst_id, _ammo] remoteExec ["sendammo_remote_call", 2];
+			};
+			send_ammo = 0;
 		};
+		sleep 0.1;
 	};
 };

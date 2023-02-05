@@ -2,26 +2,23 @@
 // * This project is licensed under the GNU Affero GPL v3. Copyright © 2014 A3Wasteland.com *
 // ******************************************************************************************
 //	@file Name: mission_HostileHelicopter.sqf
-//	@file Author: JoSchaap, AgentRev
 
 if (!isServer) exitwith {};
 #include "sideMissionDefines.sqf"
 
-private ["_vehicleClass", "_vehicle", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_box1", "_box2"];
-_citylist = [(call cityList)] call checkSpawn;
-
-if (count (_citylist) <= 1) exitWith {};
+private [ "_citylist", "_vehicleClass", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_box1", "_box2"];
 
 _setupVars =
 {
-	_missionType = "Hostile Helicopter";
+	_missionType = localize "STR_HOSSTILE_HELI";
+	_citylist = [] call cityList;
 	_locationsArray = nil; // locations are generated on the fly from towns
 };
 
 _setupObjects =
 {
 	_missionPos = markerPos ((selectRandom _citylist) select 0);
-	_vehicleClass = selectRandom opfor_choppers;
+	_vehicleClass = selectRandom opfor_troup_transports_heli;
 
 	_aiGroup = createGroup [GRLIB_side_enemy, true];
 	//_aiGroup setCombatMode "WHITE"; // Defensive behaviour
@@ -31,7 +28,7 @@ _setupObjects =
 	_speedMode = if (count AllPlayers > 2) then { "NORMAL" } else { "LIMITED" };
 	_aiGroup setSpeedMode _speedMode;
 
-	_vehicle = [_missionPos, _vehicleClass, false] call F_libSpawnVehicle;
+	_vehicle = [_missionPos, _vehicleClass] call F_libSpawnVehicle;
 	(crew _vehicle) joinSilent _aiGroup;
 	_leader = effectiveCommander _vehicle;
 	_aiGroup selectLeader _leader;
@@ -50,8 +47,9 @@ _setupObjects =
 	_missionPos = getPosATL leader _aiGroup;
 	_missionPicture = getText (configFile >> "CfgVehicles" >> (_vehicleClass param [0,""]) >> "picture");
 	_vehicleName = getText (configFile >> "CfgVehicles" >> (_vehicleClass param [0,""]) >> "displayName");
-	_missionHintText = format ["An armed <t color='%2'>%1</t> is patrolling the island. Intercept it and recover its cargo!", _vehicleName, sideMissionColor];
+	_missionHintText = format [localize "STR_HOSSTILE_HELI_MESSAGE1", _vehicleName, sideMissionColor];
 	_numWaypoints = count waypoints _aiGroup;
+	true;
 };
 
 _waitUntilMarkerPos = {getPosATL _leader};
@@ -75,7 +73,7 @@ _successExec =
 		{
 			sleep 0.1;
 			_pos = getPos _veh;
-			(isTouchingGround _veh || _pos select 2 < 5) && {vectorMagnitude velocity _veh < [1,5] select surfaceIsWater _pos}
+			(isTouchingGround _veh || _pos select 2 < 5) && {vectorMagnitude velocity _veh < [1,5] select surfaceIsWater _pos};
 		};
 
 		_wreckPos = getPosATL _veh;
@@ -83,7 +81,7 @@ _successExec =
 		_box2 = [ammobox_o_typename, _wreckPos, false] call boxSetup;
 	};
 
-	_successHintMessage = "The sky is clear again, the enemy patrol was taken out! Ammo crates have fallen near the wreck.";
+	_successHintMessage = localize "STR_HOSSTILE_HELI_MESSAGE2";
 };
 
 _this call sideMissionProcessor;

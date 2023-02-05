@@ -1,9 +1,17 @@
-params [ "_ammobox", ["_max_transport_distance", 15] ];
-private [ "_neartransporttrucks", "_truck_to_load", "_truck_load", "_next_truck", "_maxload", "_i" ];
+params [ "_ammobox" ];
+private [ "_truck_to_load", "_truck_load", "_next_truck", "_maxload", "_offsets" ];
 
-_maxload = 3;
-_neartransporttrucks = [ ((getpos _ammobox) nearEntities [ ammobox_transports_typenames, _max_transport_distance]), { alive _x && speed _x < 5 && ((getpos _x) select 2) < 5 && !(_x getVariable ['R3F_LOG_disabled', true]) } ] call BIS_fnc_conditionalSelect;
+private _max_transport_distance = 15;
+private _neartransporttrucks = [ nearestObjects [player, transport_vehicles, _max_transport_distance], {
+	 alive _x && speed vehicle _x < 5 &&
+	 ((getpos _x) select 2) < 5 &&
+	 ([player, _x] call is_owner || [_x] call is_public) &&
+	 !(_x getVariable ['R3F_LOG_disabled', false]) 
+}] call BIS_fnc_conditionalSelect;
+
 _truck_to_load = objNull;
+_box_offset = { if (typeOf _ammobox == (_x select 0)) exitWith {_x select 1} } foreach box_transport_offset;
+if (isNil "_box_offset") then {_box_offset = [0, 0, 0]};
 
 {
 	_next_truck = _x;
@@ -12,24 +20,23 @@ _truck_to_load = objNull;
 	{
 		if ( _x select 0 == typeof _next_truck ) then {
 			_maxload = (count _x) - 2;
-			for [ {_i=2}, {_i < (count _x) }, {_i=_i+1} ] do { _offsets pushback (_x select _i); };
+			for "_i" from 2 to (count _x) do { _offsets pushback (_x select _i) };
 		};
 	} foreach box_transport_config;
 
 	if ( isNull _truck_to_load ) then {
-		_truck_load = _next_truck getVariable ["GRLIB_ammo_truck_load", 0];
-		if (  _truck_load < _maxload ) then {
+		_truck_load = _next_truck getVariable ["GRLIB_ammo_truck_load", []];
+		if ( count _truck_load < _maxload ) then {
+			hintSilent format [localize "STR_BOX_LOADED", [typeOf _ammobox] call F_getLRXName];
 			_truck_to_load = _next_truck;
-			_truck_offset = _offsets select _truck_load;
-			if (typeOf _ammobox in [waterbarrel_typename,fuelbarrel_typename,foodbarrel_typename]) then {
-				_truck_offset = _truck_offset vectorAdd [0, 0, -0.4];
-			};
-			_ammobox attachTo [ _truck_to_load, _truck_offset ];
+			_truck_offset = (_offsets select (count _truck_load)) vectorAdd _box_offset;
+			_ammobox attachTo [ _next_truck, _truck_offset ];
 			_ammobox setVariable ["R3F_LOG_disabled", true, true];
 			_ammobox allowDamage false;
-			_truck_to_load setVariable ["GRLIB_ammo_truck_load", _truck_load + 1, true];
-			hint localize "STR_BOX_LOADED";
-		}
+			[_ammobox, false] remoteExec ["enableSimulationGlobal", 2];
+			_truck_load pushback _ammobox;
+			_next_truck setVariable ["GRLIB_ammo_truck_load", _truck_load, true];
+		};
 	};
 } foreach _neartransporttrucks;
 

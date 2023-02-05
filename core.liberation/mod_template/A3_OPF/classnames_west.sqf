@@ -23,7 +23,7 @@ chimera_vehicle_overide = [
 ];
 
 // [CLASSNAME, MANPOWER, AMMO, FUEL, RANK]
-infantry_units_west = [
+infantry_units = [
 	["Alsatian_Random_F",0,0,0,GRLIB_perm_max],
 	["Fin_random_F",0,0,0,0],
 	["O_soldier_F",1,0,0,0],
@@ -113,7 +113,6 @@ blufor_air = [
 
 static_vehicles = [
 	["O_UGV_02_Demining_F",0,5,0,GRLIB_perm_inf],
-	["O_Static_Designator_01_F",0,5,0,GRLIB_perm_inf],
 	["O_HMG_01_F",0,10,0,GRLIB_perm_log],
 	["O_HMG_01_high_F",0,10,0,GRLIB_perm_tank],
 	["O_GMG_01_F",0,20,0,GRLIB_perm_log],
@@ -127,20 +126,20 @@ static_vehicles = [
 ];
 
 // *** Static Weapon with AI ***
-static_vehicles_AI = [
+static_vehicles_AI_west = [
 	"B_SAM_System_01_F",
 	"B_AAA_System_01_F",
 	"O_SAM_System_04_F"
 ];
 
-support_vehicles_west = [
+support_vehicles = [
 	["O_G_Offroad_01_repair_F",5,15,5,GRLIB_perm_inf],
 	["O_G_Van_01_fuel_F",5,15,20,GRLIB_perm_inf],
 	["Land_Pod_Heli_Transport_04_bench_F",0,50,0,GRLIB_perm_log],
 	["Land_Pod_Heli_Transport_04_covered_F",0,50,0,GRLIB_perm_log]
 ];
 
-buildings_west = [
+buildings = [
 	["Land_Cargo_Tower_V3_F",0,0,0,GRLIB_perm_tank],
 	["Land_Cargo_House_V3_F",0,0,0,GRLIB_perm_inf],
 	["Land_Cargo_Patrol_V3_F",0,0,0,GRLIB_perm_log],
@@ -225,14 +224,14 @@ ai_healing_sources_west = [
 vehicle_rearm_sources_west = [
 ];
 
-vehicle_big_units_west = [
+vehicle_repair_sources_west = [
+];
 
+vehicle_big_units_west = [
 ];
 
 GRLIB_vehicle_whitelist_west = [
-
 ];
 
 GRLIB_vehicle_blacklist_west = [
-
 ];

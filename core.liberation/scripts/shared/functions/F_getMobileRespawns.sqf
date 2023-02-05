@@ -1,22 +1,19 @@
-private _respawn_trucks_unsorted = [ vehicles, {
-	alive _x &&
-	_x distance2D lhd_west > GRLIB_sector_size &&
-	_x distance2D lhd_east > GRLIB_sector_size &&
+// Public Hurron
+private _respawn_huron_unsorted = [entities [[huron_typename], [], false, true], {
+	_x getVariable ["GRLIB_vehicle_ishuron", false] &&
+	!([_x, "LHD", GRLIB_sector_size] call F_check_near) &&
 	!surfaceIsWater (getpos _x) &&
-	(typeof _x in [Respawn_truck_typename, huron_typename]) &&
-	((getpos _x) select 2) < 5 &&  speed _x < 5
+	((getpos _x) select 2) < 5 && speed vehicle _x < 5		
 }] call BIS_fnc_conditionalSelect;
 
-private _respawn_tent_unsorted = [];
-_respawn_tent_unsorted = [ [] call get_myBeacons, {
-	alive _x &&
-	_x distance2D lhd_west > GRLIB_sector_size &&
-	_x distance2D lhd_east > GRLIB_sector_size &&
-	!surfaceIsWater (getpos _x) &&
-	_x distance2D ([_x] call F_getNearestFob) > GRLIB_sector_size &&
-	isNull (_x getVariable ["R3F_LOG_est_transporte_par", objNull])
-}] call BIS_fnc_conditionalSelect;
+// Truck / Tent
+private _player_respawn_unsorted = [];
+private _allplayer_respawn_unsorted = [];
+{
+	_player_respawn_unsorted = ([getPlayerUID _x] call F_getMobileRespawnsPlayer) select 0;
+	_allplayer_respawn_unsorted append _player_respawn_unsorted;
+} forEach (AllPlayers - (entities "HeadlessClient_F"));
 
-private _respawn_trucks_sorted = [ _respawn_trucks_unsorted + _respawn_tent_unsorted , [] , { (getpos _x) select 0 } , 'ASCEND' ] call BIS_fnc_sortBy;
+private _respawn_trucks_sorted = [ _respawn_huron_unsorted + _allplayer_respawn_unsorted , [] , { (getpos _x) select 0 } , 'ASCEND' ] call BIS_fnc_sortBy;
 
-_respawn_trucks_sorted
+_respawn_trucks_sorted;

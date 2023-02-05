@@ -4,10 +4,16 @@ sectors_bigtown = [];
 sectors_factory = [];
 sectors_military = [];
 sectors_tower = [];
+sectors_opfor = [];
 sectors_airspawn = [];
 
 {
 	_ismissionsector = false;
+	_tempmarker = toArray _x; _tempmarker resize 11;
+	if ( toString _tempmarker == "opfor_point" ) then {
+		sectors_opfor pushback _x;
+		_ismissionsector = false;
+	};
 	_tempmarker = toArray _x; _tempmarker resize 14;
 	if ( toString _tempmarker == "opfor_airspawn" ) then {
 		sectors_airspawn pushback _x;
@@ -37,7 +43,6 @@ sectors_airspawn = [];
 	if ( toString _tempmarker == "tower" ) then {
 		sectors_tower pushback _x;
 		_x setMarkerTextLocal format ["%1 %2",markerText _x, mapGridPosition (markerPos _x)];
-		//_x setMarkerShadowLocal true;
 		_ismissionsector = true;
 	};
 
@@ -68,9 +73,8 @@ sectors_airspawn = [];
 			if (_marker in sectors_factory) then {_marker_text = "Fuel Depot"};
 			diag_log format ["--- LRX World: %1 - Auto-Name failed for marker: %2", worldname, _marker]
 		};
-		_marker setMarkerTextLocal _marker_text;
-	};
-	//_marker setMarkerShadowLocal true;   // cause Bad conversion: string
+		_marker setMarkerText _marker_text;
+  };
 } forEach sectors_capture + sectors_bigtown + sectors_factory + sectors_military;
 GRLIB_sectors_init = true;
 publicVariable "GRLIB_sectors_init";

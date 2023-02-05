@@ -1,7 +1,3 @@
+// check if vehicle is abandoned
 params ["_vehicle"];
-
-private _ret = false;
-if (_vehicle getVariable ["GRLIB_vehicle_owner", ""] == "") then {
-	_ret = true;
-};
-_ret;
+(_vehicle getVariable ["GRLIB_vehicle_owner", ""] == "" && count (crew _vehicle) == 0);

@@ -2,41 +2,43 @@ params ["_unit", "_role", "_vehicle"];
 
 private _doeject = false;
 private _role = (assignedVehicleRole _unit) select 0;
-if (isNil "_role") exitWith {false};  // Eject unit
+if (isNil "_role") exitWith {moveOut _unit;};  // Eject unit
 if (count ([] call get_myFobs) == 0 && typeOf _vehicle in [FOB_truck_typename,huron_typename]) exitWith {true}; // Allowed at start
 
 private _msg = "";
-if (!((_role == "cargo") || (_vehicle isKindOf "Steerable_Parachute_F"))) then {
-	if (!([player, 0] call fetch_permission)) then {
-		_doeject = true;
-		_msg = localize "STR_PERMISSION_NO_LIGHT";
-	};
-
-	if ((_vehicle isKindOf "Tank") || (_vehicle isKindOf "Wheeled_APC_F")) then {
-		if (!([player, 1] call fetch_permission)) then {
+if (!(_role == "cargo" || _vehicle isKindOf "Steerable_Parachute_F" || typeOf _vehicle in list_static_weapons)) then {
+	if (GRLIB_permissions_param) then {
+		if (!([player, 0] call fetch_permission)) then {
 			_doeject = true;
-			_msg = localize "STR_PERMISSION_NO_ARMOR";
+			_msg = localize "STR_PERMISSION_NO_LIGHT";
 		};
-	};
 
-	if (_vehicle isKindOf "Air") then {
-		if (!([player, 2] call fetch_permission)) then {
+		if ((_vehicle isKindOf "Tank") || (_vehicle isKindOf "Wheeled_APC_F")) then {
+			if (!([player, 1] call fetch_permission)) then {
+				_doeject = true;
+				_msg = localize "STR_PERMISSION_NO_ARMOR";
+			};
+		};
+
+		if (_vehicle isKindOf "Air") then {
+			if (!([player, 2] call fetch_permission)) then {
+				_doeject = true;
+				_msg = localize "STR_PERMISSION_NO_AIR";
+			};
+		};
+
+		_score = [player] call F_getScore;
+		if ((typeOf _vehicle) in elite_vehicles && _score < GRLIB_perm_max) then {
 			_doeject = true;
-			_msg = localize "STR_PERMISSION_NO_AIR";
+			_msg = localize "STR_PERMISSION_NO_VIP";
 		};
-	};
 
-	_score = score player;
-	if ((typeOf _vehicle) in elite_vehicles && _score < GRLIB_perm_max) then {
-		_doeject = true;
-		_msg = localize "STR_PERMISSION_NO_VIP";
-	};
-
-	_support_vehicles = [];
-	{_support_vehicles pushBack ( _x select 0 )} foreach (support_vehicles);
-	if ((typeOf _vehicle) in _support_vehicles && _score < GRLIB_perm_inf) then {
-		_doeject = true;
-		_msg = localize "STR_PERMISSION_NO_SUP";
+		_support_vehicles = [];
+		{_support_vehicles pushBack ( _x select 0 )} foreach (support_vehicles);
+		if ((typeOf _vehicle) in _support_vehicles && _score < GRLIB_perm_inf) then {
+			_doeject = true;
+			_msg = localize "STR_PERMISSION_NO_SUP";
+		};
 	};
 
 	if (GRLIB_permission_vehicles) then {
@@ -59,8 +61,6 @@ if (_doeject) then {
 	hintSilent _msg;
 	moveOut _unit;
 } else {
-	if (isPlayer _unit) then {
-		[_vehicle] spawn vehicle_defense;
-	};
+	[_vehicle] spawn vehicle_defense;
+	[_unit, _vehicle] spawn vehicle_fuel;	
 };
-!(_doeject);

@@ -1,13 +1,5 @@
-// Customize loadout - Only Militia 
+// Customize loadout - Militia, Guard 
 // template located in mod_template\<MOD>\loadout
 
 loadout_militia = compile preprocessFileLineNumbers "scripts\loadouts\default.sqf";
-loadout_crewman = compile preprocessFileLineNumbers (format ["mod_template\%1\loadout\%2.sqf", GRLIB_mod_indp, "crewman"]);
-
-// Customize loadout - Only player and build AI 
-// template located in scripts\loadouts\forced\
-
-units_loadout_overide = [
-	"B_medic_F",
-	"O_medic_F"
-];
+loadout_crewman = compile preprocessFileLineNumbers (format ["mod_template\%1\loadout\%2.sqf", GRLIB_mod_east, "crewman"]);

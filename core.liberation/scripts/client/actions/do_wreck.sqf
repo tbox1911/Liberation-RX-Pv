@@ -13,8 +13,8 @@ _vehicle setVariable ["wreck_in_use", true, true];
 // Stop running
 AR_active = false;
 
-private _valuable_veh = [] + opfor_air + air_attack_west + air_attack_east ;
-{ _valuable_veh pushBack ( _x select 0 ) } foreach (heavy_vehicles_west + heavy_vehicles_east + opfor_recyclable);
+private _valuable_veh = [] + opfor_air ;
+{ _valuable_veh pushBack ( _x select 0 ) } foreach (heavy_vehicles + opfor_recyclable + ind_recyclable);
 
 disableUserInput true;
 player playMove 'ainvpknlmstpslaywrfldnon_medic';
@@ -26,7 +26,7 @@ disableUserInput true;
 disableUserInput false;
 if (round (getPosASL player select 2) <= -1) then {player switchmove ""};
 
-if (lifeState player == 'INCAPACITATED' || vehicle player != player) exitWith {
+if (lifeState player == 'INCAPACITATED' || !isNull objectParent player) exitWith {
 	_vehicle setVariable ["wreck_in_use", false, true];
 	player setVariable ["salvage_wreck", false, true];
 };
@@ -38,10 +38,9 @@ if (typeOf _vehicle in _valuable_veh) then {
 	_res = [_vehicle] call F_getBounty;
 	_bounty = _res select 0;
 	_bonus = _res select 1;
-	private _ammo_collected = player getVariable ["GREUH_ammo_count",0];
-	player setVariable ["GREUH_ammo_count", (_ammo_collected + _bounty), true];
-	hintSilent format ["%1\nBonus Score + %2 Pts\nBonus Ammo + %3 !!", name player, _bonus, _bounty];
-	[player, _bonus] remoteExec ["addScore", 2];
+	[player, _bounty, 2] remoteExec ["ammo_add_remote_call", 2];
+	hintSilent format [localize "STR_DO_WRECK", name player, _bonus, _bounty];
+	[player, _bonus] remoteExec ["F_addScore", 2];
 	player addRating 100;
 } else {
 	hintSilent "Thank You !!";

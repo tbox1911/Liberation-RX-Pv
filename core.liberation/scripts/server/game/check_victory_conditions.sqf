@@ -1,14 +1,17 @@
-sleep 5;
+diag_log format ["Check Victory condition at %1", time];
 
 _maxSector = count (sectors_allSectors);
 _bluSector = count (west_sectors);
 _opfSector = count (east_sectors);
 _indSector = (_maxsector - _bluSector - _opfSector);
-
 //_maxSector = _maxSector * 0.80; // 80% sector captured
+
 if (_indSector == 0 && (_bluSector >= _maxSector || _opfSector >= _maxSector)) then {
+	sleep 30;
 	GRLIB_endgame = 1;
 	publicVariable "GRLIB_endgame";
+	[] call save_game_mp;
+	
 	{ _x allowDamage false; (vehicle _x) allowDamage false; } foreach allPlayers;
 
 	publicstats = [];
@@ -45,6 +48,5 @@ if (_indSector == 0 && (_bluSector >= _maxSector || _opfSector >= _maxSector)) t
 
 	sleep 20;
 
-	{ if ( !(isPlayer _x) && _x distance lhd_west > GRLIB_sector_size && _x distance lhd_east > GRLIB_sector_size ) then { deleteVehicle _x } } foreach allUnits;
-
+	{ if ( !(isPlayer _x) && !([_x, "LHD", GRLIB_sector_size] call F_check_near) ) then { deleteVehicle _x } } foreach allUnits;
 };

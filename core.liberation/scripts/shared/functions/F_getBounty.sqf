@@ -7,6 +7,9 @@ private _extra_bounty = opfor_air + [
 	"B_AFV_Wheeled_01_cannon_F"
 ];
 
+private _heavy_blu = [];
+{_heavy_blu pushBack ( _x select 0 )} foreach heavy_vehicles;
+
 _bounty = 10;
 _bonus = 2;
 
@@ -33,6 +36,10 @@ if ( _vehicle isKindOf "Air" ) then {
 if (typeOf _vehicle in _extra_bounty) then {
 	_bounty = _bounty + 25;
 	_bonus = _bonus + 1;
+};
+
+if (typeOf _vehicle in _heavy_blu) then {
+	_bonus = 0;
 };
 
 [_bounty, _bonus];

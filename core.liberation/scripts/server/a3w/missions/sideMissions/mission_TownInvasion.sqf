@@ -10,11 +10,11 @@ private ["_nbUnits", "_box1", "_box2", "_townName", "_buildingpositions", "_tent
 
 _setupVars =
 {
-	_missionType = "Town Invasion";
+	_missionType = localize "STR_INVASION";
 	_nbUnits = [] call getNbUnits;
 
 	// settings for this mission
-	_missionLocation = selectRandom (((west_sectors + east_sectors) select {["capture_", _x] call F_startsWith;}) apply {[_x, false]}) select 0;
+	_missionLocation = [sectors_capture] call getMissionLocation;
 	_townName = markerText _missionLocation;
 
 	_locationsArray = nil;
@@ -47,30 +47,32 @@ _setupObjects =
 	} foreach _allbuildings;
 
 	// spawn some enemies
-	_managed_units = (["militia", (_nbUnits - 3), _buildingpositions, _missionPos] call F_spawnBuildingSquad);
-	{ _x setVariable ["mission_AI", true] } forEach _managed_units;
+	[_missionPos, 30] call createlandmines;
+	_aiGroup = createGroup [GRLIB_side_enemy, true];
+	_managed_units = (["militia", (_nbUnits - 4), _buildingpositions, _missionPos] call F_spawnBuildingSquad);
+	_managed_units joinSilent _aiGroup;
 
-	if (count _managed_units > 0) then {
-		_aiGroup = group leader (_managed_units select 0);
-	} else {
-		_aiGroup = createGroup [GRLIB_side_enemy, true];
-	};
 	[_aiGroup, _missionPos, (_nbUnits - (count _managed_units)) , "militia"] call createCustomGroup;
 
-	[_missionPos, 25] call createlandmines;
+	{
+		_x setSkill ["courage", 1];
+		_x setVariable ["GRLIB_mission_AI", nil];
+	} forEach (units _aiGroup);
 
-	_missionHintText = format ["Hostiles have taken over <br/><t size='1.25' color='%1'>%2</t><br/><br/>There seem to be <t color='%1'>%3 enemies</t> hiding inside or on top of buildings. Get rid of them all, and take their supplies!<br/>Watch out for those windows!", sideMissionColor, _townName, _nbUnits];
+	_missionHintText = format [localize "STR_INVASION_MESSAGE1", sideMissionColor, _townName, _nbUnits];
+	A3W_sectors_in_use = A3W_sectors_in_use + [_missionLocation];
+	true;
 };
 
 _waitUntilMarkerPos = nil;
 _waitUntilExec = nil;
-
-_waitUntilCondition = { _missionLocation in (sectors_allSectors - west_sectors) };
+_waitUntilCondition = { !(_missionLocation in (west_sectors + east_sectors)) };
 
 _failedExec = {
 	// Mission failed
 	{ deleteVehicle _x } forEach [_box1, _box2, _tent1, _chair1, _chair2, _fire1];
 	[_missionPos] call clearlandmines;
+	A3W_sectors_in_use = A3W_sectors_in_use - [_missionLocation];
 };
 
 _successExec = {
@@ -80,9 +82,20 @@ _successExec = {
 		_x setVariable ["GRLIB_vehicle_owner", nil, true];
 	} forEach [_box1, _box2];
 
-	_successHintMessage = format ["Nice work!<br/><br/><t color='%1'>%2</t><br/>is a safe place again!<br/>Their belongings are now yours to take!", sideMissionColor, _townName];
+	private _rwd_ammo = (100 + floor(random 100));
+	private _rwd_fuel = (10 + floor(random 10));
+	private _text = format ["Reward Received: %1 Ammo and %2 Fuel", _rwd_ammo, _rwd_fuel];
+	{
+		if (_x distance2D _missionPos < GRLIB_sector_size ) then {
+			[_x, _rwd_ammo, _rwd_fuel] call ammo_add_remote_call;
+			[gamelogic, _text] remoteExec ["globalChat", owner _x];
+		};
+	} forEach (AllPlayers - (entities "HeadlessClient_F"));
+
+	_successHintMessage = format [localize "STR_INVASION_MESSAGE2", sideMissionColor, _townName];
 	{ deleteVehicle _x } forEach [_tent1, _chair1, _chair2, _fire1];
 	[_missionPos] call showlandmines;
+	A3W_sectors_in_use = A3W_sectors_in_use - [_missionLocation];
 };
 
 _this call sideMissionProcessor;

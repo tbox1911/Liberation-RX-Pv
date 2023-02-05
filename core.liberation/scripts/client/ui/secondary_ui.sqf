@@ -1,5 +1,5 @@
-if ( isNil "GRLIB_secondary_starting" ) then { GRLIB_secondary_starting = false; };
-if ( isNil "GRLIB_secondary_in_progress" ) then { GRLIB_secondary_in_progress = -1; };
+waitUntil {	sleep 0.1; !isNil "GRLIB_secondary_starting"};
+waitUntil {	sleep 0.1; !isNil "GRLIB_secondary_in_progress"};
 
 createDialog "liberation_secondary";
 dostartsecondary = 0;
@@ -66,7 +66,7 @@ while { dialog && alive player && dostartsecondary == 0 } do {
 };
 
 if ( dostartsecondary == 1 ) then {
-	[ lbCurSel 101, false, GRLIB_side_friendly ] remoteExec ["start_secondary_remote_call", 2];
+	[lbCurSel 101] remoteExec ["start_secondary_remote_call", 2];
 };
 
 if ( dialog ) then {

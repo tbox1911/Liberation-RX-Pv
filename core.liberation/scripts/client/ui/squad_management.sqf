@@ -35,13 +35,10 @@ while { dialog && alive player } do {
 		lbClear 101;
 		{
 			if ( alive _x ) then {
-				_unitname =  format ["%1. ", [ _x ] call F_getUnitPositionId];
-				if(isPlayer _x) then {
-					if ( count (squadParams _x ) != 0) then {
-						_unitname = "[" + ((squadParams _x select 0) select 0) + "] ";
-					};
+				_unitname =  format ["%1. %2", [ _x ] call F_getUnitPositionId, name _x];
+				if (isPlayer _x) then {
+					_unitname = [_x] call get_player_name;
 				};
-				_unitname = _unitname + ( name _x );
 				lbAdd [ 101, _unitname ];
 			};
 		} foreach (_bros);
@@ -80,13 +77,10 @@ while { dialog && alive player } do {
 			};
 			_squad_camera camcommit 0;
 
-			_unitname = format ["%1. ", [ _selectedmember ] call F_getUnitPositionId];
-			if(isPlayer _selectedmember) then {
-				if ( count (squadParams _selectedmember ) != 0) then {
-					_unitname = "[" + ((squadParams _selectedmember select 0) select 0) + "] ";
-				};
+			_unitname = format ["%1. %2", [ _selectedmember ] call F_getUnitPositionId, name _selectedmember];
+			if (isPlayer _selectedmember) then {
+				_unitname = [_selectedmember] call get_player_name;
 			};
-			_unitname = _unitname + ( name _selectedmember );
 			ctrlSetText [ 201, _unitname];
 
 			ctrlSetText [ 202, format ["%1 (%2)", getText (_cfgVehicles >> (typeof _selectedmember) >> "displayName"), rank _selectedmember] ];
@@ -206,11 +200,20 @@ while { dialog && alive player } do {
 		};
 
 		if (GRLIB_squadaction == 2) then {
-			private _ammo_collected = player getVariable ["GREUH_ammo_count",0];
-			private _refund = [_selectedmember] call F_loadoutPrice;
-			player setVariable ["GREUH_ammo_count", (_ammo_collected + _refund), true];
-			playSound "rearm";
-			gamelogic globalChat format ["Soldier Refund: %1, Thank you !", _refund];
+			private _ai_rank = 1 + (GRLIB_rank_level find (rank _selectedmember));
+			private _refund = 0;
+			if (_ai_rank > 1 ) then {
+				_refund = round (([_selectedmember] call F_loadoutPrice) * (_ai_rank * 0.7));
+			} else {
+				_refund = [_selectedmember] call F_loadoutPrice;
+			};
+			[player, _refund, 0] remoteExec ["ammo_add_remote_call", 2];
+			playSound "taskSucceeded";
+			if (_ai_rank > 1 ) then {
+				gamelogic globalChat format ["Soldier rank %2 Refund: %1, Thank you !", _refund, _ai_rank];
+			} else {
+				gamelogic globalChat format ["Soldier Refund: %1, Thank you !", _refund];
+			};
 			deleteVehicle _selectedmember;
 			_resupplied = true;
 			hint localize 'STR_REMOVE_OK';
@@ -242,9 +245,9 @@ while { dialog && alive player } do {
 
 		if (GRLIB_squadaction == 4) then {
 			if ((player distance _selectedmember) < 30) then {
-				private _price = [player] call F_loadoutPrice;
 				private _price_ai = [_selectedmember] call F_loadoutPrice;
-				private _cost = 0 max (_price -_price_ai);
+				private _price = [player] call F_loadoutPrice;
+				private _cost = 0 max (_price - _price_ai);
 				if ([_cost] call F_pay) then {
 					_selectedmember setUnitLoadout (getUnitLoadout player);
 					hintSilent format ["Loadout copied, Price: %1\nThank you !", _cost];

@@ -43,7 +43,6 @@ while { cinematic_camera_started } do {
 					_positions pushback (getmarkerpos (selectRandom _sectors));
 				};
 			};
-
 		};
 		_position = selectRandom  ( _positions - [ _last_position ] );
 		_last_position = _position;
@@ -51,7 +50,7 @@ while { cinematic_camera_started } do {
 		_nearentities = _position nearEntities [ "Man", 100 ];
 		_camtarget = _cinematic_pointer;
 		if ( first_camera_round ) then {
-			_camtarget = _cinematic_pointer;
+			_camtarget = my_lhd;
 		} else {
 			if ( count ( [ _nearentities , { alive _x && isPlayer _x } ] call BIS_fnc_conditionalSelect ) != 0 ) then {
 				_camtarget = selectRandom ( [ _nearentities , { alive _x && isPlayer _x } ] call BIS_fnc_conditionalSelect );
@@ -244,14 +243,14 @@ while { cinematic_camera_started } do {
 				_unitname = "";
 				if ( isPlayer _camtarget ) then { _unitname = name _camtarget };
 				_nearest_sector = "";
-				if ( _position distance my_lhd < 300 ) then {
+				if ( _position distance2D my_lhd < 300 ) then {
 					_nearest_sector = "BASE CHIMERA";
 				} else {
 					_nearest_sector = [300, _position ] call F_getNearestSector;
 					if ( _nearest_sector != "" ) then {
 						_nearest_sector = markertext _nearest_sector;
 					} else {
-						_nearfobs = [ _myfobs, { _x distance _position < 300 } ] call BIS_fnc_conditionalSelect;
+						_nearfobs = [ _myfobs, { _x distance2D _position < 300 } ] call BIS_fnc_conditionalSelect;
 						if ( count _nearfobs > 0 ) then {
 							_nearest_sector = format [ "FOB %1", military_alphabet select ( _myfobs find ( _nearfobs select 0 ) ) ];
 						};
@@ -268,4 +267,4 @@ _cinematic_camera cameraEffect ["Terminate", "BACK"];
 camDestroy _cinematic_camera;
 camUseNVG false;
 cinematic_camera_stop = true;
-titleText ["","BLACK IN", 3];
+titleText ["","BLACK FADED", 100];

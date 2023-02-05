@@ -57,7 +57,7 @@ if ((_grouptype == 'infantry') && (_vehicletype != '')) then {
 		if  ( _vehicletype == (_x select 0)) then {
 			_grouptype = 'static';
 		};
-	} foreach (static_vehicles_west + static_vehicles_east);
+	} foreach static_vehicles;
 	};
 
 };

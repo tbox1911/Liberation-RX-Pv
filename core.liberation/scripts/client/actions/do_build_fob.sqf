@@ -1,5 +1,5 @@
 _box = _this select 3;
-if (isNull _box) exitWith {};
+if (isNil "_box") exitWith {};
 
 private [ "_minfobdist", "_minsectordist", "_distfob", "_clearedtobuildfob", "_distsector", "_clearedtobuildsector", "_idx" ];
 
@@ -7,7 +7,7 @@ private [ "_minfobdist", "_minsectordist", "_distfob", "_clearedtobuildfob", "_d
 if ((_box getVariable ["box_in_use", false])) exitWith {};
 
 private _myfobs = ([] call get_myFobs);
-if ( count _myfobs >= GRLIB_maximum_fobs ) exitWith {
+if ( count _myfobs >= GRLIB_maximum_fobs && typeOf _box != FOB_box_outpost ) exitWith {
 	hint format [ localize "STR_HINT_FOBS_EXCEEDED", GRLIB_maximum_fobs ];
 };
 
@@ -52,6 +52,8 @@ if (!_clearedtobuildfob) then {
 			buildtype = 99;
 			dobuild = 1;
 		};
+		waitUntil {sleep 0.3; dobuild == 0};
+		if (build_confirmed == 0) then { deleteVehicle _box };
 	};
 };
 _box setVariable ["box_in_use", false, true];
