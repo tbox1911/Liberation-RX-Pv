@@ -61,7 +61,7 @@ if ( combat_readiness > 100 && GRLIB_difficulty_modifier <= 2.0 ) then { combat_
 stats_readiness_earned = stats_readiness_earned + _combat_readiness_increase;
 publicVariable "stats_readiness_earned";
 
-[ _liberated_sector, 0 ] remoteExec ["remote_call_sector", 0];
+[ _liberated_sector, 0, _side ] remoteExec ["remote_call_sector", 0];
 if (_side == GRLIB_side_west) then {
 	west_sectors pushback _liberated_sector; publicVariable "west_sectors";
 	east_sectors = east_sectors - [_liberated_sector]; publicVariable "east_sectors";

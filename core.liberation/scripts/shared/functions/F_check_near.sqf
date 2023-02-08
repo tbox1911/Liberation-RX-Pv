@@ -14,7 +14,7 @@ if (isNil "_list") exitWith {_ret};
 
 switch ( _list ) do {
 	case "LHD" : { _classlist = [lhd_west, lhd_east]; _includeFOB = false};	
-	case "FOB" : { _classlist = GRLIB_fobs_west; _includeFOB = false};
+	case "FOB" : { _classlist = GRLIB_fobs_west + GRLIB_fobs_east; _includeFOB = false};
 	case "SRV" : { _classlist = GRLIB_Marker_SRV};
 	case "ATM" : { _classlist = GRLIB_Marker_ATM};
 	case "FUEL" : { _classlist = GRLIB_Marker_FUEL};

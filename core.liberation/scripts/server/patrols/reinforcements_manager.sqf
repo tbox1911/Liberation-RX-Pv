@@ -1,4 +1,4 @@
-params [ "_targetsector" ];
+params [ "_targetsector", "_side" ];
 
 if (combat_readiness < 35 || GRLIB_csat_aggressivity < 1 || diag_fps < 35) exitWith {};
 
@@ -41,11 +41,11 @@ if ( _targetsector in active_sectors ) then {
 		if ( _sector1 in sectors_tower) then {
 			[_sector1, _defensecount] spawn static_manager;
 		} else {
-			[_sector1, (1 + floor (random 2))] spawn patrol_manager;
+			[_sector1, (1 + floor (random 2)), _side] spawn patrol_manager;
 		};
 		sleep 3;
 		if ( _sector1 in sectors_military) then {
-			[_sector1, 2] spawn patrol_manager;
+			[_sector1, 2, _side] spawn patrol_manager;
 		};
 		stats_reinforcements_called = stats_reinforcements_called + 1;
 	};
@@ -58,11 +58,11 @@ if ( _targetsector in active_sectors ) then {
 			if ( _sector2 in sectors_tower) then {
 				[_sector2, _defensecount] spawn static_manager;
 			} else {
-				[_sector2, (1 + floor (random 2))] spawn patrol_manager;
+				[_sector2, (1 + floor (random 2)), _side] spawn patrol_manager;
 			};
 			sleep 3;
 			if ( _sector2 in sectors_military) then {
-				[_sector2, 2] spawn patrol_manager;
+				[_sector2, 2, _side] spawn patrol_manager;
 			};
 			stats_reinforcements_called = stats_reinforcements_called + 1;
 		};
@@ -76,11 +76,11 @@ if ( _targetsector in active_sectors ) then {
 			if ( _sector3 in sectors_tower) then {
 				[_sector3, _defensecount] spawn static_manager;
 			} else {
-				[_sector3, (1 + floor (random 2))] spawn patrol_manager;
+				[_sector3, (1 + floor (random 2)), _side] spawn patrol_manager;
 			};
 			sleep 3;
 			if ( _sector3 in sectors_military) then {
-				[_sector3, 2] spawn patrol_manager;
+				[_sector3, 2, _side] spawn patrol_manager;
 			};
 			stats_reinforcements_called = stats_reinforcements_called + 1;
 		};

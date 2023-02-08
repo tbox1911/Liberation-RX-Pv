@@ -39,5 +39,5 @@ while { GRLIB_endgame == 0 } do {
 		sleep 0.5;
 	} foreach GRLIB_fobs_east - active_fobs;
 
-	sleep 10;
+	sleep 5;
 };

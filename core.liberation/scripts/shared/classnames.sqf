@@ -41,6 +41,8 @@ air_attack_west = blufor_air;
 static_vehicles_west = static_vehicles;
 buildings_west = buildings_default + buildings;
 support_vehicles_west = default_support_vehicles + support_vehicles;
+squad_inf_west = blufor_squad_inf;
+squad_inf_light_west = blufor_squad_inf_light;
 squads_west = squads;
 uavs_west = uavs;
 
@@ -90,6 +92,8 @@ air_attack_east = blufor_air;
 static_vehicles_east = static_vehicles;
 buildings_east = buildings_default + buildings;
 support_vehicles_east = default_support_vehicles + support_vehicles;
+squad_inf_east = blufor_squad_inf;
+squad_inf_light_east = blufor_squad_inf_light;
 squads_east = squads;
 uavs_east = uavs;
 
