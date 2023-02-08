@@ -72,7 +72,7 @@ private _disabled_controls = [1606,1607,1608,1609,1610,1613,1614,1620];
 (_display displayCtrl 1615) ctrlSetText getMissionPath "res\ui_arsenal.paa";
 (_display displayCtrl 1615) ctrlSetToolTip "Add Ammo credit";
 (_display displayCtrl 1616) ctrlSetText getMissionPath "res\ui_rotation.paa";
-(_display displayCtrl 1616) ctrlSetToolTip "Rejoin player";
+(_display displayCtrl 1616) ctrlSetToolTip "Change Player Side";
 (_display displayCtrl 1619) ctrlSetToolTip "Amount of Ammo or Experience Points to add";
 (_display displayCtrl 1621) ctrlSetText getMissionPath "res\ui_redeploy.paa";
 (_display displayCtrl 1621) ctrlSetToolTip "Kick player!";
