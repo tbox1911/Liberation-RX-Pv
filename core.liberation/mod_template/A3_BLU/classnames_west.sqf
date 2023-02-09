@@ -79,15 +79,10 @@ heavy_vehicles = [
 	["B_APC_Tracked_01_rcws_F",10,500,20,GRLIB_perm_log],
 	["B_APC_Wheeled_01_cannon_F",10,500,20,GRLIB_perm_log],
 	["B_APC_Tracked_01_AA_F",10,500,20,GRLIB_perm_tank],
-	["I_APC_Wheeled_03_cannon_F",10,500,20,GRLIB_perm_tank],
-	//["I_APC_tracked_03_cannon_F",10,500,20,GRLIB_perm_tank],
-	//["I_MBT_03_cannon_F",15,4500,15,GRLIB_perm_max],
-	//["I_E_Truck_02_MRL_F",15,3500,15,GRLIB_perm_max],
 	["B_MBT_01_cannon_F",15,1000,35,GRLIB_perm_tank],
 	["B_MBT_01_TUSK_F",15,1500,35,GRLIB_perm_air],
 	["B_AFV_Wheeled_01_cannon_F",15,3000,35,GRLIB_perm_max],
-	["B_AFV_Wheeled_01_up_cannon_F",15,3500,35,GRLIB_perm_max],
-	["B_MBT_01_arty_F",15,3500,30,GRLIB_perm_max]
+	["B_AFV_Wheeled_01_up_cannon_F",15,3500,35,GRLIB_perm_max]
 ];
 
 air_vehicles = [
@@ -131,7 +126,8 @@ static_vehicles = [
 	["B_Mortar_01_F",0,500,0,GRLIB_perm_max],
 	["B_SAM_System_01_F",10,1500,0,GRLIB_perm_tank],
 	["B_SAM_System_02_F",10,1500,0,GRLIB_perm_air],
-	["B_AAA_System_01_F",10,1500,0,GRLIB_perm_max]
+	["B_AAA_System_01_F",10,1500,0,GRLIB_perm_max],
+	["B_MBT_01_arty_F",15,3500,30,GRLIB_perm_max]
 ];
 
 // *** Static Weapon with AI ***

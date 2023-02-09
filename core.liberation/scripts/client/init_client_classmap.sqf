@@ -25,6 +25,7 @@ if (GRLIB_side_friendly == GRLIB_side_west) then {
 	static_vehicles = [ static_vehicles_west ] call F_filterMods;
 	buildings = [ buildings_west ] call F_filterMods;
 	squads = squads_west;
+	chimera_sign = chimera_sign_west;
 	air_attack = air_attack_west;
 	deleteMarkerLocal "base_chimera_east";
 	deleteMarkerLocal "huronmarker_east";
@@ -55,6 +56,7 @@ if (GRLIB_side_friendly == GRLIB_side_west) then {
 	static_vehicles = [ static_vehicles_east ] call F_filterMods;
 	buildings = [ buildings_east ] call F_filterMods;
 	squads = squads_east;
+	chimera_sign = chimera_sign_east;
 	air_attack = air_attack_east;
 	deleteMarkerLocal "base_chimera_west";
 	deleteMarkerLocal "huronmarker_west";

@@ -2,7 +2,7 @@
 <Project name="Liberation">
 	<Package name="Liberation">
 		<Key ID="STR_MISSION_TITLE">
-			<Original>-= Liberation RX =-</Original>
+			<Original>-= Liberation RX - PvP =-</Original>
 		</Key>
 		<Key ID="STR_MISSION_AUTHOR">
 			<Original>[AKH] pSiKO</Original>
@@ -1117,28 +1117,19 @@
 			<Czech>NEPŘÁTELSKÝ POSILY ÚTOČÍ %1.</Czech>
 		</Key>
 		<Key ID="STR_VICTORY_TITLE">
-			<Original>BLUFOR VICTORY</Original>
-			<French>VICTOIRE BLUFOR</French>
-			<German>BLUFOR SIEGREICH</German>
-			<Spanish>VICTORIA DE BLUFOR</Spanish>
-			<Russian>СИНИЕ ПОБЕДИЛИ</Russian>
-			<Chinesesimp>BLUFOR获胜</Chinesesimp>
-			<Chinese>BLUFOR獲勝</Chinese>
-			<Japanese>我々の勝利です</Japanese>
-			<Portuguese>VITÓRIA BLUFOR</Portuguese>
-			<Czech>ZVÍTĚZILY JSME</Czech>
+			<Original>%1 VICTORY</Original>
+			<French>VICTOIRE %1</French>
+			<German>%1 SIEGREICH</German>
+			<Spanish>VICTORIA DE %1</Spanish>
+			<Portuguese>VITÓRIA %1</Portuguese>
 		</Key>
 		<Key ID="STR_VICTORY_TEXT">
-			<Original>You have liberated this country from the OPFOR oppression.</Original>
-			<French>Vous avez libéré ce pays de l'oppression de l'OPFOR.</French>
-			<German>Du hast das Land von der OPFOR Besatzung befreit.</German>
-			<Spanish>Has liberado al país de la opresión del OPFOR</Spanish>
-			<Russian>Вы освободили эту страну от оккупации OPFOR.</Russian>
-			<Chinesesimp>你把这个国家从压迫中解放了出来。</Chinesesimp>
-			<Chinese>你把這個國家從壓迫中解放了出來。</Chinese>
-			<Japanese>貴方はこのエリアを敵軍の脅威から解放しました。</Japanese>
-			<Portuguese>Você libertou este país da opressão OPFOR.</Portuguese>
-			<Czech>Osvobodili jste tuto zemi od útlaku.</Czech>
+			<Original>You have liberated this country from the %1 oppression.</Original>
+			<French>Vous avez libéré ce pays de l'oppression des %1.</French>
+			<German>Du hast das Land von der %1 Besatzung befreit.</German>
+			<Spanish>Has liberado al país de la opresión del %1</Spanish>
+			<Russian>Вы освободили эту страну от оккупации %1.</Russian>
+			<Portuguese>Você libertou este país da opressão %1.</Portuguese>
 		</Key>
 		<Key ID="STR_STATS_DAY">
 			<Original>days</Original>
