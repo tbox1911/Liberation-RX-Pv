@@ -160,8 +160,6 @@ blufor_squad_inf = [
 	"O_Soldier_AR_F",
 	"O_soldier_LAT_F",
 	"O_HeavyGunner_F",
-	"O_Sharpshooter_F",
-	"O_Soldier_F",
 	"O_Soldier_F",
 	"O_Soldier_F"
 ];

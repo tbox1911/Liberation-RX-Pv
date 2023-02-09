@@ -1,4 +1,4 @@
-private [ "_sourcestr", "_position", "_myfpsmarker", "_myfps", "_localunits", "_localvehicles" ];
+private [ "_sourcestr", "_position", "_myfpsmarker", "_myfps", "_localunits_civ", "_localunits_enemy" ];
 
 if ( isServer ) then {
 	_sourcestr = "Server";
@@ -40,34 +40,16 @@ while { true } do {
 
 	_myfps = diag_fps;
 
-	_localunits_civ = 0;
-	_localvehicles_civ = 0;
-	_localunits_enemy = 0;
-	_localvehicles_enemy = 0;
-
-	{
-		switch (side _x) do {
-			case GRLIB_side_civilian: {_localunits_civ = _localunits_civ +1};
-			case GRLIB_side_enemy: {_localunits_enemy = _localunits_enemy +1};
-		};
-	} forEach ([allUnits, {(local _x) && (alive _x) && (_x distance2D lhd_west) >= GRLIB_sector_size && (_x distance2D lhd_east) >= GRLIB_sector_size}] call BIS_fnc_conditionalSelect);
-
-	{
-		switch (side _x) do {
-			case GRLIB_side_civilian: {_localvehicles_civ = _localvehicles_civ +1};
-			case GRLIB_side_enemy: {_localvehicles_enemy = _localvehicles_enemy +1};
-		};
-	} forEach ([vehicles, {(local _x) && (alive _x) && (_x distance2D lhd_west) >= GRLIB_sector_size && (_x distance2D lhd_east) >= GRLIB_sector_size && (!isNull (currentPilot _x))}] call BIS_fnc_conditionalSelect);
+	_localunits_enemy = { alive _x } count units GRLIB_side_enemy;
+	_localunits_civ = { alive _x && !(typeOf _x in [SHOP_Man, SELL_Man])} count units GRLIB_side_civilian;
 
 	_myfpsmarker setMarkerColor "ColorGREEN";
 	if ( _myfps < 30 ) then { _myfpsmarker setMarkerColor "ColorYELLOW"; };
 	if ( _myfps < 20 ) then { _myfpsmarker setMarkerColor "ColorORANGE"; };
 	if ( _myfps < 10 ) then { _myfpsmarker setMarkerColor "ColorRED"; };
 
-	_myfpsmarker setMarkerText format [ "%1: %2 fps - Unt: civ:%3 ind:%4 - Veh:civ:%5 ind:%6",
-		_sourcestr, ( round ( _myfps * 100.0 ) ) / 100.0 ,
-		_localunits_civ,_localunits_enemy,
-		_localvehicles_civ,_localvehicles_enemy];
-
+	_myfpsmarker setMarkerText format [ "%1: %2 fps - civ:%3 ind:%4",
+		_sourcestr, (round (_myfps * 100.0)) / 100 ,
+		_localunits_civ, _localunits_enemy];
 	sleep 15;
 };
