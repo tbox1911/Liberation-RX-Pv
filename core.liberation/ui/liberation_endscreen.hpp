@@ -14,6 +14,7 @@ class liberation_endscreen {
 	};
 	
 	class Title : EndText {
+		idc = 680;
 		style = ST_CENTER;
 		sizeEx = 0.1 * safezoneH;
 		x = (0.2 * safezoneW + safezoneX);
@@ -24,6 +25,7 @@ class liberation_endscreen {
 
 	};
 	class SubTitle : Title {
+		idc = 681;
 		sizeEx = 0.04 * safezoneH;
 		y = (0.24 * safezoneH + safezoneY);
 		text = $STR_VICTORY_TEXT;

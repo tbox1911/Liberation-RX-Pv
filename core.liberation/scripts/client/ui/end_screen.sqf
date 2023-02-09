@@ -1,5 +1,18 @@
+params ["_winner"];
 private [ "_line_delay", "_page_delay", "_playtime_days", "_playtime_hours", "_playtime_minutes", "_playtime_seconds", "_comma", "_playtime_str" ];
 if (isDedicated) exitWith {};
+
+private _winner_side = "BLUFOR";
+private _looser_side = "OPFOR";
+if (_winner == GRLIB_side_east) then {
+	_winner_side = "OPFOR";
+	_looser_side = "BLUFOR";
+};
+
+private _msg = format [localize "STR_VICTORY_TITLE", _winner_side];
+[_msg, 0, 0, 5, 0, 0, 90] spawn BIS_fnc_dynamicText;
+sleep 30;
+
 if ( isNil "cinematic_camera_started" ) then { cinematic_camera_started = false };
 _line_delay = 0.75;
 _page_delay = 5;
@@ -21,6 +34,8 @@ if (alive player && isNull objectParent player && lifestate player != "INCAPACIT
 [] spawn cinematic_camera;
 
 createDialog "liberation_endscreen";
+ctrlSetText [680, format [localize "STR_VICTORY_TITLE", _winner_side]];
+ctrlSetText [681, format [localize "STR_VICTORY_TEXT", _looser_side]];
 waitUntil { dialog };
 
 if ( dialog ) then { uiSleep 3 };

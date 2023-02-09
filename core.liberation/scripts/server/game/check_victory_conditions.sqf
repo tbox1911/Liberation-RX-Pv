@@ -1,17 +1,17 @@
 diag_log format ["Check Victory condition at %1", time];
 
-_maxSector = count (sectors_allSectors);
-_bluSector = count (west_sectors);
-_opfSector = count (east_sectors);
-_indSector = (_maxsector - _bluSector - _opfSector);
+private _maxSector = count (sectors_allSectors);
+private _bluSector = count (west_sectors);
+private _opfSector = count (east_sectors);
+private _indSector = (_maxsector - _bluSector - _opfSector) max 0;
 //_maxSector = _maxSector * 0.80; // 80% sector captured
 
 if (_indSector == 0 && (_bluSector >= _maxSector || _opfSector >= _maxSector)) then {
-	sleep 30;
-	GRLIB_endgame = 1;
-	publicVariable "GRLIB_endgame";
-	[] call save_game_mp;
-	
+	private _winner = GRLIB_side_west;
+	if (_opfSector > _bluSector) then {
+		_winner = GRLIB_side_east;
+	};
+
 	{ _x allowDamage false; (vehicle _x) allowDamage false; } foreach allPlayers;
 
 	publicstats = [];
@@ -44,9 +44,11 @@ if (_indSector == 0 && (_bluSector >= _maxSector || _opfSector >= _maxSector)) t
 	publicstats pushback stats_fobs_lost;
 	publicstats pushback (round stats_readiness_earned);
 
-	[publicstats] remoteExec ["remote_call_endgame", allPlayers];
+	sleep 5;
+	[publicstats, _winner] remoteExec ["remote_call_endgame", 0];
 
-	sleep 20;
-
+	GRLIB_endgame = 1;
+	publicVariable "GRLIB_endgame";
+	[] call save_game_mp;
 	{ if ( !(isPlayer _x) && !([_x, "LHD", GRLIB_sector_size] call F_check_near) ) then { deleteVehicle _x } } foreach allUnits;
 };

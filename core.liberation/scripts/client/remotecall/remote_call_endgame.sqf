@@ -1,6 +1,5 @@
 if (isDedicated || (!hasInterface && !isServer)) exitWith {};
-
-publicstats = _this select 0;
+params ["publicstats", "_winner"];
 
 stats_opfor_soldiers_killed = publicstats select 0;
 stats_opfor_killed_by_players = publicstats select 1;
@@ -31,7 +30,4 @@ stats_fobs_built = publicstats select 25;
 stats_fobs_lost = publicstats select 26;
 stats_readiness_earned = publicstats select 27;
 
-{ _x allowDamage false; (vehicle _x) allowDamage false; } foreach allPlayers;
-sleep 10;
-
-[] execVM "scripts\client\ui\end_screen.sqf";
+[_winner] execVM "scripts\client\ui\end_screen.sqf";
