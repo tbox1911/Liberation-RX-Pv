@@ -16,10 +16,10 @@ if (!isNil "_civ_unit") then {
 	_civ_unit addEventHandler ["HandleDamage", {
 		params ["_unit", "_selection", "_damage", "_source"];
 		private _dam = 0;
-		if ( side _source == GRLIB_side_friendly ) then {
+		if ( side _source in [GRLIB_side_west, GRLIB_side_east] ) then {
 			_dam = _damage;
 		};
-		if ( side(driver _unit) == GRLIB_side_friendly ) then {
+		if ( side(driver _unit) in [GRLIB_side_west, GRLIB_side_east] ) then {
 			_dam = _damage;
 		};
 		_dam;

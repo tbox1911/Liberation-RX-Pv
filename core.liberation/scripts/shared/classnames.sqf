@@ -6,13 +6,13 @@ zeropos = [0,0,0];
 // All Object classname used in RX must be declared here
 
 [] call compileFinal preprocessFileLineNumbers "scripts\loadouts\init_loadouts.sqf";
-// *** DEFENSE ***
-[] call compileFinal preprocessFileLineNUmbers format ["mod_template\%1\classnames_east.sqf", GRLIB_mod_indp];
 
 // *** DEFAULT ***
 [] call compileFinal preprocessFileLineNUmbers format ["scripts\shared\default_classnames.sqf"];
 
-// ********************************************************************************************************
+// *** DEFENSE ***
+[] call compileFinal preprocessFileLineNUmbers format ["mod_template\%1\classnames_east.sqf", GRLIB_mod_indp];
+
 // *** BLUE ***
 [] call compileFinal preprocessFileLineNUmbers format ["mod_template\%1\classnames_west.sqf", GRLIB_mod_west];
 [infantry_units, GRLIB_mod_west] call F_calcUnitsCost;
@@ -63,7 +63,6 @@ GRLIB_vehicle_blacklist append GRLIB_vehicle_blacklist_west;
 // GRLIB_AirDrop_1 per side
 //(maybe cleanup vars ?)
 
-// ********************************************************************************************************
 // *** RED ***
 [] call compileFinal preprocessFileLineNUmbers format ["mod_template\%1\classnames_west.sqf", GRLIB_mod_east];
 [infantry_units, GRLIB_mod_east] call F_calcUnitsCost;
@@ -441,6 +440,9 @@ if ( isNil "GRLIB_AirDrop_1" ) then {
 		"B_G_Offroad_01_F"
 	];
 };
+if ( isNil "GRLIB_AirDrop_1_cost" ) then {
+	GRLIB_AirDrop_1_cost = 50;
+};
 
 if ( isNil "GRLIB_AirDrop_2" ) then {
 	GRLIB_AirDrop_2 = [
@@ -449,6 +451,9 @@ if ( isNil "GRLIB_AirDrop_2" ) then {
 		"O_G_Offroad_01_armed_F",
 		"I_C_Offroad_02_LMG_F"
 	];
+};
+if ( isNil "GRLIB_AirDrop_2_cost" ) then {
+	GRLIB_AirDrop_2_cost = 100;
 };
 
 if ( isNil "GRLIB_AirDrop_3" ) then {	
@@ -459,6 +464,9 @@ if ( isNil "GRLIB_AirDrop_3" ) then {
 		"B_T_MRAP_01_gmg_F"
 	];
 };
+if ( isNil "GRLIB_AirDrop_3_cost" ) then {
+	GRLIB_AirDrop_3_cost = 200;
+};
 
 if ( isNil "GRLIB_AirDrop_4" ) then {	
 	GRLIB_AirDrop_4 = [
@@ -468,6 +476,9 @@ if ( isNil "GRLIB_AirDrop_4" ) then {
 		"I_Truck_02_transport_F"
 	];
 };
+if ( isNil "GRLIB_AirDrop_4_cost" ) then {
+	GRLIB_AirDrop_4_cost = 300;
+};
 
 if ( isNil "GRLIB_AirDrop_5" ) then {	
 	GRLIB_AirDrop_5 = [
@@ -475,6 +486,9 @@ if ( isNil "GRLIB_AirDrop_5" ) then {
 		"B_APC_Wheeled_03_cannon_F",
 		"B_APC_Wheeled_01_cannon_F"
 	];
+};
+if ( isNil "GRLIB_AirDrop_5_cost" ) then {
+	GRLIB_AirDrop_5_cost = 750;
 };
 
 if ( isNil "GRLIB_AirDrop_6" ) then {	
@@ -484,4 +498,10 @@ if ( isNil "GRLIB_AirDrop_6" ) then {
 		"B_Boat_Transport_01_F",
 		"I_C_Boat_Transport_02_F"
 	];
+};
+if ( isNil "GRLIB_AirDrop_6_cost" ) then {
+	GRLIB_AirDrop_6_cost = 250;
+};
+if ( isNil "GRLIB_AirDrop_7_cost" ) then {
+	GRLIB_AirDrop_7_cost = 2000;
 };

@@ -1,6 +1,4 @@
-params ["_side"];
-
-private _pool = [];
+params [["_side", GRLIB_side_enemy]];
 private _vehicle_pool = [];
 
 if (_side == GRLIB_side_enemy) then {
@@ -11,13 +9,11 @@ if (_side == GRLIB_side_enemy) then {
 };
 
 if (_side == GRLIB_side_west) then {
-	_pool = heavy_vehicles_west;
-	{_vehicle_pool pushBack (_x select 0)} foreach _pool;
+	{_vehicle_pool pushBack (_x select 0)} foreach heavy_vehicles_west;
 };
 
 if (_side == GRLIB_side_east) then {
-	_pool = heavy_vehicles_east;
-	{_vehicle_pool pushBack (_x select 0)} foreach _pool;
+	{_vehicle_pool pushBack (_x select 0)} foreach heavy_vehicles_east;
 };
 
 (selectRandom (_vehicle_pool select {!(_x isKindOf "Truck_F")}));

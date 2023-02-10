@@ -6,7 +6,7 @@ private _duration = 15 * 60;
 
 // Create Infantry
 if (_patrol_type == 1) then {
-    _grp = [markerpos _sector, ([] call F_getAdaptiveSquadComp), _side, "infantry"] call F_libSpawnUnits;
+    _grp = [markerpos _sector, ([_side] call F_getAdaptiveSquadComp), _side, "infantry"] call F_libSpawnUnits;
     [_grp, markerpos _sector, 150] spawn add_defense_waypoints;
     diag_log format [ "Spawn Infantry Patrol on sector %1 at %2", _sector, time ];
 };
