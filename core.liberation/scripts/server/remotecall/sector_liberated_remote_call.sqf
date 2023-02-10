@@ -63,8 +63,10 @@ publicVariable "stats_readiness_earned";
 
 [ _liberated_sector, 0, _side ] remoteExec ["remote_call_sector", 0];
 if (_side == GRLIB_side_west) then {
-	west_sectors pushback _liberated_sector; publicVariable "west_sectors";
-	east_sectors = east_sectors - [_liberated_sector]; publicVariable "east_sectors";
+	west_sectors pushback _liberated_sector;
+	publicVariable "west_sectors";
+	east_sectors = east_sectors - [_liberated_sector];
+	publicVariable "east_sectors";
 };
 if (_side == GRLIB_side_east) then {
 	east_sectors pushback _liberated_sector; publicVariable "east_sectors";

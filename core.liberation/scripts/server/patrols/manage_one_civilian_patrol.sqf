@@ -5,9 +5,7 @@ private [
 	"_grp",
 	"_civ_veh",
 	"_civ_unit",
-	"_civ_unit_ttl",
-	"_west_units",
-	"_east_units"
+	"_civ_unit_ttl"
 ];
 
 while { GRLIB_endgame == 0 } do {
@@ -19,12 +17,10 @@ while { GRLIB_endgame == 0 } do {
 	_civ_veh = objNull;
 	_usable_sectors = [];
 	{
-		_west_units = [markerpos _x, GRLIB_sector_size, GRLIB_side_west] call F_getUnitsCount;
-		_east_units = [markerpos _x, GRLIB_sector_size, GRLIB_side_east] call F_getUnitsCount;
-		if ( _west_units == 0 && _east_units == 0 && ( count ( [ getmarkerpos _x , 3500 ] call F_getNearbyPlayers ) > 0 ) ) then {
+		if (count ([getmarkerpos _x, 3500] call F_getNearbyPlayers) > 0) then {
 			_usable_sectors pushback _x;
 		}
-	} foreach ((sectors_bigtown + sectors_capture + sectors_factory) - (active_sectors));
+	} foreach (sectors_bigtown + sectors_capture + sectors_factory - active_sectors);
 
 	if ( count _usable_sectors > 0 ) then {
 		_spawnsector = selectRandom _usable_sectors;
@@ -41,6 +37,9 @@ while { GRLIB_endgame == 0 } do {
 					params ["_unit", "_selection", "_damage", "_source"];
 					private _dam = 0;
 					if ( side _source in [GRLIB_side_west, GRLIB_side_east] ) then {
+						_dam = _damage;
+					};
+					if (side(driver _unit) in [GRLIB_side_west, GRLIB_side_east]) then {
 						_dam = _damage;
 					};
 					_dam;
@@ -71,13 +70,13 @@ while { GRLIB_endgame == 0 } do {
 
 			_civ_unit_ttl = round(time + 1800);
 			waitUntil {
-				sleep 60;
-				( (diag_fps < 20) || (!alive _civ_unit) || round (speed vehicle _civ_unit) == 0 || (count ([getPosATL _civ_unit , 4000] call F_getNearbyPlayers) == 0) || time > _civ_unit_ttl )
+				sleep 30;
+				( (diag_fps < 30) || (!alive _civ_unit) || (round (speed vehicle _civ_unit) == 0) || (count ([getPosATL _civ_unit , 4000] call F_getNearbyPlayers) == 0) || (time > _civ_unit_ttl) )
 			};
 
 			// Cleanup
 			if (!isNull _civ_veh) then {
-				if ( (count (crew _civ_veh) == 0) || [_civ_veh] call is_abandoned ) then {
+				if ( ({(alive _x) && (side group _x in [GRLIB_side_west, GRLIB_side_east])} count (crew _civ_veh) == 0) || [_civ_veh] call is_abandoned ) then {
 					[_civ_veh] call clean_vehicle;
 					deleteVehicle _civ_veh;
 				};
