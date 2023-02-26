@@ -59,16 +59,11 @@ while { true } do {
 
 		_sector = [_nextvehicle] call F_getSectorSide;
 		_side = [_nextvehicle getVariable ["GRLIB_vehicle_owner", ""]] call F_getPlayerSide;
-		if (_sector != GRLIB_side_enemy && _side == str sideUnknown) then {
+		if (_side == str sideUnknown) then {
 			_side = str (side group _nextvehicle);
 		};
 
-		diag_log format ["DBG %1 %2 %3", typeOf _nextvehicle, _sector, _side];
-
-		if (_side == str sideUnknown) then {
-			_nextmarker setMarkerColorLocal "ColorKhaki";
-			_nextmarker setMarkerAlphaLocal 1;
-		};
+		//diag_log format ["DBG %1 %2 %3 %4", typeOf _nextvehicle, getPosATL _nextvehicle, _sector, _side];
 
 		// Owned sectors
 		if (_sector == GRLIB_side_friendly) then {
@@ -84,6 +79,10 @@ while { true } do {
 				_nextmarker setMarkerColorLocal GRLIB_color_enemy;
 				_nextmarker setMarkerAlphaLocal 1;
 			};
+			if (_side == str sideUnknown) then {
+				_nextmarker setMarkerColorLocal "ColorKhaki";
+				_nextmarker setMarkerAlphaLocal 1;
+			};			
 		};
 		
 		// Enemies sectors
@@ -92,6 +91,10 @@ while { true } do {
 				_nextmarker setMarkerColorLocal GRLIB_color_friendly;
 				_nextmarker setMarkerAlphaLocal 1;
 			};
+			if (_side == str sideUnknown) then {
+				_nextmarker setMarkerColorLocal "ColorKhaki";
+				_nextmarker setMarkerAlphaLocal 1;
+			};	
 		};
 
 		// Civilian sectors
@@ -100,6 +103,10 @@ while { true } do {
 				_nextmarker setMarkerColorLocal GRLIB_color_friendly;
 				_nextmarker setMarkerAlphaLocal 1;
 			};
+			if (_side == str sideUnknown) then {
+				_nextmarker setMarkerColorLocal "ColorKhaki";
+				_nextmarker setMarkerAlphaLocal 1;
+			};	
 		};
 
 	} foreach _veh_list;
