@@ -2,13 +2,11 @@ private _marked_players = [];
 private _marked_vehicles = [];
 private _marked_squadmates = [];
 private _marker_objs = [];
-private _color = "";
 private _cfg = configFile >> "cfgVehicles";
 
-if ( side player == GRLIB_side_friendly ) then {
+private _color = GRLIB_color_enemy;
+if ( side (group player) == GRLIB_side_friendly ) then {
 	_color = GRLIB_color_friendly;
-} else {
-	_color = GRLIB_color_enemy;
 };
 
 while { true } do {
