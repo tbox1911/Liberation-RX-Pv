@@ -2,8 +2,8 @@ params [ "_targetsector", "_side" ];
 
 if (combat_readiness < 35 || GRLIB_csat_aggressivity < 1 || diag_fps < 35) exitWith {};
 
-private _nb_players = count ([getmarkerpos _targetsector, GRLIB_sector_size] call F_getNearbyPlayers);
-if (_nb_players == 0) exitWith {};
+private _nb_player = count ([getmarkerpos _targetsector, GRLIB_sector_size] call F_getNearbyPlayers);
+if (_nb_player == 0) exitWith {};
 
 diag_log format ["Spawn Reinforcement on Sector %1 at %2", _targetsector, time];
 

@@ -71,7 +71,7 @@ if ( !_civilian ) then {
 	if ( _classname in militia_vehicles ) then {
 		[ _vehicle ] call F_libSpawnMilitiaCrew;
 	} else {
-		[ _vehicle ] call F_forceOpforCrew;
+		[ _vehicle, GRLIB_side_enemy ] call F_forceSideCrew;
 	};
 
 	_vehcrew = crew _vehicle;
